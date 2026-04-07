@@ -1,0 +1,213 @@
+[
+  {
+    "id": "DIS001",
+    "category": "Disorders",
+    "topic": "Polycystic Ovary Syndrome (PCOS)",
+    "keywords": ["pcos", "irregular periods", "hormonal imbalance", "excess hair growth", "weight gain"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "PCOS is a hormonal disorder that affects ovulation and can cause irregular periods and elevated androgen levels.",
+    "commonSymptoms": [
+      "Irregular or missed periods",
+      "Acne",
+      "Excess facial or body hair",
+      "Weight gain",
+      "Difficulty conceiving"
+    ],
+    "commonProblems": [
+      "Anovulation",
+      "Infertility",
+      "Insulin resistance"
+    ],
+    "possibleComplications": [
+      "Type 2 diabetes",
+      "Metabolic syndrome",
+      "Endometrial hyperplasia"
+    ],
+    "whatToDo": [
+      "Maintain healthy weight",
+      "Balanced diet",
+      "Regular exercise",
+      "Consult gynecologist"
+    ],
+    "seeDoctorIf": [
+      "Persistent irregular cycles",
+      "Severe acne or hair growth",
+      "Difficulty getting pregnant"
+    ]
+  },
+
+  {
+    "id": "DIS002",
+    "category": "Disorders",
+    "topic": "Endometriosis",
+    "keywords": ["endometriosis", "severe period pain", "painful intercourse", "chronic pelvic pain"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Endometriosis occurs when tissue similar to the uterine lining grows outside the uterus.",
+    "commonSymptoms": [
+      "Severe menstrual cramps",
+      "Pain during intercourse",
+      "Chronic pelvic pain",
+      "Heavy bleeding"
+    ],
+    "commonProblems": [
+      "Infertility",
+      "Pain worsening over time"
+    ],
+    "possibleComplications": [
+      "Adhesions",
+      "Ovarian cysts"
+    ],
+    "whatToDo": [
+      "Track pain patterns",
+      "Consult specialist",
+      "Pain management plan"
+    ],
+    "seeDoctorIf": [
+      "Severe disabling pain",
+      "Pain not relieved by medication"
+    ]
+  },
+
+  {
+    "id": "DIS003",
+    "category": "Disorders",
+    "topic": "Uterine Fibroids",
+    "keywords": ["fibroids", "heavy bleeding", "pelvic pressure", "large clots"],
+    "lifeStage": ["Reproductive", "Perimenopause"],
+    "explanation": "Fibroids are non-cancerous growths in the uterus that may cause heavy bleeding and pelvic discomfort.",
+    "commonSymptoms": [
+      "Heavy periods",
+      "Pelvic pressure",
+      "Frequent urination",
+      "Back pain"
+    ],
+    "commonProblems": [
+      "Anemia",
+      "Prolonged menstruation"
+    ],
+    "possibleComplications": [
+      "Severe anemia",
+      "Fertility issues"
+    ],
+    "whatToDo": [
+      "Track bleeding",
+      "Iron-rich diet",
+      "Consult gynecologist"
+    ],
+    "seeDoctorIf": [
+      "Bleeding longer than 7 days",
+      "Severe pelvic pressure"
+    ]
+  },
+
+  {
+    "id": "DIS004",
+    "category": "Disorders",
+    "topic": "Adenomyosis",
+    "keywords": ["adenomyosis", "heavy painful periods", "uterine enlargement"],
+    "lifeStage": ["Reproductive", "Perimenopause"],
+    "explanation": "Adenomyosis occurs when endometrial tissue grows into the muscular wall of the uterus.",
+    "commonSymptoms": [
+      "Heavy bleeding",
+      "Severe cramps",
+      "Pelvic pain"
+    ],
+    "commonProblems": [
+      "Chronic pain",
+      "Enlarged uterus"
+    ],
+    "whatToDo": [
+      "Pain management",
+      "Consult gynecologist"
+    ],
+    "seeDoctorIf": [
+      "Severe persistent pain",
+      "Excessive bleeding"
+    ]
+  },
+
+  {
+    "id": "DIS005",
+    "category": "Disorders",
+    "topic": "Thyroid Disorders",
+    "keywords": ["thyroid imbalance", "hypothyroidism", "hyperthyroidism", "irregular periods"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Thyroid hormone imbalance can disrupt menstrual cycle regularity.",
+    "commonSymptoms": [
+      "Irregular periods",
+      "Weight changes",
+      "Hair thinning",
+      "Fatigue"
+    ],
+    "commonProblems": [
+      "Missed periods",
+      "Heavy or light bleeding"
+    ],
+    "possibleComplications": [
+      "Fertility issues"
+    ],
+    "whatToDo": [
+      "Thyroid blood test",
+      "Consult physician"
+    ],
+    "seeDoctorIf": [
+      "Persistent irregular cycles",
+      "Extreme fatigue"
+    ]
+  },
+
+  {
+    "id": "DIS006",
+    "category": "Disorders",
+    "topic": "Premenstrual Dysphoric Disorder (PMDD)",
+    "keywords": ["pmdd", "severe pms", "extreme mood swings"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "PMDD is a severe mood disorder linked to hormonal changes in the luteal phase.",
+    "commonSymptoms": [
+      "Severe depression",
+      "Irritability",
+      "Anxiety",
+      "Difficulty concentrating"
+    ],
+    "commonProblems": [
+      "Work impairment",
+      "Relationship strain"
+    ],
+    "whatToDo": [
+      "Consult healthcare provider",
+      "Track symptoms",
+      "Mental health support"
+    ],
+    "seeDoctorIf": [
+      "Suicidal thoughts",
+      "Severe life disruption"
+    ]
+  },
+
+  {
+    "id": "DIS007",
+    "category": "Disorders",
+    "topic": "Early Menopause (Premature Ovarian Insufficiency)",
+    "keywords": ["early menopause", "premature menopause", "period stopped before 40"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Early menopause occurs when ovarian function stops before age 40.",
+    "commonSymptoms": [
+      "Missed periods",
+      "Hot flashes",
+      "Night sweats",
+      "Vaginal dryness"
+    ],
+    "commonProblems": [
+      "Infertility",
+      "Bone density loss"
+    ],
+    "whatToDo": [
+      "Hormone evaluation",
+      "Consult specialist"
+    ],
+    "seeDoctorIf": [
+      "No periods before age 40",
+      "Persistent menopause symptoms"
+    ]
+  }
+]

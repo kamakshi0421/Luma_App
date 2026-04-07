@@ -1,0 +1,213 @@
+[
+  {
+    "id": "NUT001",
+    "category": "Nutrition",
+    "topic": "Iron Intake During Menstruation",
+    "keywords": ["iron during period", "low iron", "anemia period", "fatigue during period"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Blood loss during menstruation can lower iron levels, increasing fatigue risk.",
+    "isNormal": "Mild tiredness during periods is common.",
+    "recommendedFoods": [
+      "Spinach",
+      "Lentils",
+      "Beans",
+      "Red meat (if non-vegetarian)",
+      "Fortified cereals"
+    ],
+    "absorptionTip": "Pair iron-rich foods with vitamin C (like citrus fruits) for better absorption.",
+    "commonProblems": [
+      "Fatigue",
+      "Dizziness",
+      "Weakness"
+    ],
+    "seeDoctorIf": [
+      "Frequent dizziness",
+      "Shortness of breath",
+      "Heavy bleeding with weakness"
+    ]
+  },
+
+  {
+    "id": "NUT002",
+    "category": "Nutrition",
+    "topic": "PMS-Relief Nutrition",
+    "keywords": ["foods for pms", "bloating relief diet", "reduce cramps naturally"],
+    "lifeStage": ["Reproductive", "Perimenopause"],
+    "explanation": "Certain nutrients may help reduce PMS symptoms like bloating and mood swings.",
+    "recommendedFoods": [
+      "Magnesium-rich foods (nuts, seeds)",
+      "Leafy greens",
+      "Bananas",
+      "Whole grains",
+      "Yogurt"
+    ],
+    "avoidOrLimit": [
+      "Excess salt",
+      "High caffeine",
+      "Sugary processed foods"
+    ],
+    "commonBenefits": [
+      "Reduced bloating",
+      "Improved mood stability",
+      "Better energy"
+    ],
+    "seeDoctorIf": [
+      "Severe PMS not improving with lifestyle changes"
+    ]
+  },
+
+  {
+    "id": "NUT003",
+    "category": "Nutrition",
+    "topic": "PCOS-Friendly Diet",
+    "keywords": ["pcos diet", "insulin resistance diet", "weight gain pcos"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "PCOS is often linked with insulin resistance, so balanced blood sugar management is important.",
+    "recommendedFoods": [
+      "High-fiber vegetables",
+      "Whole grains",
+      "Lean protein",
+      "Healthy fats (nuts, seeds, olive oil)"
+    ],
+    "avoidOrLimit": [
+      "Refined sugars",
+      "Sugary drinks",
+      "Highly processed foods"
+    ],
+    "commonBenefits": [
+      "Improved cycle regularity",
+      "Weight management",
+      "Reduced acne"
+    ],
+    "seeDoctorIf": [
+      "Rapid weight gain",
+      "Persistent irregular cycles"
+    ]
+  },
+
+  {
+    "id": "NUT004",
+    "category": "Nutrition",
+    "topic": "Hydration During Cycle",
+    "keywords": ["drink water during period", "bloating hydration", "period headaches"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause", "Menopause"],
+    "explanation": "Proper hydration supports circulation, reduces bloating, and may ease headaches.",
+    "isNormal": "Mild bloating is common during luteal phase.",
+    "recommended": [
+      "6-8 glasses of water daily",
+      "Coconut water",
+      "Herbal teas"
+    ],
+    "commonBenefits": [
+      "Reduced bloating",
+      "Better energy",
+      "Headache reduction"
+    ],
+    "seeDoctorIf": [
+      "Severe swelling",
+      "Persistent headaches"
+    ]
+  },
+
+  {
+    "id": "NUT005",
+    "category": "Nutrition",
+    "topic": "Puberty Nutrition Support",
+    "keywords": ["teen diet period", "nutrition during puberty", "first period diet"],
+    "lifeStage": ["Puberty"],
+    "explanation": "During puberty, the body requires balanced nutrition to support growth and hormonal development.",
+    "recommendedFoods": [
+      "Calcium-rich foods (milk, yogurt)",
+      "Iron-rich foods",
+      "Protein sources",
+      "Fruits and vegetables"
+    ],
+    "commonProblems": [
+      "Skipping meals",
+      "Low iron levels",
+      "Poor diet habits"
+    ],
+    "seeDoctorIf": [
+      "Extreme weight loss",
+      "Persistent fatigue",
+      "Disordered eating behavior"
+    ]
+  },
+
+  {
+    "id": "NUT006",
+    "category": "Nutrition",
+    "topic": "Perimenopause and Menopause Nutrition",
+    "keywords": ["menopause diet", "hot flashes diet", "bone health menopause"],
+    "lifeStage": ["Perimenopause", "Menopause", "PostMenopause"],
+    "explanation": "Hormonal changes during menopause can affect bone density and metabolism.",
+    "recommendedFoods": [
+      "Calcium-rich foods",
+      "Vitamin D sources",
+      "Lean protein",
+      "Omega-3 fatty acids"
+    ],
+    "commonBenefits": [
+      "Bone health support",
+      "Reduced hot flash triggers",
+      "Heart health support"
+    ],
+    "avoidOrLimit": [
+      "Excess caffeine",
+      "Spicy foods (if triggering hot flashes)",
+      "Highly processed foods"
+    ],
+    "seeDoctorIf": [
+      "Frequent fractures",
+      "Severe hot flashes affecting sleep"
+    ]
+  },
+
+  {
+    "id": "NUT007",
+    "category": "Nutrition",
+    "topic": "Managing Period Cravings",
+    "keywords": ["period cravings", "sweet cravings before period", "chocolate cravings"],
+    "lifeStage": ["Reproductive", "Perimenopause"],
+    "explanation": "Hormonal fluctuations in the luteal phase can increase cravings for carbohydrates and sweets.",
+    "isNormal": "Mild cravings are common before menstruation.",
+    "recommendedAlternatives": [
+      "Dark chocolate (small portion)",
+      "Fruit",
+      "Nuts",
+      "Whole grain snacks"
+    ],
+    "commonProblems": [
+      "Overeating",
+      "Energy crashes"
+    ],
+    "seeDoctorIf": [
+      "Binge eating behavior",
+      "Significant weight fluctuations"
+    ]
+  },
+
+  {
+    "id": "NUT008",
+    "category": "Nutrition",
+    "topic": "Anti-Inflammatory Foods for Cramps",
+    "keywords": ["foods for cramps", "reduce inflammation period", "natural pain relief diet"],
+    "lifeStage": ["Reproductive", "Perimenopause"],
+    "explanation": "Certain foods may help reduce inflammation and ease menstrual discomfort.",
+    "recommendedFoods": [
+      "Omega-3 rich fish",
+      "Chia seeds",
+      "Walnuts",
+      "Turmeric",
+      "Leafy greens"
+    ],
+    "commonBenefits": [
+      "Reduced cramp intensity",
+      "Improved circulation"
+    ],
+    "seeDoctorIf": [
+      "Severe cramps not improving",
+      "Pain interfering with daily activities"
+    ]
+  }
+]

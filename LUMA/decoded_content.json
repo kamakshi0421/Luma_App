@@ -1,0 +1,75 @@
+{
+  "myths": [
+    { "stage": "prePuberty", "category": "hormones", "myth": "Hormones change only after first period.", "fact": "Hormonal activity starts years before menarche.", "source": "NIH" },
+    { "stage": "prePuberty", "category": "cycle", "myth": "Periods start without signs.", "fact": "Breast development and discharge appear first.", "source": "ACOG" },
+    { "stage": "prePuberty", "category": "mood", "myth": "Moodiness means misbehavior.", "fact": "Hormonal shifts can affect emotions early.", "source": "NIH" },
+    { "stage": "prePuberty", "category": "health", "myth": "Learning about periods early is harmful.", "fact": "Education reduces anxiety and stigma.", "source": "UNICEF" },
+
+    { "stage": "puberty", "category": "hormones", "myth": "Hormones make girls dramatic.", "fact": "Hormonal changes impact emotional regulation.", "source": "NIH" },
+    { "stage": "puberty", "category": "cycle", "myth": "Irregular cycles mean disease.", "fact": "Cycles stabilize over 2–3 years.", "source": "ACOG" },
+    { "stage": "puberty", "category": "mood", "myth": "PMS is fake.", "fact": "Hormonal shifts genuinely affect mood.", "source": "Cleveland Clinic" },
+    { "stage": "puberty", "category": "health", "myth": "Exercise during periods is unsafe.", "fact": "Light exercise reduces cramps.", "source": "WHO" },
+
+    { "stage": "reproductive", "category": "hormones", "myth": "Stress doesn’t affect cycles.", "fact": "Cortisol can delay ovulation.", "source": "NIH" },
+    { "stage": "reproductive", "category": "cycle", "myth": "All cycles are 28 days.", "fact": "Normal cycles range 21–35 days.", "source": "ACOG" },
+    { "stage": "reproductive", "category": "mood", "myth": "Mood swings mean weakness.", "fact": "Estrogen affects neurotransmitters.", "source": "NIH" },
+    { "stage": "reproductive", "category": "health", "myth": "Pregnancy isn’t possible during period.", "fact": "Pregnancy is less likely but possible.", "source": "Nationwide Children's Hospital" },
+
+    { "stage": "perimenopause", "category": "hormones", "myth": "Hot flashes mean illness.", "fact": "Estrogen fluctuations cause hot flashes.", "source": "Mayo Clinic" },
+    { "stage": "perimenopause", "category": "cycle", "myth": "Irregular periods mean menopause is complete.", "fact": "Perimenopause can last years.", "source": "ACOG" },
+    { "stage": "perimenopause", "category": "mood", "myth": "Mood changes are personality issues.", "fact": "Hormone shifts affect brain chemistry.", "source": "NIH" },
+    { "stage": "perimenopause", "category": "health", "myth": "Weight gain is unavoidable.", "fact": "Lifestyle still influences metabolism.", "source": "CDC" },
+
+    { "stage": "menopause", "category": "hormones", "myth": "Hormone therapy is unsafe for everyone.", "fact": "Suitability depends on medical history.", "source": "NAMS" },
+    { "stage": "menopause", "category": "cycle", "myth": "Menopause happens suddenly.", "fact": "Confirmed after 12 months without period.", "source": "WHO" },
+    { "stage": "menopause", "category": "mood", "myth": "Menopause always causes depression.", "fact": "Emotional responses vary widely.", "source": "NIH" },
+    { "stage": "menopause", "category": "health", "myth": "Symptoms stop immediately.", "fact": "Some symptoms may persist.", "source": "Mayo Clinic" },
+
+    { "stage": "postMenopause", "category": "hormones", "myth": "Hormones completely stop working.", "fact": "Hormone levels stabilize at lower levels.", "source": "NIH" },
+    { "stage": "postMenopause", "category": "cycle", "myth": "Bleeding after menopause is normal.", "fact": "Any bleeding must be evaluated.", "source": "ACOG" },
+    { "stage": "postMenopause", "category": "mood", "myth": "Mood symptoms disappear instantly.", "fact": "Some emotional adjustments continue.", "source": "Mayo Clinic" },
+    { "stage": "postMenopause", "category": "health", "myth": "Health risks disappear.", "fact": "Bone and heart health need monitoring.", "source": "CDC" }
+  ],
+
+  "commonConcerns": [
+    { "stage": "prePuberty", "title": "Breast tenderness", "explanation": "Normal early hormonal development." },
+    { "stage": "prePuberty", "title": "White discharge", "explanation": "Common before first period." },
+    { "stage": "prePuberty", "title": "Body odor changes", "explanation": "Hormonal changes activate sweat glands." },
+    { "stage": "prePuberty", "title": "Emotional sensitivity", "explanation": "Hormonal shifts affect mood." },
+
+    { "stage": "puberty", "title": "Irregular cycles", "explanation": "Cycles stabilize over time." },
+    { "stage": "puberty", "title": "Acne flare-ups", "explanation": "Hormones increase oil production." },
+    { "stage": "puberty", "title": "Mood swings", "explanation": "Estrogen fluctuations affect emotions." },
+    { "stage": "puberty", "title": "Cramps", "explanation": "Uterine contractions cause pain." },
+
+    { "stage": "reproductive", "title": "Delayed cycle", "explanation": "Stress may shift ovulation." },
+    { "stage": "reproductive", "title": "Breast tenderness", "explanation": "Hormonal sensitivity." },
+    { "stage": "reproductive", "title": "Mild cramps", "explanation": "Prostaglandins cause contractions." },
+    { "stage": "reproductive", "title": "Spotting", "explanation": "Can occur during ovulation." },
+
+    { "stage": "perimenopause", "title": "Hot flashes", "explanation": "Estrogen fluctuation." },
+    { "stage": "perimenopause", "title": "Sleep issues", "explanation": "Hormones affect circadian rhythm." },
+    { "stage": "perimenopause", "title": "Brain fog", "explanation": "Hormone shifts affect cognition." },
+    { "stage": "perimenopause", "title": "Irregular periods", "explanation": "Transition phase symptom." },
+
+    { "stage": "menopause", "title": "Night sweats", "explanation": "Hormone-related temperature shifts." },
+    { "stage": "menopause", "title": "Vaginal dryness", "explanation": "Lower estrogen affects tissues." },
+    { "stage": "menopause", "title": "Mood fluctuations", "explanation": "Hormone changes affect brain chemistry." },
+    { "stage": "menopause", "title": "Fatigue", "explanation": "Sleep disruption is common." },
+
+    { "stage": "postMenopause", "title": "Joint stiffness", "explanation": "Lower estrogen impacts joints." },
+    { "stage": "postMenopause", "title": "Bone weakness", "explanation": "Reduced bone density risk." },
+    { "stage": "postMenopause", "title": "Dry skin", "explanation": "Hormonal decline affects collagen." },
+    { "stage": "postMenopause", "title": "Urinary changes", "explanation": "Pelvic tissue changes." }
+  ],
+
+  "redFlags": [
+    { "stage": "prePuberty", "points": ["No signs of puberty by age 13", "Severe abdominal pain", "Unusual discharge with odor"] },
+    { "stage": "puberty", "points": ["No period by 16", "Bleeding soaking pad hourly", "Severe pain missing school"] },
+    { "stage": "reproductive", "points": ["Bleeding longer than 8 days", "Severe pelvic pain", "Bleeding between periods"] },
+    { "stage": "perimenopause", "points": ["Very heavy sudden bleeding", "Severe depression symptoms", "Bleeding after long gaps"] },
+    { "stage": "menopause", "points": ["Bleeding after 12 months", "Unexplained pelvic pain", "Sudden heavy bleeding"] },
+    { "stage": "postMenopause", "points": ["Any vaginal bleeding", "Persistent pelvic pain", "Sudden unexplained weight loss"] }
+  ]
+}
+

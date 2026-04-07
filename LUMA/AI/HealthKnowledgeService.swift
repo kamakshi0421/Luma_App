@@ -1,0 +1,95 @@
+import Foundation
+
+class HealthKnowledgeService {
+    
+    static let shared = HealthKnowledgeService()
+    
+    private var allItems: [HealthItem] = []
+    private var emergencyItems: [HealthItem] = []
+    
+    init() {
+        loadAllData()
+    }
+   
+    private func loadAllData() {
+        
+        let files = [
+            "menstrual",
+            "pcos",
+            "pregnancy",
+            "symptoms",
+            "disorders",
+            "contraceptive",
+            "mental_health",
+            "nutrition",
+            "lifestyle",
+            "medications",
+            "emergency_flags"
+        ]
+        
+        for file in files {
+            let items = loadJSON(named: file)
+            
+            if file == "emergency_flags" {
+                emergencyItems.append(contentsOf: items)
+            } else {
+                allItems.append(contentsOf: items)
+            }
+        }
+    }
+    
+    private func loadJSON(named name: String) -> [HealthItem] {
+        guard let url = Bundle.main.url(forResource: name, withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let items = try? JSONDecoder().decode([HealthItem].self, from: data)
+        else {
+            print("⚠️ Failed to load \(name).json")
+            return []
+        }
+        return items
+    }
+    
+  
+    
+    func searchEmergencyContent(for query: String) -> HealthItem? {
+        
+        let lowerQuery = query.lowercased()
+        
+        for item in emergencyItems {
+            for keyword in item.keywords {
+                if lowerQuery.contains(keyword.lowercased()) {
+                    return item
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    
+    
+    func searchRelevantContent(for query: String) -> HealthItem? {
+        
+        let lowerQuery = query.lowercased()
+        
+        var bestMatch: HealthItem?
+        var highestScore = 0
+        
+        for item in allItems {
+            var score = 0
+            
+            for keyword in item.keywords {
+                if lowerQuery.contains(keyword.lowercased()) {
+                    score += 1
+                }
+            }
+            
+            if score > highestScore {
+                highestScore = score
+                bestMatch = item
+            }
+        }
+        
+        return bestMatch
+    }
+}

@@ -1,0 +1,201 @@
+[
+  {
+    "id": "MED001",
+    "category": "Medications",
+    "topic": "NSAIDs for Period Pain",
+    "keywords": ["painkiller for period", "ibuprofen cramps", "naproxen period pain"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Nonsteroidal anti-inflammatory drugs (NSAIDs) reduce prostaglandins that cause menstrual cramps.",
+    "commonExamples": [
+      "Ibuprofen",
+      "Naproxen"
+    ],
+    "benefits": [
+      "Reduces cramp intensity",
+      "May reduce heavy bleeding slightly"
+    ],
+    "commonSideEffects": [
+      "Stomach irritation",
+      "Heartburn"
+    ],
+    "avoidIf": [
+      "History of stomach ulcers",
+      "Kidney disease",
+      "NSAID allergy"
+    ],
+    "seeDoctorIf": [
+      "Pain not relieved by medication",
+      "Severe side effects",
+      "Chronic monthly severe pain"
+    ]
+  },
+
+  {
+    "id": "MED002",
+    "category": "Medications",
+    "topic": "Hormonal Birth Control Pills",
+    "keywords": ["birth control pill", "hormone pill regulate period"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Hormonal contraceptive pills prevent ovulation and can regulate cycles and reduce cramps.",
+    "benefits": [
+      "More predictable cycles",
+      "Reduced bleeding",
+      "Improved acne"
+    ],
+    "commonSideEffects": [
+      "Nausea",
+      "Breast tenderness",
+      "Mood changes"
+    ],
+    "avoidIf": [
+      "History of blood clots",
+      "Migraine with aura",
+      "Smoking over age 35"
+    ],
+    "seeDoctorIf": [
+      "Severe leg pain",
+      "Chest pain",
+      "Vision changes"
+    ]
+  },
+
+  {
+    "id": "MED003",
+    "category": "Medications",
+    "topic": "Iron Supplements",
+    "keywords": ["iron tablets", "anemia supplement", "low iron period"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Iron supplements may be recommended if heavy periods cause iron deficiency anemia.",
+    "benefits": [
+      "Improves energy",
+      "Prevents anemia complications"
+    ],
+    "commonSideEffects": [
+      "Constipation",
+      "Dark stools",
+      "Stomach upset"
+    ],
+    "whatToKnow": [
+      "Best absorbed with vitamin C",
+      "Avoid taking with tea or coffee"
+    ],
+    "seeDoctorIf": [
+      "Persistent fatigue",
+      "Dizziness",
+      "Heavy prolonged bleeding"
+    ]
+  },
+
+  {
+    "id": "MED004",
+    "category": "Medications",
+    "topic": "Antidepressants for PMDD",
+    "keywords": ["pmdd medication", "ssri period mood", "fluoxetine pmdd"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Selective serotonin reuptake inhibitors (SSRIs) may be prescribed for severe PMDD symptoms.",
+    "commonExamples": [
+      "Fluoxetine",
+      "Sertraline"
+    ],
+    "benefits": [
+      "Improves mood stability",
+      "Reduces severe irritability"
+    ],
+    "commonSideEffects": [
+      "Nausea",
+      "Sleep disturbance",
+      "Headache"
+    ],
+    "seeDoctorIf": [
+      "Suicidal thoughts",
+      "Severe side effects",
+      "No improvement in symptoms"
+    ]
+  },
+
+  {
+    "id": "MED005",
+    "category": "Medications",
+    "topic": "Thyroid Medications",
+    "keywords": ["thyroid pill", "levothyroxine", "irregular period thyroid"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Thyroid hormone replacement may regulate cycles if irregularity is caused by thyroid imbalance.",
+    "commonExamples": [
+      "Levothyroxine"
+    ],
+    "benefits": [
+      "Improves cycle regularity",
+      "Improves energy levels"
+    ],
+    "seeDoctorIf": [
+      "Persistent irregular cycles",
+      "Extreme fatigue",
+      "Rapid weight changes"
+    ]
+  },
+
+  {
+    "id": "MED006",
+    "category": "Medications",
+    "topic": "Hormone Therapy for Menopause",
+    "keywords": ["hrt", "menopause hormone therapy", "estrogen therapy"],
+    "lifeStage": ["Perimenopause", "Menopause", "PostMenopause"],
+    "explanation": "Hormone replacement therapy (HRT) may reduce severe menopausal symptoms like hot flashes.",
+    "benefits": [
+      "Reduces hot flashes",
+      "Improves sleep",
+      "Supports bone health"
+    ],
+    "commonSideEffects": [
+      "Breast tenderness",
+      "Spotting"
+    ],
+    "avoidIf": [
+      "History of certain cancers",
+      "Blood clot history"
+    ],
+    "seeDoctorIf": [
+      "Abnormal vaginal bleeding",
+      "Severe chest pain"
+    ]
+  },
+
+  {
+    "id": "MED007",
+    "category": "Medications",
+    "topic": "Antibiotics for Pelvic Infections",
+    "keywords": ["pelvic infection treatment", "pid antibiotics", "infection period pain"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Antibiotics may be prescribed for pelvic inflammatory disease or other infections.",
+    "commonSymptoms": [
+      "Fever",
+      "Pelvic pain",
+      "Unusual discharge"
+    ],
+    "importantNote": "Antibiotics must be prescribed by a healthcare professional.",
+    "seeDoctorIf": [
+      "Fever with pelvic pain",
+      "Foul-smelling discharge",
+      "Severe abdominal pain"
+    ]
+  },
+
+  {
+    "id": "MED008",
+    "category": "Medications",
+    "topic": "Emergency Contraceptive Pills",
+    "keywords": ["morning after pill", "emergency birth control"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Emergency contraceptive pills help prevent pregnancy after unprotected intercourse.",
+    "importantNote": "Not intended for regular contraception use.",
+    "commonSideEffects": [
+      "Nausea",
+      "Temporary cycle changes",
+      "Spotting"
+    ],
+    "seeDoctorIf": [
+      "Severe abdominal pain",
+      "No period within 3 weeks"
+    ]
+  }
+]

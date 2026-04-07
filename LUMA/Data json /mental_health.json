@@ -1,0 +1,224 @@
+[
+  {
+    "id": "MH001",
+    "category": "Mental Health",
+    "topic": "Mood Swings During Cycle",
+    "keywords": ["emotional before period", "crying before period", "irritability", "hormonal mood"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Mood changes can occur due to fluctuations in estrogen and progesterone during the menstrual cycle.",
+    "isNormal": "Mild emotional changes before menstruation are common.",
+    "commonTriggers": [
+      "Hormonal shifts in luteal phase",
+      "Sleep disruption",
+      "Stress"
+    ],
+    "commonProblems": [
+      "Irritability",
+      "Low motivation",
+      "Sudden sadness"
+    ],
+    "possibleUnderlyingIssues": [
+      "PMS",
+      "PMDD",
+      "Chronic stress"
+    ],
+    "whatToDo": [
+      "Maintain sleep routine",
+      "Regular exercise",
+      "Reduce caffeine",
+      "Practice relaxation techniques"
+    ],
+    "seeDoctorIf": [
+      "Severe depression",
+      "Mood affecting daily functioning",
+      "Thoughts of self-harm"
+    ]
+  },
+
+  {
+    "id": "MH002",
+    "category": "Mental Health",
+    "topic": "Premenstrual Dysphoric Disorder (PMDD)",
+    "keywords": ["pmdd", "severe pms depression", "extreme mood before period"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "PMDD is a severe mood disorder linked to hormonal changes in the luteal phase.",
+    "isNormal": "PMDD is not considered normal and requires medical attention.",
+    "commonSymptoms": [
+      "Severe depression",
+      "Extreme irritability",
+      "Anxiety",
+      "Crying spells",
+      "Difficulty concentrating"
+    ],
+    "commonProblems": [
+      "Work impairment",
+      "Relationship strain"
+    ],
+    "whatToDo": [
+      "Track symptoms across 2-3 cycles",
+      "Consult healthcare provider",
+      "Seek mental health support"
+    ],
+    "seeDoctorIf": [
+      "Suicidal thoughts",
+      "Severe life disruption",
+      "Persistent intense symptoms"
+    ]
+  },
+
+  {
+    "id": "MH003",
+    "category": "Mental Health",
+    "topic": "Anxiety Related to Hormones",
+    "keywords": ["period anxiety", "cycle anxiety", "hormonal anxiety"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Hormonal fluctuations can influence neurotransmitters linked to anxiety.",
+    "isNormal": "Mild anxiety before periods can occur.",
+    "commonTriggers": [
+      "Progesterone drop",
+      "Stress",
+      "Sleep deprivation"
+    ],
+    "commonProblems": [
+      "Restlessness",
+      "Racing thoughts",
+      "Panic-like feelings"
+    ],
+    "possibleUnderlyingIssues": [
+      "Generalized anxiety disorder",
+      "PMDD",
+      "Chronic stress"
+    ],
+    "whatToDo": [
+      "Deep breathing exercises",
+      "Reduce caffeine intake",
+      "Maintain consistent sleep schedule"
+    ],
+    "seeDoctorIf": [
+      "Frequent panic attacks",
+      "Anxiety affecting work or school",
+      "Persistent anxiety beyond cycle timing"
+    ]
+  },
+
+  {
+    "id": "MH004",
+    "category": "Mental Health",
+    "topic": "Stress Impact on Menstrual Cycle",
+    "keywords": ["stress delayed period", "stress missed period", "cycle affected by stress"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "High stress can disrupt hormonal signaling between the brain and ovaries, delaying ovulation.",
+    "isNormal": "Temporary cycle delay during stressful periods is common.",
+    "commonProblems": [
+      "Delayed ovulation",
+      "Missed period",
+      "Irregular cycles"
+    ],
+    "possibleUnderlyingIssues": [
+      "Chronic stress",
+      "Overtraining",
+      "Emotional trauma"
+    ],
+    "whatToDo": [
+      "Practice relaxation techniques",
+      "Prioritize sleep",
+      "Balanced nutrition",
+      "Moderate exercise"
+    ],
+    "seeDoctorIf": [
+      "No period for 3 months (not pregnant)",
+      "Persistent irregular cycles"
+    ]
+  },
+
+  {
+    "id": "MH005",
+    "category": "Mental Health",
+    "topic": "Body Image Concerns During Puberty",
+    "keywords": ["puberty body changes", "insecure about body", "period weight gain"],
+    "lifeStage": ["Puberty"],
+    "explanation": "Hormonal changes during puberty can affect mood and body perception.",
+    "isNormal": "Body changes during puberty are natural and expected.",
+    "commonProblems": [
+      "Low self-esteem",
+      "Embarrassment about menstruation",
+      "Social anxiety"
+    ],
+    "possibleUnderlyingIssues": [
+      "Bullying",
+      "Peer pressure",
+      "Depression"
+    ],
+    "whatToDo": [
+      "Education about normal body development",
+      "Open communication with trusted adult",
+      "Encourage positive self-talk"
+    ],
+    "seeDoctorIf": [
+      "Persistent sadness",
+      "Withdrawal from social activities",
+      "Self-harm behavior"
+    ]
+  },
+
+  {
+    "id": "MH006",
+    "category": "Mental Health",
+    "topic": "Perimenopause Mood Changes",
+    "keywords": ["mood swings in 40s", "perimenopause anxiety", "irritability menopause"],
+    "lifeStage": ["Perimenopause"],
+    "explanation": "Hormone fluctuations during perimenopause can cause emotional instability.",
+    "isNormal": "Mild mood changes are common during transition to menopause.",
+    "commonProblems": [
+      "Irritability",
+      "Anxiety",
+      "Sleep disturbance",
+      "Low mood"
+    ],
+    "possibleUnderlyingIssues": [
+      "Major depressive disorder",
+      "Chronic insomnia"
+    ],
+    "whatToDo": [
+      "Maintain routine sleep schedule",
+      "Stress reduction",
+      "Consult healthcare provider for severe symptoms"
+    ],
+    "seeDoctorIf": [
+      "Persistent depression",
+      "Severe anxiety",
+      "Sleep severely disrupted"
+    ]
+  },
+
+  {
+    "id": "MH007",
+    "category": "Mental Health",
+    "topic": "Depression and Menstrual Cycle",
+    "keywords": ["depression during period", "low mood cycle", "sad during period"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Hormonal fluctuations can worsen underlying depression symptoms.",
+    "isNormal": "Occasional low mood may occur, but persistent depression is not normal.",
+    "commonProblems": [
+      "Loss of interest",
+      "Persistent sadness",
+      "Fatigue",
+      "Sleep changes"
+    ],
+    "possibleUnderlyingIssues": [
+      "Major depressive disorder",
+      "PMDD",
+      "Chronic stress"
+    ],
+    "whatToDo": [
+      "Seek mental health support",
+      "Maintain structured routine",
+      "Talk to trusted person"
+    ],
+    "seeDoctorIf": [
+      "Suicidal thoughts",
+      "Hopelessness lasting more than 2 weeks",
+      "Significant life disruption"
+    ]
+  }
+]

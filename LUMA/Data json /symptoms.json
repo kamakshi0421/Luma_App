@@ -1,0 +1,241 @@
+[
+  {
+    "id": "SYM001",
+    "category": "Symptoms",
+    "topic": "Lower Abdominal Cramps",
+    "keywords": ["period cramps", "lower stomach pain", "uterine pain", "dysmenorrhea"],
+    "explanation": "Lower abdominal cramps are caused by uterine contractions triggered by prostaglandins during menstruation.",
+    "isNormal": "Mild to moderate cramps during periods are common.",
+    "commonDuringPhase": ["Menstrual Phase"],
+    "commonProblems": [
+      "Severe pain limiting daily activity",
+      "Pain starting years after painless cycles",
+      "Pain with heavy bleeding"
+    ],
+    "possibleUnderlyingIssues": [
+      "Endometriosis",
+      "Fibroids",
+      "Adenomyosis",
+      "Pelvic inflammatory disease"
+    ],
+    "whatToDo": [
+      "Apply heat to lower abdomen",
+      "Light exercise",
+      "Stay hydrated",
+      "Rest"
+    ],
+    "seeDoctorIf": [
+      "Pain is severe and disabling",
+      "Pain does not improve with pain relief",
+      "Associated fever or unusual discharge"
+    ]
+  },
+
+  {
+    "id": "SYM002",
+    "category": "Symptoms",
+    "topic": "Heavy Menstrual Bleeding",
+    "keywords": ["heavy bleeding", "soaking pad hourly", "menorrhagia", "large clots"],
+    "explanation": "Heavy bleeding refers to excessive menstrual blood loss that interferes with daily activities.",
+    "isNormal": "Some variation is normal, but soaking a pad every hour is not normal.",
+    "commonDuringPhase": ["Menstrual Phase"],
+    "commonProblems": [
+      "Fatigue",
+      "Dizziness",
+      "Large blood clots"
+    ],
+    "possibleUnderlyingIssues": [
+      "Fibroids",
+      "Hormonal imbalance",
+      "PCOS",
+      "Bleeding disorders",
+      "Thyroid dysfunction"
+    ],
+    "whatToDo": [
+      "Track bleeding days",
+      "Maintain iron-rich diet",
+      "Stay hydrated"
+    ],
+    "seeDoctorIf": [
+      "Bleeding lasts more than 7 days",
+      "Feeling faint",
+      "Frequent large clots"
+    ]
+  },
+
+  {
+    "id": "SYM003",
+    "category": "Symptoms",
+    "topic": "Irregular Periods",
+    "keywords": ["late period", "missed period", "cycle delay", "irregular cycle"],
+    "explanation": "Irregular periods occur when cycle length frequently changes or periods are missed.",
+    "isNormal": "Occasional irregularity can occur during adolescence, stress, or lifestyle changes.",
+    "commonDuringPhase": ["Follicular Phase", "Ovulation Phase"],
+    "commonProblems": [
+      "Frequent delays",
+      "Skipped ovulation",
+      "Very short or long cycles"
+    ],
+    "possibleUnderlyingIssues": [
+      "PCOS",
+      "Thyroid imbalance",
+      "Stress",
+      "Excessive exercise",
+      "Underweight or overweight"
+    ],
+    "whatToDo": [
+      "Track cycle consistently",
+      "Manage stress",
+      "Maintain balanced nutrition"
+    ],
+    "seeDoctorIf": [
+      "No period for 3 months (not pregnant)",
+      "Cycles shorter than 21 days",
+      "Cycles longer than 35 days regularly"
+    ]
+  },
+
+  {
+    "id": "SYM004",
+    "category": "Symptoms",
+    "topic": "Mood Swings",
+    "keywords": ["emotional before period", "irritability", "crying before period"],
+    "explanation": "Mood changes occur due to fluctuations in estrogen and progesterone levels.",
+    "isNormal": "Mild mood changes before menstruation are common.",
+    "commonDuringPhase": ["Luteal Phase"],
+    "commonProblems": [
+      "Severe irritability",
+      "Anxiety",
+      "Depressive symptoms"
+    ],
+    "possibleUnderlyingIssues": [
+      "PMDD",
+      "Chronic stress",
+      "Hormone sensitivity"
+    ],
+    "whatToDo": [
+      "Regular exercise",
+      "Reduce caffeine",
+      "Practice stress management",
+      "Maintain sleep routine"
+    ],
+    "seeDoctorIf": [
+      "Severe depression",
+      "Thoughts of self-harm",
+      "Symptoms affecting daily functioning"
+    ]
+  },
+
+  {
+    "id": "SYM005",
+    "category": "Symptoms",
+    "topic": "Acne Before Period",
+    "keywords": ["period acne", "hormonal acne", "breakouts before period"],
+    "explanation": "Hormonal acne occurs due to progesterone rise and androgen sensitivity in the luteal phase.",
+    "isNormal": "Mild breakouts before periods are common.",
+    "commonDuringPhase": ["Luteal Phase"],
+    "commonProblems": [
+      "Severe cystic acne",
+      "Persistent acne throughout cycle"
+    ],
+    "possibleUnderlyingIssues": [
+      "PCOS",
+      "Hormonal imbalance",
+      "High androgen levels"
+    ],
+    "whatToDo": [
+      "Gentle skincare routine",
+      "Avoid picking skin",
+      "Maintain balanced diet"
+    ],
+    "seeDoctorIf": [
+      "Painful cystic acne",
+      "Sudden severe worsening"
+    ]
+  },
+
+  {
+    "id": "SYM006",
+    "category": "Symptoms",
+    "topic": "Breast Tenderness",
+    "keywords": ["breast pain", "sore breasts before period"],
+    "explanation": "Breast tenderness is caused by progesterone changes during the luteal phase.",
+    "isNormal": "Mild tenderness before period is common.",
+    "commonDuringPhase": ["Luteal Phase"],
+    "commonProblems": [
+      "Severe breast swelling",
+      "Pain in one specific area"
+    ],
+    "possibleUnderlyingIssues": [
+      "Hormonal imbalance",
+      "Fibrocystic breast changes"
+    ],
+    "whatToDo": [
+      "Wear supportive bra",
+      "Reduce caffeine",
+      "Warm compress"
+    ],
+    "seeDoctorIf": [
+      "New lump",
+      "Persistent localized pain"
+    ]
+  },
+
+  {
+    "id": "SYM007",
+    "category": "Symptoms",
+    "topic": "Spotting Between Periods",
+    "keywords": ["spotting", "light bleeding mid cycle", "bleeding between periods"],
+    "explanation": "Spotting is light bleeding outside regular menstruation.",
+    "isNormal": "Occasional spotting can occur during ovulation.",
+    "commonDuringPhase": ["Ovulation Phase"],
+    "commonProblems": [
+      "Frequent spotting",
+      "Spotting with pain"
+    ],
+    "possibleUnderlyingIssues": [
+      "Hormonal imbalance",
+      "Fibroids",
+      "Infection",
+      "Early pregnancy"
+    ],
+    "whatToDo": [
+      "Track timing",
+      "Monitor other symptoms"
+    ],
+    "seeDoctorIf": [
+      "Spotting is frequent",
+      "Accompanied by severe pain",
+      "Occurs after menopause"
+    ]
+  },
+
+  {
+    "id": "SYM008",
+    "category": "Symptoms",
+    "topic": "Fatigue During Cycle",
+    "keywords": ["tired during period", "low energy cycle", "period exhaustion"],
+    "explanation": "Fatigue can occur due to hormonal shifts or blood loss.",
+    "isNormal": "Mild tiredness during menstruation is common.",
+    "commonDuringPhase": ["Menstrual Phase", "Luteal Phase"],
+    "commonProblems": [
+      "Extreme weakness",
+      "Persistent exhaustion"
+    ],
+    "possibleUnderlyingIssues": [
+      "Iron deficiency anemia",
+      "Thyroid disorders",
+      "Chronic stress"
+    ],
+    "whatToDo": [
+      "Ensure adequate sleep",
+      "Iron-rich diet",
+      "Stay hydrated"
+    ],
+    "seeDoctorIf": [
+      "Frequent dizziness",
+      "Shortness of breath",
+      "Severe ongoing fatigue"
+    ]
+  }
+]

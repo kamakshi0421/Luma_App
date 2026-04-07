@@ -1,0 +1,208 @@
+[
+  {
+    "id": "PCOS001",
+    "category": "Disorders",
+    "topic": "Polycystic Ovary Syndrome (PCOS) Overview",
+    "keywords": ["what is pcos", "pcos meaning", "polycystic ovary syndrome"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "PCOS is a hormonal disorder affecting ovulation, androgen levels, and metabolic balance.",
+    "commonSymptoms": [
+      "Irregular periods",
+      "Acne",
+      "Weight gain",
+      "Excess hair growth",
+      "Difficulty conceiving"
+    ],
+    "commonProblems": [
+      "Anovulation",
+      "Insulin resistance",
+      "Hormonal imbalance"
+    ],
+    "possibleComplications": [
+      "Type 2 diabetes",
+      "Infertility",
+      "Endometrial hyperplasia"
+    ],
+    "whatToDo": [
+      "Consult gynecologist",
+      "Maintain healthy body weight",
+      "Balanced diet",
+      "Regular exercise"
+    ],
+    "seeDoctorIf": [
+      "Persistent irregular cycles",
+      "Severe acne or hair growth",
+      "Difficulty conceiving"
+    ]
+  },
+  {
+    "id": "PCOS002",
+    "category": "Disorders",
+    "topic": "Irregular Periods in PCOS",
+    "keywords": ["pcos irregular period", "missed period pcos"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Irregular periods in PCOS are caused by inconsistent ovulation.",
+    "commonProblems": [
+      "Skipped ovulation",
+      "Long cycles",
+      "Heavy bleeding episodes"
+    ],
+    "possibleComplications": [
+      "Endometrial thickening"
+    ],
+    "seeDoctorIf": [
+      "No period for 3 months",
+      "Heavy prolonged bleeding"
+    ]
+  },
+  {
+    "id": "PCOS003",
+    "category": "Disorders",
+    "topic": "Weight Gain and Insulin Resistance",
+    "keywords": ["pcos weight gain", "insulin resistance pcos"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Insulin resistance in PCOS can lead to abdominal weight gain.",
+    "commonSymptoms": [
+      "Belly fat",
+      "Cravings",
+      "Fatigue"
+    ],
+    "possibleComplications": [
+      "Prediabetes",
+      "Type 2 diabetes"
+    ],
+    "whatToDo": [
+      "Low glycemic index diet",
+      "Strength training",
+      "Monitor blood sugar"
+    ],
+    "seeDoctorIf": [
+      "Rapid weight gain",
+      "Abnormal glucose reports"
+    ]
+  },
+  {
+    "id": "PCOS004",
+    "category": "Disorders",
+    "topic": "Hirsutism (Excess Facial or Body Hair)",
+    "keywords": ["facial hair pcos", "hirsutism"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Elevated androgen levels can cause excess hair growth.",
+    "commonSymptoms": [
+      "Chin hair",
+      "Chest hair",
+      "Abdominal hair"
+    ],
+    "possibleComplications": [
+      "Emotional distress"
+    ],
+    "seeDoctorIf": [
+      "Rapid increase in hair growth",
+      "Voice deepening"
+    ]
+  },
+  {
+    "id": "PCOS005",
+    "category": "Disorders",
+    "topic": "Acne in PCOS",
+    "keywords": ["pcos acne", "hormonal acne"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Androgen excess increases oil production, causing acne.",
+    "commonSymptoms": [
+      "Chin acne",
+      "Jawline acne",
+      "Cystic acne"
+    ],
+    "seeDoctorIf": [
+      "Severe scarring acne",
+      "Persistent acne with irregular cycles"
+    ]
+  },
+  {
+    "id": "PCOS006",
+    "category": "Disorders",
+    "topic": "Hair Thinning (Androgenic Alopecia)",
+    "keywords": ["pcos hair loss", "thinning hair woman"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "High androgen levels may cause scalp hair thinning.",
+    "seeDoctorIf": [
+      "Rapid hair shedding",
+      "Visible bald patches"
+    ]
+  },
+  {
+    "id": "PCOS007",
+    "category": "Disorders",
+    "topic": "Infertility in PCOS",
+    "keywords": ["pcos infertility", "no ovulation pcos"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Irregular ovulation makes conception more difficult.",
+    "commonProblems": [
+      "Anovulation",
+      "Delayed ovulation"
+    ],
+    "whatToDo": [
+      "Track ovulation",
+      "Consult fertility specialist"
+    ],
+    "seeDoctorIf": [
+      "Trying to conceive for 12 months without success"
+    ]
+  },
+  {
+    "id": "PCOS008",
+    "category": "Disorders",
+    "topic": "Acanthosis Nigricans",
+    "keywords": ["dark neck pcos", "acanthosis pcos"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Darkened skin patches may indicate insulin resistance.",
+    "possibleComplications": [
+      "Diabetes risk"
+    ],
+    "seeDoctorIf": [
+      "Rapid spreading dark patches"
+    ]
+  },
+  {
+    "id": "PCOS009",
+    "category": "Disorders",
+    "topic": "Mood Changes in PCOS",
+    "keywords": ["pcos anxiety", "pcos depression"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Hormonal imbalance may contribute to anxiety and depression.",
+    "seeDoctorIf": [
+      "Persistent sadness",
+      "Severe anxiety",
+      "Thoughts of self-harm"
+    ]
+  },
+  {
+    "id": "PCOS010",
+    "category": "Disorders",
+    "topic": "Ovarian Cysts in PCOS",
+    "keywords": ["ovarian cyst pcos"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Multiple small follicles may appear on ultrasound in PCOS.",
+    "importantNote": "Diagnosis requires clinical + hormonal criteria, not just ultrasound.",
+    "seeDoctorIf": [
+      "Sudden severe pelvic pain"
+    ]
+  },
+  {
+    "id": "PCOS011",
+    "category": "Disorders",
+    "topic": "Long-Term Health Risks in PCOS",
+    "keywords": ["pcos complications", "long term risk pcos"],
+    "lifeStage": ["Reproductive"],
+    "possibleComplications": [
+      "Type 2 diabetes",
+      "High cholesterol",
+      "Cardiovascular disease",
+      "Endometrial cancer risk"
+    ],
+    "whatToDo": [
+      "Regular health checkups",
+      "Monitor blood sugar and cholesterol"
+    ]
+  }
+]

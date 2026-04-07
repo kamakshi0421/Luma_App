@@ -1,0 +1,220 @@
+[
+  {
+    "id": "CON001",
+    "category": "Contraception",
+    "topic": "Male Condoms",
+    "keywords": ["condom", "protection during sex", "barrier method"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "type": "Barrier Method",
+    "effectivenessTypicalUse": "Around 87%",
+    "effectivenessPerfectUse": "Around 98%",
+    "explanation": "Male condoms are thin coverings worn over the penis to prevent sperm from entering the vagina.",
+    "benefits": [
+      "Protects against STIs",
+      "No hormones",
+      "Easily available"
+    ],
+    "commonSideEffects": [
+      "Latex allergy (rare)",
+      "Reduced sensation"
+    ],
+    "whatToKnow": [
+      "Use a new condom every time",
+      "Check expiry date",
+      "Store properly"
+    ],
+    "seeDoctorIf": [
+      "Frequent condom breakage",
+      "Allergic reactions"
+    ]
+  },
+
+  {
+    "id": "CON002",
+    "category": "Contraception",
+    "topic": "Combined Oral Contraceptive Pills",
+    "keywords": ["birth control pills", "combined pill", "estrogen pill"],
+    "lifeStage": ["Reproductive"],
+    "type": "Hormonal Method",
+    "effectivenessTypicalUse": "Around 93%",
+    "effectivenessPerfectUse": "Over 99%",
+    "explanation": "Combined pills contain estrogen and progestin to prevent ovulation.",
+    "benefits": [
+      "Regulates periods",
+      "Reduces cramps",
+      "Improves acne"
+    ],
+    "commonSideEffects": [
+      "Nausea",
+      "Breast tenderness",
+      "Mild headaches"
+    ],
+    "seriousRisks": [
+      "Blood clots (rare)",
+      "High blood pressure"
+    ],
+    "notRecommendedIf": [
+      "History of blood clots",
+      "Migraine with aura",
+      "Smoking over age 35"
+    ],
+    "whatToKnow": [
+      "Take at same time daily",
+      "May take 7 days to become effective"
+    ],
+    "seeDoctorIf": [
+      "Severe leg pain",
+      "Chest pain",
+      "Severe headaches"
+    ]
+  },
+
+  {
+    "id": "CON003",
+    "category": "Contraception",
+    "topic": "Progestin-Only Pills (Mini Pill)",
+    "keywords": ["mini pill", "progestin only pill"],
+    "lifeStage": ["Reproductive", "Breastfeeding"],
+    "type": "Hormonal Method",
+    "effectivenessTypicalUse": "Around 93%",
+    "explanation": "Mini pills contain only progestin and prevent pregnancy mainly by thickening cervical mucus.",
+    "benefits": [
+      "Suitable during breastfeeding",
+      "No estrogen"
+    ],
+    "commonSideEffects": [
+      "Irregular bleeding",
+      "Spotting"
+    ],
+    "whatToKnow": [
+      "Must be taken at same time daily",
+      "Short delay can reduce effectiveness"
+    ],
+    "seeDoctorIf": [
+      "Persistent heavy bleeding",
+      "Severe abdominal pain"
+    ]
+  },
+
+  {
+    "id": "CON004",
+    "category": "Contraception",
+    "topic": "Intrauterine Device (IUD)",
+    "keywords": ["iud", "copper iud", "hormonal iud", "coil"],
+    "lifeStage": ["Reproductive", "Perimenopause"],
+    "type": "Long Acting Reversible Contraception",
+    "effectivenessTypicalUse": "Over 99%",
+    "explanation": "IUDs are small devices placed inside the uterus to prevent pregnancy.",
+    "types": [
+      "Copper IUD (non-hormonal)",
+      "Hormonal IUD (releases progestin)"
+    ],
+    "benefits": [
+      "Long-term protection (3–10 years)",
+      "Low maintenance",
+      "Highly effective"
+    ],
+    "commonSideEffects": [
+      "Irregular spotting initially",
+      "Heavier periods with copper IUD"
+    ],
+    "seeDoctorIf": [
+      "Severe pelvic pain",
+      "Fever after insertion",
+      "Unable to feel IUD strings"
+    ]
+  },
+
+  {
+    "id": "CON005",
+    "category": "Contraception",
+    "topic": "Contraceptive Implant",
+    "keywords": ["implant", "birth control rod"],
+    "lifeStage": ["Reproductive"],
+    "type": "Long Acting Reversible Contraception",
+    "effectivenessTypicalUse": "Over 99%",
+    "explanation": "A small rod inserted under the skin of the arm that releases progestin.",
+    "benefits": [
+      "Lasts up to 3 years",
+      "Very effective"
+    ],
+    "commonSideEffects": [
+      "Irregular bleeding",
+      "Headache",
+      "Mood changes"
+    ],
+    "seeDoctorIf": [
+      "Severe arm pain",
+      "Signs of infection"
+    ]
+  },
+
+  {
+    "id": "CON006",
+    "category": "Contraception",
+    "topic": "Emergency Contraception",
+    "keywords": ["morning after pill", "emergency pill", "plan b"],
+    "lifeStage": ["Reproductive"],
+    "type": "Emergency Method",
+    "effectivenessTypicalUse": "Most effective within 24–72 hours",
+    "explanation": "Emergency contraception prevents pregnancy after unprotected intercourse.",
+    "commonSideEffects": [
+      "Nausea",
+      "Temporary cycle changes",
+      "Spotting"
+    ],
+    "whatToKnow": [
+      "Not for regular use",
+      "Does not protect against STIs"
+    ],
+    "seeDoctorIf": [
+      "Severe abdominal pain",
+      "No period within 3 weeks"
+    ]
+  },
+
+  {
+    "id": "CON007",
+    "category": "Contraception",
+    "topic": "Tubal Ligation",
+    "keywords": ["female sterilization", "permanent birth control"],
+    "lifeStage": ["Reproductive"],
+    "type": "Permanent Method",
+    "effectivenessTypicalUse": "Over 99%",
+    "explanation": "Surgical procedure to permanently block fallopian tubes.",
+    "benefits": [
+      "Permanent solution",
+      "No ongoing maintenance"
+    ],
+    "whatToKnow": [
+      "Not easily reversible",
+      "Requires surgical procedure"
+    ],
+    "seeDoctorIf": [
+      "Post-surgery complications",
+      "Severe abdominal pain"
+    ]
+  },
+
+  {
+    "id": "CON008",
+    "category": "Contraception",
+    "topic": "Natural Family Planning",
+    "keywords": ["fertility awareness", "cycle tracking", "natural method"],
+    "lifeStage": ["Reproductive"],
+    "type": "Behavioral Method",
+    "effectivenessTypicalUse": "Around 76%",
+    "explanation": "Tracking cycle and avoiding intercourse during fertile window.",
+    "benefits": [
+      "No hormones",
+      "Low cost"
+    ],
+    "limitations": [
+      "Requires strict tracking",
+      "Less effective than other methods"
+    ],
+    "seeDoctorIf": [
+      "Irregular cycles making tracking difficult"
+    ]
+  }
+]

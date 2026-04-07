@@ -1,0 +1,207 @@
+[
+  {
+    "id": "LIF001",
+    "category": "Lifestyle",
+    "topic": "Sleep and Menstrual Health",
+    "keywords": ["sleep during period", "insomnia before period", "cycle sleep problems"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause", "Menopause"],
+    "explanation": "Hormonal changes during the menstrual cycle can affect sleep quality.",
+    "isNormal": "Mild sleep disturbance before periods is common.",
+    "commonProblems": [
+      "Insomnia during luteal phase",
+      "Night sweats (perimenopause)",
+      "Daytime fatigue"
+    ],
+    "whatToDo": [
+      "Maintain consistent sleep schedule",
+      "Limit screen time before bed",
+      "Reduce caffeine after evening",
+      "Practice relaxation techniques"
+    ],
+    "seeDoctorIf": [
+      "Chronic insomnia",
+      "Severe night sweats affecting sleep"
+    ]
+  },
+
+  {
+    "id": "LIF002",
+    "category": "Lifestyle",
+    "topic": "Exercise During Menstrual Cycle",
+    "keywords": ["workout during period", "exercise in luteal phase", "cycle syncing workouts"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Exercise needs may vary across different menstrual phases.",
+    "phaseGuidance": {
+      "Menstrual Phase": "Light activities like walking or stretching.",
+      "Follicular Phase": "Strength training and moderate workouts.",
+      "Ovulation Phase": "High intensity workouts and peak performance.",
+      "Luteal Phase": "Low to moderate intensity exercise."
+    },
+    "benefits": [
+      "Reduced cramps",
+      "Improved mood",
+      "Better energy regulation"
+    ],
+    "seeDoctorIf": [
+      "Dizziness during workouts",
+      "Severe pelvic pain with activity"
+    ]
+  },
+
+  {
+    "id": "LIF003",
+    "category": "Lifestyle",
+    "topic": "Stress Management",
+    "keywords": ["stress period delay", "cycle affected by stress", "relaxation methods"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Chronic stress can interfere with hormonal signals that regulate ovulation.",
+    "commonProblems": [
+      "Delayed ovulation",
+      "Missed periods",
+      "Mood swings"
+    ],
+    "whatToDo": [
+      "Deep breathing exercises",
+      "Meditation",
+      "Journaling",
+      "Regular physical activity"
+    ],
+    "seeDoctorIf": [
+      "Persistent missed periods",
+      "Severe anxiety symptoms"
+    ]
+  },
+
+  {
+    "id": "LIF004",
+    "category": "Lifestyle",
+    "topic": "Menstrual Hygiene Practices",
+    "keywords": ["pad hygiene", "tampon safety", "menstrual cup care"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Proper menstrual hygiene reduces infection risk.",
+    "recommended": [
+      "Change pad/tampon every 4-6 hours",
+      "Wash hands before and after changing",
+      "Sterilize menstrual cup properly"
+    ],
+    "commonProblems": [
+      "Skin irritation",
+      "Infections"
+    ],
+    "seeDoctorIf": [
+      "Foul-smelling discharge",
+      "Fever with tampon use",
+      "Symptoms of toxic shock syndrome"
+    ]
+  },
+
+  {
+    "id": "LIF005",
+    "category": "Lifestyle",
+    "topic": "Caffeine and Menstrual Symptoms",
+    "keywords": ["coffee during period", "caffeine pms", "period headaches coffee"],
+    "lifeStage": ["Reproductive", "Perimenopause"],
+    "explanation": "Excess caffeine may worsen anxiety, breast tenderness, and sleep issues.",
+    "isNormal": "Moderate caffeine intake is generally safe.",
+    "whatToDo": [
+      "Limit excessive coffee intake",
+      "Switch to herbal tea during luteal phase"
+    ],
+    "seeDoctorIf": [
+      "Severe anxiety triggered by caffeine",
+      "Palpitations"
+    ]
+  },
+
+  {
+    "id": "LIF006",
+    "category": "Lifestyle",
+    "topic": "Smoking and Alcohol Impact",
+    "keywords": ["smoking period", "alcohol cycle effect", "drinking before period"],
+    "lifeStage": ["Reproductive", "Perimenopause", "Menopause"],
+    "explanation": "Smoking and excessive alcohol may worsen hormonal imbalance and increase health risks.",
+    "commonProblems": [
+      "Worsened PMS",
+      "Cycle irregularity",
+      "Hot flashes worsening"
+    ],
+    "whatToDo": [
+      "Limit alcohol intake",
+      "Avoid smoking",
+      "Seek cessation support if needed"
+    ],
+    "seeDoctorIf": [
+      "Frequent cycle irregularities",
+      "Dependency concerns"
+    ]
+  },
+
+  {
+    "id": "LIF007",
+    "category": "Lifestyle",
+    "topic": "Screen Time and Hormonal Health",
+    "keywords": ["late night phone period", "screen time sleep period"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Excess screen exposure at night can disrupt sleep and indirectly affect hormonal balance.",
+    "commonProblems": [
+      "Poor sleep",
+      "Mood instability"
+    ],
+    "whatToDo": [
+      "Limit screen time 1 hour before bed",
+      "Use night mode",
+      "Follow regular bedtime routine"
+    ],
+    "seeDoctorIf": [
+      "Chronic sleep deprivation",
+      "Severe mood disturbances"
+    ]
+  },
+
+  {
+    "id": "LIF008",
+    "category": "Lifestyle",
+    "topic": "Perimenopause Lifestyle Support",
+    "keywords": ["hot flashes lifestyle", "menopause routine", "perimenopause self care"],
+    "lifeStage": ["Perimenopause", "Menopause", "PostMenopause"],
+    "explanation": "Lifestyle changes can ease symptoms during menopause transition.",
+    "recommended": [
+      "Layered clothing for hot flashes",
+      "Regular exercise",
+      "Calcium and vitamin D intake",
+      "Stress reduction practices"
+    ],
+    "commonProblems": [
+      "Hot flashes",
+      "Sleep disruption",
+      "Mood swings"
+    ],
+    "seeDoctorIf": [
+      "Severe hot flashes",
+      "Persistent depression",
+      "Bone fractures"
+    ]
+  },
+
+  {
+    "id": "LIF009",
+    "category": "Lifestyle",
+    "topic": "Healthy Weight and Cycle Regulation",
+    "keywords": ["weight and periods", "underweight missed period", "overweight irregular cycle"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Extreme weight loss or gain can disrupt ovulation and menstrual cycles.",
+    "commonProblems": [
+      "Missed periods",
+      "Irregular cycles"
+    ],
+    "whatToDo": [
+      "Balanced diet",
+      "Moderate exercise",
+      "Avoid crash dieting"
+    ],
+    "seeDoctorIf": [
+      "No period for 3 months",
+      "Rapid unexplained weight changes"
+    ]
+  }
+]

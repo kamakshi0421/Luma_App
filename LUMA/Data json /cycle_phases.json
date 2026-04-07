@@ -1,0 +1,207 @@
+
+  {
+    "id": "CP001",
+    "category": "Cycle Phases",
+    "topic": "Menstrual Phase",
+    "keywords": ["period phase", "bleeding phase", "day 1 of cycle", "menstrual bleeding"],
+    "explanation": "The menstrual phase begins on Day 1 of the cycle and involves shedding of the uterine lining when pregnancy has not occurred.",
+    "hormones": "Estrogen and progesterone levels are low.",
+    "isNormal": "Bleeding lasting 3–7 days is considered normal.",
+    "commonSymptoms": [
+      "Bleeding",
+      "Lower abdominal cramps",
+      "Lower back pain",
+      "Fatigue",
+      "Headache",
+      "Loose stools"
+    ],
+    "commonProblems": [
+      "Heavy bleeding",
+      "Severe cramps (dysmenorrhea)",
+      "Large blood clots",
+      "Nausea or vomiting",
+      "Extreme fatigue"
+    ],
+    "possibleUnderlyingIssues": [
+      "Endometriosis",
+      "Fibroids",
+      "Adenomyosis",
+      "Hormonal imbalance",
+      "Iron deficiency anemia"
+    ],
+    "whyItHappens": "The uterus sheds its lining due to a drop in progesterone. Prostaglandins cause uterine contractions.",
+    "whatToDo": [
+      "Use heat therapy",
+      "Stay hydrated",
+      "Eat iron-rich foods",
+      "Gentle stretching",
+      "Rest adequately"
+    ],
+    "seeDoctorIf": [
+      "Bleeding lasts more than 7 days",
+      "Soaking pad/tampon every hour",
+      "Severe disabling pain",
+      "Dizziness or fainting"
+    ]
+  },
+
+  {
+    "id": "CP002",
+    "category": "Cycle Phases",
+    "topic": "Follicular Phase",
+    "keywords": ["after period phase", "pre ovulation phase", "follicular stage"],
+    "explanation": "The follicular phase prepares the body for ovulation. The uterine lining rebuilds and one follicle matures.",
+    "hormones": "Estrogen gradually rises while progesterone remains low.",
+    "isNormal": "Phase length varies between individuals.",
+    "commonSymptoms": [
+      "Improving mood",
+      "Rising energy",
+      "Better focus",
+      "Motivation increase"
+    ],
+    "commonProblems": [
+      "Delayed ovulation",
+      "Low energy despite rising hormones",
+      "Persistent acne",
+      "Irregular cycle length"
+    ],
+    "possibleUnderlyingIssues": [
+      "PCOS",
+      "Thyroid imbalance",
+      "Chronic stress",
+      "Underweight or excessive exercise"
+    ],
+    "whyItHappens": "FSH stimulates follicles. Estrogen rebuilds uterine lining.",
+    "whatToDo": [
+      "Balanced nutrition",
+      "Moderate exercise",
+      "Stress management",
+      "Track ovulation signs"
+    ],
+    "seeDoctorIf": [
+      "Cycles consistently shorter than 21 days",
+      "No ovulation for multiple cycles",
+      "Frequent irregular cycles"
+    ]
+  },
+
+  {
+    "id": "CP003",
+    "category": "Cycle Phases",
+    "topic": "Ovulation Phase",
+    "keywords": ["ovulation", "fertile window", "egg release", "mid cycle pain"],
+    "explanation": "Ovulation occurs when a mature egg is released from the ovary, usually mid-cycle.",
+    "hormones": "Estrogen peaks and LH surge triggers egg release.",
+    "isNormal": "Ovulation timing varies per individual.",
+    "commonSymptoms": [
+      "Clear stretchy cervical mucus",
+      "Mild one-sided pelvic pain",
+      "Increased libido",
+      "Slight temperature rise after ovulation"
+    ],
+    "commonProblems": [
+      "Painful ovulation (mittelschmerz)",
+      "No ovulation (anovulation)",
+      "Irregular ovulation timing",
+      "Spotting during ovulation"
+    ],
+    "possibleUnderlyingIssues": [
+      "PCOS",
+      "Hormonal imbalance",
+      "Thyroid disorders",
+      "Stress-related cycle disruption"
+    ],
+    "whyItHappens": "LH surge causes egg release from ovary.",
+    "whatToDo": [
+      "Track cervical mucus",
+      "Monitor basal body temperature",
+      "Manage stress",
+      "Consult doctor if trying to conceive and ovulation is absent"
+    ],
+    "seeDoctorIf": [
+      "Severe sharp pelvic pain",
+      "No ovulation signs for several cycles",
+      "Irregular bleeding"
+    ]
+  },
+
+  {
+    "id": "CP004",
+    "category": "Cycle Phases",
+    "topic": "Luteal Phase",
+    "keywords": ["before period phase", "luteal stage", "post ovulation phase"],
+    "explanation": "The luteal phase follows ovulation and prepares the uterus for pregnancy. If pregnancy does not occur, hormone levels drop.",
+    "hormones": "Progesterone rises then falls before menstruation.",
+    "isNormal": "Typically lasts 12–14 days.",
+    "commonSymptoms": [
+      "Breast tenderness",
+      "Bloating",
+      "Mood changes",
+      "Acne",
+      "Fatigue",
+      "Food cravings"
+    ],
+    "commonProblems": [
+      "Severe PMS",
+      "Short luteal phase",
+      "Intense mood swings",
+      "Sleep disturbances"
+    ],
+    "possibleUnderlyingIssues": [
+      "Low progesterone",
+      "PMDD",
+      "Hormonal imbalance",
+      "Stress or nutritional deficiencies"
+    ],
+    "whyItHappens": "Progesterone prepares the uterus. Hormone drop triggers PMS symptoms.",
+    "whatToDo": [
+      "Light exercise",
+      "Magnesium-rich foods",
+      "Limit caffeine",
+      "Maintain sleep routine",
+      "Practice relaxation techniques"
+    ],
+    "seeDoctorIf": [
+      "Severe depression or anxiety",
+      "Symptoms affecting daily life",
+      "Repeated short luteal phase"
+    ]
+  },
+
+  {
+    "id": "CP005",
+    "category": "Cycle Phases",
+    "topic": "Premenstrual Dysphoric Disorder (PMDD)",
+    "keywords": ["pmdd", "severe pms", "extreme mood before period"],
+    "explanation": "PMDD is a severe form of PMS that significantly affects emotional and mental well-being.",
+    "hormones": "Sensitivity to progesterone changes in luteal phase.",
+    "isNormal": "PMDD is not considered normal and requires medical care.",
+    "commonSymptoms": [
+      "Severe depression",
+      "Extreme irritability",
+      "Anxiety",
+      "Crying spells",
+      "Difficulty concentrating"
+    ],
+    "commonProblems": [
+      "Work impairment",
+      "Relationship strain",
+      "Emotional instability"
+    ],
+    "possibleUnderlyingIssues": [
+      "Hormone sensitivity",
+      "History of depression",
+      "Stress disorders"
+    ],
+    "whatToDo": [
+      "Seek medical evaluation",
+      "Track symptoms for 2–3 cycles",
+      "Maintain structured routine"
+    ],
+    "seeDoctorIf": [
+      "Suicidal thoughts",
+      "Severe functional impairment",
+      "Persistent severe symptoms"
+    ]
+  }
+]

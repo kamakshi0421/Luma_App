@@ -1,0 +1,279 @@
+[
+  {
+    "id": "MEN001",
+    "category": "Menstrual Health",
+    "topic": "What Is a Menstrual Cycle",
+    "keywords": ["what is period", "menstrual cycle meaning", "why periods happen"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "The menstrual cycle is a monthly hormonal process in which the uterus prepares for pregnancy. If pregnancy does not occur, the uterine lining sheds as a period.",
+    "averageCycleLength": "21-35 days in adults",
+    "averageBleedingDuration": "3-7 days",
+    "isNormal": "Cycle length may vary slightly each month.",
+    "seeDoctorIf": [
+      "Cycle shorter than 21 days consistently",
+      "Cycle longer than 35 days consistently",
+      "No period for 3 months (not pregnant)"
+    ]
+  },
+
+  {
+    "id": "MEN002",
+    "category": "Menstrual Health",
+    "topic": "Hormones Involved in Menstrual Cycle",
+    "keywords": ["estrogen period", "progesterone role", "hormones during period"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Estrogen builds the uterine lining, progesterone stabilizes it, and FSH and LH regulate ovulation.",
+    "commonEffects": [
+      "Mood changes",
+      "Energy fluctuations",
+      "Skin changes"
+    ],
+    "seeDoctorIf": [
+      "Severe hormonal imbalance symptoms",
+      "Persistent irregular cycles"
+    ]
+  },
+
+  {
+    "id": "MEN003",
+    "category": "Menstrual Health",
+    "topic": "Normal vs Abnormal Period",
+    "keywords": ["normal period", "abnormal bleeding", "is my period normal"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "normalSigns": [
+      "Bleeding 3-7 days",
+      "Mild to moderate cramps",
+      "Cycle 21-35 days"
+    ],
+    "abnormalSigns": [
+      "Bleeding longer than 7 days",
+      "Soaking pad every hour",
+      "Severe pain",
+      "Bleeding between periods"
+    ],
+    "seeDoctorIf": [
+      "Frequent abnormal cycles",
+      "Severe symptoms interfering with life"
+    ]
+  },
+
+  {
+    "id": "MEN004",
+    "category": "Menstrual Health",
+    "topic": "Types of Menstrual Flow",
+    "keywords": ["light period", "heavy period", "spotting", "flow types"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "flowTypes": {
+      "Light": "Minimal bleeding, may last fewer days.",
+      "Moderate": "Typical bleeding pattern.",
+      "Heavy": "Soaking pad every 1-2 hours."
+    },
+    "isNormal": "Flow may vary month to month.",
+    "seeDoctorIf": [
+      "Heavy bleeding every cycle",
+      "Large clots frequently"
+    ]
+  },
+
+  {
+    "id": "MEN005",
+    "category": "Menstrual Health",
+    "topic": "Period Blood Color Meaning",
+    "keywords": ["brown period blood", "dark red period", "pink discharge"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "colorGuide": {
+      "Bright Red": "Fresh blood, common during active flow.",
+      "Dark Red": "Older blood, normal.",
+      "Brown": "Old blood at beginning or end of period.",
+      "Pink": "May indicate light flow or spotting."
+    },
+    "seeDoctorIf": [
+      "Gray discharge",
+      "Strong odor",
+      "Pain with unusual discharge"
+    ]
+  },
+
+  {
+    "id": "MEN006",
+    "category": "Menstrual Health",
+    "topic": "Blood Clots During Period",
+    "keywords": ["clots during period", "large clots period"],
+    "lifeStage": ["Reproductive", "Perimenopause"],
+    "explanation": "Small clots may occur during heavy flow days.",
+    "isNormal": "Clots smaller than a coin occasionally can be normal.",
+    "seeDoctorIf": [
+      "Clots larger than a coin frequently",
+      "Heavy bleeding with weakness"
+    ]
+  },
+
+  {
+    "id": "MEN007",
+    "category": "Menstrual Health",
+    "topic": "Delayed or Missed Period",
+    "keywords": ["late period", "missed period", "period not coming"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "commonCauses": [
+      "Pregnancy",
+      "Stress",
+      "Hormonal imbalance",
+      "Thyroid disorder",
+      "PCOS"
+    ],
+    "isNormal": "Occasional delay during stress or puberty is common.",
+    "seeDoctorIf": [
+      "No period for 3 months",
+      "Frequent irregular cycles"
+    ]
+  },
+
+  {
+    "id": "MEN008",
+    "category": "Menstrual Health",
+    "topic": "First Period (Menarche)",
+    "keywords": ["first period", "menarche", "starting period first time"],
+    "lifeStage": ["Puberty"],
+    "explanation": "Menarche is the first menstrual period and usually occurs between ages 9-15.",
+    "isNormal": "Cycles may be irregular for first 2-3 years.",
+    "seeDoctorIf": [
+      "No period by age 16",
+      "Very heavy first periods"
+    ]
+  },
+
+  {
+    "id": "MEN009",
+    "category": "Menstrual Health",
+    "topic": "Perimenopause Cycle Changes",
+    "keywords": ["irregular periods 40s", "perimenopause bleeding"],
+    "lifeStage": ["Perimenopause"],
+    "explanation": "Hormonal fluctuations can cause irregular or heavier cycles during perimenopause.",
+    "commonChanges": [
+      "Shorter cycles",
+      "Longer cycles",
+      "Heavier bleeding"
+    ],
+    "seeDoctorIf": [
+      "Very heavy bleeding",
+      "Bleeding after menopause"
+    ]
+  },
+
+  {
+    "id": "MEN010",
+    "category": "Menstrual Health",
+    "topic": "When Periods Stop (Menopause)",
+    "keywords": ["menopause", "period stopped 12 months"],
+    "lifeStage": ["Menopause", "PostMenopause"],
+    "explanation": "Menopause is confirmed after 12 consecutive months without a period.",
+    "isNormal": "Occurs typically between ages 45-55.",
+    "seeDoctorIf": [
+      "Bleeding after menopause"
+    ]
+  }
+]
+[
+  {
+    "id": "MEN011",
+    "category": "Menstrual Health",
+    "topic": "Frequent Periods (Short Cycle)",
+    "keywords": ["period every 2 weeks", "short cycle", "frequent menstruation"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Frequent periods occur when cycles are consistently shorter than 21 days.",
+    "isNormal": "May occur temporarily during puberty or stress.",
+    "possibleCauses": [
+      "Hormonal imbalance",
+      "Thyroid disorder",
+      "Perimenopause",
+      "Stress"
+    ],
+    "seeDoctorIf": [
+      "Cycles shorter than 21 days repeatedly",
+      "Heavy bleeding with short cycles"
+    ]
+  },
+  {
+    "id": "MEN012",
+    "category": "Menstrual Health",
+    "topic": "Very Light Period (Hypomenorrhea)",
+    "keywords": ["very light period", "only spotting period", "scanty flow"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "Very light periods may involve minimal bleeding or only spotting.",
+    "isNormal": "Can be normal for some individuals.",
+    "possibleCauses": [
+      "Hormonal imbalance",
+      "Birth control use",
+      "Low body weight",
+      "Stress"
+    ],
+    "seeDoctorIf": [
+      "Sudden drastic change in flow",
+      "Missed periods repeatedly"
+    ]
+  },
+  {
+    "id": "MEN013",
+    "category": "Menstrual Health",
+    "topic": "Ovulation Pain (Mittelschmerz)",
+    "keywords": ["mid cycle pain", "one side pain ovulation", "mittelschmerz"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Some individuals experience mild one-sided pelvic pain during ovulation.",
+    "isNormal": "Mild pain lasting a few hours is common.",
+    "seeDoctorIf": [
+      "Severe sharp pain",
+      "Pain with fever or vomiting"
+    ]
+  },
+  {
+    "id": "MEN014",
+    "category": "Menstrual Health",
+    "topic": "Severe PMS (PMDD)",
+    "keywords": ["severe pms", "pmdd", "extreme mood before period"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "PMDD is a severe form of PMS affecting mood and daily functioning.",
+    "isNormal": "Not considered normal.",
+    "seeDoctorIf": [
+      "Severe depression",
+      "Suicidal thoughts",
+      "Severe functional impairment"
+    ]
+  },
+  {
+    "id": "MEN015",
+    "category": "Menstrual Health",
+    "topic": "Delayed Puberty",
+    "keywords": ["no period at 15", "late puberty", "period not started"],
+    "lifeStage": ["Puberty"],
+    "explanation": "Delayed puberty may be considered if menstruation has not started by age 15-16.",
+    "seeDoctorIf": [
+      "No period by age 16",
+      "No breast development by age 13"
+    ]
+  },
+  {
+    "id": "MEN016",
+    "category": "Menstrual Health",
+    "topic": "Bleeding After Menopause",
+    "keywords": ["bleeding after menopause", "postmenopausal bleeding"],
+    "lifeStage": ["PostMenopause"],
+    "explanation": "Any vaginal bleeding after menopause is abnormal.",
+    "isNormal": "Not normal.",
+    "seeDoctorIf": [
+      "Any bleeding after 12 months without period"
+    ]
+  },
+  {
+    "id": "MEN017",
+    "category": "Menstrual Health",
+    "topic": "Importance of Cycle Tracking",
+    "keywords": ["track period", "cycle tracking benefits"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Tracking cycles helps identify irregularities early and supports reproductive planning.",
+    "benefits": [
+      "Detects irregular patterns",
+      "Helps identify ovulation",
+      "Improves health awareness"
+    ]
+  }
+]

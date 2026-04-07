@@ -1,0 +1,426 @@
+
+[
+  {
+    "id": "PR001",
+    "category": "Pregnancy",
+    "topic": "Early Pregnancy Signs",
+    "keywords": ["early pregnancy symptoms", "am i pregnant", "pregnancy signs first week"],
+    "explanation": "Early pregnancy symptoms may include missed period, nausea, breast tenderness, fatigue, and frequent urination.",
+    "isNormal": "These symptoms are common in early pregnancy.",
+    "whatToDo": [
+      "Take a home pregnancy test after missed period",
+      "Consult a doctor for confirmation",
+      "Start prenatal vitamins if confirmed"
+    ],
+    "seeDoctorIf": [
+      "Severe abdominal pain",
+      "Heavy bleeding",
+      "Dizziness or fainting"
+    ]
+  },
+  {
+    "id": "PR002",
+    "category": "Pregnancy",
+    "topic": "Nausea and Morning Sickness",
+    "keywords": ["morning sickness", "pregnancy nausea", "vomiting during pregnancy"],
+    "explanation": "Morning sickness is caused by hormonal changes and usually occurs in the first trimester.",
+    "isNormal": "Mild to moderate nausea is common.",
+    "whatToDo": [
+      "Eat small frequent meals",
+      "Stay hydrated",
+      "Avoid strong smells"
+    ],
+    "seeDoctorIf": [
+      "Unable to keep fluids down",
+      "Severe dehydration",
+      "Rapid weight loss"
+    ]
+  },
+  {
+    "id": "PR003",
+    "category": "Pregnancy",
+    "topic": "Implantation Bleeding",
+    "keywords": ["implantation bleeding", "light spotting early pregnancy"],
+    "explanation": "Light spotting may occur when the fertilized egg attaches to the uterine lining.",
+    "isNormal": "Light spotting without pain can be normal.",
+    "whatToDo": [
+      "Monitor bleeding amount",
+      "Avoid heavy physical activity"
+    ],
+    "seeDoctorIf": [
+      "Heavy bleeding",
+      "Severe cramps",
+      "Passing clots"
+    ]
+  },
+  {
+    "id": "PR004",
+    "category": "Pregnancy",
+    "topic": "First Trimester Care",
+    "keywords": ["first trimester care", "pregnancy first 3 months"],
+    "explanation": "The first trimester is critical for fetal development.",
+    "isNormal": "Fatigue and nausea are common.",
+    "whatToDo": [
+      "Take folic acid supplements",
+      "Avoid alcohol and smoking",
+      "Attend prenatal appointments"
+    ],
+    "seeDoctorIf": [
+      "Heavy bleeding",
+      "Severe abdominal pain"
+    ]
+  },
+  {
+    "id": "PR005",
+    "category": "Pregnancy",
+    "topic": "Second Trimester Changes",
+    "keywords": ["second trimester symptoms", "pregnancy 4 to 6 months"],
+    "explanation": "Energy levels often improve and baby movements may begin.",
+    "isNormal": "Mild back pain and stretching discomfort are common.",
+    "whatToDo": [
+      "Balanced nutrition",
+      "Light exercise",
+      "Stay hydrated"
+    ],
+    "seeDoctorIf": [
+      "Persistent abdominal pain",
+      "Vaginal bleeding"
+    ]
+  },
+  {
+    "id": "PR006",
+    "category": "Pregnancy",
+    "topic": "Third Trimester Symptoms",
+    "keywords": ["third trimester symptoms", "pregnancy 7 to 9 months"],
+    "explanation": "The third trimester involves rapid fetal growth and increased maternal discomfort.",
+    "isNormal": "Swelling in feet and mild breathlessness may occur.",
+    "whatToDo": [
+      "Elevate legs",
+      "Sleep on left side",
+      "Regular prenatal visits"
+    ],
+    "seeDoctorIf": [
+      "Severe headache",
+      "Vision changes",
+      "Sudden swelling in face"
+    ]
+  },
+  {
+    "id": "PR007",
+    "category": "Pregnancy",
+    "topic": "Gestational Diabetes",
+    "keywords": ["gestational diabetes", "high sugar pregnancy"],
+    "explanation": "Gestational diabetes is high blood sugar during pregnancy.",
+    "isNormal": "It requires monitoring but is manageable.",
+    "whatToDo": [
+      "Monitor blood sugar",
+      "Healthy low-sugar diet",
+      "Regular exercise"
+    ],
+    "seeDoctorIf": [
+      "Persistently high glucose levels",
+      "Excessive thirst"
+    ]
+  },
+  {
+    "id": "PR008",
+    "category": "Pregnancy",
+    "topic": "High Blood Pressure in Pregnancy",
+    "keywords": ["pregnancy high bp", "preeclampsia signs"],
+    "explanation": "High blood pressure during pregnancy may indicate preeclampsia.",
+    "isNormal": "It is not normal and requires medical supervision.",
+    "whatToDo": [
+      "Monitor blood pressure",
+      "Reduce stress",
+      "Follow medical advice"
+    ],
+    "seeDoctorIf": [
+      "Severe headache",
+      "Blurred vision",
+      "Upper abdominal pain"
+    ]
+  },
+  {
+    "id": "PR009",
+    "category": "Pregnancy",
+    "topic": "Reduced Baby Movement",
+    "keywords": ["baby not moving", "less fetal movement"],
+    "explanation": "Decreased fetal movement can signal distress in later pregnancy.",
+    "isNormal": "Occasional quiet periods may occur.",
+    "whatToDo": [
+      "Lie on left side",
+      "Count kicks for 2 hours"
+    ],
+    "seeDoctorIf": [
+      "No movement for several hours",
+      "Sudden significant reduction"
+    ]
+  },
+  {
+    "id": "PR010",
+    "category": "Pregnancy",
+    "topic": "Miscarriage Signs",
+    "keywords": ["miscarriage symptoms", "pregnancy bleeding severe"],
+    "explanation": "Miscarriage may present with heavy bleeding and severe cramping.",
+    "isNormal": "Heavy bleeding with pain is not normal.",
+    "whatToDo": [
+      "Seek immediate medical care"
+    ],
+    "seeDoctorIf": [
+      "Heavy bleeding",
+      "Severe abdominal pain",
+      "Passing tissue"
+    ]
+  },
+  {
+    "id": "PR011",
+    "category": "Pregnancy",
+    "topic": "Ectopic Pregnancy",
+    "keywords": ["ectopic pregnancy", "one side pain pregnancy"],
+    "explanation": "An ectopic pregnancy occurs when the embryo implants outside the uterus, often in the fallopian tube.",
+    "isNormal": "This is a medical emergency.",
+    "whatToDo": [
+      "Seek emergency medical attention"
+    ],
+    "seeDoctorIf": [
+      "Sharp one-sided abdominal pain",
+      "Shoulder pain",
+      "Dizziness or fainting"
+    ]
+  },
+  {
+    "id": "PR012",
+    "category": "Pregnancy",
+    "topic": "Nutrition During Pregnancy",
+    "keywords": ["pregnancy diet", "what to eat during pregnancy"],
+    "explanation": "Proper nutrition supports fetal growth and maternal health.",
+    "isNormal": "Increased appetite may occur.",
+    "whatToDo": [
+      "Consume iron-rich foods",
+      "Include protein sources",
+      "Take prenatal vitamins",
+      "Stay hydrated"
+    ],
+    "seeDoctorIf": [
+      "Persistent vomiting",
+      "Severe weakness"
+    ]
+  },
+  {
+    "id": "PR013",
+    "category": "Pregnancy",
+    "topic": "Postpartum Bleeding",
+    "keywords": ["bleeding after delivery", "postpartum bleeding"],
+    "explanation": "Postpartum bleeding (lochia) is normal after childbirth.",
+    "isNormal": "Moderate bleeding for weeks is common.",
+    "whatToDo": [
+      "Use sanitary pads",
+      "Rest adequately"
+    ],
+    "seeDoctorIf": [
+      "Soaking pad every hour",
+      "Foul odor",
+      "Fever"
+    ]
+  },
+  {
+    "id": "PR014",
+    "category": "Pregnancy",
+    "topic": "Back Pain in Pregnancy",
+    "keywords": ["back pain pregnancy", "lower back pain pregnant"],
+    "explanation": "Back pain is common due to weight gain and posture changes.",
+    "isNormal": "Mild to moderate back pain is common.",
+    "whatToDo": [
+      "Use proper posture",
+      "Prenatal yoga",
+      "Supportive footwear"
+    ],
+    "seeDoctorIf": [
+      "Severe pain",
+      "Pain with fever"
+    ]
+  }
+]
+[
+  {
+    "id": "PR007",
+    "category": "Pregnancy",
+    "topic": "Confirming Pregnancy",
+    "keywords": ["pregnancy test", "home pregnancy test accuracy", "hcg test"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Pregnancy is confirmed through detection of hCG hormone in urine or blood.",
+    "whatToDo": [
+      "Take test after missed period",
+      "Use first morning urine for accuracy",
+      "Consult doctor for blood test confirmation"
+    ],
+    "seeDoctorIf": [
+      "Repeated unclear results",
+      "Symptoms of pregnancy with negative tests"
+    ]
+  },
+  {
+    "id": "PR008",
+    "category": "Pregnancy",
+    "topic": "Ectopic Pregnancy",
+    "keywords": ["ectopic pregnancy", "one sided pain pregnancy", "shoulder pain pregnancy"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "An ectopic pregnancy occurs when the embryo implants outside the uterus, usually in the fallopian tube.",
+    "redFlagSymptoms": [
+      "Sharp one-sided abdominal pain",
+      "Shoulder pain",
+      "Dizziness or fainting",
+      "Light bleeding with pain"
+    ],
+    "action": "Seek emergency medical care immediately."
+  },
+  {
+    "id": "PR009",
+    "category": "Pregnancy",
+    "topic": "Miscarriage Signs",
+    "keywords": ["miscarriage symptoms", "pregnancy bleeding severe"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Miscarriage may present with heavy bleeding and severe cramping in early pregnancy.",
+    "seeDoctorIf": [
+      "Heavy bleeding",
+      "Severe abdominal pain",
+      "Passing tissue"
+    ]
+  },
+  {
+    "id": "PR010",
+    "category": "Pregnancy",
+    "topic": "Anemia During Pregnancy",
+    "keywords": ["low iron pregnancy", "fatigue pregnant anemia"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Iron deficiency anemia is common during pregnancy due to increased blood volume.",
+    "commonSymptoms": [
+      "Fatigue",
+      "Dizziness",
+      "Shortness of breath"
+    ],
+    "whatToDo": [
+      "Iron-rich diet",
+      "Prenatal vitamins",
+      "Regular blood tests"
+    ],
+    "seeDoctorIf": [
+      "Severe weakness",
+      "Fainting"
+    ]
+  },
+  {
+    "id": "PR011",
+    "category": "Pregnancy",
+    "topic": "Safe Exercise in Pregnancy",
+    "keywords": ["exercise pregnant", "workout during pregnancy safe"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Moderate exercise during pregnancy supports physical and mental health.",
+    "recommended": [
+      "Walking",
+      "Prenatal yoga",
+      "Swimming"
+    ],
+    "avoid": [
+      "High impact sports",
+      "Contact sports",
+      "Activities with fall risk"
+    ],
+    "seeDoctorIf": [
+      "Vaginal bleeding during exercise",
+      "Dizziness or chest pain"
+    ]
+  },
+  {
+    "id": "PR012",
+    "category": "Pregnancy",
+    "topic": "Travel During Pregnancy",
+    "keywords": ["travel pregnant", "flying pregnancy safety"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Travel is usually safe in low-risk pregnancies before 36 weeks.",
+    "whatToDo": [
+      "Stay hydrated",
+      "Walk periodically during long trips",
+      "Consult doctor before travel"
+    ],
+    "seeDoctorIf": [
+      "High-risk pregnancy",
+      "History of preterm labor"
+    ]
+  },
+  {
+    "id": "PR013",
+    "category": "Pregnancy",
+    "topic": "Sex During Pregnancy",
+    "keywords": ["sex while pregnant", "is sex safe in pregnancy"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Sex is generally safe in uncomplicated pregnancies.",
+    "avoidIf": [
+      "Placenta previa",
+      "Preterm labor risk",
+      "Unexplained bleeding"
+    ],
+    "seeDoctorIf": [
+      "Pain during intercourse",
+      "Bleeding after intercourse"
+    ]
+  },
+  {
+    "id": "PR014",
+    "category": "Pregnancy",
+    "topic": "Preterm Labor Signs",
+    "keywords": ["early labor signs", "preterm contractions"],
+    "lifeStage": ["Reproductive"],
+    "redFlagSymptoms": [
+      "Regular contractions before 37 weeks",
+      "Lower back pain",
+      "Fluid leakage"
+    ],
+    "action": "Seek medical care immediately."
+  },
+  {
+    "id": "PR015",
+    "category": "Pregnancy",
+    "topic": "Labor Signs",
+    "keywords": ["labor signs", "water broke", "contractions regular"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Labor may begin with regular contractions, water breaking, and cervical changes.",
+    "seeDoctorIf": [
+      "Contractions every 5 minutes",
+      "Fluid leakage",
+      "Decreased baby movement"
+    ]
+  },
+  {
+    "id": "PR016",
+    "category": "Pregnancy",
+    "topic": "Postpartum Depression",
+    "keywords": ["sad after delivery", "postpartum depression", "baby blues severe"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Postpartum depression involves persistent sadness after childbirth.",
+    "isNormal": "Mild baby blues may occur briefly.",
+    "seeDoctorIf": [
+      "Persistent sadness beyond 2 weeks",
+      "Thoughts of self-harm",
+      "Difficulty bonding with baby"
+    ]
+  },
+  {
+    "id": "PR017",
+    "category": "Pregnancy",
+    "topic": "Breastfeeding Basics",
+    "keywords": ["breastfeeding support", "milk supply issues"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Breastfeeding provides essential nutrition and immune protection for newborns.",
+    "whatToDo": [
+      "Feed on demand",
+      "Maintain hydration",
+      "Seek lactation support if needed"
+    ],
+    "seeDoctorIf": [
+      "Severe breast pain",
+      "Signs of infection",
+      "Baby not gaining weight"
+    ]
+  }
+]

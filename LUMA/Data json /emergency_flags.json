@@ -1,0 +1,138 @@
+[
+  {
+    "id": "EMG001",
+    "category": "Emergency",
+    "topic": "Excessive Menstrual Bleeding",
+    "keywords": ["soaking pad every hour", "bleeding nonstop", "very heavy bleeding"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause"],
+    "explanation": "Bleeding that soaks through one or more pads or tampons every hour for several hours may indicate a medical emergency.",
+    "redFlagSymptoms": [
+      "Dizziness",
+      "Fainting",
+      "Shortness of breath",
+      "Weakness"
+    ],
+    "action": "Seek urgent medical care immediately."
+  },
+
+  {
+    "id": "EMG002",
+    "category": "Emergency",
+    "topic": "Severe Sudden Pelvic Pain",
+    "keywords": ["sharp pelvic pain", "sudden severe abdominal pain", "unbearable cramps"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Sudden severe pelvic pain may indicate ovarian torsion, ruptured cyst, or ectopic pregnancy.",
+    "redFlagSymptoms": [
+      "Fever",
+      "Vomiting",
+      "Fainting"
+    ],
+    "action": "Go to emergency services immediately."
+  },
+
+  {
+    "id": "EMG003",
+    "category": "Emergency",
+    "topic": "Possible Ectopic Pregnancy",
+    "keywords": ["pregnant severe pain", "one sided pain early pregnancy", "shoulder pain pregnancy"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "An ectopic pregnancy occurs when a fertilized egg implants outside the uterus and can be life-threatening.",
+    "redFlagSymptoms": [
+      "Severe one-sided abdominal pain",
+      "Shoulder pain",
+      "Dizziness or fainting",
+      "Positive pregnancy test with pain"
+    ],
+    "action": "Seek emergency medical care immediately."
+  },
+
+  {
+    "id": "EMG004",
+    "category": "Emergency",
+    "topic": "Toxic Shock Syndrome (TSS)",
+    "keywords": ["tampon fever", "rash with tampon", "sudden high fever period"],
+    "lifeStage": ["Puberty", "Reproductive"],
+    "explanation": "TSS is a rare but serious bacterial infection associated with tampon use.",
+    "redFlagSymptoms": [
+      "High fever",
+      "Sudden rash",
+      "Low blood pressure",
+      "Vomiting",
+      "Confusion"
+    ],
+    "action": "Remove tampon immediately and seek emergency care."
+  },
+
+  {
+    "id": "EMG005",
+    "category": "Emergency",
+    "topic": "Suicidal Thoughts or Severe Depression",
+    "keywords": ["want to harm myself", "suicidal thoughts", "hopelessness extreme"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause", "Menopause"],
+    "explanation": "Severe depression or suicidal thoughts require immediate professional support.",
+    "redFlagSymptoms": [
+      "Thoughts of self-harm",
+      "Feeling hopeless",
+      "Planning suicide"
+    ],
+    "action": "Seek immediate help from emergency services or a mental health crisis helpline."
+  },
+
+  {
+    "id": "EMG006",
+    "category": "Emergency",
+    "topic": "Postmenopausal Bleeding",
+    "keywords": ["bleeding after menopause", "period after menopause"],
+    "lifeStage": ["PostMenopause"],
+    "explanation": "Any vaginal bleeding after menopause is abnormal and requires urgent medical evaluation.",
+    "redFlagSymptoms": [
+      "Unexpected bleeding after 12 months without period"
+    ],
+    "action": "Schedule urgent medical evaluation."
+  },
+
+  {
+    "id": "EMG007",
+    "category": "Emergency",
+    "topic": "Fever with Pelvic Pain",
+    "keywords": ["fever and pelvic pain", "infection period pain", "foul discharge with fever"],
+    "lifeStage": ["Reproductive"],
+    "explanation": "Fever combined with pelvic pain may indicate pelvic inflammatory disease or infection.",
+    "redFlagSymptoms": [
+      "High fever",
+      "Foul-smelling discharge",
+      "Severe abdominal tenderness"
+    ],
+    "action": "Seek medical care urgently."
+  },
+
+  {
+    "id": "EMG008",
+    "category": "Emergency",
+    "topic": "Severe Allergic Reaction to Medication",
+    "keywords": ["allergic reaction pill", "swelling after medication", "difficulty breathing medication"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause", "Menopause"],
+    "explanation": "Severe allergic reactions can be life-threatening.",
+    "redFlagSymptoms": [
+      "Swelling of face or throat",
+      "Difficulty breathing",
+      "Severe rash"
+    ],
+    "action": "Call emergency services immediately."
+  },
+
+  {
+    "id": "EMG009",
+    "category": "Emergency",
+    "topic": "Chest Pain on Hormonal Therapy",
+    "keywords": ["chest pain birth control", "leg swelling pill", "blood clot symptoms"],
+    "lifeStage": ["Reproductive", "Perimenopause"],
+    "explanation": "Certain hormonal medications may increase rare risk of blood clots.",
+    "redFlagSymptoms": [
+      "Chest pain",
+      "Sudden shortness of breath",
+      "Severe leg pain or swelling"
+    ],
+    "action": "Seek emergency care immediately."
+  }
+]
