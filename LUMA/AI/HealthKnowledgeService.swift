@@ -9,6 +9,42 @@ class HealthKnowledgeService {
     
     init() {
         loadAllData()
+        Task {
+            await fetchRemoteUpdates()
+        }
+    }
+    
+    /// Fetches dynamic updates/new diseases from a server and merges them into the database
+    func fetchRemoteUpdates() async {
+        // This is a placeholder URL. You can change this to your actual API or raw JSON file URL (e.g., hosted on Firebase or GitHub)
+        guard let url = URL(string: "https://raw.githubusercontent.com/kamakshi0421/Luma_App/main/remote_health_updates.json") else { return }
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                return
+            }
+            
+            let items = try JSONDecoder().decode([HealthItem].self, from: data)
+            
+            await MainActor.run {
+                for item in items {
+                    // Check if it's already present to prevent duplicate entries
+                    if !self.allItems.contains(where: { $0.id == item.id }) &&
+                       !self.emergencyItems.contains(where: { $0.id == item.id }) {
+                        if item.category.lowercased().contains("emergency") || item.redFlagSymptoms != nil {
+                            self.emergencyItems.append(item)
+                        } else {
+                            self.allItems.append(item)
+                        }
+                    }
+                }
+                print("✅ Successfully fetched and merged \(items.count) remote health items!")
+            }
+        } catch {
+            print("ℹ️ Remote health updates fetch failed (expected if url is empty/placeholder): \(error.localizedDescription)")
+        }
     }
    
     private func loadAllData() {

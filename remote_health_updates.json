@@ -1,0 +1,25 @@
+[
+  {
+    "id": "NEW001",
+    "category": "Disorders",
+    "topic": "Mpox Prevention and Awareness",
+    "keywords": ["mpox", "monkeypox", "skin lesions", "rash", "prevention"],
+    "lifeStage": ["Puberty", "Reproductive", "Perimenopause", "Postmenopause"],
+    "explanation": "Mpox is a viral zoonotic disease that can spread from person to person. It leads to a painful rash, fever, and swollen lymph nodes.",
+    "commonSymptoms": [
+      "Painful rash or skin lesions",
+      "Fever and body chills",
+      "Swollen lymph nodes",
+      "Muscle aches and fatigue"
+    ],
+    "whatToDo": [
+      "Avoid close, skin-to-skin contact with infected individuals",
+      "Practice frequent hand hygiene with soap and water",
+      "Consult a doctor if you develop a new, unexplained rash"
+    ],
+    "seeDoctorIf": [
+      "You have been in contact with someone diagnosed with mpox",
+      "You develop painful blisters or skin lesions with fever"
+    ]
+  }
+]
