@@ -17,7 +17,7 @@ class HealthKnowledgeService {
     /// Fetches dynamic updates/new diseases from a server and merges them into the database
     func fetchRemoteUpdates() async {
         // This is a placeholder URL. You can change this to your actual API or raw JSON file URL (e.g., hosted on Firebase or GitHub)
-        guard let url = URL(string: "https://raw.githubusercontent.com/kamakshi0421/Luma_App/main/remote_health_updates.json") else { return }
+        guard let url = URL(string: "https://raw.githubusercontent.com/kamakshi0421/Luma_App/luma_refactored/remote_health_updates.json") else { return }
         
         do {
             let (data, response) = try await URLSession.shared.data(from: url)
