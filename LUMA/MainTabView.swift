@@ -28,32 +28,20 @@ struct MainTabView: View {
                     MySpaceView(selectedTab: $selectedTab)
                         .tag(Tab.MySpace)
                         .tabItem {
-                            AnimatedTabIcon(
-                                systemName: "house.fill",
-                                title: "MySpace",
-                                isSelected: selectedTab == .MySpace
-                            )
+                            Label("MySpace", systemImage: "house.fill")
                         }
                     
                     PhasesView()
                         .tag(Tab.Phases)
                         .tabItem {
-                            AnimatedTabIcon(
-                                systemName: "moon.stars.fill",
-                                title: "Phases",
-                                isSelected: selectedTab == .Phases
-                            )
+                            Label("Phases", systemImage: "moon.stars.fill")
                         }
                     
                     RevealView()
                         .id(savedStageRaw)
                         .tag(Tab.Reveal)
                         .tabItem {
-                            AnimatedTabIcon(
-                                systemName: "magnifyingglass",
-                                title: "Reveal",
-                                isSelected: selectedTab == .Reveal
-                            )
+                            Label("Reveal", systemImage: "magnifyingglass")
                         }
                 }
                 .tint(.lumaPinkBubble)
@@ -96,7 +84,7 @@ struct MainTabView: View {
                             )
                         }
                         .padding(.trailing, 20)
-                        .padding(.bottom, 80)
+                        .padding(.bottom, 64)
                     }
                 }
                 .ignoresSafeArea(.keyboard)

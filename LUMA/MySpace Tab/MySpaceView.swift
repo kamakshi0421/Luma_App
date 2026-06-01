@@ -2,7 +2,7 @@
 
 import SwiftUI
 import FoundationModels
-
+import FirebaseAuth
 
 @available(iOS 26.0, *)
 struct MySpaceView: View {
@@ -15,6 +15,7 @@ struct MySpaceView: View {
     
     @State private var selectedStageForSheet: LifeStage?
     @State private var showTracker = false
+    @State private var showProfile = false
     
     @AppStorage("selectedStage")
     private var savedStageRaw: String = LifeStage.reproductive.rawValue
@@ -50,6 +51,16 @@ struct MySpaceView: View {
 
             
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        showProfile = true
+                    } label: {
+                        Image(systemName: "person.crop.circle")
+                            .font(.title3)
+                            .foregroundColor(.lumaDarkGray)
+                    }
+                }
+                
                 ToolbarItem(placement: .topBarTrailing) {
                     GlobalInfoButton(tab: .herSpace)
                 }
@@ -57,6 +68,11 @@ struct MySpaceView: View {
             
             .task {
                 await insightManager.generateInsight(from: store.logs)
+            }
+            
+            .sheet(isPresented: $showProfile) {
+                ProfileView()
+                    .environmentObject(store)
             }
             
             .sheet(item: $selectedStageForSheet) { stage in
@@ -91,7 +107,7 @@ private extension MySpaceView {
 private extension MySpaceView {
     
     private var greetingSection: some View {
-        HStack {
+        HStack(spacing: 16) {
             
             VStack(alignment: .leading, spacing: 4) {
                 Text("Good to see you 🌙")
@@ -104,6 +120,14 @@ private extension MySpaceView {
             }
             
             Spacer()
+            
+            Button {
+                showProfile = true
+            } label: {
+                Image(systemName: "person.crop.circle")
+                    .font(.title3)
+                    .foregroundColor(.lumaDarkGray)
+            }
             
             GlobalInfoButton(tab: .herSpace)
         }

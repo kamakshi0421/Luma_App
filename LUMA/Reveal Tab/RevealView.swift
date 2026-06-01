@@ -353,7 +353,7 @@ struct MythFactInteractiveCard: View {
         .accessibilityLabel(flipped ? "Fact. \(fact)" : "Myth. \(myth)")
         .accessibilityHint("Double tap to reveal the truth")
         .accessibilityAddTraits(.isButton)
-        .frame(height: 260)
+        .frame(minHeight: 240)
         .rotation3DEffect(
             .degrees(flipped ? 180 : 0),
             axis: (x: 0, y: 1, z: 0)

@@ -22,10 +22,7 @@ struct SymptomTrackerView: View {
     let moods = ["😊", "🙂", "😐", "😔", "😢"]
     
     var body: some View {
-        
         ZStack {
-            
-            
             LinearGradient(
                 colors: [
                     stageAccentColor.opacity(0.15),
@@ -38,17 +35,17 @@ struct SymptomTrackerView: View {
             
             ScrollView {
                 VStack(spacing: 24) {
-                    
                     stageHeader
                     moodSection
                     stageSpecificSymptoms
                     energySection
                     saveButton
-                    
                 }
                 .padding()
             }
         }
+        .navigationTitle("Track Today's Health")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -236,50 +233,68 @@ struct pastelCard<Content: View>: View {
 extension SymptomTrackerView {
     
     func sliderView(title: String, value: Binding<Double>) -> some View {
-        
-        VStack(alignment: .leading, spacing: 14) {
-            
+        VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text(title)
                     .font(.headline)
+                    .foregroundColor(.lumaDarkGray)
                 
                 Spacer()
                 
                 Text(painDescription(for: value.wrappedValue))
-                    .font(.subheadline)
+                    .font(.subheadline.bold())
                     .foregroundColor(painColor(for: value.wrappedValue))
             }
             
-            Slider(value: value, in: 0...10, step: 1)
-                .tint(painColor(for: value.wrappedValue))
-            
-            ProgressView(value: value.wrappedValue, total: 10)
-                .progressViewStyle(.linear)
-                .tint(painColor(for: value.wrappedValue))
-                .opacity(0.5)
+            HStack(spacing: 12) {
+                Image(systemName: sliderIcon(for: title, isLow: true))
+                    .foregroundColor(.secondary)
+                    .font(.subheadline)
+                
+                Slider(value: value, in: 0...10, step: 1)
+                    .tint(painColor(for: value.wrappedValue))
+                
+                Image(systemName: sliderIcon(for: title, isLow: false))
+                    .foregroundColor(painColor(for: value.wrappedValue))
+                    .font(.subheadline)
+            }
         }
     }
     
     func painDescription(for level: Double) -> String {
         switch level {
-        case 0...2: return "🌷 Very Mild"
-        case 3...5: return "🌸 Moderate"
-        case 6...8: return "🌺 Intense"
-        default: return "🔥 Severe"
+        case 0...2: return "Very Mild 🌷"
+        case 3...5: return "Moderate 🌸"
+        case 6...8: return "Intense 🌺"
+        default: return "Severe 🔥"
         }
     }
     
     func painColor(for level: Double) -> Color {
         switch level {
-        case 0...2: return stageAccentColor.opacity(0.4)
-        case 3...5: return stageAccentColor.opacity(0.6)
-        case 6...8: return stageAccentColor.opacity(0.8)
+        case 0...2: return stageAccentColor.opacity(0.5)
+        case 3...5: return stageAccentColor.opacity(0.75)
+        case 6...8: return stageAccentColor.opacity(0.9)
         default: return stageAccentColor
         }
     }
-}
-private extension SymptomTrackerView {
     
+    func sliderIcon(for title: String, isLow: Bool) -> String {
+        let lowCaseTitle = title.lowercased()
+        if lowCaseTitle.contains("energy") {
+            return isLow ? "battery.25" : "battery.100.bolt"
+        } else if lowCaseTitle.contains("skin") || lowCaseTitle.contains("acne") {
+            return isLow ? "face.smiling" : "face.dashed"
+        } else if lowCaseTitle.contains("flash") {
+            return isLow ? "thermometer.snowflake" : "thermometer.sun.fill"
+        } else {
+            return isLow ? "heart" : "heart.text.square.fill"
+        }
+    }
+}
+
+private extension SymptomTrackerView {
     private var stageAccentColor: Color {
         Color(red: 0.93, green: 0.55, blue: 0.70) 
-    }}
+    }
+}
