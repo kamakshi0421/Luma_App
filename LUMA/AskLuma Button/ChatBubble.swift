@@ -120,43 +120,54 @@ struct ChatBubble: View {
         .fixedSize(horizontal: false, vertical: true)
     }
 
+    struct BulletLine: Identifiable {
+        let id = UUID()
+        let isBullet: Bool
+        let text: String
+    }
+
     func formattedContent(_ content: String,
                           color: Color) -> some View {
-        let lines = content
+        let rawLines = content
             .split(separator: "\n")
             .map { String($0) }
             .filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
         
+        let lines: [BulletLine] = rawLines.map { rawLine in
+            var line = rawLine.replacingOccurrences(of: "**", with: "")
+                .replacingOccurrences(of: "*", with: "")
+                .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            
+            let isBullet = line.hasPrefix("-") || line.hasPrefix("•")
+            
+            if isBullet {
+                if line.hasPrefix("-") {
+                    line = String(line.dropFirst())
+                } else if line.hasPrefix("•") {
+                    line = String(line.dropFirst())
+                }
+                line = line.trimmingCharacters(in: CharacterSet.whitespaces)
+            }
+            return BulletLine(isBullet: isBullet, text: line)
+        }
+        
         return VStack(alignment: .leading, spacing: 8) {
-            ForEach(lines, id: \.self) { rawLine in
-                var line = rawLine.replacingOccurrences(of: "**", with: "")
-                    .replacingOccurrences(of: "*", with: "")
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
-                
-                let isBullet = line.hasPrefix("-") || line.hasPrefix("•")
-                
-                if isBullet {
-                    if line.hasPrefix("-") {
-                        line = String(line.dropFirst())
-                    } else if line.hasPrefix("•") {
-                        line = String(line.dropFirst())
-                    }
-                    line = line.trimmingCharacters(in: .whitespaces)
-                    
+            ForEach(lines) { line in
+                if line.isBullet {
                     HStack(alignment: .top, spacing: 10) {
                         Image(systemName: "circle.fill")
                             .font(.system(size: 6))
                             .foregroundColor(color)
                             .padding(.top, 6)
                         
-                        Text(line)
+                        Text(line.text)
                             .font(.system(size: 14))
                             .foregroundColor(.lumaDarkGray)
                             .lineSpacing(4)
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 } else {
-                    Text(line)
+                    Text(line.text)
                         .font(.system(size: 14))
                         .foregroundColor(.lumaDarkGray)
                         .lineSpacing(4)
