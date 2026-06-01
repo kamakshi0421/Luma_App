@@ -181,6 +181,11 @@ struct ChatBubble: View {
         let cleanedText = message.text
             .replacingOccurrences(of: "**---**", with: "---")
         let parts = cleanedText.components(separatedBy: "---")
+        
+        // If there are no --- dividers, everything is parsed into sections (if there are headers)
+        // or printed as a single block. We return nil to prevent double rendering.
+        guard parts.count > 1 else { return nil }
+        
         guard let first = parts.first else { return nil }
         
         let trimmed = first.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -203,13 +208,17 @@ struct ChatBubble: View {
             let lines = message.text.components(separatedBy: "\n")
             var currentTitle = ""
             var currentContent: [String] = []
+            var foundAnyHeader = false
             
             for line in lines {
                 let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
                 if trimmed.isEmpty { continue }
                 
-                if (trimmed.hasPrefix("**") && trimmed.hasSuffix("**")) ||
-                   (trimmed.hasPrefix("💗") || trimmed.hasPrefix("🌼") || trimmed.hasPrefix("🌸") || trimmed.hasPrefix("🌿") || trimmed.hasPrefix("🩺")) {
+                let isHeader = (trimmed.hasPrefix("**") && trimmed.hasSuffix("**")) ||
+                               (trimmed.hasPrefix("💗") || trimmed.hasPrefix("🌼") || trimmed.hasPrefix("🌸") || trimmed.hasPrefix("🌿") || trimmed.hasPrefix("🩺"))
+                
+                if isHeader {
+                    foundAnyHeader = true
                     if !currentContent.isEmpty || !currentTitle.isEmpty {
                         sections.append(SectionData(
                             title: currentTitle.isEmpty ? "Insights" : currentTitle,
@@ -229,6 +238,10 @@ struct ChatBubble: View {
                     content: currentContent.joined(separator: "\n")
                 ))
             }
+            
+            // If no headers were actually found, return empty array to fall back to a single plain block
+            guard foundAnyHeader else { return [] }
+            
             return sections.filter { !$0.title.isEmpty && !$0.content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
         }
         
