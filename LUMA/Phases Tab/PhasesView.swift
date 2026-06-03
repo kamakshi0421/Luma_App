@@ -4,6 +4,7 @@ struct PhasesView: View {
     
    
     @State private var selectedStage: LifeStage?
+    @State private var showPlayground = false
     
     let stages: [LifeStage] = [
         .prePuberty, .puberty,
@@ -40,6 +41,46 @@ struct PhasesView: View {
                     }
                     .padding(.horizontal)
                     
+                    // Interactive Playground Banner
+                    Button {
+                        showPlayground = true
+                    } label: {
+                        HStack(spacing: 16) {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("Interactive Playground")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                
+                                Text("Automate cycles, swipe myths, and try the symptom mixer!")
+                                    .font(.caption)
+                                    .foregroundColor(.white.opacity(0.9))
+                                    .multilineTextAlignment(.leading)
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "gamecontroller.fill")
+                                .font(.title)
+                                .foregroundColor(.white)
+                        }
+                        .padding()
+                        .background(
+                            LinearGradient(
+                                colors: [
+                                    Color.lumaPinkBubble,
+                                    Color.lumaPinkBubble.opacity(0.85),
+                                    Color.lumaAccent
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .cornerRadius(20)
+                        .shadow(color: Color.lumaPinkBubble.opacity(0.35), radius: 8, y: 4)
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal)
+                    
                     LazyVGrid(
                         columns: [
                             GridItem(.flexible()),
@@ -62,6 +103,9 @@ struct PhasesView: View {
         }
         .navigationDestination(item: $selectedStage) { stage in
             LifeStageDetailView(stage: stage)
+        }
+        .sheet(isPresented: $showPlayground) {
+            InteractivePlaygroundView()
         }
         
     }
@@ -100,6 +144,15 @@ struct LifeStageCard: View {
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .frame(maxWidth: .infinity)
+                
+            HStack(spacing: 4) {
+                Image(systemName: "play.circle.fill")
+                    .foregroundColor(.purple)
+                Text("Live the Story")
+                    .font(.caption2)
+                    .foregroundColor(.purple)
+            }
+            .padding(.top, -4)
         }
         .padding()
         .frame(height: 190) 

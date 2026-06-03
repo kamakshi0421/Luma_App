@@ -16,6 +16,9 @@ struct MySpaceView: View {
     @State private var selectedStageForSheet: LifeStage?
     @State private var showTracker = false
     @State private var showProfile = false
+    @State private var showStoryPlayer = false
+    @State private var showBodyMap = false
+    @State private var showDailyChallenge = false
     
     @AppStorage("selectedStage")
     private var savedStageRaw: String = LifeStage.reproductive.rawValue
@@ -35,6 +38,8 @@ struct MySpaceView: View {
                     VStack(alignment: .leading, spacing: 28) {
                         
                         greetingSection
+                        dailyChallengeCard
+                        storyCard
                         heroSection
                         journeySection
                         bodyInsightSection
@@ -82,6 +87,15 @@ struct MySpaceView: View {
             
             .navigationDestination(isPresented: $showTracker) {
                 SymptomTrackerView()
+            }
+            .sheet(isPresented: $showStoryPlayer) {
+                StoryPlayerView(stage: currentStage)
+            }
+            .sheet(isPresented: $showBodyMap) {
+                BodyMapView()
+            }
+            .sheet(isPresented: $showDailyChallenge) {
+                DailyChallengeView(stage: currentStage)
             }
         }
     }
@@ -132,6 +146,59 @@ private extension MySpaceView {
             GlobalInfoButton(tab: .herSpace)
         }
     }
+    
+    var dailyChallengeCard: some View {
+        Button {
+            showDailyChallenge = true
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Today's Challenge 🏆")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    Text("Complete your daily interactive task!")
+                        .font(.subheadline)
+                        .foregroundColor(.white.opacity(0.9))
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.white)
+            }
+            .padding()
+            .background(
+                LinearGradient(colors: [.orange, .red.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .cornerRadius(20)
+            .shadow(color: .orange.opacity(0.3), radius: 8, y: 4)
+        }
+    }
+    
+    var storyCard: some View {
+        Button {
+            showStoryPlayer = true
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Live the Story 🎭")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    Text("Experience the \(currentStage.title) journey.")
+                        .font(.subheadline)
+                        .foregroundColor(.white.opacity(0.9))
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.white)
+            }
+            .padding()
+            .background(
+                LinearGradient(colors: [.purple, .blue.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .cornerRadius(20)
+            .shadow(color: .purple.opacity(0.3), radius: 8, y: 4)
+        }
+    }
+    
     var heroSection: some View {
         
         HStack(spacing: 18) {
@@ -331,6 +398,14 @@ private extension MySpaceView {
                 icon: "questionmark.circle.fill"
             ) {
                 selectedTab = .Reveal
+            }
+            
+            QuickActionCard(
+                title: "Interactive Body Map",
+                subtitle: "Explore changes in your body",
+                icon: "figure.walk"
+            ) {
+                showBodyMap = true
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

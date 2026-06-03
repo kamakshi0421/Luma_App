@@ -17,6 +17,7 @@ struct RevealView: View {
     
     @State private var selectedTopic: NormalTopic?
     @State private var selectedCategory: MythCategory = .hormones
+    @State private var showScenarios = false
     
     private var stageTopics: [NormalTopic] {
         NormalTopic.allTopics.filter {
@@ -61,6 +62,7 @@ struct RevealView: View {
                     
                     headerSection
                     mythFactSection
+                    scenarioSection
                     concernsSection
                     redFlagSection
                     
@@ -77,6 +79,9 @@ struct RevealView: View {
             ConcernDetailSheet(topic: topic)
                 .presentationDetents([.large])
                 .presentationCornerRadius(28)
+        }
+        .sheet(isPresented: $showScenarios) {
+            ScenarioGameView(stage: currentStage)
         }
     }
 }
@@ -215,6 +220,47 @@ private extension RevealView {
     }
 }
 
+
+@available(iOS 26.0, *)
+private extension RevealView {
+    
+    var scenarioSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Real Life Scenarios")
+                .font(.headline)
+                .foregroundColor(.lumaDarkGray)
+            
+            Button {
+                showScenarios = true
+            } label: {
+                HStack(spacing: 16) {
+                    Image(systemName: "play.circle.fill")
+                        .font(.system(size: 40))
+                        .foregroundColor(.white)
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("What Would You Do?")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        Text("Practice making choices in real-life situations.")
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.9))
+                    }
+                    
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.white)
+                }
+                .padding()
+                .background(
+                    LinearGradient(colors: [.orange, .pink], startPoint: .topLeading, endPoint: .bottomTrailing)
+                )
+                .cornerRadius(20)
+                .shadow(color: .orange.opacity(0.3), radius: 8, y: 4)
+            }
+        }
+    }
+}
 
 @available(iOS 26.0, *)
 private extension RevealView {
