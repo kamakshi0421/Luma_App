@@ -72,23 +72,22 @@ struct ChatBubble: View {
                     .fixedSize(horizontal: false, vertical: true)
             } else {
                 ForEach(Array(sections.enumerated()), id: \.element.id) { index, section in
-                    VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading, spacing: 8) {
                         Text(section.title)
-                            .font(.system(size: 15, weight: .semibold))
+                            .font(.system(size: 11, weight: .bold, design: .rounded))
                             .foregroundColor(colorForSection(section.title))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(colorForSection(section.title).opacity(0.12))
+                            .clipShape(Capsule())
+                            .padding(.bottom, 2)
                         
                         formattedContent(
                             section.content,
                             color: colorForSection(section.title)
                         )
                     }
-                    
-                    if index != sections.count - 1 {
-                        Rectangle()
-                            .fill(Color.lumaDarkGray.opacity(0.12))
-                            .frame(height: 1)
-                            .padding(.vertical, 4)
-                    }
+                    .padding(.bottom, index == sections.count - 1 ? 0 : 12)
                 }
             }
             
@@ -102,18 +101,27 @@ struct ChatBubble: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 24)
-                .fill(Color.lumaSurface)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            Color.white,
+                            Color(red: 0.99, green: 0.96, blue: 0.97)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
         )
         .overlay(
             RoundedRectangle(cornerRadius: 24)
-                .stroke(Color.lumaAccent.opacity(0.12), lineWidth: 1)
+                .stroke(Color.lumaPinkBubble.opacity(0.18), lineWidth: 1.5)
         )
         .shadow(
             color: isEmergency
-            ? Color.red.opacity(0.18)
-            : Color.lumaAccent.opacity(0.08),
-            radius: 10,
-            y: 5
+            ? Color.red.opacity(0.12)
+            : Color.lumaPinkBubble.opacity(0.04),
+            radius: 8,
+            y: 4
         )
         .frame(maxWidth: UIScreen.main.bounds.width * 0.82,
                alignment: .leading)
@@ -270,17 +278,17 @@ struct ChatBubble: View {
     func colorForSection(_ title: String) -> Color {
         let cleanTitle = title.lowercased()
         if cleanTitle.contains("what this means") || cleanTitle.contains("means") {
-            return .pink
+            return Color(red: 0.94, green: 0.52, blue: 0.65) // Pastel Pink
         } else if cleanTitle.contains("possible reasons") || cleanTitle.contains("reasons") || cleanTitle.contains("causes") {
-            return .orange
+            return Color(red: 0.95, green: 0.65, blue: 0.50) // Pastel Orange
         } else if cleanTitle.contains("is this normal") || cleanTitle.contains("normal") {
-            return .purple
+            return Color(red: 0.72, green: 0.60, blue: 0.88) // Pastel Purple
         } else if cleanTitle.contains("what you can do") || cleanTitle.contains("do") || cleanTitle.contains("prevention") {
-            return .green
+            return Color(red: 0.45, green: 0.76, blue: 0.62) // Pastel Green
         } else if cleanTitle.contains("doctor") || cleanTitle.contains("note") || cleanTitle.contains("medical") {
-            return .red
+            return Color(red: 0.90, green: 0.50, blue: 0.50) // Pastel Red
         } else {
-            return .lumaAccent
+            return Color.lumaPinkBubble.opacity(0.85) // Fallback
         }
     }
 }
