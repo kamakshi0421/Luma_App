@@ -54,7 +54,7 @@ struct LaunchView: View {
                         }
                     
                     if !isLogoExpanded {
-                        Text("LUMA")
+                        Text("AAROHI")
                             .font(.system(size: 44, weight: .bold, design: .rounded))
                             .foregroundColor(.white)
                             .tracking(6)

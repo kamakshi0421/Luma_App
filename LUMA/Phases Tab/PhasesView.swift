@@ -26,7 +26,7 @@ struct PhasesView: View {
                         Spacer()
                         
                         VStack(spacing: 6) {
-                            Text("Phases")
+                            Text("Padhav")
                                 .font(.title2.bold())
                                 .foregroundColor(.lumaDarkGray)
                             

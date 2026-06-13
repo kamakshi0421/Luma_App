@@ -28,20 +28,20 @@ struct MainTabView: View {
                     MySpaceView(selectedTab: $selectedTab)
                         .tag(Tab.MySpace)
                         .tabItem {
-                            Label("MySpace", systemImage: "house.fill")
+                            Label("Aangan", systemImage: "house.fill")
                         }
                     
                     PhasesView()
                         .tag(Tab.Phases)
                         .tabItem {
-                            Label("Phases", systemImage: "moon.stars.fill")
+                            Label("Padhav", systemImage: "moon.stars.fill")
                         }
                     
                     RevealView()
                         .id(savedStageRaw)
                         .tag(Tab.Reveal)
                         .tabItem {
-                            Label("Reveal", systemImage: "magnifyingglass")
+                            Label("Darpan", systemImage: "magnifyingglass")
                         }
                 }
                 .tint(.lumaPinkBubble)
@@ -60,7 +60,7 @@ struct MainTabView: View {
                             HStack(spacing: 8) {
                                 Image(systemName: "sparkles")
                                 
-                                Text("Ask Luma")
+                                Text("Ask Aarohi")
                                     .font(.system(size: 14, weight: .semibold))
                             }
                             .foregroundColor(.white)

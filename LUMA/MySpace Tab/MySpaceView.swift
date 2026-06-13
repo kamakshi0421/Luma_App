@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 import FoundationModels
 import FirebaseAuth
@@ -19,6 +17,7 @@ struct MySpaceView: View {
     @State private var showStoryPlayer = false
     @State private var showBodyMap = false
     @State private var showDailyChallenge = false
+    @State private var selectedMood: String? = nil
     
     @AppStorage("selectedStage")
     private var savedStageRaw: String = LifeStage.reproductive.rawValue
@@ -27,34 +26,41 @@ struct MySpaceView: View {
         LifeStage(rawValue: savedStageRaw) ?? .reproductive
     }
     
+    private let moods = ["🌟 Great", "😌 Okay", "🥱 Tired", "🌧️ Rough"]
+    
     var body: some View {
         NavigationStack {
-            
             ZStack {
-                
-                LumaBackground()
+                Color(uiColor: .systemGroupedBackground)
+                    .ignoresSafeArea()
                 
                 ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 28) {
+                    VStack(alignment: .leading, spacing: 24) {
                         
-                        greetingSection
-                        dailyChallengeCard
-                        storyCard
-                        heroSection
-                        journeySection
+                        moodSelectorSection
+                        
+                        quickActionGrid
+                        
                         bodyInsightSection
+                        
+                        heroSection
+                        
+                        editorialCardsSection
+                        
+                        journeySection
+                        
                         stageRiskSection
-                        quickActionSection
+                        
                         gentleTruthSection
                         
                     }
                     .padding(.horizontal, 20)
-                    .padding(.top, 24)
-                    .padding(.bottom, 40)
+                    .padding(.top, 10)
+                    .padding(.bottom, 100) 
                 }
             }
-
-            
+            .navigationTitle("Aangan")
+            .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
@@ -70,21 +76,17 @@ struct MySpaceView: View {
                     GlobalInfoButton(tab: .herSpace)
                 }
             }
-            
             .task {
                 await insightManager.generateInsight(from: store.logs)
             }
-            
             .sheet(isPresented: $showProfile) {
                 ProfileView()
                     .environmentObject(store)
             }
-            
             .sheet(item: $selectedStageForSheet) { stage in
                 LifeStageDetailView(stage: stage)
                     .presentationDetents([.large])
             }
-            
             .navigationDestination(isPresented: $showTracker) {
                 SymptomTrackerView()
             }
@@ -100,242 +102,209 @@ struct MySpaceView: View {
         }
     }
 }
-@available(iOS 26.0, *)
-private extension MySpaceView {
-    
-    private var stageAccentColor: Color {
-            Color(red: 0.93, green: 0.55, blue: 0.70) 
-        
-    }
-    
-    var stageGradientColors: [Color] {
-        [
-            stageAccentColor.opacity(0.18),
-            stageAccentColor.opacity(0.08)
-        ]
-    }
-}
-
 
 @available(iOS 26.0, *)
 private extension MySpaceView {
     
-    private var greetingSection: some View {
-        HStack(spacing: 16) {
+    var moodSelectorSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Today's Vibe")
+                .font(.headline)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
             
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Good to see you 🌙")
-                    .font(.title2.bold())
-                    .foregroundColor(.lumaDarkGray)
+            HStack(spacing: 12) {
+                ForEach(moods, id: \.self) { mood in
+                    Button {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            selectedMood = mood
+                        }
+                    } label: {
+                        Text(mood)
+                            .font(.footnote)
+                            .padding(.vertical, 12)
+                            .frame(maxWidth: .infinity)
+                            .background(
+                                selectedMood == mood 
+                                ? Color.lumaPinkBubble 
+                                : Color(uiColor: .secondarySystemGroupedBackground)
+                            )
+                            .foregroundColor(selectedMood == mood ? .white : .primary)
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .shadow(color: .black.opacity(selectedMood == mood ? 0.15 : 0.04), radius: 6, y: 3)
+                    }
+                }
+            }
+        }
+    }
+    
+    var quickActionGrid: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Quick Actions")
+                .font(.headline)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
+            
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                NativeGridCard(
+                    title: "Log Symptoms",
+                    icon: "plus.circle.fill",
+                    color: .lumaPinkBubble
+                ) { showTracker = true }
                 
-                Text("Here's what your body may need today.")
-                    .font(.subheadline)
-                    .foregroundColor(.lumaMidGray)
+                NativeGridCard(
+                    title: "Body Map",
+                    icon: "figure.walk",
+                    color: .purple
+                ) { showBodyMap = true }
+                
+                NativeGridCard(
+                    title: "Is This Normal?",
+                    icon: "questionmark.circle.fill",
+                    color: .blue
+                ) { selectedTab = .Reveal }
+                
+                NativeGridCard(
+                    title: "My Profile",
+                    icon: "person.crop.circle.fill",
+                    color: .orange
+                ) { showProfile = true }
             }
-            
-            Spacer()
-            
-            Button {
-                showProfile = true
-            } label: {
-                Image(systemName: "person.crop.circle")
-                    .font(.title3)
-                    .foregroundColor(.lumaDarkGray)
-            }
-            
-            GlobalInfoButton(tab: .herSpace)
         }
     }
     
-    var dailyChallengeCard: some View {
-        Button {
-            showDailyChallenge = true
-        } label: {
-            HStack {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Today's Challenge 🏆")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                    Text("Complete your daily interactive task!")
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.9))
+    var editorialCardsSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Discover")
+                .font(.headline)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
+                
+            VStack(spacing: 16) {
+                Button { showDailyChallenge = true } label: {
+                    EditorialCard(
+                        tagline: "DAILY CHALLENGE",
+                        title: "Complete your interactive task today",
+                        gradient: [Color.orange, Color.red]
+                    )
                 }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.white)
-            }
-            .padding()
-            .background(
-                LinearGradient(colors: [.orange, .red.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing)
-            )
-            .cornerRadius(20)
-            .shadow(color: .orange.opacity(0.3), radius: 8, y: 4)
-        }
-    }
-    
-    var storyCard: some View {
-        Button {
-            showStoryPlayer = true
-        } label: {
-            HStack {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Live the Story 🎭")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                    Text("Experience the \(currentStage.title) journey.")
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.9))
+                
+                Button { showStoryPlayer = true } label: {
+                    EditorialCard(
+                        tagline: "INTERACTIVE STORY",
+                        title: "Experience the \(currentStage.title) journey",
+                        gradient: [Color.purple, Color.blue]
+                    )
                 }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.white)
             }
-            .padding()
-            .background(
-                LinearGradient(colors: [.purple, .blue.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing)
-            )
-            .cornerRadius(20)
-            .shadow(color: .purple.opacity(0.3), radius: 8, y: 4)
         }
     }
     
     var heroSection: some View {
-        
-        HStack(spacing: 18) {
-            
-            VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("My Stage")
+                .font(.headline)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
                 
-                Text("My current phase")
-                    .font(.caption)
-                    .foregroundColor(stageAccentColor)
-                
-                Text(currentStage.title)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                
-                Text(currentStage.description)
-                    .font(.subheadline)
-                    .foregroundColor(.lumaMidGray)
-                    .lineLimit(3)
-                
-                Button {
-                    selectedStageForSheet = currentStage
-                } label: {
-                    Text("Learn for my stage")
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(stageAccentColor)
-                        .cornerRadius(18)
+            HStack(spacing: 18) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(currentStage.title)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                    
+                    Text(currentStage.description)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .lineLimit(3)
+                    
+                    Button {
+                        selectedStageForSheet = currentStage
+                    } label: {
+                        Text("Learn More")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(Color.lumaPinkBubble)
+                            .clipShape(Capsule())
+                    }
+                    .padding(.top, 4)
                 }
+                
+                Spacer()
+                
+                Image(currentStage.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 90)
             }
-            
-            Spacer()
-            
-            Image(currentStage.imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 110)
+            .padding(20)
+            .background(Color(uiColor: .secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .shadow(color: .black.opacity(0.04), radius: 8, y: 4)
         }
-        .padding(22)
-        .background(
-            LinearGradient(
-                colors: [
-                    stageAccentColor.opacity(0.22),
-                    stageAccentColor.opacity(0.10)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 28)
-                .stroke(stageAccentColor.opacity(0.3), lineWidth: 1)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 28))
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .shadow(color: stageAccentColor.opacity(0.18), radius: 8, y: 4)
     }
     
     var journeySection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            
-            Text("Where I Am")
+        VStack(alignment: .leading, spacing: 10) {
+            Text("My Journey")
                 .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
             
             LifeStageJourneyView(currentStage: currentStage)
+                .padding()
+                .background(Color(uiColor: .secondarySystemGroupedBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .shadow(color: .black.opacity(0.04), radius: 8, y: 4)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
+    
     var bodyInsightSection: some View {
-        
-        VStack(alignment: .leading, spacing: 14) {
-            
-            Text("My Weekly Body Insight")
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Weekly AI Insight")
                 .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
             
             ZStack(alignment: .topTrailing) {
-                
-                
                 Group {
-                    
                     if insightManager.isLoading {
-                        
                         HStack(spacing: 10) {
                             ProgressView()
-                                .tint(.green)
-                            
                             Text("Analyzing your week...")
-                                .font(.caption)
-                                .foregroundColor(.lumaMidGray)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
                         }
-                        
                     } else if insightManager.hasEnoughData {
-                        
                         VStack(alignment: .leading, spacing: 6) {
-                            
                             Text(insightManager.message)
                                 .font(.subheadline)
-                                .foregroundColor(.lumaDarkGray)
-                            
-                            Text("AI-generated from this week's logs")
+                                .foregroundColor(.primary)
+                            Text("Based on your recent logs")
                                 .font(.caption)
-                                .foregroundColor(.lumaMidGray)
+                                .foregroundColor(.secondary)
                         }
-                        
                     } else {
-                        
                         VStack(alignment: .leading, spacing: 6) {
-                            
                             Text("No insight yet 🌷")
                                 .font(.subheadline.weight(.semibold))
-                                .foregroundColor(.lumaDarkGray)
-                            
-                            Text("Track at least 3 symptoms this week to unlock personalized insights.")
+                                .foregroundColor(.primary)
+                            Text("Track at least 3 symptoms this week to unlock insights.")
                                 .font(.caption)
-                                .foregroundColor(.lumaMidGray)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
-                .padding(18)
+                .padding(20)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(
-                    RoundedRectangle(cornerRadius: 22)
-                        .fill(Color(red: 0.94, green: 0.92, blue: 0.98))                 )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 22)
-                        .stroke(Color(red: 0.70, green: 0.62, blue: 0.85).opacity(0.35), lineWidth: 1)
-                )
-                .shadow(
-                    color: Color(red: 0.70, green: 0.62, blue: 0.85).opacity(0.12),
-                    radius: 10,
-                    y: 6
-                )
+                .background(Color(uiColor: .secondarySystemGroupedBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .shadow(color: .black.opacity(0.04), radius: 8, y: 4)
                 
-               
                 if insightManager.justUnlocked {
                     InsightReadyBadge()
                         .offset(x: -12, y: -12)
@@ -344,18 +313,17 @@ private extension MySpaceView {
             }
         }
     }
+    
     var stageRiskSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            
-            Text("Conditions to be aware of")
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Things to watch out for")
                 .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    
                     ForEach(currentStage.content.conditions) { condition in
-                        
                         Button {
                             selectedCondition = condition
                         } label: {
@@ -364,86 +332,101 @@ private extension MySpaceView {
                         .buttonStyle(.plain)
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 2)
                 .padding(.vertical, 4)
             }
         }
         .sheet(item: $selectedCondition) { condition in
             ConditionDetailSheet(condition: condition)
-                .presentationDetents([
-                    PresentationDetent.large
-                ])
+                .presentationDetents([.large])
                 .presentationCornerRadius(28)
         }
     }
     
-    var quickActionSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            
-            Text("Quick Actions")
-                .font(.headline)
-                .foregroundColor(.lumaDarkGray)
-            
-            QuickActionCard(
-                title: "Track how your body feels",
-                subtitle: "Log symptoms for personalized weekly insights",
-                icon: "list.bullet"
-            ) {
-                showTracker = true
-            }
-            
-            QuickActionCard(
-                title: "Is This Normal?",
-                subtitle: "Get gentle reassurance",
-                icon: "questionmark.circle.fill"
-            ) {
-                selectedTab = .Reveal
-            }
-            
-            QuickActionCard(
-                title: "Interactive Body Map",
-                subtitle: "Explore changes in your body",
-                icon: "figure.walk"
-            ) {
-                showBodyMap = true
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    
     var gentleTruthSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            
             Text("A Moment to Pause")
                 .font(.headline)
-                .foregroundColor(stageAccentColor)
+                .foregroundColor(.lumaPinkBubble)
             
             Text("Many changes you feel are common. You’re not broken — you’re evolving.")
                 .font(.subheadline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(18)
-                .background(
-                    RoundedRectangle(cornerRadius: 24)
-                        .fill(stageAccentColor.opacity(0.15))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 24)
-                        .stroke(stageAccentColor.opacity(0.25), lineWidth: 1)
-                )
-                .shadow(color: stageAccentColor.opacity(0.15), radius: 8, y: 4)
+                .padding(20)
+                .background(Color.lumaPinkBubble.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
         }
+    }
+}
+
+struct NativeGridCard: View {
+    let title: String
+    let icon: String
+    let color: Color
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: 12) {
+                Image(systemName: icon)
+                    .font(.title)
+                    .foregroundColor(color)
+                
+                Spacer()
+                
+                Text(title)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.leading)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 100)
+            .background(Color(uiColor: .secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .shadow(color: .black.opacity(0.04), radius: 8, y: 4)
+        }
+    }
+}
+
+struct EditorialCard: View {
+    let tagline: String
+    let title: String
+    let gradient: [Color]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(tagline)
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(.white.opacity(0.85))
+            
+            Text(title)
+                .font(.title3)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .lineLimit(2)
+            
+            Spacer()
+        }
+        .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: 130)
+        .background(
+            LinearGradient(colors: gradient, startPoint: .topLeading, endPoint: .bottomTrailing)
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .shadow(color: gradient.last!.opacity(0.3), radius: 10, y: 5)
     }
 }
 
 struct StageRiskCard: View {
-    
     let condition: StageCondition
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-           
             Image(condition.imageName)
                 .resizable()
                 .scaledToFill()
@@ -452,109 +435,33 @@ struct StageRiskCard: View {
                 .clipped()
                 .cornerRadius(14)
             
-           
             Text(condition.name)
                 .font(.subheadline)
                 .fontWeight(.semibold)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
                 .lineLimit(1)
             
-           
             Text(condition.shortDescription)
                 .font(.caption)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
                 .lineLimit(2)
                 .frame(height: 34, alignment: .top)
             
             Spacer(minLength: 0)
         }
-        .padding()
-        .frame(width: 210, height: 200)
-        .background(
-            RoundedRectangle(cornerRadius: 22)
-                .fill(Color.gray.opacity(0.08))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 22)
-                .stroke(Color.gray.opacity(0.15), lineWidth: 1)
-        )
-        .shadow(
-            color: Color.black.opacity(0.04),
-            radius: 6,
-            y: 4
-        )
-    }
-}
-
-struct QuickActionCard: View {
-    
-    let title: String
-    let subtitle: String
-    let icon: String
-    let action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: 14) {
-                
-                
-                ZStack {
-                    Circle()
-                        .fill(Color.purple.opacity(0.18))
-                        .frame(width: 42, height: 42)
-                    
-                    Image(systemName: icon)
-                        .foregroundColor(.purple)
-                        .font(.system(size: 18, weight: .semibold))
-                }
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.lumaDarkGray)
-                    
-                    Text(subtitle)
-                        .font(.caption)
-                        .foregroundColor(.lumaMidGray)
-                        .lineLimit(2)
-                }
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray.opacity(0.4))
-            }
-            .padding()
-            .frame(maxWidth: .infinity, minHeight: 90)
-            .background(
-                RoundedRectangle(cornerRadius: 22)
-                    .fill(Color.purple.opacity(0.12))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 22)
-                    .stroke(Color.purple.opacity(0.25), lineWidth: 1)
-            )
-            .shadow(
-                color: Color.purple.opacity(0.10),
-                radius: 8,
-                y: 4
-            )
-        }
+        .padding(12)
+        .frame(width: 180, height: 190)
+        .background(Color(uiColor: .secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .shadow(color: .black.opacity(0.04), radius: 8, y: 4)
     }
 }
 
 struct LifeStageJourneyView: View {
-    
     let currentStage: LifeStage
     
     private let stages: [LifeStage] = [
-        .prePuberty,
-        .puberty,
-        .reproductive,
-        .perimenopause,
-        .menopause,
-        .postMenopause
+        .prePuberty, .puberty, .reproductive, .perimenopause, .menopause, .postMenopause
     ]
     
     var visibleStages: [LifeStage] {
@@ -565,17 +472,11 @@ struct LifeStageJourneyView: View {
     }
     
     var body: some View {
-        
         VStack(spacing: 12) {
-            
             HStack(spacing: 0) {
-                
                 ForEach(visibleStages.indices, id: \.self) { index in
-                    
                     let stage = visibleStages[index]
-                    
                     VStack(spacing: 6) {
-                        
                         ZStack {
                             Circle()
                                 .fill(circleColor(for: stage))
@@ -593,7 +494,7 @@ struct LifeStageJourneyView: View {
                             
                             if stage == currentStage {
                                 Circle()
-                                    .stroke(Color.white, lineWidth: 2)
+                                    .stroke(Color(uiColor: .secondarySystemGroupedBackground), lineWidth: 2)
                                     .frame(width: 22, height: 22)
                             }
                         }
@@ -605,7 +506,6 @@ struct LifeStageJourneyView: View {
                             .frame(width: 80)
                     }
                     .frame(maxWidth: .infinity)
-                    
                     
                     if index < visibleStages.count - 1 {
                         Capsule()
@@ -620,22 +520,16 @@ struct LifeStageJourneyView: View {
     }
     
     private func circleColor(for stage: LifeStage) -> Color {
-        if stage == currentStage {
-            return .lumaPinkBubble
-        } else if stage.order < currentStage.order {
-            return .green.opacity(0.8)
-        } else {
-            return .gray.opacity(0.35)
-        }
+        if stage == currentStage { return .lumaPinkBubble }
+        else if stage.order < currentStage.order { return .green.opacity(0.8) }
+        else { return .gray.opacity(0.35) }
     }
     
     private func textColor(for stage: LifeStage) -> Color {
-        stage == currentStage ? .lumaPinkBubble : .lumaMidGray
+        stage == currentStage ? .lumaPinkBubble : .secondary
     }
     
     private func lineColor(for stage: LifeStage) -> Color {
-        stage.order < currentStage.order
-        ? .green.opacity(0.6)
-        : .gray.opacity(0.35)
+        stage.order < currentStage.order ? .green.opacity(0.6) : .gray.opacity(0.2)
     }
 }

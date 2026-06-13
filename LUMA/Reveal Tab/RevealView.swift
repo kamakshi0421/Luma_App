@@ -95,7 +95,7 @@ private extension RevealView {
             
             VStack(spacing: 8) {
                 
-                Text("Reveal")
+                Text("Darpan")
                     .font(.title2.bold())
                     .foregroundColor(.lumaDarkGray)
                     .multilineTextAlignment(.center)

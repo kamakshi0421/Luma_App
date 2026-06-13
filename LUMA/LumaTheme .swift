@@ -3,13 +3,13 @@ import SwiftUI
 extension Color {
     
     
-    static let lumaPinkLight = Color(red: 0.98, green: 0.86, blue: 0.90)
-    static let lumaPinkDark  = Color(red: 0.95, green: 0.72, blue: 0.82)
+    static let lumaPinkLight = Color(red: 1.00, green: 0.55, blue: 0.78)
+    static let lumaPinkDark  = Color(red: 0.95, green: 0.15, blue: 0.55)
     
     
-    static let lumaAccent = Color(red: 0.82, green: 0.36, blue: 0.54)
+    static let lumaAccent = Color(red: 0.85, green: 0.05, blue: 0.45)
     
-    static let lumaSurface = Color(red: 0.96, green: 0.92, blue: 0.94)
+    static let lumaSurface = Color(red: 1.00, green: 0.96, blue: 0.98)
 }
 
 
@@ -35,7 +35,7 @@ struct LumaGradient {
     )
 }
 extension Color {
-    static let lumaPinkBubble = Color(red: 0.86, green: 0.45, blue: 0.62) 
+    static let lumaPinkBubble = Color(red: 0.98, green: 0.30, blue: 0.65) 
     static let lumaDarkGray = Color(red: 0.25, green: 0.25, blue: 0.27)
     static let lumaMidGray  = Color(red: 0.45, green: 0.45, blue: 0.47)
 }
