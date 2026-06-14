@@ -19,25 +19,29 @@ struct MainTabView: View {
     
     var body: some View {
         
-        NavigationStack {
-            
-            ZStack {
+        ZStack {
                 
                 TabView(selection: $selectedTab) {
                     
-                    MySpaceView(selectedTab: $selectedTab)
+                    NavigationStack {
+                        MySpaceView(selectedTab: $selectedTab)
+                    }
                         .tag(Tab.MySpace)
                         .tabItem {
                             Label("Aangan", systemImage: "house.fill")
                         }
                     
-                    PhasesView()
+                    NavigationStack {
+                        PhasesView()
+                    }
                         .tag(Tab.Phases)
                         .tabItem {
                             Label("Padhav", systemImage: "moon.stars.fill")
                         }
                     
-                    RevealView()
+                    NavigationStack {
+                        RevealView()
+                    }
                         .id(savedStageRaw)
                         .tag(Tab.Reveal)
                         .tabItem {
@@ -88,11 +92,9 @@ struct MainTabView: View {
                     }
                 }
                 .ignoresSafeArea(.keyboard)
-            }
-            
-            .navigationDestination(isPresented: $showChat) {
-                AskLumaView(currentStage: currentStage)
-            }
+        }
+        .fullScreenCover(isPresented: $showChat) {
+            AskLumaView(currentStage: currentStage)
         }
     }
 }

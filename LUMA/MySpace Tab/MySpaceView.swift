@@ -17,7 +17,6 @@ struct MySpaceView: View {
     @State private var showStoryPlayer = false
     @State private var showBodyMap = false
     @State private var showDailyChallenge = false
-    @State private var selectedMood: String? = nil
     
     @AppStorage("selectedStage")
     private var savedStageRaw: String = LifeStage.reproductive.rawValue
@@ -26,18 +25,13 @@ struct MySpaceView: View {
         LifeStage(rawValue: savedStageRaw) ?? .reproductive
     }
     
-    private let moods = ["🌟 Great", "😌 Okay", "🥱 Tired", "🌧️ Rough"]
-    
     var body: some View {
-        NavigationStack {
-            ZStack {
+        ZStack {
                 Color(uiColor: .systemGroupedBackground)
                     .ignoresSafeArea()
                 
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 24) {
-                        
-                        moodSelectorSection
                         
                         quickActionGrid
                         
@@ -99,44 +93,11 @@ struct MySpaceView: View {
             .sheet(isPresented: $showDailyChallenge) {
                 DailyChallengeView(stage: currentStage)
             }
-        }
     }
 }
 
 @available(iOS 26.0, *)
 private extension MySpaceView {
-    
-    var moodSelectorSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Today's Vibe")
-                .font(.headline)
-                .foregroundColor(.secondary)
-                .textCase(.uppercase)
-            
-            HStack(spacing: 12) {
-                ForEach(moods, id: \.self) { mood in
-                    Button {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            selectedMood = mood
-                        }
-                    } label: {
-                        Text(mood)
-                            .font(.footnote)
-                            .padding(.vertical, 12)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                selectedMood == mood 
-                                ? Color.lumaPinkBubble 
-                                : Color(uiColor: .secondarySystemGroupedBackground)
-                            )
-                            .foregroundColor(selectedMood == mood ? .white : .primary)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: .black.opacity(selectedMood == mood ? 0.15 : 0.04), radius: 6, y: 3)
-                    }
-                }
-            }
-        }
-    }
     
     var quickActionGrid: some View {
         VStack(alignment: .leading, spacing: 10) {
