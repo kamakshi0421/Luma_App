@@ -16,9 +16,6 @@ struct MySpaceView: View {
     @State private var selectedStageForSheet: LifeStage?
     @State private var showTracker = false
     @State private var showProfile = false
-    @State private var showStoryPlayer = false
-    @State private var showBodyMap = false
-    @State private var showDailyChallenge = false
     
     @AppStorage("selectedStage")
     private var savedStageRaw: String = LifeStage.reproductive.rawValue
@@ -85,15 +82,6 @@ struct MySpaceView: View {
             
             .navigationDestination(isPresented: $showTracker) {
                 SymptomTrackerView()
-            }
-            .sheet(isPresented: $showStoryPlayer) {
-                StoryPlayerView(stage: currentStage)
-            }
-            .sheet(isPresented: $showBodyMap) {
-                BodyMapView()
-            }
-            .sheet(isPresented: $showDailyChallenge) {
-                DailyChallengeView(stage: currentStage)
             }
         }
     }
@@ -335,30 +323,6 @@ private extension MySpaceView {
                 icon: "list.bullet"
             ) {
                 showTracker = true
-            }
-            
-            QuickActionCard(
-                title: "Daily Challenge",
-                subtitle: "Complete your interactive task today",
-                icon: "star.fill"
-            ) {
-                showDailyChallenge = true
-            }
-            
-            QuickActionCard(
-                title: "Interactive Story",
-                subtitle: "Experience the \(currentStage.title) journey",
-                icon: "book.fill"
-            ) {
-                showStoryPlayer = true
-            }
-            
-            QuickActionCard(
-                title: "Body Map",
-                subtitle: "Explore symptoms by body area",
-                icon: "figure.walk"
-            ) {
-                showBodyMap = true
             }
             
             QuickActionCard(

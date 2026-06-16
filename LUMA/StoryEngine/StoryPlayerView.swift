@@ -36,135 +36,168 @@ struct StoryPlayerView: View {
             } else if isStoryComplete {
                 completionScreen
             } else if let scene = currentScene, let char = character {
-                VStack {
-                    // Header with progress and close
-                    HStack {
-                        ProgressView(value: Double(currentSceneIndex + 1), total: Double(currentChapter?.scenes.count ?? 1))
-                            .tint(char.accentColor)
-                        
-                        Spacer()
-                        
-                        Button {
-                            // Back to chapter selection
-                            selectedChapterIndex = nil
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .font(.title2)
-                                .foregroundColor(.lumaMidGray)
+                ZStack(alignment: .top) {
+                    // Background Illustration
+                    if let imageName = currentChapter?.imageName {
+                        GeometryReader { geo in
+                            Image(imageName)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: geo.size.width, height: geo.size.height * 0.65)
+                                .clipped()
+                                .ignoresSafeArea(edges: .top)
+                                // Adding a subtle gradient at bottom of image to blend with content
+                                .overlay(
+                                    LinearGradient(
+                                        colors: [.clear, .clear, Color(UIColor.systemBackground).opacity(0.8), Color(UIColor.systemBackground)],
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+                                )
                         }
                     }
-                    .padding()
                     
-                    Spacer()
-                    
-                    // Narration
-                    Text(displayedNarration)
-                        .font(.title3)
-                        .foregroundColor(.lumaDarkGray)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                        .transition(.opacity)
-                        .id("narration_\(currentSceneIndex)")
-                    
-                    if let animType = scene.animationType {
-                        animationOverlay(for: animType)
-                            .frame(height: 80)
-                    } else {
-                        Spacer()
-                    }
-                    
-                    // Character & Dialogue
-                    if let dialogue = scene.characterDialogue {
-                        VStack(spacing: 0) {
-                            StoryDialogueBubble(text: dialogue, color: char.accentColor)
-                                .padding(.bottom, -10)
-                                .zIndex(1)
+                    VStack {
+                        // Header with progress and close
+                        HStack {
+                            ProgressView(value: Double(currentSceneIndex + 1), total: Double(currentChapter?.scenes.count ?? 1))
+                                .tint(char.accentColor)
+                                .background(Color.white.opacity(0.8).cornerRadius(8))
                             
-                            StoryCharacterView(character: char)
-                        }
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                    } else {
-                        StoryCharacterView(character: char)
-                    }
-                    
-                    Spacer()
-                    
-                    // Choices or Educational Reveal or Tap to continue
-                    if showFeedback {
-                        Text(currentFeedback)
-                            .font(.headline)
-                            .foregroundColor(char.accentColor)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(16)
-                            .shadow(radius: 5)
-                            .transition(.opacity)
-                    } else if let reveal = scene.educationalReveal {
-                        VStack(spacing: 10) {
-                            HStack {
-                                Image(systemName: "sparkles")
-                                    .foregroundColor(.purple)
-                                Text("Did You Know?")
-                                    .font(.headline)
-                                    .foregroundColor(.purple)
-                            }
-                            Text(reveal)
-                                .font(.subheadline)
-                                .foregroundColor(.lumaDarkGray)
-                                .multilineTextAlignment(.center)
+                            Spacer()
                             
                             Button {
-                                advanceScene()
+                                // Back to chapter selection
+                                selectedChapterIndex = nil
                             } label: {
-                                Text("Continue")
-                                    .font(.headline)
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.title2)
                                     .foregroundColor(.white)
-                                    .padding(.vertical, 12)
-                                    .frame(maxWidth: .infinity)
-                                    .background(Color.purple)
-                                    .cornerRadius(16)
+                                    .background(Circle().fill(Color.black.opacity(0.3)))
                             }
-                            .padding(.top)
                         }
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(LinearGradient(colors: [Color.purple.opacity(0.1), Color.lumaPinkBubble.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing))
-                        )
-                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.purple.opacity(0.3), lineWidth: 2))
-                        .padding()
-                    } else if let choices = scene.choices, !choices.isEmpty {
-                        VStack(spacing: 12) {
-                            ForEach(choices) { choice in
-                                Button {
-                                    handleChoice(choice)
-                                } label: {
-                                    Text(choice.text)
-                                        .font(.headline)
+                        
+                        Spacer()
+                        
+                        // Scene Content (Dialogue, Narration, Choices)
+                        VStack(spacing: 16) {
+                            if let animType = scene.animationType {
+                                animationOverlay(for: animType)
+                                    .frame(height: 60)
+                            }
+                            
+                            // Narration Box
+                            if !displayedNarration.isEmpty {
+                                Text(displayedNarration)
+                                    .font(.title3)
+                                    .foregroundColor(.white)
+                                    .multilineTextAlignment(.leading)
+                                    .padding()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(char.accentColor.opacity(0.9))
+                                    .cornerRadius(16)
+                                    .padding(.horizontal)
+                                    .transition(.opacity)
+                                    .id("narration_\(currentSceneIndex)")
+                            }
+                            
+                            // Character Dialogue (if any)
+                            if let dialogue = scene.characterDialogue {
+                                StoryDialogueBubble(text: dialogue, color: char.accentColor)
+                                    .padding(.horizontal)
+                                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                            }
+                            
+                            // Show avatar only if no image exists
+                            if currentChapter?.imageName == nil {
+                                StoryCharacterView(character: char)
+                                    .padding(.top)
+                            }
+                            
+                            // Choices or Educational Reveal or Tap to continue
+                            if showFeedback {
+                                Text(currentFeedback)
+                                    .font(.headline)
+                                    .foregroundColor(char.accentColor)
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(16)
+                                    .shadow(radius: 5)
+                                    .padding(.horizontal)
+                                    .transition(.opacity)
+                            } else if let reveal = scene.educationalReveal {
+                                VStack(spacing: 10) {
+                                    HStack {
+                                        Image(systemName: "sparkles")
+                                            .foregroundColor(.purple)
+                                        Text("Did You Know?")
+                                            .font(.headline)
+                                            .foregroundColor(.purple)
+                                    }
+                                    Text(reveal)
+                                        .font(.subheadline)
                                         .foregroundColor(.lumaDarkGray)
-                                        .padding()
+                                        .multilineTextAlignment(.center)
+                                    
+                                    Button {
+                                        advanceScene()
+                                    } label: {
+                                        Text("Continue")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding(.vertical, 12)
+                                            .frame(maxWidth: .infinity)
+                                            .background(Color.purple)
+                                            .cornerRadius(16)
+                                    }
+                                    .padding(.top)
+                                }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(LinearGradient(colors: [Color.purple.opacity(0.1), Color.lumaPinkBubble.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                                )
+                                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.purple.opacity(0.3), lineWidth: 2))
+                                .padding()
+                            } else if let choices = scene.choices, !choices.isEmpty {
+                                VStack(spacing: 12) {
+                                    ForEach(choices) { choice in
+                                        Button {
+                                            handleChoice(choice)
+                                        } label: {
+                                            Text(choice.text)
+                                                .font(.headline)
+                                                .foregroundColor(.white)
+                                                .padding()
+                                                .frame(maxWidth: .infinity)
+                                                .background(char.accentColor)
+                                                .cornerRadius(16)
+                                                .shadow(color: char.accentColor.opacity(0.3), radius: 5, y: 2)
+                                        }
+                                    }
+                                }
+                                .padding(.horizontal)
+                                .padding(.bottom)
+                                .transition(.move(edge: .bottom))
+                            } else {
+                                Button {
+                                    advanceScene()
+                                } label: {
+                                    Text("Tap to continue")
+                                        .font(.headline)
+                                        .foregroundColor(char.accentColor)
+                                        .padding(.vertical, 16)
                                         .frame(maxWidth: .infinity)
                                         .background(Color.white)
-                                        .cornerRadius(16)
-                                        .shadow(color: Color.black.opacity(0.05), radius: 5, y: 2)
+                                        .cornerRadius(20)
+                                        .shadow(color: Color.black.opacity(0.1), radius: 5, y: 2)
+                                        .padding(.horizontal)
+                                        .padding(.bottom)
                                 }
                             }
                         }
-                        .padding()
-                        .transition(.move(edge: .bottom))
-                    } else {
-                        Button {
-                            advanceScene()
-                        } label: {
-                            Text("Tap to continue")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding(.vertical, 16)
-                                .frame(maxWidth: .infinity)
-                                .background(char.accentColor)
-                                .cornerRadius(20)
-                                .padding()
-                        }
+                        .padding(.bottom, 20) // Add some padding for the bottom safe area
                     }
                 }
             }

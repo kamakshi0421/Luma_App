@@ -38,4 +38,5 @@ struct StoryChapter: Identifiable {
     let title: String
     let scenes: [StoryScene]
     let stage: LifeStage
+    var imageName: String? = nil
 }

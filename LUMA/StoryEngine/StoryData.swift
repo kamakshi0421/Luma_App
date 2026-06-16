@@ -41,7 +41,8 @@ struct StoryLibrary {
                     StoryScene(narration: "Mira's mom explains that her body is starting to prepare for growing up.", characterDialogue: "These are called breast buds! It means your hormones are waking up.", choices: nil, educationalReveal: "Hormonal changes begin years before your first period. The hypothalamus starts sending signals, causing early signs like breast buds.", isEndScene: true),
                     StoryScene(narration: "Eventually, Mira realizes many of her friends are experiencing the same things.", characterDialogue: "Oh, it's just my body growing up!", choices: nil, educationalReveal: "Hormonal changes begin years before your first period. It's perfectly normal.", isEndScene: true)
                 ],
-                stage: .prePuberty
+                stage: .prePuberty,
+                imageName: "mira_big_changing_world"
             ),
             StoryChapter(
                 title: "The Emotional Rollercoaster",
@@ -54,7 +55,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She steps away, drinks some water, and feels much better.", characterDialogue: "I guess I just needed a break.", choices: nil, educationalReveal: "As hormones begin to fluctuate, mood swings can happen even before puberty is fully visible. It's normal to have big feelings!", isEndScene: true),
                     StoryScene(narration: "Her dad helps her clean it up and they talk.", characterDialogue: "Sometimes our bodies make our feelings seem bigger than they are.", choices: nil, educationalReveal: "Hormones affect the brain's emotional centers. Learning to recognize and ride out these waves is a great skill.", isEndScene: true)
                 ],
-                stage: .prePuberty
+                stage: .prePuberty,
+                imageName: "mira_emotional_rollercoaster"
             ),
             StoryChapter(
                 title: "What's That Spot?",
@@ -67,7 +69,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She learns later at school that it's called discharge.", characterDialogue: "Oh, the nurse said it's my body cleaning itself.", choices: nil, educationalReveal: "Vaginal discharge often starts 6-12 months before the first period. It's the vagina's natural way of cleaning itself.", isEndScene: true),
                     StoryScene(narration: "Her mom gives her pantyliners just in case.", characterDialogue: "So this just means my period is coming... eventually.", choices: nil, educationalReveal: "Vaginal discharge is completely normal and healthy. It's one of the signs that the body is preparing for menstruation.", isEndScene: true)
                 ],
-                stage: .prePuberty
+                stage: .prePuberty,
+                imageName: "mira_whats_that_spot"
             ),
             StoryChapter(
                 title: "Growing Pains",
@@ -80,7 +83,8 @@ struct StoryLibrary {
                     StoryScene(narration: "The warmth soothes her legs and she falls back asleep.", characterDialogue: "Ah, that's better...", choices: nil, educationalReveal: "Growing pains are common during pre-puberty growth spurts. They usually happen at night and affect the legs.", isEndScene: true),
                     StoryScene(narration: "She does some gentle stretches and the ache lessens.", characterDialogue: "Okay, I think I can sleep now.", choices: nil, educationalReveal: "Rapid bone growth can cause muscle tension. Stretching and a warm bath before bed can help.", isEndScene: true)
                 ],
-                stage: .prePuberty
+                stage: .prePuberty,
+                imageName: "mira_growing_pains"
             )
         ]
     }
@@ -99,7 +103,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She wraps toilet paper in her underwear and heads to the nurse.", characterDialogue: "I just need a quick fix until I get home.", choices: nil, educationalReveal: "It's very common to be caught off guard by your first few periods. Toilet paper is a safe temporary solution.", isEndScene: true),
                     StoryScene(narration: "The nurse gives her a pad and a warm smile.", characterDialogue: "Thank you so much. I was panicking.", choices: nil, educationalReveal: "School nurses are equipped to help! Don't be afraid to ask for supplies.", isEndScene: true)
                 ],
-                stage: .puberty
+                stage: .puberty,
+                imageName: "priya_first_period"
             ),
             StoryChapter(
                 title: "Acne Attack!",
@@ -112,7 +117,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She pops it, but it gets redder and angrier.", characterDialogue: "I should have just left it...", choices: nil, educationalReveal: "Hormonal shifts during puberty increase sebum (oil) production, leading to acne. Popping pushes bacteria deeper.", isEndScene: true),
                     StoryScene(narration: "She uses a gentle cleanser and puts a pimple patch on it.", characterDialogue: "At least I'm not making it worse.", choices: nil, educationalReveal: "Hormonal shifts increase sebum (oil) production. Gentle, consistent skincare helps manage breakouts.", isEndScene: true)
                 ],
-                stage: .puberty
+                stage: .puberty,
+                imageName: "priya_acne_attack"
             ),
             StoryChapter(
                 title: "The Sleepy Teen",
@@ -125,7 +131,8 @@ struct StoryLibrary {
                     StoryScene(narration: "The caffeine keeps her up again that night.", characterDialogue: "Now I'm wired AND tired.", choices: nil, educationalReveal: "During puberty, the brain's melatonin release shifts later at night, making teens naturally want to sleep later.", isEndScene: true),
                     StoryScene(narration: "She opens the blinds and the sunlight helps her wake up.", characterDialogue: "Okay, I feel a bit more alert now.", choices: nil, educationalReveal: "During puberty, the brain's melatonin release shifts later at night. Morning sunlight helps reset your internal clock.", isEndScene: true)
                 ],
-                stage: .puberty
+                stage: .puberty,
+                imageName: "priya_sleepy_teen"
             ),
             StoryChapter(
                 title: "Cramps in Class",
@@ -139,7 +146,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She suffers through the whole class, feeling miserable.", characterDialogue: "I wish I brought pain meds...", choices: nil, educationalReveal: "Uterine contractions cause cramps. Prostaglandins are the chemicals responsible for this pain.", isEndScene: true),
                     StoryScene(narration: "The nurse gives her a warm heating pad to hold against her stomach.", characterDialogue: "This feels so much better.", choices: nil, educationalReveal: "Heat increases blood flow to the pelvic area, helping to relax the muscles and relieve cramp pain.", isEndScene: true)
                 ],
-                stage: .puberty
+                stage: .puberty,
+                imageName: "priya_cramps"
             )
         ]
     }
@@ -159,7 +167,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She tries to meditate, and a week later her period finally starts.", characterDialogue: "Okay, time to prioritize my mental health.", animationType: .menstruation),
                     StoryScene(narration: "She realizes stress was the culprit.", characterDialogue: nil, choices: nil, educationalReveal: "High cortisol levels from stress can suppress GnRH, delaying ovulation and pushing back your period.", isEndScene: true)
                 ],
-                stage: .reproductive
+                stage: .reproductive,
+                imageName: "ananya_waiting_game"
             ),
             StoryChapter(
                 title: "The Energy Slump",
@@ -172,7 +181,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She struggles through the run and feels exhausted for the rest of the day.", characterDialogue: "Maybe I should have taken it easy.", choices: nil, educationalReveal: "In the late luteal phase, progesterone peaks, which can have a sedative effect and lower energy levels.", isEndScene: true),
                     StoryScene(narration: "She does a gentle yoga flow and feels much more balanced.", characterDialogue: "That was exactly what I needed.", choices: nil, educationalReveal: "Progesterone peaks in the luteal phase, lowering energy. Adapting workouts to your cycle helps you stay active without burning out.", isEndScene: true)
                 ],
-                stage: .reproductive
+                stage: .reproductive,
+                imageName: "ananya_energy_slump"
             ),
             StoryChapter(
                 title: "Ovulation Power",
@@ -185,7 +195,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She nails the presentation and charms her team.", characterDialogue: "That went amazingly well.", choices: nil, educationalReveal: "During ovulation, estrogen and testosterone peak, boosting energy, mood, and sociability.", isEndScene: true),
                     StoryScene(narration: "She delays it, and next week she feels much less motivated.", characterDialogue: "I should have done it when I had the energy.", choices: nil, educationalReveal: "Tracking your cycle can help you align demanding tasks with the high-energy ovulatory phase.", isEndScene: true)
                 ],
-                stage: .reproductive
+                stage: .reproductive,
+                imageName: "ananya_ovulation_power"
             ),
             StoryChapter(
                 title: "PMS Cravings",
@@ -198,7 +209,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She eats a huge chocolate bar, but feels a sugar crash an hour later.", characterDialogue: "Ugh, now I'm tired AND craving salt.", choices: nil, educationalReveal: "Hormonal shifts before your period can lower serotonin. Carbs and sweets temporarily boost it, but cause sugar crashes.", isEndScene: true),
                     StoryScene(narration: "She eats some almonds and a piece of dark chocolate.", characterDialogue: "Okay, craving satisfied, and I still have energy.", choices: nil, educationalReveal: "Dark chocolate has magnesium (good for cramps!), and pairing it with protein prevents a blood sugar roller coaster.", isEndScene: true)
                 ],
-                stage: .reproductive
+                stage: .reproductive,
+                imageName: "ananya_pms_cravings"
             )
         ]
     }
@@ -216,7 +228,8 @@ struct StoryLibrary {
                     StoryScene(narration: "The cold water helps cool her core temperature quickly.", characterDialogue: "Much better.", choices: nil, educationalReveal: "Fluctuating estrogen levels can trigger the brain's thermostat, causing sudden hot flashes.", isEndScene: true),
                     StoryScene(narration: "Without her jacket, she feels the breeze and recovers quickly.", characterDialogue: "Just a small pause, I've got this.", choices: nil, educationalReveal: "Wearing breathable layers makes it much easier to manage sudden temperature shifts.", isEndScene: true)
                 ],
-                stage: .perimenopause
+                stage: .perimenopause,
+                imageName: "sunita_suddenly_warm"
             ),
             StoryChapter(
                 title: "The Brain Fog",
@@ -229,7 +242,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She spends the day anxious, which only makes it harder to focus.", characterDialogue: "I need to talk to my doctor.", choices: nil, educationalReveal: "Estrogen supports brain regions involved in memory. Fluctuations can cause temporary 'brain fog.'", isEndScene: true),
                     StoryScene(narration: "She starts keeping a small notebook. Writing things down eases her anxiety.", characterDialogue: "Okay, this helps. I just need a little extra support right now.", choices: nil, educationalReveal: "Estrogen supports brain regions involved in memory. This 'brain fog' is a common and usually temporary symptom of perimenopause.", isEndScene: true)
                 ],
-                stage: .perimenopause
+                stage: .perimenopause,
+                imageName: "sunita_brain_fog"
             ),
             StoryChapter(
                 title: "A Surprise Period",
