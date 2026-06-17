@@ -18,7 +18,7 @@ struct LaunchView: View {
             MainTabView()
         } else {
             ZStack {
-                LumaGradient.primary
+                Color.lumaSurface
                     .ignoresSafeArea()
                 
                 if isLogoExpanded {
@@ -41,7 +41,7 @@ struct LaunchView: View {
                         .frame(width: isLogoExpanded ? 300 : 210,
                                height: isLogoExpanded ? 300 : 210)
                         .clipShape(RoundedRectangle(cornerRadius: 32))
-                        .shadow(color: .black.opacity(0.25),
+                        .shadow(color: .black.opacity(0.15),
                                 radius: isLogoExpanded ? 40 : 25,
                                 x: 0,
                                 y: 15)
@@ -56,13 +56,13 @@ struct LaunchView: View {
                     if !isLogoExpanded {
                         Text("AAROHI")
                             .font(.system(size: 44, weight: .bold, design: .rounded))
-                            .foregroundColor(.white)
+                            .foregroundColor(.lumaDarkGray)
                             .tracking(6)
                             .opacity(animate ? 1 : 0)
                         
                         Text("Because every stage deserves care")
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.white.opacity(0.92))
+                            .foregroundColor(.lumaMidGray)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 30)
                             .opacity(animate ? 1 : 0)
@@ -74,14 +74,14 @@ struct LaunchView: View {
                         } label: {
                             Text("Get Started")
                                 .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(Color.lumaAccent)
+                                .foregroundColor(.white)
                                 .padding(.horizontal, 48)
                                 .padding(.vertical, 16)
                                 .background(
                                     RoundedRectangle(cornerRadius: 30)
-                                        .fill(Color.white)
+                                        .fill(Color.lumaPinkLight)
                                 )
-                                .shadow(color: .black.opacity(0.15),
+                                .shadow(color: .black.opacity(0.1),
                                         radius: 12,
                                         x: 0,
                                         y: 6)
@@ -110,6 +110,8 @@ struct LaunchView: View {
                 }
             }
             .onAppear {
+                hasSeenOnboarding = false // Reset for testing so the user can see the onboarding screen
+                
                 withAnimation(.easeOut(duration: 0.9)) {
                     animate = true
                 }

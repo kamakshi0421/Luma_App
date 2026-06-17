@@ -6,21 +6,21 @@ import FirebaseAuth
 
 // MARK: - Pastel Color Palette
 private extension Color {
-    // Soft pastel tones for a feminine premium feel
-    static let pastelRose     = Color(red: 0.96, green: 0.80, blue: 0.85)
-    static let pastelLavender = Color(red: 0.88, green: 0.83, blue: 0.95)
-    static let pastelPeach    = Color(red: 0.98, green: 0.87, blue: 0.80)
-    static let pastelMint     = Color(red: 0.82, green: 0.94, blue: 0.89)
-    static let pastelBlush    = Color(red: 0.97, green: 0.85, blue: 0.88)
-    static let pastelSky      = Color(red: 0.84, green: 0.90, blue: 0.97)
+    // Standard system colors match the RevealView pastel look when used with .opacity(0.15)
+    static let pastelRose     = Color.pink
+    static let pastelLavender = Color.purple
+    static let pastelPeach    = Color.orange
+    static let pastelMint     = Color.green
+    static let pastelBlush    = Color.red
+    static let pastelSky      = Color.blue
     
-    // Text colors — softer than the old lumaDarkGray
-    static let feminineText      = Color(red: 0.32, green: 0.28, blue: 0.35)
-    static let feminineSubtext   = Color(red: 0.52, green: 0.48, blue: 0.56)
+    // Text colors
+    static let feminineText      = Color.primary
+    static let feminineSubtext   = Color.secondary
     
-    // Accent — soft dusty rose instead of harsh pink
-    static let feminineAccent    = Color(red: 0.85, green: 0.52, blue: 0.65)
-    static let feminineLilac     = Color(red: 0.72, green: 0.58, blue: 0.82)
+    // Accent
+    static let feminineAccent    = Color.pink
+    static let feminineLilac     = Color.purple
 }
 
 @available(iOS 26.0, *)
@@ -47,7 +47,7 @@ struct MySpaceView: View {
     }
     
     private var stageAccentColor: Color {
-        Color(red: 0.93, green: 0.55, blue: 0.70) 
+        Color.pink
     }
     
     private var greetingText: String {
@@ -85,6 +85,7 @@ struct MySpaceView: View {
                 }
             }
             
+            .navigationTitle("MySpace")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -192,22 +193,13 @@ private extension MySpaceView {
         .padding(22)
         .background(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            stageAccentColor.opacity(0.22),
-                            stageAccentColor.opacity(0.10)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+                .fill(stageAccentColor.opacity(0.15))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .stroke(stageAccentColor.opacity(0.3), lineWidth: 1)
+                .stroke(stageAccentColor.opacity(0.35), lineWidth: 1)
         )
-        .shadow(color: stageAccentColor.opacity(0.18), radius: 12, y: 6)
+        .shadow(color: stageAccentColor.opacity(0.1), radius: 12, y: 6)
     }
     
     // MARK: Journey
@@ -219,11 +211,11 @@ private extension MySpaceView {
                 .padding(16)
                 .background(
                     RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .fill(Color.white.opacity(0.65))
+                        .fill(Color.pastelLavender.opacity(0.15))
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .stroke(Color.pastelLavender.opacity(0.4), lineWidth: 1)
+                        .stroke(Color.pastelLavender.opacity(0.35), lineWidth: 1)
                 )
                 .shadow(color: Color.feminineLilac.opacity(0.06), radius: 8, y: 4)
         }
@@ -268,15 +260,13 @@ private extension MySpaceView {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(
                     RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .fill(
-                            LinearGradient(colors: [Color.pastelLavender.opacity(0.35), Color.pastelSky.opacity(0.25)], startPoint: .topLeading, endPoint: .bottomTrailing)
-                        )
+                        .fill(Color.pastelSky.opacity(0.15))
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .stroke(Color.feminineLilac.opacity(0.2), lineWidth: 1)
+                        .stroke(Color.pastelSky.opacity(0.35), lineWidth: 1)
                 )
-                .shadow(color: Color.feminineLilac.opacity(0.08), radius: 10, y: 5)
+                .shadow(color: Color.pastelSky.opacity(0.08), radius: 10, y: 5)
                 
                 if insightManager.justUnlocked {
                     InsightReadyBadge()
@@ -316,15 +306,13 @@ private extension MySpaceView {
                     .frame(height: 120)
                     .background(
                         RoundedRectangle(cornerRadius: 22, style: .continuous)
-                            .fill(
-                                LinearGradient(colors: [Color.pastelLavender.opacity(0.45), Color.pastelRose.opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing)
-                            )
+                            .fill(Color.pastelLavender.opacity(0.15))
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 22, style: .continuous)
-                            .stroke(Color.feminineLilac.opacity(0.2), lineWidth: 1)
+                            .stroke(Color.pastelLavender.opacity(0.35), lineWidth: 1)
                     )
-                    .shadow(color: Color.feminineLilac.opacity(0.08), radius: 8, y: 4)
+                    .shadow(color: Color.pastelLavender.opacity(0.08), radius: 8, y: 4)
                 }
                 
                 // Daily Challenge
@@ -349,15 +337,13 @@ private extension MySpaceView {
                     .frame(height: 120)
                     .background(
                         RoundedRectangle(cornerRadius: 22, style: .continuous)
-                            .fill(
-                                LinearGradient(colors: [Color.pastelPeach.opacity(0.45), Color.pastelRose.opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing)
-                            )
+                            .fill(Color.pastelPeach.opacity(0.15))
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 22, style: .continuous)
-                            .stroke(Color.feminineAccent.opacity(0.15), lineWidth: 1)
+                            .stroke(Color.pastelPeach.opacity(0.35), lineWidth: 1)
                     )
-                    .shadow(color: Color.feminineAccent.opacity(0.08), radius: 8, y: 4)
+                    .shadow(color: Color.pastelPeach.opacity(0.08), radius: 8, y: 4)
                 }
             }
         }
@@ -441,13 +427,11 @@ private extension MySpaceView {
                 .padding(18)
                 .background(
                     RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .fill(
-                            LinearGradient(colors: [Color.pastelRose.opacity(0.3), Color.pastelPeach.opacity(0.25)], startPoint: .leading, endPoint: .trailing)
-                        )
+                        .fill(Color.pastelMint.opacity(0.15))
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .stroke(Color.feminineAccent.opacity(0.12), lineWidth: 1)
+                        .stroke(Color.pastelMint.opacity(0.35), lineWidth: 1)
                 )
         }
     }
@@ -480,7 +464,7 @@ struct PastelFeminineBackground: View {
             // Soft rose radial at top
             RadialGradient(
                 colors: [
-                    Color.pastelRose.opacity(0.25),
+                    Color.pastelRose.opacity(0.1),
                     Color.clear
                 ],
                 center: .topLeading,
@@ -492,7 +476,7 @@ struct PastelFeminineBackground: View {
             // Subtle lavender glow at bottom-right
             RadialGradient(
                 colors: [
-                    Color.pastelLavender.opacity(0.18),
+                    Color.pastelLavender.opacity(0.1),
                     Color.clear
                 ],
                 center: .bottomTrailing,
@@ -536,13 +520,13 @@ struct StageRiskCard: View {
         .frame(width: 200, height: 200)
         .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(Color.white.opacity(0.7))
+                .fill(Color.pastelRose.opacity(0.15))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .stroke(Color.pastelRose.opacity(0.3), lineWidth: 1)
+                .stroke(Color.pastelRose.opacity(0.35), lineWidth: 1)
         )
-        .shadow(color: Color.feminineAccent.opacity(0.06), radius: 8, y: 4)
+        .shadow(color: Color.pastelRose.opacity(0.06), radius: 8, y: 4)
     }
 }
 
@@ -590,13 +574,13 @@ struct PastelActionCard: View {
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(tint.opacity(0.22))
+                    .fill(tint.opacity(0.15))
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
                     .stroke(tint.opacity(0.35), lineWidth: 1)
             )
-            .shadow(color: tint.opacity(0.1), radius: 6, y: 3)
+            .shadow(color: tint.opacity(0.05), radius: 6, y: 3)
         }
     }
 }

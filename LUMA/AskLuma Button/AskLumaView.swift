@@ -78,7 +78,7 @@ struct AskLumaView: View {
         
         ZStack {
             
-            LumaGradient.soft
+            Color.lumaSurface
                 .ignoresSafeArea()
                 .accessibilityHidden(true)
             
@@ -126,7 +126,7 @@ struct AskLumaView: View {
             } label: {
                 Image(systemName: "chevron.left")
                     .font(.title3.weight(.semibold))
-                    .foregroundColor(.lumaAccent)
+                    .foregroundColor(Color.lumaPinkBubble)
             }
             
             VStack(alignment: .leading, spacing: 2) {
@@ -146,7 +146,7 @@ struct AskLumaView: View {
             }
         }
         .padding()
-        .background(.ultraThinMaterial)
+        .background(Color.white.opacity(0.6))
     }
 
     
@@ -196,7 +196,7 @@ struct AskLumaView: View {
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.lumaAccent.opacity(0.25), lineWidth: 1)
+                        .stroke(Color.lumaPinkLight, lineWidth: 1)
                 )
             
             Button {
@@ -205,13 +205,13 @@ struct AskLumaView: View {
                 Image(systemName: "paperplane.fill")
                     .foregroundColor(.white)
                     .padding(16)
-                    .background(Color.lumaAccent)
+                    .background(Color.lumaPinkLight)
                     .clipShape(Circle())
             }
             .disabled(messageText.trimmingCharacters(in: .whitespaces).isEmpty || isSending)
         }
         .padding()
-        .background(.ultraThinMaterial)
+        .background(Color.white.opacity(0.6))
     }
     
     
@@ -277,7 +277,7 @@ struct TypingDots: View {
             Circle().frame(width: 7, height: 7)
             Circle().frame(width: 7, height: 7)
         }
-        .foregroundColor(Color.lumaAccent.opacity(0.7))
+        .foregroundColor(Color.lumaPinkLight.opacity(0.7))
         .opacity(animate ? 1 : 0.3)
         .animation(.easeInOut(duration: 0.8).repeatForever(), value: animate)
         .onAppear { animate = true }
@@ -286,7 +286,7 @@ struct TypingDots: View {
             RoundedRectangle(cornerRadius: 18)
                 .fill(Color.white)
         )
-        .shadow(color: .lumaAccent.opacity(0.1), radius: 8, y: 4)
+        .shadow(color: .lumaPinkLight.opacity(0.1), radius: 8, y: 4)
     }
 }
 
@@ -307,10 +307,10 @@ struct SuggestionChip: View {
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.lumaAccent.opacity(0.25), lineWidth: 1)
+                        .stroke(Color.lumaPinkLight.opacity(0.25), lineWidth: 1)
                 )
                 .foregroundColor(.lumaDarkGray)
-                .shadow(color: .lumaAccent.opacity(0.05), radius: 4, y: 2)
+                .shadow(color: .lumaPinkLight.opacity(0.05), radius: 4, y: 2)
         }
     }
 }
@@ -324,13 +324,13 @@ struct MicPulseView: View {
         ZStack {
             
             Circle()
-                .fill(Color.lumaAccent.opacity(0.2))
+                .fill(Color.lumaPinkLight.opacity(0.2))
                 .frame(width: 60, height: 60)
                 .scaleEffect(animate ? 1.4 : 1)
                 .opacity(animate ? 0 : 1)
             
             Image(systemName: "mic.fill")
-                .foregroundColor(.lumaAccent)
+                .foregroundColor(.lumaPinkLight)
                 .font(.title3)
         }
         .onAppear {

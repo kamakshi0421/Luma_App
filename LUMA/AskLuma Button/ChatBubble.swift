@@ -30,13 +30,13 @@ struct ChatBubble: View {
             .foregroundColor(.white)
             .background(
                 RoundedRectangle(cornerRadius: 22)
-                    .fill(Color.lumaAccent)
+                    .fill(Color.lumaPinkLight)
             )
             .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
                    alignment: .trailing)
             .fixedSize(horizontal: false, vertical: true)
             .shadow(
-                color: Color.lumaAccent.opacity(0.45),
+                color: Color.lumaPinkLight.opacity(0.45),
                 radius: 12,
                 y: 6
             )

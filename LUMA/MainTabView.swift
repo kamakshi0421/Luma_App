@@ -28,7 +28,7 @@ struct MainTabView: View {
                     }
                         .tag(Tab.MySpace)
                         .tabItem {
-                            Label("Aangan", systemImage: "house.fill")
+                            Label("MySpace", systemImage: "house.fill")
                         }
                     
                     NavigationStack {
@@ -36,7 +36,7 @@ struct MainTabView: View {
                     }
                         .tag(Tab.Phases)
                         .tabItem {
-                            Label("Padhav", systemImage: "moon.stars.fill")
+                            Label("Phases", systemImage: "moon.stars.fill")
                         }
                     
                     NavigationStack {
@@ -45,7 +45,7 @@ struct MainTabView: View {
                         .id(savedStageRaw)
                         .tag(Tab.Reveal)
                         .tabItem {
-                            Label("Darpan", systemImage: "magnifyingglass")
+                            Label("Reveal", systemImage: "magnifyingglass")
                         }
                 }
                 .tint(.lumaPinkBubble)
