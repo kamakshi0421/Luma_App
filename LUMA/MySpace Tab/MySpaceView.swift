@@ -4,6 +4,25 @@ import SwiftUI
 import FoundationModels
 import FirebaseAuth
 
+// MARK: - Pastel Color Palette
+private extension Color {
+    // Soft pastel tones for a feminine premium feel
+    static let pastelRose     = Color(red: 0.96, green: 0.80, blue: 0.85)
+    static let pastelLavender = Color(red: 0.88, green: 0.83, blue: 0.95)
+    static let pastelPeach    = Color(red: 0.98, green: 0.87, blue: 0.80)
+    static let pastelMint     = Color(red: 0.82, green: 0.94, blue: 0.89)
+    static let pastelBlush    = Color(red: 0.97, green: 0.85, blue: 0.88)
+    static let pastelSky      = Color(red: 0.84, green: 0.90, blue: 0.97)
+    
+    // Text colors — softer than the old lumaDarkGray
+    static let feminineText      = Color(red: 0.32, green: 0.28, blue: 0.35)
+    static let feminineSubtext   = Color(red: 0.52, green: 0.48, blue: 0.56)
+    
+    // Accent — soft dusty rose instead of harsh pink
+    static let feminineAccent    = Color(red: 0.85, green: 0.52, blue: 0.65)
+    static let feminineLilac     = Color(red: 0.72, green: 0.58, blue: 0.82)
+}
+
 @available(iOS 26.0, *)
 struct MySpaceView: View {
     
@@ -27,45 +46,56 @@ struct MySpaceView: View {
         LifeStage(rawValue: savedStageRaw) ?? .reproductive
     }
     
+    private var stageAccentColor: Color {
+        Color(red: 0.93, green: 0.55, blue: 0.70) 
+    }
+    
+    private var greetingText: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        switch hour {
+        case 5..<12: return "Good morning, sunshine ☀️"
+        case 12..<17: return "Good afternoon, beautiful 🌸"
+        case 17..<21: return "Good evening, love 🌙"
+        default: return "Sweet dreams, dear 💫"
+        }
+    }
+    
     var body: some View {
         NavigationStack {
-            
             ZStack {
-                
-                LumaBackground()
+                // Premium soft pastel background
+                PastelFeminineBackground()
                 
                 ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 28) {
+                    VStack(alignment: .leading, spacing: 26) {
                         
                         greetingSection
                         heroSection
                         journeySection
                         bodyInsightSection
+                        discoverSection
                         stageRiskSection
                         quickActionSection
                         gentleTruthSection
                         
                     }
                     .padding(.horizontal, 20)
-                    .padding(.top, 24)
-                    .padding(.bottom, 40)
+                    .padding(.top, 16)
+                    .padding(.bottom, 50)
                 }
             }
-
             
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showProfile = true
                     } label: {
-                        Image(systemName: "person.crop.circle")
+                        Image(systemName: "person.crop.circle.fill")
                             .font(.title3)
-                            .foregroundColor(.lumaDarkGray)
+                            .foregroundStyle(
+                                LinearGradient(colors: [.feminineAccent, .feminineLilac], startPoint: .topLeading, endPoint: .bottomTrailing)
+                            )
                     }
-                }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    GlobalInfoButton(tab: .herSpace)
                 }
             }
             
@@ -98,83 +128,58 @@ struct MySpaceView: View {
         }
     }
 }
+
+// MARK: - Sections
 @available(iOS 26.0, *)
 private extension MySpaceView {
     
-    private var stageAccentColor: Color {
-            Color(red: 0.93, green: 0.55, blue: 0.70) 
-        
-    }
-    
-    var stageGradientColors: [Color] {
-        [
-            stageAccentColor.opacity(0.18),
-            stageAccentColor.opacity(0.08)
-        ]
-    }
-}
-
-
-@available(iOS 26.0, *)
-private extension MySpaceView {
-    
-    private var greetingSection: some View {
-        HStack(spacing: 16) {
+    // MARK: Greeting
+    var greetingSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(greetingText)
+                .font(.title2.weight(.semibold))
+                .foregroundColor(.feminineText)
             
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Good to see you 🌙")
-                    .font(.title2.bold())
-                    .foregroundColor(.lumaDarkGray)
-                
-                Text("Here's what your body may need today.")
-                    .font(.subheadline)
-                    .foregroundColor(.lumaMidGray)
-            }
-            
-            Spacer()
-            
-            Button {
-                showProfile = true
-            } label: {
-                Image(systemName: "person.crop.circle")
-                    .font(.title3)
-                    .foregroundColor(.lumaDarkGray)
-            }
-            
-            GlobalInfoButton(tab: .herSpace)
+            Text("Here's what your body may need today.")
+                .font(.subheadline)
+                .foregroundColor(.feminineSubtext)
         }
     }
+    
+    // MARK: Hero Card
     var heroSection: some View {
-        
-        HStack(spacing: 18) {
-            
+        HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 10) {
-                
                 Text("My current phase")
                     .font(.caption)
+                    .fontWeight(.medium)
                     .foregroundColor(stageAccentColor)
+                    .textCase(.uppercase)
+                    .tracking(0.8)
                 
                 Text(currentStage.title)
                     .font(.title3)
                     .fontWeight(.bold)
+                    .foregroundColor(.feminineText)
                 
                 Text(currentStage.description)
                     .font(.subheadline)
-                    .foregroundColor(.lumaMidGray)
+                    .foregroundColor(.feminineSubtext)
                     .lineLimit(3)
                 
                 Button {
                     selectedStageForSheet = currentStage
                 } label: {
-                    Text("Learn for my stage")
+                    Text("Learn more →")
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 9)
                         .background(stageAccentColor)
-                        .cornerRadius(18)
+                        .clipShape(Capsule())
                 }
+                .padding(.top, 2)
             }
             
             Spacer()
@@ -182,105 +187,97 @@ private extension MySpaceView {
             Image(currentStage.imageName)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 110)
+                .frame(width: 100)
         }
         .padding(22)
         .background(
-            LinearGradient(
-                colors: [
-                    stageAccentColor.opacity(0.22),
-                    stageAccentColor.opacity(0.10)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )        )
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            stageAccentColor.opacity(0.22),
+                            stageAccentColor.opacity(0.10)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+        )
         .overlay(
-            RoundedRectangle(cornerRadius: 28)
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
                 .stroke(stageAccentColor.opacity(0.3), lineWidth: 1)
         )
-        .clipShape(RoundedRectangle(cornerRadius: 28))
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .shadow(color: stageAccentColor.opacity(0.18), radius: 8, y: 4)
+        .shadow(color: stageAccentColor.opacity(0.18), radius: 12, y: 6)
     }
     
+    // MARK: Journey
     var journeySection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            
-            Text("Where I Am")
-                .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+            MySpaceSectionHeader(title: "Where I Am", emoji: "🌿")
             
             LifeStageJourneyView(currentStage: currentStage)
+                .padding(16)
+                .background(
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .fill(Color.white.opacity(0.65))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .stroke(Color.pastelLavender.opacity(0.4), lineWidth: 1)
+                )
+                .shadow(color: Color.feminineLilac.opacity(0.06), radius: 8, y: 4)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
+    
+    // MARK: Weekly Insight
     var bodyInsightSection: some View {
-        
-        VStack(alignment: .leading, spacing: 14) {
-            
-            Text("My Weekly Body Insight")
-                .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+        VStack(alignment: .leading, spacing: 12) {
+            MySpaceSectionHeader(title: "Weekly Body Insight", emoji: "✨")
             
             ZStack(alignment: .topTrailing) {
-                
-                
                 Group {
-                    
                     if insightManager.isLoading {
-                        
                         HStack(spacing: 10) {
                             ProgressView()
-                                .tint(.green)
-                            
-                            Text("Analyzing your week...")
+                                .tint(.feminineAccent)
+                            Text("Analysing your week...")
                                 .font(.caption)
-                                .foregroundColor(.lumaMidGray)
+                                .foregroundColor(.feminineSubtext)
                         }
-                        
                     } else if insightManager.hasEnoughData {
-                        
                         VStack(alignment: .leading, spacing: 6) {
-                            
                             Text(insightManager.message)
                                 .font(.subheadline)
-                                .foregroundColor(.lumaDarkGray)
-                            
+                                .foregroundColor(.feminineText)
                             Text("AI-generated from this week's logs")
                                 .font(.caption)
-                                .foregroundColor(.lumaMidGray)
+                                .foregroundColor(.feminineSubtext)
                         }
-                        
                     } else {
-                        
                         VStack(alignment: .leading, spacing: 6) {
-                            
                             Text("No insight yet 🌷")
                                 .font(.subheadline.weight(.semibold))
-                                .foregroundColor(.lumaDarkGray)
-                            
-                            Text("Track at least 3 symptoms this week to unlock personalized insights.")
+                                .foregroundColor(.feminineText)
+                            Text("Track at least 3 symptoms this week to unlock personalised insights.")
                                 .font(.caption)
-                                .foregroundColor(.lumaMidGray)
+                                .foregroundColor(.feminineSubtext)
                         }
                     }
                 }
                 .padding(18)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(
-                    RoundedRectangle(cornerRadius: 22)
-                        .fill(Color(red: 0.94, green: 0.92, blue: 0.98))                 )
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .fill(
+                            LinearGradient(colors: [Color.pastelLavender.opacity(0.35), Color.pastelSky.opacity(0.25)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        )
+                )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 22)
-                        .stroke(Color(red: 0.70, green: 0.62, blue: 0.85).opacity(0.35), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .stroke(Color.feminineLilac.opacity(0.2), lineWidth: 1)
                 )
-                .shadow(
-                    color: Color(red: 0.70, green: 0.62, blue: 0.85).opacity(0.12),
-                    radius: 10,
-                    y: 6
-                )
+                .shadow(color: Color.feminineLilac.opacity(0.08), radius: 10, y: 5)
                 
-               
                 if insightManager.justUnlocked {
                     InsightReadyBadge()
                         .offset(x: -12, y: -12)
@@ -289,18 +286,91 @@ private extension MySpaceView {
             }
         }
     }
+    
+    // MARK: Discover (Story + Challenge)
+    var discoverSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            MySpaceSectionHeader(title: "Discover", emoji: "🦋")
+            
+            HStack(spacing: 14) {
+                // Interactive Story
+                Button { showStoryPlayer = true } label: {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Image(systemName: "book.fill")
+                            .font(.title2)
+                            .foregroundColor(.feminineLilac)
+                        
+                        Spacer()
+                        
+                        Text("Story")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundColor(.feminineText)
+                        
+                        Text(currentStage.title)
+                            .font(.caption2)
+                            .foregroundColor(.feminineSubtext)
+                            .lineLimit(1)
+                    }
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 120)
+                    .background(
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .fill(
+                                LinearGradient(colors: [Color.pastelLavender.opacity(0.45), Color.pastelRose.opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                            )
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .stroke(Color.feminineLilac.opacity(0.2), lineWidth: 1)
+                    )
+                    .shadow(color: Color.feminineLilac.opacity(0.08), radius: 8, y: 4)
+                }
+                
+                // Daily Challenge
+                Button { showDailyChallenge = true } label: {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Image(systemName: "star.fill")
+                            .font(.title2)
+                            .foregroundColor(.feminineAccent)
+                        
+                        Spacer()
+                        
+                        Text("Challenge")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundColor(.feminineText)
+                        
+                        Text("Today's task")
+                            .font(.caption2)
+                            .foregroundColor(.feminineSubtext)
+                    }
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 120)
+                    .background(
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .fill(
+                                LinearGradient(colors: [Color.pastelPeach.opacity(0.45), Color.pastelRose.opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                            )
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .stroke(Color.feminineAccent.opacity(0.15), lineWidth: 1)
+                    )
+                    .shadow(color: Color.feminineAccent.opacity(0.08), radius: 8, y: 4)
+                }
+            }
+        }
+    }
+    
+    // MARK: Stage Risk
     var stageRiskSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            
-            Text("Conditions to be aware of")
-                .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+            MySpaceSectionHeader(title: "Things to Watch", emoji: "🩺")
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    
                     ForEach(currentStage.content.conditions) { condition in
-                        
                         Button {
                             selectedCondition = condition
                         } label: {
@@ -309,213 +379,234 @@ private extension MySpaceView {
                         .buttonStyle(.plain)
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 4)
+                .padding(.horizontal, 2)
             }
         }
         .sheet(item: $selectedCondition) { condition in
             ConditionDetailSheet(condition: condition)
-                .presentationDetents([
-                    PresentationDetent.large
-                ])
+                .presentationDetents([.large])
                 .presentationCornerRadius(28)
         }
     }
     
+    // MARK: Quick Actions
     var quickActionSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 14) {
+            MySpaceSectionHeader(title: "Quick Actions", emoji: "💜")
             
-            Text("Quick Actions")
-                .font(.headline)
-                .foregroundColor(.lumaDarkGray)
-            
-            QuickActionCard(
+            PastelActionCard(
                 title: "Track how your body feels",
-                subtitle: "Log symptoms for personalized weekly insights",
-                icon: "list.bullet"
-            ) {
-                showTracker = true
-            }
+                subtitle: "Log symptoms for weekly insights",
+                icon: "heart.text.clipboard",
+                tint: .pastelRose,
+                iconColor: .feminineAccent
+            ) { showTracker = true }
             
-            QuickActionCard(
-                title: "Daily Challenge",
-                subtitle: "Complete your interactive task today",
-                icon: "star.fill"
-            ) {
-                showDailyChallenge = true
-            }
-            
-            QuickActionCard(
-                title: "Interactive Story",
-                subtitle: "Experience the \(currentStage.title) journey",
-                icon: "book.fill"
-            ) {
-                showStoryPlayer = true
-            }
-            
-            QuickActionCard(
+            PastelActionCard(
                 title: "Body Map",
                 subtitle: "Explore symptoms by body area",
-                icon: "figure.walk"
-            ) {
-                showBodyMap = true
-            }
+                icon: "figure.mind.and.body",
+                tint: .pastelMint,
+                iconColor: Color(red: 0.40, green: 0.72, blue: 0.60)
+            ) { showBodyMap = true }
             
-            QuickActionCard(
+            PastelActionCard(
                 title: "Is This Normal?",
                 subtitle: "Get gentle reassurance",
-                icon: "questionmark.circle.fill"
-            ) {
-                selectedTab = .Reveal
-            }
+                icon: "questionmark.bubble",
+                tint: .pastelSky,
+                iconColor: Color(red: 0.45, green: 0.60, blue: 0.82)
+            ) { selectedTab = .Reveal }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
+    // MARK: Gentle Truth
     var gentleTruthSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(spacing: 0) {
+            HStack {
+                Image(systemName: "leaf.fill")
+                    .foregroundColor(.feminineAccent.opacity(0.7))
+                Text("A Moment to Pause")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundColor(.feminineAccent)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.bottom, 10)
             
-            Text("A Moment to Pause")
-                .font(.headline)
-                .foregroundColor(stageAccentColor)
-            
-            Text("Many changes you feel are common. You’re not broken — you’re evolving.")
+            Text("Many changes you feel are common. You're not broken — you're evolving. 🌱")
                 .font(.subheadline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.feminineText)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(18)
                 .background(
-                    RoundedRectangle(cornerRadius: 24)
-                        .fill(stageAccentColor.opacity(0.15))
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .fill(
+                            LinearGradient(colors: [Color.pastelRose.opacity(0.3), Color.pastelPeach.opacity(0.25)], startPoint: .leading, endPoint: .trailing)
+                        )
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 24)
-                        .stroke(stageAccentColor.opacity(0.25), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .stroke(Color.feminineAccent.opacity(0.12), lineWidth: 1)
                 )
-                .shadow(color: stageAccentColor.opacity(0.15), radius: 8, y: 4)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
-struct StageRiskCard: View {
+// MARK: - Section Header
+private struct MySpaceSectionHeader: View {
+    let title: String
+    let emoji: String
     
+    var body: some View {
+        HStack(spacing: 6) {
+            Text(emoji)
+                .font(.subheadline)
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.feminineText)
+        }
+    }
+}
+
+// MARK: - Pastel Feminine Background
+struct PastelFeminineBackground: View {
+    var body: some View {
+        ZStack {
+            // Base soft white
+            Color(red: 0.99, green: 0.97, blue: 0.98)
+                .ignoresSafeArea()
+            
+            // Soft rose radial at top
+            RadialGradient(
+                colors: [
+                    Color.pastelRose.opacity(0.25),
+                    Color.clear
+                ],
+                center: .topLeading,
+                startRadius: 0,
+                endRadius: 400
+            )
+            .ignoresSafeArea()
+            
+            // Subtle lavender glow at bottom-right
+            RadialGradient(
+                colors: [
+                    Color.pastelLavender.opacity(0.18),
+                    Color.clear
+                ],
+                center: .bottomTrailing,
+                startRadius: 0,
+                endRadius: 350
+            )
+            .ignoresSafeArea()
+        }
+    }
+}
+
+// MARK: - Stage Risk Card (Redesigned)
+struct StageRiskCard: View {
     let condition: StageCondition
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-           
             Image(condition.imageName)
                 .resizable()
                 .scaledToFill()
                 .frame(height: 90)
                 .frame(maxWidth: .infinity)
                 .clipped()
-                .cornerRadius(14)
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
             
-           
             Text(condition.name)
                 .font(.subheadline)
                 .fontWeight(.semibold)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.feminineText)
                 .lineLimit(1)
             
-           
             Text(condition.shortDescription)
                 .font(.caption)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.feminineSubtext)
                 .lineLimit(2)
                 .frame(height: 34, alignment: .top)
             
             Spacer(minLength: 0)
         }
-        .padding()
-        .frame(width: 210, height: 200)
+        .padding(14)
+        .frame(width: 200, height: 200)
         .background(
-            RoundedRectangle(cornerRadius: 22)
-                .fill(Color.gray.opacity(0.08))
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .fill(Color.white.opacity(0.7))
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 22)
-                .stroke(Color.gray.opacity(0.15), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .stroke(Color.pastelRose.opacity(0.3), lineWidth: 1)
         )
-        .shadow(
-            color: Color.black.opacity(0.04),
-            radius: 6,
-            y: 4
-        )
+        .shadow(color: Color.feminineAccent.opacity(0.06), radius: 8, y: 4)
     }
 }
 
-struct QuickActionCard: View {
-    
+// MARK: - Pastel Action Card
+struct PastelActionCard: View {
     let title: String
     let subtitle: String
     let icon: String
+    let tint: Color
+    let iconColor: Color
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
             HStack(spacing: 14) {
-                
-                
                 ZStack {
                     Circle()
-                        .fill(Color.purple.opacity(0.18))
-                        .frame(width: 42, height: 42)
+                        .fill(tint.opacity(0.5))
+                        .frame(width: 44, height: 44)
                     
                     Image(systemName: icon)
-                        .foregroundColor(.purple)
+                        .foregroundColor(iconColor)
                         .font(.system(size: 18, weight: .semibold))
                 }
                 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 3) {
                     Text(title)
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(.lumaDarkGray)
+                        .foregroundColor(.feminineText)
                     
                     Text(subtitle)
                         .font(.caption)
-                        .foregroundColor(.lumaMidGray)
-                        .lineLimit(2)
+                        .foregroundColor(.feminineSubtext)
+                        .lineLimit(1)
                 }
                 
                 Spacer()
                 
                 Image(systemName: "chevron.right")
-                    .foregroundColor(.gray.opacity(0.4))
+                    .font(.caption)
+                    .foregroundColor(.feminineSubtext.opacity(0.5))
             }
-            .padding()
-            .frame(maxWidth: .infinity, minHeight: 90)
+            .padding(16)
+            .frame(maxWidth: .infinity)
             .background(
-                RoundedRectangle(cornerRadius: 22)
-                    .fill(Color.purple.opacity(0.12))
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .fill(tint.opacity(0.22))
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 22)
-                    .stroke(Color.purple.opacity(0.25), lineWidth: 1)
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .stroke(tint.opacity(0.35), lineWidth: 1)
             )
-            .shadow(
-                color: Color.purple.opacity(0.10),
-                radius: 8,
-                y: 4
-            )
+            .shadow(color: tint.opacity(0.1), radius: 6, y: 3)
         }
     }
 }
 
+// MARK: - Life Stage Journey
 struct LifeStageJourneyView: View {
-    
     let currentStage: LifeStage
     
     private let stages: [LifeStage] = [
-        .prePuberty,
-        .puberty,
-        .reproductive,
-        .perimenopause,
-        .menopause,
-        .postMenopause
+        .prePuberty, .puberty, .reproductive, .perimenopause, .menopause, .postMenopause
     ]
     
     var visibleStages: [LifeStage] {
@@ -526,17 +617,12 @@ struct LifeStageJourneyView: View {
     }
     
     var body: some View {
-        
         VStack(spacing: 12) {
-            
             HStack(spacing: 0) {
-                
                 ForEach(visibleStages.indices, id: \.self) { index in
-                    
                     let stage = visibleStages[index]
                     
                     VStack(spacing: 6) {
-                        
                         ZStack {
                             Circle()
                                 .fill(circleColor(for: stage))
@@ -546,7 +632,7 @@ struct LifeStageJourneyView: View {
                                 )
                                 .shadow(
                                     color: stage == currentStage
-                                    ? .lumaPinkBubble.opacity(0.35)
+                                    ? Color.feminineAccent.opacity(0.3)
                                     : .clear,
                                     radius: 6,
                                     y: 3
@@ -554,7 +640,7 @@ struct LifeStageJourneyView: View {
                             
                             if stage == currentStage {
                                 Circle()
-                                    .stroke(Color.white, lineWidth: 2)
+                                    .stroke(Color.white, lineWidth: 2.5)
                                     .frame(width: 22, height: 22)
                             }
                         }
@@ -566,7 +652,6 @@ struct LifeStageJourneyView: View {
                             .frame(width: 80)
                     }
                     .frame(maxWidth: .infinity)
-                    
                     
                     if index < visibleStages.count - 1 {
                         Capsule()
@@ -582,21 +667,21 @@ struct LifeStageJourneyView: View {
     
     private func circleColor(for stage: LifeStage) -> Color {
         if stage == currentStage {
-            return .lumaPinkBubble
+            return .feminineAccent
         } else if stage.order < currentStage.order {
-            return .green.opacity(0.8)
+            return Color.pastelMint.opacity(0.9)
         } else {
-            return .gray.opacity(0.35)
+            return Color.pastelLavender.opacity(0.5)
         }
     }
     
     private func textColor(for stage: LifeStage) -> Color {
-        stage == currentStage ? .lumaPinkBubble : .lumaMidGray
+        stage == currentStage ? .feminineAccent : .feminineSubtext
     }
     
     private func lineColor(for stage: LifeStage) -> Color {
         stage.order < currentStage.order
-        ? .green.opacity(0.6)
-        : .gray.opacity(0.35)
+        ? Color.pastelMint.opacity(0.7)
+        : Color.pastelLavender.opacity(0.4)
     }
 }

@@ -256,7 +256,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She makes it home and changes.", characterDialogue: "I guess I'm not in menopause yet.", choices: nil, educationalReveal: "Perimenopause is characterized by highly irregular periods. Cycles can skip months and then return unpredictably.", isEndScene: true),
                     StoryScene(narration: "She stops at a pharmacy and handles the situation.", characterDialogue: "Mental note: always carry a backup pad in my purse.", choices: nil, educationalReveal: "During perimenopause, ovulation becomes erratic. It's best to always be prepared for an unpredictable cycle.", isEndScene: true)
                 ],
-                stage: .perimenopause
+                stage: .perimenopause,
+                imageName: "sunita_surprise_period"
             ),
             StoryChapter(
                 title: "Mood Swing Mayhem",
@@ -269,7 +270,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She snaps, an argument starts, and later she feels terrible.", characterDialogue: "I didn't mean it. It's just my hormones talking.", choices: nil, educationalReveal: "Hormonal shifts in perimenopause can cause severe mood swings, similar to intense PMS.", isEndScene: true),
                     StoryScene(narration: "She tells him she's feeling very sensitive. He gives her some space.", characterDialogue: "Thank you for understanding.", choices: nil, educationalReveal: "Being open about perimenopause symptoms can help partners provide the right support during mood swings.", isEndScene: true)
                 ],
-                stage: .perimenopause
+                stage: .perimenopause,
+                imageName: "sunita_mood_swings"
             )
         ]
     }
@@ -287,7 +289,8 @@ struct StoryLibrary {
                     StoryScene(narration: "The doctor prescribes a low-dose HRT.", characterDialogue: "This should help smooth out the transition.", choices: nil, educationalReveal: "Hormone Replacement Therapy (HRT) is highly effective for managing severe menopausal symptoms.", isEndScene: true),
                     StoryScene(narration: "Rekha embraces this new phase with daily yoga.", characterDialogue: "This isn't an ending. It's a new beginning.", choices: nil, educationalReveal: "Menopause is confirmed after 12 consecutive months without a period. It marks a transition to a new hormonal balance.", isEndScene: true)
                 ],
-                stage: .menopause
+                stage: .menopause,
+                imageName: "rekha_new_chapter"
             ),
             StoryChapter(
                 title: "The Sleep Thief",
@@ -301,7 +304,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She reads for 20 minutes until she feels sleepy again, then goes back to bed.", characterDialogue: "That was much better than just lying there frustrated.", animationType: .sleep),
                     StoryScene(narration: "She wakes up feeling decently rested.", characterDialogue: nil, choices: nil, educationalReveal: "Night sweats and lowered estrogen can disrupt sleep. Leaving the bed when awake helps preserve it as a place for rest.", isEndScene: true)
                 ],
-                stage: .menopause
+                stage: .menopause,
+                imageName: "rekha_sleep_thief"
             ),
             StoryChapter(
                 title: "Dry & Uncomfortable",
@@ -314,7 +318,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She ignores it, but it gets worse over time.", characterDialogue: "I really should have asked for help.", choices: nil, educationalReveal: "Vaginal atrophy is caused by a drop in estrogen. Without treatment, it can lead to chronic pain and UTIs.", isEndScene: true),
                     StoryScene(narration: "The doctor prescribes a localized estrogen cream.", characterDialogue: "Oh wow, this made such a big difference.", choices: nil, educationalReveal: "Vaginal dryness is incredibly common due to low estrogen. Localized treatments are safe and highly effective.", isEndScene: true)
                 ],
-                stage: .menopause
+                stage: .menopause,
+                imageName: "rekha_dry_uncomfortable"
             ),
             StoryChapter(
                 title: "Rediscovering Intimacy",
@@ -327,7 +332,8 @@ struct StoryLibrary {
                     StoryScene(narration: "They talk honestly about their changing bodies and desires.", characterDialogue: "I'm glad we can talk about this.", choices: nil, educationalReveal: "Many women report an increase in sexual confidence after menopause once the fear of pregnancy is gone.", isEndScene: true),
                     StoryScene(narration: "They enjoy a lovely evening connecting emotionally first.", characterDialogue: "This is exactly what we needed.", choices: nil, educationalReveal: "Intimacy post-menopause might look different, but it can be deeply fulfilling with communication and patience.", isEndScene: true)
                 ],
-                stage: .menopause
+                stage: .menopause,
+                imageName: "rekha_rediscovering_intimacy"
             )
         ]
     }
@@ -345,7 +351,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She starts a daily yoga practice.", characterDialogue: "My flexibility is improving nicely.", choices: nil, educationalReveal: "Yoga helps lubricate the joints and improves balance, reducing the risk of falls in later years.", isEndScene: true),
                     StoryScene(narration: "She starts lifting light dumbbells.", characterDialogue: "I feel so strong!", choices: nil, educationalReveal: "Lower estrogen levels accelerate bone density loss. Weight-bearing exercise and calcium are essential for post-menopausal health.", isEndScene: true)
                 ],
-                stage: .postMenopause
+                stage: .postMenopause,
+                imageName: "lakshmi_golden_strength"
             ),
             StoryChapter(
                 title: "A Heart to Heart",
@@ -358,7 +365,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She starts adding more oats and avocados to her diet.", characterDialogue: "This is delicious and good for my heart.", choices: nil, educationalReveal: "Estrogen has a protective effect on the cardiovascular system. After menopause, heart health becomes a primary focus.", isEndScene: true),
                     StoryScene(narration: "Her doctor suggests trying dietary changes first.", characterDialogue: "I'll start with oatmeal for breakfast.", choices: nil, educationalReveal: "Estrogen protects the cardiovascular system. After menopause, heart disease risk increases, making diet and exercise crucial.", isEndScene: true)
                 ],
-                stage: .postMenopause
+                stage: .postMenopause,
+                imageName: "lakshmi_heart_health"
             ),
             StoryChapter(
                 title: "Finding Purpose",
@@ -371,7 +379,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She joins a gardening club and makes new friends.", characterDialogue: "I love learning about native plants from everyone.", choices: nil, educationalReveal: "Strong social connections are one of the biggest predictors of a long, healthy, and happy post-menopausal life.", isEndScene: true),
                     StoryScene(narration: "She starts learning to paint.", characterDialogue: "I never knew I had a creative side!", choices: nil, educationalReveal: "Engaging in new hobbies stimulates neuroplasticity, keeping your brain healthy as you age.", isEndScene: true)
                 ],
-                stage: .postMenopause
+                stage: .postMenopause,
+                imageName: "lakshmi_finding_purpose"
             ),
             StoryChapter(
                 title: "Pelvic Floor Power",
@@ -384,7 +393,8 @@ struct StoryLibrary {
                     StoryScene(narration: "She relies on liners, but the leaking happens more often.", characterDialogue: "I should probably tell my doctor.", choices: nil, educationalReveal: "Loss of estrogen weakens the pelvic floor muscles. Ignoring it can lead to worse incontinence over time.", isEndScene: true),
                     StoryScene(narration: "She looks up Kegel exercises and starts doing them daily.", characterDialogue: "I can already feel the difference after a few weeks.", choices: nil, educationalReveal: "Loss of estrogen weakens pelvic muscles. Regular pelvic floor exercises can significantly improve or cure mild incontinence.", isEndScene: true)
                 ],
-                stage: .postMenopause
+                stage: .postMenopause,
+                imageName: "lakshmi_pelvic_floor"
             )
         ]
     }
