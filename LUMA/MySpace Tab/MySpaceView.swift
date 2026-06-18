@@ -61,12 +61,7 @@ struct MySpaceView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                // Premium soft pastel background
-                PastelFeminineBackground()
-                
-                ScrollView(showsIndicators: false) {
+        ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 26) {
                         
                         greetingSection
@@ -82,10 +77,11 @@ struct MySpaceView: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 16)
                     .padding(.bottom, 50)
-                }
-            }
-            
-            .navigationTitle("MySpace")
+        }
+        .background {
+            PastelFeminineBackground()
+        }
+        .navigationTitle("MySpace")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -126,7 +122,6 @@ struct MySpaceView: View {
             .sheet(isPresented: $showDailyChallenge) {
                 DailyChallengeView(stage: currentStage)
             }
-        }
     }
 }
 
