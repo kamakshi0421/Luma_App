@@ -79,7 +79,7 @@ struct MySpaceView: View {
                     .padding(.bottom, 50)
         }
         .background {
-            PastelFeminineBackground()
+            LumaBackground()
         }
         .navigationTitle("MySpace")
             .toolbar {

@@ -31,7 +31,6 @@ struct LUMAApp: App {
         WindowGroup {
             LaunchView()
                 .environmentObject(symptomStore)
-                .preferredColorScheme(.light)
         }
     }
 }

@@ -19,25 +19,23 @@ struct SectionCard: View {
                 
                 Text(title)
                     .font(.headline)
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                 
                 Spacer()
             }
             
             Text(text)
                 .font(.subheadline)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(background)
-        )
+        .background(background)
+        .liquidGlass(cornerRadius: 24)
         .overlay(
             RoundedRectangle(cornerRadius: 24)
-                .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                .stroke(Color.white.opacity(0.4), lineWidth: 1)
         )
         
     }

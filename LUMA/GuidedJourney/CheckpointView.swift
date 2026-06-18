@@ -77,7 +77,7 @@ struct CheckpointView: View {
                 Text(question)
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 if !isRevealed {
@@ -122,7 +122,7 @@ struct CheckpointView: View {
                             
                             Text(answer)
                                 .font(.subheadline)
-                                .foregroundColor(.lumaDarkGray)
+                                .foregroundColor(.primary)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }
@@ -134,15 +134,15 @@ struct CheckpointView: View {
             }
             .padding(18)
             .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(
-                        LinearGradient(
-                            colors: style.gradientColors,
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
+                Group {
+                    LinearGradient(
+                        colors: style.gradientColors,
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
                     )
+                }
             )
+            .liquidGlass(cornerRadius: 20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(style.borderColor, lineWidth: 1.5)
@@ -190,7 +190,7 @@ struct EmojiReactionView: View {
                 Text(prompt)
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             

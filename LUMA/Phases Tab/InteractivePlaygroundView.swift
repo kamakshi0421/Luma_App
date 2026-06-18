@@ -8,102 +8,27 @@ struct InteractivePlaygroundView: View {
         LifeStage(rawValue: savedStageRaw) ?? .reproductive
     }
     
-    @State private var activeActivity: ActivityType = .hormoneSimulator
-    
-    enum ActivityType: String, CaseIterable, Identifiable {
-        case hormoneSimulator = "Hormones"
-        case truthSwipe = "Truth Swipe"
-        case careMatcher = "Care Mixer"
-        
-        var id: String { rawValue }
-        var icon: String {
-            switch self {
-            case .hormoneSimulator: return "waveform.path.ecg"
-            case .truthSwipe: return "hand.draw.fill"
-            case .careMatcher: return "hand.sparkles.fill"
-            }
-        }
-    }
+    @AppStorage("hideGlobalFAB") private var hideGlobalFAB: Bool = false
     
     var body: some View {
         ZStack {
             LumaBackground()
             
             VStack(spacing: 0) {
-                // Header View
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Luma Playground")
-                            .font(.title2.bold())
-                            .foregroundColor(.lumaDarkGray)
-                        
-                        Text("Learn through play & interactive simulations")
-                            .font(.caption)
-                            .foregroundColor(.lumaMidGray)
-                    }
-                    
-                    Spacer()
-                    
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.title2)
-                            .foregroundColor(.lumaMidGray.opacity(0.6))
-                    }
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 16)
-                .padding(.bottom, 12)
+                // Native navigation handles header
                 
-                // Segments
-                HStack(spacing: 12) {
-                    ForEach(ActivityType.allCases) { activity in
-                        Button {
-                            withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
-                                activeActivity = activity
-                            }
-                        } label: {
-                            HStack(spacing: 6) {
-                                Image(systemName: activity.icon)
-                                    .font(.subheadline)
-                                Text(activity.rawValue)
-                                    .font(.subheadline.bold())
-                            }
-                            .foregroundColor(activeActivity == activity ? .white : .lumaDarkGray)
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 14)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .fill(activeActivity == activity ? Color.lumaPinkBubble : Color.white.opacity(0.6))
-                                    .shadow(color: activeActivity == activity ? Color.lumaPinkBubble.opacity(0.3) : Color.clear, radius: 6, y: 3)
-                            )
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 16)
-                
-                Divider()
-                    .background(Color.lumaPinkLight.opacity(0.5))
-                
-                // Content Views
-                Group {
-                    switch activeActivity {
-                    case .hormoneSimulator:
-                        HormoneSimulatorView()
-                    case .truthSwipe:
-                        TruthSwipeGameView(stage: currentStage)
-                    case .careMatcher:
-                        CareMatcherGameView(stage: currentStage)
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                HormoneSimulatorView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .navigationBarHidden(true)
+        .navigationTitle("Cycle Insights")
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            hideGlobalFAB = true
+        }
+        .onDisappear {
+            hideGlobalFAB = false
+        }
     }
 }
 
@@ -205,19 +130,16 @@ struct HormoneSimulatorView: View {
                     
                     Text(phase.description)
                         .font(.subheadline)
-                        .foregroundColor(.lumaDarkGray)
+                        .foregroundColor(.primary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                         .frame(height: 50)
                 }
                 .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(phase.color.opacity(0.08))
-                )
+                .liquidGlass(cornerRadius: 20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(phase.color.opacity(0.2), lineWidth: 1.5)
+                        .stroke(phase.color.opacity(0.4), lineWidth: 1.5)
                 )
                 .padding(.horizontal, 20)
                 
@@ -225,7 +147,7 @@ struct HormoneSimulatorView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Day \(Int(day)) of 28-Day Cycle")
                         .font(.headline)
-                        .foregroundColor(.lumaDarkGray)
+                        .foregroundColor(.primary)
                     
                     // Wave Visualizer
                     ZStack(alignment: .leading) {
@@ -238,7 +160,7 @@ struct HormoneSimulatorView: View {
                                     path.addLine(to: CGPoint(x: geo.size.width, y: y))
                                 }
                             }
-                            .stroke(Color.lumaDarkGray.opacity(0.06), style: StrokeStyle(lineWidth: 1, lineCap: .round, dash: [4, 4]))
+                            .stroke(Color.secondary.opacity(0.2), style: StrokeStyle(lineWidth: 1, lineCap: .round, dash: [4, 4]))
                             
                             // Estrogen line
                             Path { path in
@@ -303,9 +225,7 @@ struct HormoneSimulatorView: View {
                     }
                     .frame(height: 180)
                     .padding()
-                    .background(Color.white)
-                    .cornerRadius(18)
-                    .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
+                    .liquidGlass(cornerRadius: 18)
                     
                     // Legend
                     HStack(spacing: 16) {
@@ -324,15 +244,14 @@ struct HormoneSimulatorView: View {
                         .padding(.horizontal)
                 }
                 .padding()
-                .background(Color.white)
-                .cornerRadius(18)
+                .liquidGlass(cornerRadius: 18)
                 .padding(.horizontal, 20)
                 
                 // Meters & Body stats simulator
                 VStack(alignment: .leading, spacing: 14) {
                     Text("Physical & Emotional Indicators")
                         .font(.headline)
-                        .foregroundColor(.lumaDarkGray)
+                        .foregroundColor(.primary)
                     
                     VStack(spacing: 12) {
                         IndicatorProgressView(title: "Energy Level", value: getEnergyValue(for: day), color: .orange, icon: "bolt.fill")
@@ -341,6 +260,8 @@ struct HormoneSimulatorView: View {
                         IndicatorProgressView(title: "Basal Temperature", value: getTempValue(for: day), color: .red, icon: "thermometer.medium", suffix: "°C")
                     }
                 }
+                .padding(20)
+                .liquidGlass(cornerRadius: 20)
                 .padding(.horizontal, 20)
                 .padding(.bottom, 30)
             }
@@ -390,7 +311,7 @@ struct LegendItem: View {
                 .frame(width: 8, height: 8)
             Text(title)
                 .font(.caption2)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
         }
     }
 }
@@ -410,25 +331,25 @@ struct IndicatorProgressView: View {
                     .font(.caption)
                 Text(title)
                     .font(.caption)
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                 
                 Spacer()
                 
                 if suffix == "%" {
                     Text("\(Int(value * 100))%")
                         .font(.caption.bold())
-                        .foregroundColor(.lumaDarkGray)
+                        .foregroundColor(.primary)
                 } else {
                     Text(String(format: "%.1f%@", value, suffix))
                         .font(.caption.bold())
-                        .foregroundColor(.lumaDarkGray)
+                        .foregroundColor(.primary)
                 }
             }
             
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     Capsule()
-                        .fill(Color.lumaDarkGray.opacity(0.06))
+                        .fill(Color.secondary.opacity(0.2))
                     
                     Capsule()
                         .fill(color)

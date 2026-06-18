@@ -53,7 +53,7 @@ struct LumaBackground: View {
             LinearGradient(
                 colors: [
                     Color.lumaPinkBubble.opacity(0.15),
-                    Color.white
+                    Color(UIColor.systemBackground)
                 ],
                 startPoint: .top,
                 endPoint: .bottom

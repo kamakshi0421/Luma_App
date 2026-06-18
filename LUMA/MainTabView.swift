@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 @available(iOS 26.0, *)
@@ -9,6 +8,7 @@ struct MainTabView: View {
     
     @AppStorage("selectedStage")
     private var savedStageRaw: String = LifeStage.reproductive.rawValue
+    @AppStorage("hideGlobalFAB") private var hideGlobalFAB: Bool = false
 
     private var currentStage: LifeStage {
         LifeStage(rawValue: savedStageRaw) ?? .reproductive
@@ -50,48 +50,49 @@ struct MainTabView: View {
                 }
                 .tint(.lumaPinkBubble)
                 
-                
-                VStack {
-                    Spacer()
-                    
-                    HStack {
+                if !hideGlobalFAB {
+                    VStack {
                         Spacer()
                         
-                        Button {
-                            showChat = true
-                        } label: {
+                        HStack {
+                            Spacer()
                             
-                            HStack(spacing: 8) {
-                                Image(systemName: "sparkles")
+                            Button {
+                                showChat = true
+                            } label: {
                                 
-                                Text("Ask Aarohi")
-                                    .font(.system(size: 14, weight: .semibold))
-                            }
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 18)
-                            .padding(.vertical, 12)
-                            .background(
-                                LinearGradient(
-                                    colors: [
-                                        Color(red: 0.92, green: 0.45, blue: 0.70),
-                                        Color(red: 0.82, green: 0.30, blue: 0.60)
-                                    ],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
+                                HStack(spacing: 8) {
+                                    Image(systemName: "sparkles")
+                                    
+                                    Text("Ask Aarohi")
+                                        .font(.system(size: 14, weight: .semibold))
+                                }
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 18)
+                                .padding(.vertical, 12)
+                                .background(
+                                    LinearGradient(
+                                        colors: [
+                                            Color(red: 0.92, green: 0.45, blue: 0.70),
+                                            Color(red: 0.82, green: 0.30, blue: 0.60)
+                                        ],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
                                 )
-                            )
-                            .clipShape(Capsule())
-                            .shadow(
-                                color: Color(red: 0.82, green: 0.30, blue: 0.60).opacity(0.35),
-                                radius: 10,
-                                y: 6
-                            )
+                                .clipShape(Capsule())
+                                .shadow(
+                                    color: Color(red: 0.82, green: 0.30, blue: 0.60).opacity(0.35),
+                                    radius: 10,
+                                    y: 6
+                                )
+                            }
+                            .padding(.trailing, 20)
+                            .padding(.bottom, 64)
                         }
-                        .padding(.trailing, 20)
-                        .padding(.bottom, 64)
                     }
+                    .ignoresSafeArea(.keyboard)
                 }
-                .ignoresSafeArea(.keyboard)
         }
         .fullScreenCover(isPresented: $showChat) {
             AskLumaView(currentStage: currentStage)

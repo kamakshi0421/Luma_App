@@ -18,6 +18,8 @@ struct RevealView: View {
     @State private var selectedTopic: NormalTopic?
     @State private var selectedCategory: MythCategory = .hormones
     @State private var showScenarios = false
+    @State private var searchText = ""
+    @State private var dailyMyth: DecodedMyth?
     
     private var stageTopics: [NormalTopic] {
         NormalTopic.allTopics.filter {
@@ -51,29 +53,73 @@ struct RevealView: View {
         }
     }
     
+    private var filteredMyths: [DecodedMyth] {
+        if searchText.isEmpty {
+            return stageMyths
+        } else {
+            return content.myths.filter {
+                $0.stage == currentStage &&
+                ($0.myth.localizedCaseInsensitiveContains(searchText) ||
+                 $0.fact.localizedCaseInsensitiveContains(searchText))
+            }
+        }
+    }
+    
+    private var filteredConcerns: [CommonConcern] {
+        if searchText.isEmpty {
+            return stageConcerns
+        } else {
+            return stageConcerns.filter {
+                $0.title.localizedCaseInsensitiveContains(searchText) ||
+                $0.explanation.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+    
     var body: some View {
         
-        ZStack {
-            
-            LumaBackground()
-            
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
                     
-                    headerSection
+                    heroSection
+                    
+                    if searchText.isEmpty {
+                        filterSection
+                    }
+                    
                     mythFactSection
-                    scenarioSection
-                    concernsSection
-                    redFlagSection
+                    
+                    if searchText.isEmpty {
+                        scenarioSection
+                        concernsSection
+                        redFlagSection
+                    } else if !filteredConcerns.isEmpty {
+                        concernsSection
+                    }
                     
                     Spacer(minLength: 40)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 40)
             }
+        .background {
+            LumaBackground()
+        }
+        .searchable(text: $searchText, prompt: "Search myths, facts, or concerns...")
+        .navigationTitle("Reveal")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                GlobalInfoButton(tab: .reveal)
+            }
+        }
+        .onAppear {
+            if dailyMyth == nil {
+                dailyMyth = content.myths.randomElement()
+            }
         }
         .onChange(of: currentStage) { _, newStage in
             content = DecodedContentLoader.load()
+            dailyMyth = content.myths.randomElement()
         }
         .sheet(item: $selectedTopic) { topic in
             ConcernDetailSheet(topic: topic)
@@ -88,31 +134,33 @@ struct RevealView: View {
 @available(iOS 26.0, *)
 private extension RevealView {
     
-    var headerSection: some View {
-        HStack {
+    var heroSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            RevealSectionHeader(title: "Myth of the Day", emoji: "🌟")
             
-            Spacer()
-            
-            VStack(spacing: 8) {
-                
-                Text("Darpan")
-                    .font(.title2.bold())
-                    .foregroundColor(.lumaDarkGray)
-                    .multilineTextAlignment(.center)
-                    .accessibilityAddTraits(.isHeader)
-                
-                Text("Let’s uncover the truth.")
-                    .font(.subheadline)
-                    .foregroundColor(.lumaMidGray)
-                    .multilineTextAlignment(.center)
+            if let myth = dailyMyth {
+                MythFactInteractiveCard(
+                    myth: myth.myth,
+                    fact: myth.fact
+                )
             }
-            
-            Spacer()
-            
-            GlobalInfoButton(tab: .reveal)
         }
-        .padding(.top, 16)
-        .padding(.horizontal)
+    }
+}
+
+// MARK: - Section Header
+private struct RevealSectionHeader: View {
+    let title: String
+    let emoji: String
+    
+    var body: some View {
+        HStack(spacing: 6) {
+            Text(emoji)
+                .font(.subheadline)
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.primary)
+        }
     }
 }
 
@@ -169,46 +217,45 @@ private extension RevealView {
 private extension RevealView {
     
     var mythFactSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 12) {
+            RevealSectionHeader(title: "Truth Behind Myths", emoji: "🎭")
             
-            Text("Truth Behind Myths")
-                .font(.headline)
-                .foregroundColor(.lumaDarkGray)
-            
-          
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(MythCategory.allCases) { category in
-                        Button {
-                            selectedCategory = category
-                        } label: {
-                            Text(category.rawValue.capitalized)
-                                .font(.caption)
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 8)
-                                .background(
-                                    selectedCategory == category
-                                    ? Color.lumaPinkBubble
-                                    : Color.white
-                                )
-                                .foregroundColor(
-                                    selectedCategory == category
-                                    ? .white
-                                    : .lumaDarkGray
-                                )
-                                .clipShape(Capsule())
+            if searchText.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(MythCategory.allCases) { category in
+                            Button {
+                                selectedCategory = category
+                            } label: {
+                                Text(category.rawValue.capitalized)
+                                    .font(.caption)
+                                    .padding(.horizontal, 14)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        selectedCategory == category
+                                        ? Color.pink
+                                        : Color.white
+                                    )
+                                    .foregroundColor(
+                                        selectedCategory == category
+                                        ? .white
+                                        : .primary
+                                    )
+                                    .clipShape(Capsule())
+                                    .shadow(color: .black.opacity(0.05), radius: 2)
+                            }
                         }
                     }
                 }
             }
             
-            if stageMyths.isEmpty {
-                Text("No myths available for this category.")
+            if filteredMyths.isEmpty {
+                Text(searchText.isEmpty ? "No myths available for this category." : "No matching myths found.")
                     .font(.caption)
-                    .foregroundColor(.lumaMidGray)
+                    .foregroundColor(.secondary)
             } else {
                 VStack(spacing: 16) {
-                    ForEach(stageMyths) { myth in
+                    ForEach(filteredMyths) { myth in
                         MythFactInteractiveCard(
                             myth: myth.myth,
                             fact: myth.fact
@@ -225,39 +272,16 @@ private extension RevealView {
 private extension RevealView {
     
     var scenarioSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Real Life Scenarios")
-                .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+        VStack(alignment: .leading, spacing: 12) {
+            RevealSectionHeader(title: "Real Life Scenarios", emoji: "🎬")
             
-            Button {
-                showScenarios = true
-            } label: {
-                HStack(spacing: 16) {
-                    Image(systemName: "play.circle.fill")
-                        .font(.system(size: 40))
-                        .foregroundColor(.white)
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("What Would You Do?")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                        Text("Practice making choices in real-life situations.")
-                            .font(.subheadline)
-                            .foregroundColor(.white.opacity(0.9))
-                    }
-                    
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.white)
-                }
-                .padding()
-                .background(
-                    LinearGradient(colors: [.orange, .pink], startPoint: .topLeading, endPoint: .bottomTrailing)
-                )
-                .cornerRadius(20)
-                .shadow(color: .orange.opacity(0.3), radius: 8, y: 4)
-            }
+            PastelActionCard(
+                title: "What Would You Do?",
+                subtitle: "Practice making choices in real-life situations.",
+                icon: "play.circle.fill",
+                tint: .blue,
+                iconColor: .blue
+            ) { showScenarios = true }
         }
     }
 }
@@ -267,14 +291,11 @@ private extension RevealView {
     
     var concernsSection: some View {
         
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 12) {
             
-            Text("Is it normal?")
-                .font(.headline)
-                .foregroundColor(.lumaDarkGray)
-                .accessibilityAddTraits(.isHeader)
+            RevealSectionHeader(title: "Is It Normal?", emoji: "💭")
             
-            ForEach(Array(stageConcerns.enumerated()), id: \.element.id) { index, concern in
+            ForEach(Array(filteredConcerns.enumerated()), id: \.element.id) { index, concern in
                 
                 let bgColor = pastelColors[index % pastelColors.count]
                 let strokeColor = pastelStrokes[index % pastelStrokes.count]
@@ -333,30 +354,28 @@ private extension RevealView {
     
     var redFlagSection: some View {
         
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 12) {
             
-            Text("When to See a Doctor")
-                .font(.headline)
-                .foregroundColor(.lumaDarkGray)
-                .accessibilityAddTraits(.isHeader)
+            RevealSectionHeader(title: "When to See a Doctor", emoji: "🩺")
             
             if let redFlag = stageRedFlag {
                 
                 VStack(alignment: .leading, spacing: 8) {
                     ForEach(redFlag.points, id: \.self) { point in
                         Text("• \(point)")
-                            .foregroundColor(.lumaDarkGray)
+                            .foregroundColor(.primary)
                     }
                 }
                 .font(.caption)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.lumaPinkLight.opacity(0.5))
+                .background(Color.red.opacity(0.15))
                 .cornerRadius(22)
                 .overlay(
                     RoundedRectangle(cornerRadius: 22)
-                        .stroke(Color.lumaPinkBubble.opacity(0.3), lineWidth: 1)
+                        .stroke(Color.red.opacity(0.35), lineWidth: 1)
                 )
+                .shadow(color: Color.red.opacity(0.06), radius: 8, y: 4)
             }
         }
     }

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "scenario_menopause.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

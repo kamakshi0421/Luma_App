@@ -5,6 +5,7 @@ struct PhasesView: View {
    
     @State private var selectedStage: LifeStage?
     @State private var showPlayground = false
+    @State private var showUterusSimulator = false
     
     let stages: [LifeStage] = [
         .prePuberty, .puberty,
@@ -14,32 +15,14 @@ struct PhasesView: View {
     
     var body: some View {
         
-        ZStack {
-            
-            LumaBackground()
-            
-            ScrollView {
-                VStack(spacing: 24) {
+        ScrollView {
+            VStack(spacing: 24) {
                     
-                    HStack {
-                        
-                        Spacer()
-                        
-                        VStack(spacing: 6) {
-                            Text("Padhav")
-                                .font(.title2.bold())
-                                .foregroundColor(.lumaDarkGray)
-                            
-                            Text("Explore every life stage — anytime.")
-                                .font(.subheadline)
-                                .foregroundColor(.lumaMidGray)
-                        }
-                        
-                        Spacer()
-                        
-                        GlobalInfoButton(tab: .phases)
-                    }
-                    .padding(.horizontal)
+                    Text("Explore every life stage — anytime.")
+                        .font(.subheadline)
+                        .foregroundColor(.lumaMidGray)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)
                     
                     // Interactive Playground Banner
                     Button {
@@ -47,39 +30,69 @@ struct PhasesView: View {
                     } label: {
                         HStack(spacing: 16) {
                             VStack(alignment: .leading, spacing: 6) {
-                                Text("Interactive Playground")
+                                Text("Cycle Insights")
                                     .font(.headline)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.primary)
                                 
-                                Text("Automate cycles, swipe myths, and try the symptom mixer!")
+                                Text("Explore hormone cycles visually")
                                     .font(.caption)
-                                    .foregroundColor(.white.opacity(0.9))
+                                    .foregroundColor(.secondary)
                                     .multilineTextAlignment(.leading)
                             }
                             
                             Spacer()
                             
-                            Image(systemName: "gamecontroller.fill")
+                            Image(systemName: "waveform.path.ecg")
                                 .font(.title)
-                                .foregroundColor(.white)
+                                .foregroundColor(.lumaPinkBubble)
                         }
                         .padding()
                         .background(
-                            LinearGradient(
-                                colors: [
-                                    Color.lumaPinkBubble,
-                                    Color.lumaPinkBubble.opacity(0.85),
-                                    Color.lumaAccent
-                                ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
+                            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                                .fill(Color.lumaPinkBubble.opacity(0.15))
                         )
-                        .cornerRadius(20)
-                        .shadow(color: Color.lumaPinkBubble.opacity(0.35), radius: 8, y: 4)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                                .stroke(Color.lumaPinkBubble.opacity(0.35), lineWidth: 1)
+                        )
+                        .shadow(color: Color.lumaPinkBubble.opacity(0.08), radius: 8, y: 4)
                     }
                     .buttonStyle(.plain)
-                    .padding(.horizontal)
+                    
+                    // Uterus Simulator Banner
+                    Button {
+                        showUterusSimulator = true
+                    } label: {
+                        HStack(spacing: 16) {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("Phase Simulator")
+                                    .font(.headline)
+                                    .foregroundColor(.primary)
+                                
+                                Text("Visually explore Phases, Conditions, and Organs")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.leading)
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "sparkles")
+                                .font(.title)
+                                .foregroundColor(.purple.opacity(0.7))
+                        }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                                .fill(Color.purple.opacity(0.15))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                                .stroke(Color.purple.opacity(0.35), lineWidth: 1)
+                        )
+                        .shadow(color: Color.purple.opacity(0.08), radius: 8, y: 4)
+                    }
+                    .buttonStyle(.plain)
                     
                     LazyVGrid(
                         columns: [
@@ -100,12 +113,23 @@ struct PhasesView: View {
                 }
                 .padding()
             }
+        .background {
+            LumaBackground()
+        }
+        .navigationTitle("Phases")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                GlobalInfoButton(tab: .phases)
+            }
         }
         .navigationDestination(item: $selectedStage) { stage in
             LifeStageDetailView(stage: stage)
         }
-        .sheet(isPresented: $showPlayground) {
+        .navigationDestination(isPresented: $showPlayground) {
             InteractivePlaygroundView()
+        }
+        .navigationDestination(isPresented: $showUterusSimulator) {
+            UterusSimulatorView()
         }
         
     }
@@ -140,7 +164,7 @@ struct LifeStageCard: View {
             Text(stage.title)
                 .font(.subheadline)
                 .fontWeight(.medium)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .frame(maxWidth: .infinity)
@@ -156,9 +180,7 @@ struct LifeStageCard: View {
         }
         .padding()
         .frame(height: 190) 
-        .background(Color.white)
-        .cornerRadius(22)
-        .shadow(color: Color.black.opacity(0.06), radius: 8, y: 4)
+        .liquidGlass(cornerRadius: 22)
     }
 }
 
@@ -176,7 +198,7 @@ struct InfoBlock: View {
             
             Text(text)
                 .font(.subheadline)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
         }
     }
 }

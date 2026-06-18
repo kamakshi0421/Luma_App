@@ -13,7 +13,7 @@ struct LifeStageDetailView: View {
     var body: some View {
         
         ZStack {
-            Color.lumaSurface
+            LumaBackground()
                 .ignoresSafeArea()
             
             ScrollView {
@@ -193,13 +193,13 @@ private extension LifeStageDetailView {
             
             Text(stage.title)
                 .font(.title.bold())
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
             
             Text(stage.description)
                 .font(.subheadline)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 12)
@@ -279,11 +279,11 @@ private extension LifeStageDetailView {
                                         
                                         Text(insight.title)
                                             .font(.subheadline.bold())
-                                            .foregroundColor(.lumaDarkGray)
+                                            .foregroundColor(.primary)
                                         
                                         Text(insight.text)
                                             .font(.subheadline)
-                                            .foregroundColor(.lumaMidGray)
+                                            .foregroundColor(.secondary)
                                     }
                                 }
                                 
@@ -297,9 +297,7 @@ private extension LifeStageDetailView {
                     }
                 }
                 .padding()
-                .background(Color.white)
-                .cornerRadius(20)
-                .shadow(color: Color.black.opacity(0.05), radius: 8, y: 4)
+                .liquidGlass(cornerRadius: 20)
             }
             
             if !stage.content.didYouKnow.isEmpty {
@@ -321,15 +319,13 @@ private extension LifeStageDetailView {
                                 
                                 Text(fact)
                                     .font(.subheadline)
-                                    .foregroundColor(.lumaDarkGray)
+                                    .foregroundColor(.primary)
                             }
                         }
                     }
                 }
                 .padding()
-                .background(Color.white)
-                .cornerRadius(20)
-                .shadow(color: Color.black.opacity(0.05), radius: 8, y: 4)
+                .liquidGlass(cornerRadius: 20)
             }
         }
         .padding(.top, 8)
@@ -348,7 +344,7 @@ private extension LifeStageDetailView {
                 
                 Text("Conditions to be aware of")
                     .font(.headline)
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                 
                 ForEach(stage.content.conditions) { condition in
                     
