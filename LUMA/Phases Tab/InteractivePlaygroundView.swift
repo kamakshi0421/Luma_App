@@ -135,6 +135,7 @@ struct HormoneSimulatorView: View {
                         .padding(.horizontal)
                         .frame(height: 50)
                 }
+                .frame(maxWidth: .infinity)
                 .padding()
                 .liquidGlass(cornerRadius: 20)
                 .overlay(
