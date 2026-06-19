@@ -117,11 +117,6 @@ struct PhasesView: View {
             LumaBackground()
         }
         .navigationTitle("Phases")
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                GlobalInfoButton(tab: .phases)
-            }
-        }
         .navigationDestination(item: $selectedStage) { stage in
             LifeStageDetailView(stage: stage)
         }

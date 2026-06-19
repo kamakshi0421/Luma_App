@@ -2,6 +2,7 @@ import SwiftUI
 internal import Combine
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
 class SymptomStore: ObservableObject {
     
@@ -18,9 +19,12 @@ class SymptomStore: ObservableObject {
     
     private let db = Firestore.firestore()
     private var listener: ListenerRegistration?
+    private var authListener: AuthStateDidChangeListenerHandle?
     
     private var userId: String {
-        if let id = UserDefaults.standard.string(forKey: "user_id") {
+        if let uid = Auth.auth().currentUser?.uid {
+            return uid
+        } else if let id = UserDefaults.standard.string(forKey: "user_id") {
             return id
         } else {
             let newId = UUID().uuidString
@@ -36,11 +40,17 @@ class SymptomStore: ObservableObject {
     init() {
         load()
         loadAge()
-        setupFirestoreListener()
+        
+        authListener = Auth.auth().addStateDidChangeListener { [weak self] _, _ in
+            self?.setupFirestoreListener()
+        }
     }
     
     deinit {
         listener?.remove()
+        if let authListener = authListener {
+            Auth.auth().removeStateDidChangeListener(authListener)
+        }
     }
    
     var currentLifeStage: LifeStage {

@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 26.0, *)
 struct StartYourJourneyView: View {
     @AppStorage("hasSeenOnboarding") var hasSeenOnboarding = false
     @AppStorage("selectedStage") private var selectedStageRaw: String = LifeStage.reproductive.rawValue
@@ -10,161 +11,166 @@ struct StartYourJourneyView: View {
     @State private var selectedStage: LifeStage = .reproductive
     
     var body: some View {
-        VStack(spacing: 28) {
-            
-           
-            VStack(spacing: 16) {
+        NavigationStack {
+            ZStack {
+                LumaBackground()
                 
-                Image("ProfileAvatar")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 95, height: 95)
-                    .clipShape(Circle())
-                    .overlay(
-                        Circle()
-                            .stroke(Color.white, lineWidth: 4)
-                    )
-                    .shadow(color: Color.lumaAccent.opacity(0.25), radius: 10, x: 0, y: 4)
-                
-                Text("Hi, I’m Luma")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.lumaAccent)
-                
-                Text("Let’s understand your body, together.")
-                    .font(.subheadline)
-                    .foregroundColor(Color.lumaAccent.opacity(0.8))
-                    .multilineTextAlignment(.center)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.top, 24)
-            .padding(.bottom, 32)
-            .background(LumaGradient.soft)
-            
-            
-            
-            VStack(alignment: .leading, spacing: 12) {
-                
-                Text("How old are you?")
-                    .font(.headline)
-                
-                Stepper(value: $age, in: 9...70) {
-                    Text("\(age) years")
-                        .font(.body)
-                        .foregroundColor(.primary)
-                }
-                
-                Text("You can change this anytime later.")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            .padding(.horizontal)
-            
-            
-            
-            VStack(alignment: .leading, spacing: 6) {
-                
-                Text("Based on your age, you may be in")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                
-                Text(suggestedStage.title)
-                    .font(.headline)
-                    .foregroundColor(.primary)
-            }
-            .padding(.horizontal)
-            
-            
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    ForEach(LifeStage.allCases, id: \.self) { stage in
-                        Button {
-                            withAnimation(.spring()) {
-                                selectedStage = stage
-                            }
-                        } label: {
-                            Text(stage.title)
-                                .font(.subheadline)
-                                .fontWeight(.medium)
-                                .foregroundColor(
-                                    selectedStage == stage ? .white : .primary
-                                )
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 16)
-                                .background(
-                                    selectedStage == stage ?
-                                    Color.lumaAccent :
-                                    Color.lumaSurface
-                                )
-                                .cornerRadius(20)
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 28) {
+                        
+                        // Header Profile Card
+                        VStack(spacing: 16) {
+                            Image("ProfileAvatar")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 95, height: 95)
+                                .clipShape(Circle())
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(
-                                            selectedStage == stage ?
-                                            Color.clear :
-                                            Color.gray.opacity(0.3),
-                                            lineWidth: 1
-                                        )
+                                    Circle()
+                                        .stroke(Color.white.opacity(0.8), lineWidth: 4)
                                 )
-                                .shadow(
-                                    color: selectedStage == stage ?
-                                    Color.lumaAccent.opacity(0.3) :
-                                    .clear,
-                                    radius: 6,
-                                    x: 0,
-                                    y: 3
-                                )
+                                .shadow(color: Color.lumaPinkBubble.opacity(0.3), radius: 10, x: 0, y: 4)
+                            
+                            Text("Hi, I’m Luma")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
+                            
+                            Text("Let’s understand your body, together.")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.center)
                         }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 32)
+                        .padding(.horizontal, 24)
+                        .liquidGlass()
+                        .padding(.horizontal)
+                        .padding(.top, 24)
+                        
+                        // Age Card
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("How old are you?")
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                            
+                            Stepper(value: $age, in: 9...70) {
+                                Text("\(age) years")
+                                    .font(.body)
+                                    .foregroundColor(.primary)
+                            }
+                            
+                            Text("You can change this anytime later.")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .liquidGlass()
+                        .padding(.horizontal)
+                        
+                        // Phase Suggestion
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Based on your age, you may be in")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            Text(suggestedStage.title)
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                        }
+                        .padding(.horizontal, 24)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        // Phase Selector
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                ForEach(LifeStage.allCases, id: \.self) { stage in
+                                    Button {
+                                        withAnimation(.spring()) {
+                                            selectedStage = stage
+                                        }
+                                    } label: {
+                                        Text(stage.title)
+                                            .font(.subheadline)
+                                            .fontWeight(.medium)
+                                            .foregroundColor(
+                                                selectedStage == stage ? .white : .primary
+                                            )
+                                            .padding(.vertical, 12)
+                                            .padding(.horizontal, 20)
+                                            .background(
+                                                selectedStage == stage ?
+                                                Color.lumaAccent :
+                                                Color.gray.opacity(0.15)
+                                            )
+                                            .cornerRadius(24)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 24)
+                                                    .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                                            )
+                                            .shadow(
+                                                color: selectedStage == stage ?
+                                                Color.lumaAccent.opacity(0.3) :
+                                                .clear,
+                                                radius: 6,
+                                                x: 0,
+                                                y: 3
+                                            )
+                                    }
+                                }
+                            }
+                            .padding(.horizontal, 24)
+                        }
+                        
+                        // Selected Phase Card
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Your selected phase")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            Text(selectedStage.title)
+                                .font(.headline)
+                                .foregroundColor(.lumaPinkBubble)
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .liquidGlass()
+                        .padding(.horizontal)
+                        
+                        // Navigation to Onboarding
+                        NavigationLink {
+                            OnboardingView(onComplete: {
+                                selectedStageRaw = selectedStage.rawValue
+                                hasSeenOnboarding = true
+                                dismiss()
+                            })
+                        } label: {
+                            Text("Confirm & Continue")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.lumaAccent)
+                                .cornerRadius(24)
+                                .shadow(color: Color.lumaAccent.opacity(0.3), radius: 8, y: 4)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 32)
+                        
+                        Spacer()
                     }
                 }
-                .padding(.horizontal)
             }
-            
-            
-            
-            VStack(alignment: .leading, spacing: 6) {
-                
-                Text("Your selected phase")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                
-                Text(selectedStage.title)
-                    .font(.headline)
-                    .foregroundColor(Color.lumaAccent)
+            .navigationBarHidden(true)
+            .onAppear {
+                suggestedStage = LifeStage.stage(for: age)
+                selectedStage = suggestedStage
             }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.lumaSurface.opacity(0.8))
-            .cornerRadius(16)
-            .padding(.horizontal)
-            
-            
-            
-            Button {
-                selectedStageRaw = selectedStage.rawValue
-                hasSeenOnboarding = true
-                dismiss()
-            } label: {
-                Text("Confirm & Continue")
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.lumaAccent)
-                    .cornerRadius(24)
+            .onChange(of: age) { _, newValue in
+                suggestedStage = LifeStage.stage(for: newValue)
+                selectedStage = suggestedStage
             }
-            .padding(.horizontal)
-            
-            Spacer()
-        }
-        .onAppear {
-            suggestedStage = LifeStage.stage(for: age)
-            selectedStage = suggestedStage
-        }
-        .onChange(of: age) { _, newValue in
-            suggestedStage = LifeStage.stage(for: newValue)
-            selectedStage = suggestedStage
         }
     }
 }

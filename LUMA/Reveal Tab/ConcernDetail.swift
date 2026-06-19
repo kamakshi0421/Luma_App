@@ -1,120 +1,116 @@
 import SwiftUI
 
+@available(iOS 26.0, *)
 struct ConcernDetailSheet: View {
-    
+    @Environment(\.dismiss) private var dismiss
     let topic: NormalTopic
     
     var body: some View {
-        ZStack {
-            
-            
-            LinearGradient(
-                colors: [
-                    Color.lumaPinkBubble.opacity(0.12),
-                    Color.white
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-            
-            ScrollView {
-                VStack(alignment: .leading, spacing: 26) {
-                    
-                    
-                    VStack(alignment: .leading, spacing: 6) {
-                        
-                        Text(topic.title)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.lumaDarkGray)
-                        
-                        Text(topic.shortDescription)
-                            .font(.subheadline)
-                            .foregroundColor(.lumaMidGray)
-                    }
-                    .padding(.horizontal)
-                    
-                   
-                    
-                    AskLumaSectionCard(
-                        icon: "waveform.path.ecg",
-                        title: "Why this happens",
-                        content: topic.whyItHappens,
-                        accentColor: .purple
-                    )
-                    
-                    
-                    AskLumaSectionCard(
-                        icon: "checkmark.seal",
-                        title: "When it is normal",
-                        content: topic.whenItsNormal,
-                        accentColor: .green
-                    )
-                   
-                    AskLumaSectionCard(
-                        icon: "leaf",
-                        title: "What may help",
-                        content: topic.whatHelps,
-                        accentColor: .pink
-                    )
-                    
-                    
-                    AskLumaSectionCard(
-                        icon: "stethoscope",
-                        title: "When to seek a doctor",
-                        content: topic.whenToSeekHelp,
-                        accentColor: .orange
-                    )
-                  
-                    
-                    Text("Your body communicates through patterns. Listening to it is a strength.")
-                        .font(.caption)
-                        .foregroundColor(.lumaPinkBubble)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                        .padding(.top, 6)
+        NavigationStack {
+            List {
+                Section {
+                    Text(topic.shortDescription)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .padding(.vertical, 4)
                 }
-                .padding(.vertical)
-            }
-        }
-    }
-}
-struct AskLumaSectionCard: View {
-    
-    let icon: String
-    let title: String
-    let content: String
-    let accentColor: Color
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            
-            HStack(spacing: 8) {
-                Image(systemName: icon)
-                    .foregroundColor(accentColor)
                 
-                Text(title)
-                    .font(.headline)
-                    .foregroundColor(.lumaDarkGray)
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label {
+                            Text("Why this happens")
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "waveform.path.ecg")
+                                .foregroundColor(.purple)
+                        }
+                        
+                        Text(topic.whyItHappens)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(.vertical, 4)
+                }
+                
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label {
+                            Text("When it is normal")
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "checkmark.seal")
+                                .foregroundColor(.green)
+                        }
+                        
+                        Text(topic.whenItsNormal)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(.vertical, 4)
+                }
+                
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label {
+                            Text("What may help")
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "leaf")
+                                .foregroundColor(.pink)
+                        }
+                        
+                        Text(topic.whatHelps)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(.vertical, 4)
+                }
+                
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label {
+                            Text("When to seek a doctor")
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "stethoscope")
+                                .foregroundColor(.orange)
+                        }
+                        
+                        Text(topic.whenToSeekHelp)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(.vertical, 4)
+                }
             }
-            
-            Text(content)
-                .font(.subheadline)
-                .foregroundColor(.lumaMidGray)
-                .fixedSize(horizontal: false, vertical: true)
+            .listStyle(.insetGrouped)
+            .navigationTitle(topic.title)
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                    .fontWeight(.bold)
+                }
+            }
+            .safeAreaInset(edge: .bottom) {
+                Text("Your body communicates through patterns. Listening to it is a strength.")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding()
+            }
         }
-        .padding(18)
-        .frame(maxWidth: .infinity, alignment: .leading) 
-        .background(
-            RoundedRectangle(cornerRadius: 22)
-                .fill(Color.white)
-                .shadow(color: .black.opacity(0.10), radius: 12, y: 6)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 22)
-                .stroke(accentColor.opacity(0.25), lineWidth: 1)
-        )
-        .padding(.horizontal)
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.visible)
     }
 }

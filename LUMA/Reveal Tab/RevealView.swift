@@ -107,11 +107,6 @@ struct RevealView: View {
         }
         .searchable(text: $searchText, prompt: "Search myths, facts, or concerns...")
         .navigationTitle("Reveal")
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                GlobalInfoButton(tab: .reveal)
-            }
-        }
         .onAppear {
             if dailyMyth == nil {
                 dailyMyth = content.myths.randomElement()
@@ -190,7 +185,7 @@ private extension RevealView {
                         .foregroundColor(
                             selectedCategory == category
                             ? .white
-                            : .lumaDarkGray
+                            : .primary
                         )
                         .frame(width: 80, height: 80)
                         .background(
@@ -198,10 +193,10 @@ private extension RevealView {
                                 .fill(
                                     selectedCategory == category
                                     ? Color.lumaPinkBubble
-                                    : Color.white
+                                    : Color.gray.opacity(0.15)
                                 )
-                                .shadow(color: .black.opacity(0.05), radius: 6)
                         )
+                        .background(.thinMaterial, in: Circle())
                     }
                     .buttonStyle(.plain)
                 }
@@ -220,35 +215,7 @@ private extension RevealView {
         VStack(alignment: .leading, spacing: 12) {
             RevealSectionHeader(title: "Truth Behind Myths", emoji: "🎭")
             
-            if searchText.isEmpty {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 10) {
-                        ForEach(MythCategory.allCases) { category in
-                            Button {
-                                selectedCategory = category
-                            } label: {
-                                Text(category.rawValue.capitalized)
-                                    .font(.caption)
-                                    .padding(.horizontal, 14)
-                                    .padding(.vertical, 8)
-                                    .background(
-                                        selectedCategory == category
-                                        ? Color.pink
-                                        : Color.white
-                                    )
-                                    .foregroundColor(
-                                        selectedCategory == category
-                                        ? .white
-                                        : .primary
-                                    )
-                                    .clipShape(Capsule())
-                                    .shadow(color: .black.opacity(0.05), radius: 2)
-                            }
-                        }
-                    }
-                }
-            }
-            
+
             if filteredMyths.isEmpty {
                 Text(searchText.isEmpty ? "No myths available for this category." : "No matching myths found.")
                     .font(.caption)
@@ -315,24 +282,21 @@ private extension RevealView {
                             Text(concern.title)
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
-                                .foregroundColor(.lumaDarkGray)
+                                .foregroundColor(.primary)
                             
                             Text(concern.explanation)
                                 .font(.caption)
-                                .foregroundColor(.lumaMidGray)
+                                .foregroundColor(.secondary)
                                 .lineLimit(1)
                         }
                         
                         Spacer()
                         
                         Image(systemName: "chevron.right")
-                            .foregroundColor(.lumaMidGray)
+                            .foregroundColor(.secondary)
                     }
                     .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(bgColor)
-                    )
+                    .liquidGlass(cornerRadius: 20)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(strokeColor, lineWidth: 1)
@@ -369,13 +333,11 @@ private extension RevealView {
                 .font(.caption)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.red.opacity(0.15))
-                .cornerRadius(22)
+                .liquidGlass(cornerRadius: 22)
                 .overlay(
                     RoundedRectangle(cornerRadius: 22)
                         .stroke(Color.red.opacity(0.35), lineWidth: 1)
                 )
-                .shadow(color: Color.red.opacity(0.06), radius: 8, y: 4)
             }
         }
     }
@@ -390,10 +352,13 @@ struct MythFactInteractiveCard: View {
     @State private var flipped = false
     @State private var bookmarked = false
     @State private var showConfetti = false
+    @State private var dragPoints: [CGPoint] = []
     
     @State private var pollAnswer: String? = nil
     @State private var yesCount: Int = 0
     @State private var noCount: Int = 0
+    
+    @State private var removeListener: (() -> Void)? = nil
     
     private var totalVotes: Int {
         max(yesCount + noCount, 1)
@@ -408,31 +373,57 @@ struct MythFactInteractiveCard: View {
                     .transition(.opacity)
             }
             
-            if flipped {
-                factCard
-            } else {
+            factCard // Always underneath
+            
+            if !flipped {
                 mythCard
+                    .mask(
+                        Canvas { context, size in
+                            context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(.white))
+                            
+                            var path = Path()
+                            if let first = dragPoints.first {
+                                path.move(to: first)
+                                for point in dragPoints.dropFirst() {
+                                    path.addLine(to: point)
+                                }
+                            }
+                            
+                            context.blendMode = .destinationOut
+                            context.stroke(path, with: .color(.clear), style: StrokeStyle(lineWidth: 50, lineCap: .round, lineJoin: .round))
+                        }
+                    )
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                dragPoints.append(value.location)
+                                if dragPoints.count > 70 && !flipped {
+                                    withAnimation(.easeOut(duration: 0.5)) {
+                                        flipped = true
+                                    }
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        triggerConfetti()
+                                    }
+                                }
+                            }
+                    )
+                    .transition(.opacity)
             }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(flipped ? "Fact. \(fact)" : "Myth. \(myth)")
-        .accessibilityHint("Double tap to reveal the truth")
+        .accessibilityHint(flipped ? "Truth revealed" : "Scratch card to reveal the truth")
         .accessibilityAddTraits(.isButton)
         .frame(minHeight: 240)
-        .rotation3DEffect(
-            .degrees(flipped ? 180 : 0),
-            axis: (x: 0, y: 1, z: 0)
-        )
-        .animation(.easeInOut(duration: 0.4), value: flipped)
-        .onTapGesture {
-            UIAccessibility.post(
-                notification: .announcement,
-                argument: flipped ? "Fact revealed" : "Myth revealed"
-            )
-            if !flipped {
-                flipped = true
-                triggerConfetti()
+        .animation(.easeOut(duration: 0.5), value: flipped)
+        .onAppear {
+            removeListener = MythPollManager.shared.attachPollListener(for: myth) { yes, no in
+                self.yesCount = yes
+                self.noCount = no
             }
+        }
+        .onDisappear {
+            removeListener?()
         }
     }
 }
@@ -447,13 +438,13 @@ private extension MythFactInteractiveCard {
             
             Text(myth)
                 .font(.subheadline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
             
             Divider()
             
             pollSection(color: .orange)
             
-            Text("Tap to reveal the truth ✨")
+            Text("Scratch to reveal the truth ✨")
                 .font(.caption)
                 .foregroundColor(.orange)
                 .padding(.vertical, 6)
@@ -464,8 +455,7 @@ private extension MythFactInteractiveCard {
                 )
         }
         .padding()
-        .background(Color.orange.opacity(0.15))
-        .cornerRadius(22)
+        .liquidGlass(cornerRadius: 22)
         .overlay(
             RoundedRectangle(cornerRadius: 22)
                 .stroke(Color.orange.opacity(0.3), lineWidth: 1)
@@ -483,20 +473,18 @@ private extension MythFactInteractiveCard {
             
             Text(fact)
                 .font(.subheadline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
             
             Divider()
             
             pollSection(color: .green)
         }
         .padding()
-        .background(Color.green.opacity(0.15))
-        .cornerRadius(22)
+        .liquidGlass(cornerRadius: 22)
         .overlay(
             RoundedRectangle(cornerRadius: 22)
                 .stroke(Color.green.opacity(0.3), lineWidth: 1)
         )
-        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
     }
 }
 
@@ -530,7 +518,7 @@ private extension MythFactInteractiveCard {
             
             Text("Did you believe this?")
                 .font(.caption)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
                 .accessibilityAddTraits(.isHeader)
             
             if pollAnswer == nil {
@@ -568,8 +556,8 @@ private extension MythFactInteractiveCard {
                 .fontWeight(.semibold)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 6)
-                .background(Color.white)
-                .foregroundColor(.lumaDarkGray)
+                .background(.thinMaterial, in: Capsule())
+                .foregroundColor(.primary)
                 .overlay(
                     Capsule()
                         .stroke(color.opacity(0.5), lineWidth: 1)
@@ -584,14 +572,15 @@ private extension MythFactInteractiveCard {
     func registerVote(_ answer: String) {
         pollAnswer = answer
         
+        // Optimistic UI update
         if answer == "Yes" {
-            yesCount += Int.random(in: 40...80)
-            noCount += Int.random(in: 10...40)
+            yesCount += 1
         } else {
-            noCount += Int.random(in: 40...80)
-            yesCount += Int.random(in: 10...40)
+            noCount += 1
         }
         
+        // Push to Firebase
+        MythPollManager.shared.registerVote(for: myth, answer: answer)
         
         UIAccessibility.post(
             notification: .announcement,
