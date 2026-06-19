@@ -8,6 +8,7 @@ struct SymptomTrackerView: View {
     
    
     @AppStorage("selectedStage") private var savedStageRaw: String = LifeStage.reproductive.rawValue
+    @AppStorage("hideGlobalFAB") private var hideGlobalFAB: Bool = false
     
     private var currentStage: LifeStage {
         LifeStage(rawValue: savedStageRaw) ?? .reproductive
@@ -23,15 +24,7 @@ struct SymptomTrackerView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    stageAccentColor.opacity(0.15),
-                    stageAccentColor.opacity(0.08)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            LumaBackground()
             
             ScrollView {
                 VStack(spacing: 24) {
@@ -46,6 +39,9 @@ struct SymptomTrackerView: View {
         }
         .navigationTitle("Track Today's Health")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .tabBar)
+        .onAppear { hideGlobalFAB = true }
+        .onDisappear { hideGlobalFAB = false }
     }
 }
 
@@ -70,14 +66,14 @@ extension SymptomTrackerView {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(Color.white.opacity(0.9))
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(stageAccentColor.opacity(0.15))
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 24)
-                .stroke(stageAccentColor.opacity(0.3))
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(stageAccentColor.opacity(0.35), lineWidth: 1)
         )
-        .shadow(color: stageAccentColor.opacity(0.25), radius: 12, y: 6)
+        .shadow(color: stageAccentColor.opacity(0.08), radius: 8, y: 4)
     }
 }
 
@@ -100,7 +96,7 @@ extension SymptomTrackerView {
                                 Circle()
                                     .fill(mood == emoji ?
                                            stageAccentColor.opacity(0.3) :
-                                           Color.white.opacity(0.6))
+                                           Color.secondary.opacity(0.2))
                                      .shadow(color: stageAccentColor.opacity(0.25), radius: 4, y: 3)
                             )
                             .shadow(color: .pink.opacity(0.15), radius: 4, y: 3)
@@ -219,14 +215,22 @@ struct pastelCard<Content: View>: View {
         self.content = content()
     }
     
+    var stageAccentColor: Color {
+        Color(red: 0.93, green: 0.55, blue: 0.70)
+    }
+    
     var body: some View {
         content
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: 22)
-                    .fill(Color.white.opacity(0.85))
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .fill(stageAccentColor.opacity(0.15))
             )
-            .shadow(color: .pink.opacity(0.12), radius: 10, y: 6)
+            .overlay(
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .stroke(stageAccentColor.opacity(0.35), lineWidth: 1)
+            )
+            .shadow(color: stageAccentColor.opacity(0.08), radius: 8, y: 4)
     }
 }
 
@@ -237,7 +241,7 @@ extension SymptomTrackerView {
             HStack {
                 Text(title)
                     .font(.headline)
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                 
                 Spacer()
                 

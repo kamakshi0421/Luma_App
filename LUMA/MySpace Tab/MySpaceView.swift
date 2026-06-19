@@ -116,7 +116,7 @@ struct MySpaceView: View {
             .sheet(isPresented: $showStoryPlayer) {
                 StoryPlayerView(stage: currentStage)
             }
-            .sheet(isPresented: $showBodyMap) {
+            .navigationDestination(isPresented: $showBodyMap) {
                 BodyMapView()
             }
             .sheet(isPresented: $showDailyChallenge) {

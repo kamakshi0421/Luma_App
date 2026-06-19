@@ -16,7 +16,7 @@ struct BodyZoneDetailView: View {
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .font(.title)
-                        .foregroundColor(.lumaMidGray)
+                        .foregroundColor(.secondary)
                 }
             }
             .padding(.top)
@@ -30,7 +30,7 @@ struct BodyZoneDetailView: View {
             Text(info.title)
                 .font(.title)
                 .bold()
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
             
             ScrollView {
                 VStack(spacing: 16) {
@@ -59,11 +59,11 @@ struct InfoCard: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
             
             Text(content)
                 .font(.body)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)

@@ -11,13 +11,13 @@ enum BodyZone: String, CaseIterable, Identifiable {
     
     var icon: String {
         switch self {
-        case .brain: return "brain.head.profile"
-        case .skin: return "sparkles"
-        case .breasts: return "lungs.fill" // Approximation
+        case .brain: return "brain"
+        case .skin: return "face.smiling"
+        case .breasts: return "drop.fill" // Approximation
         case .heart: return "heart.fill"
-        case .uterus: return "oval.portrait.fill" // Approximation
-        case .ovaries: return "circles.hexagongrid.fill"
-        case .bones: return "figure.stand"
+        case .uterus: return "capsule.fill" // Approximation
+        case .ovaries: return "circle.grid.2x2.fill"
+        case .bones: return "figure.walk"
         case .joints: return "link"
         }
     }
@@ -25,14 +25,14 @@ enum BodyZone: String, CaseIterable, Identifiable {
     var position: CGPoint {
         // Relative coordinates (0.0 to 1.0) on a body outline
         switch self {
-        case .brain: return CGPoint(x: 0.5, y: 0.1)
-        case .skin: return CGPoint(x: 0.25, y: 0.3)
-        case .breasts: return CGPoint(x: 0.5, y: 0.35)
-        case .heart: return CGPoint(x: 0.55, y: 0.4)
-        case .uterus: return CGPoint(x: 0.5, y: 0.6)
-        case .ovaries: return CGPoint(x: 0.4, y: 0.65)
-        case .bones: return CGPoint(x: 0.3, y: 0.75)
-        case .joints: return CGPoint(x: 0.5, y: 0.85)
+        case .brain: return CGPoint(x: 0.50, y: 0.23)
+        case .skin: return CGPoint(x: 0.38, y: 0.35)
+        case .breasts: return CGPoint(x: 0.48, y: 0.48)
+        case .heart: return CGPoint(x: 0.58, y: 0.42)
+        case .uterus: return CGPoint(x: 0.50, y: 0.62)
+        case .ovaries: return CGPoint(x: 0.42, y: 0.56)
+        case .bones: return CGPoint(x: 0.62, y: 0.66)
+        case .joints: return CGPoint(x: 0.38, y: 0.66)
         }
     }
 }

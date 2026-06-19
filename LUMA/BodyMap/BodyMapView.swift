@@ -3,6 +3,7 @@ import SpriteKit
 
 struct BodyMapView: View {
     @AppStorage("selectedStage") private var selectedStageString: String = LifeStage.reproductive.rawValue
+    @AppStorage("hideGlobalFAB") private var hideGlobalFAB: Bool = false
     @State private var selectedZone: BodyZone?
     @State private var pulsing = false
     @State private var scene: BodyMapScene = {
@@ -16,19 +17,18 @@ struct BodyMapView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                LumaBackground()
+        ZStack {
+            LumaBackground()
                 
                 VStack {
                     Text("Your Body Map")
                         .font(.largeTitle.bold())
-                        .foregroundColor(.lumaDarkGray)
+                        .foregroundColor(.primary)
                         .padding(.top)
                     
                     Text("Tap any area to explore what's happening")
                         .font(.subheadline)
-                        .foregroundColor(.lumaMidGray)
+                        .foregroundColor(.secondary)
                     
                     Text(currentStage.title)
                         .font(.caption.bold())
@@ -45,15 +45,19 @@ struct BodyMapView: View {
                         .padding()
                 }
             }
-            .navigationDestination(item: $selectedZone) { zone in
+            .sheet(item: $selectedZone) { zone in
                 BodyZoneDetailView(info: BodyMapContent.info(for: zone, stage: currentStage))
             }
-            .onAppear {
-                pulsing = true
-                scene.zoneTapped = { zone in
-                    selectedZone = zone
-                }
+        .toolbar(.hidden, for: .tabBar)
+        .onAppear {
+            hideGlobalFAB = true
+            pulsing = true
+            scene.zoneTapped = { zone in
+                selectedZone = zone
             }
+        }
+        .onDisappear {
+            hideGlobalFAB = false
         }
     }
 }

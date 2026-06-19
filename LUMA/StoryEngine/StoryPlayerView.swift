@@ -121,9 +121,7 @@ struct StoryPlayerView: View {
                                     .font(.headline)
                                     .foregroundColor(char.accentColor)
                                     .padding()
-                                    .background(Color.white)
-                                    .cornerRadius(16)
-                                    .shadow(radius: 5)
+                                    .liquidGlass(cornerRadius: 16)
                                     .padding(.horizontal)
                                     .transition(.opacity)
                             } else if let reveal = scene.educationalReveal {
@@ -137,7 +135,7 @@ struct StoryPlayerView: View {
                                     }
                                     Text(reveal)
                                         .font(.subheadline)
-                                        .foregroundColor(.lumaDarkGray)
+                                        .foregroundColor(.primary)
                                         .multilineTextAlignment(.center)
                                     
                                     Button {
@@ -187,14 +185,11 @@ struct StoryPlayerView: View {
                                     Text("Tap to continue")
                                         .font(.headline)
                                         .foregroundColor(char.accentColor)
-                                        .padding(.vertical, 16)
-                                        .frame(maxWidth: .infinity)
-                                        .background(Color.white)
-                                        .cornerRadius(20)
-                                        .shadow(color: Color.black.opacity(0.1), radius: 5, y: 2)
-                                        .padding(.horizontal)
-                                        .padding(.bottom)
                                 }
+                                .padding()
+                                .liquidGlass(cornerRadius: 16)
+                                .padding(.horizontal)
+                                .padding(.bottom)
                             }
                         }
                         .padding(.bottom, 20) // Add some padding for the bottom safe area
@@ -216,7 +211,7 @@ struct StoryPlayerView: View {
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .font(.title)
-                        .foregroundColor(.lumaMidGray)
+                        .foregroundColor(.secondary)
                 }
             }
             .padding()
@@ -224,11 +219,11 @@ struct StoryPlayerView: View {
             if let char = character {
                 Text("Stories with \(char.name)")
                     .font(.largeTitle.bold())
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                 
                 Text("Select a chapter to experience her journey through \(stage.title).")
                     .font(.subheadline)
-                    .foregroundColor(.lumaMidGray)
+                    .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
@@ -254,10 +249,10 @@ struct StoryPlayerView: View {
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text(chapters[index].title)
                                             .font(.headline)
-                                            .foregroundColor(.lumaDarkGray)
+                                            .foregroundColor(.primary)
                                         Text("\(chapters[index].scenes.count) scenes")
                                             .font(.caption)
-                                            .foregroundColor(.lumaMidGray)
+                                            .foregroundColor(.secondary)
                                     }
                                     
                                     Spacer()
@@ -267,9 +262,7 @@ struct StoryPlayerView: View {
                                         .foregroundColor(char.accentColor)
                                 }
                                 .padding()
-                                .background(Color.white)
-                                .cornerRadius(20)
-                                .shadow(color: Color.black.opacity(0.05), radius: 8, y: 4)
+                                .liquidGlass(cornerRadius: 20)
                             }
                             .buttonStyle(.plain)
                         }
@@ -289,11 +282,11 @@ struct StoryPlayerView: View {
             Text("Chapter Complete!")
                 .font(.title)
                 .bold()
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
             
             Text("You successfully helped \(character?.name ?? "your character") navigate this chapter. Keep learning and listening to your body!")
                 .font(.body)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding()
             
