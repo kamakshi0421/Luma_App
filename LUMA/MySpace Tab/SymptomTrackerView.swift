@@ -1,9 +1,10 @@
 import SwiftUI
+import SwiftData
 
 
 struct SymptomTrackerView: View {
     
-    @EnvironmentObject var store: SymptomStore
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) var dismiss
     
    
@@ -184,7 +185,7 @@ extension SymptomTrackerView {
                 lifeStage: currentStage
             )
             
-            store.addLog(log)
+            modelContext.insert(log)
             dismiss()
             
         } label: {

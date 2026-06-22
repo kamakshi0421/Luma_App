@@ -1,14 +1,12 @@
 import SwiftUI
-import FirebaseAuth
 
 @available(iOS 26.0, *)
 struct ProfileView: View {
-    @EnvironmentObject var store: SymptomStore
+    @AppStorage("user_age") private var userAge: Int = 25
+    private var currentLifeStage: LifeStage { LifeStage.stage(for: userAge) }
     @Environment(\.dismiss) private var dismiss
     
-    private var currentUserEmail: String {
-        Auth.auth().currentUser?.email ?? "Guest User"
-    }
+    
     
     var body: some View {
         NavigationStack {
@@ -27,11 +25,11 @@ struct ProfileView: View {
                             .padding(.top, 20)
                         
                         VStack(spacing: 6) {
-                            Text(currentUserEmail)
+                            Text("My Profile")
                                 .font(.headline)
                                 .foregroundColor(.lumaDarkGray)
                             
-                            Text("Current Stage: \(store.currentLifeStage.title)")
+                            Text("Current Stage: \(currentLifeStage.title)")
                                 .font(.subheadline)
                                 .foregroundColor(.lumaMidGray)
                         }
@@ -50,7 +48,7 @@ struct ProfileView: View {
                                 .font(.body)
                                 .foregroundColor(.lumaDarkGray)
                             Spacer()
-                            Text("\(store.userAge) years")
+                            Text("\(userAge) years")
                                 .font(.body.bold())
                                 .foregroundColor(.lumaMidGray)
                         }
@@ -62,24 +60,7 @@ struct ProfileView: View {
                     
                     Spacer()
                     
-                    // Log Out Button
-                    Button {
-                        signOut()
-                    } label: {
-                        HStack {
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
-                            Text("Log Out")
-                        }
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.red.opacity(0.85))
-                        .cornerRadius(24)
-                        .shadow(color: Color.red.opacity(0.25), radius: 8, y: 4)
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 32)
+                    Spacer()
                 }
             }
             .navigationTitle("My Profile")
@@ -95,12 +76,5 @@ struct ProfileView: View {
         }
     }
     
-    private func signOut() {
-        do {
-            try Auth.auth().signOut()
-            dismiss()
-        } catch {
-            print("Error signing out: \(error)")
-        }
-    }
+
 }

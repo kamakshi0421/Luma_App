@@ -7,99 +7,57 @@ struct ConcernDetailSheet: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                Section {
+            ScrollView {
+                VStack(spacing: 20) {
+                    
                     Text(topic.shortDescription)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                        .padding(.vertical, 4)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                        .padding(.top, 8)
+                    
+                    ConcernInfoCard(
+                        title: "Why this happens",
+                        icon: "waveform.path.ecg",
+                        tintColor: .purple,
+                        content: topic.whyItHappens
+                    )
+                    
+                    ConcernInfoCard(
+                        title: "When it is normal",
+                        icon: "checkmark.seal",
+                        tintColor: .green,
+                        content: topic.whenItsNormal
+                    )
+                    
+                    ConcernInfoCard(
+                        title: "What may help",
+                        icon: "leaf",
+                        tintColor: .pink,
+                        content: topic.whatHelps
+                    )
+                    
+                    ConcernInfoCard(
+                        title: "When to seek a doctor",
+                        icon: "stethoscope",
+                        tintColor: .orange,
+                        content: topic.whenToSeekHelp
+                    )
                 }
-                
-                Section {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label {
-                            Text("Why this happens")
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                        } icon: {
-                            Image(systemName: "waveform.path.ecg")
-                                .foregroundColor(.purple)
-                        }
-                        
-                        Text(topic.whyItHappens)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .padding(.vertical, 4)
-                }
-                
-                Section {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label {
-                            Text("When it is normal")
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                        } icon: {
-                            Image(systemName: "checkmark.seal")
-                                .foregroundColor(.green)
-                        }
-                        
-                        Text(topic.whenItsNormal)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .padding(.vertical, 4)
-                }
-                
-                Section {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label {
-                            Text("What may help")
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                        } icon: {
-                            Image(systemName: "leaf")
-                                .foregroundColor(.pink)
-                        }
-                        
-                        Text(topic.whatHelps)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .padding(.vertical, 4)
-                }
-                
-                Section {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label {
-                            Text("When to seek a doctor")
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                        } icon: {
-                            Image(systemName: "stethoscope")
-                                .foregroundColor(.orange)
-                        }
-                        
-                        Text(topic.whenToSeekHelp)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .padding(.vertical, 4)
-                }
+                .padding()
             }
-            .listStyle(.insetGrouped)
             .navigationTitle(topic.title)
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button {
                         dismiss()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.secondary)
+                            .font(.title3)
                     }
-                    .fontWeight(.bold)
                 }
             }
             .safeAreaInset(edge: .bottom) {
@@ -112,5 +70,48 @@ struct ConcernDetailSheet: View {
         }
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
+    }
+}
+
+@available(iOS 26.0, *)
+struct ConcernInfoCard: View {
+    let title: String
+    let icon: String
+    let tintColor: Color
+    let content: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 12) {
+                ZStack {
+                    Circle()
+                        .fill(tintColor.opacity(0.15))
+                        .frame(width: 40, height: 40)
+                    
+                    Image(systemName: icon)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(tintColor)
+                }
+                
+                Text(title)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+            }
+            
+            Text(content)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .lineSpacing(4)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .fill(tintColor.opacity(0.05))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .stroke(tintColor.opacity(0.2), lineWidth: 1)
+        )
     }
 }

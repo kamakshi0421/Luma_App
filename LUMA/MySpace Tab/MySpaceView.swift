@@ -1,8 +1,8 @@
 
 
 import SwiftUI
+import SwiftData
 import FoundationModels
-import FirebaseAuth
 
 // MARK: - Pastel Color Palette
 private extension Color {
@@ -26,7 +26,7 @@ private extension Color {
 @available(iOS 26.0, *)
 struct MySpaceView: View {
     
-    @EnvironmentObject var store: SymptomStore
+    @Query(sort: \SymptomLog.date, order: .reverse) private var logs: [SymptomLog]
     @Binding var selectedTab: MainTabView.Tab
     
     @State private var selectedCondition: StageCondition? = nil
@@ -97,12 +97,11 @@ struct MySpaceView: View {
             }
             
             .task {
-                await insightManager.generateInsight(from: store.logs)
+                await insightManager.generateInsight(from: logs)
             }
             
             .sheet(isPresented: $showProfile) {
                 ProfileView()
-                    .environmentObject(store)
             }
             
             .sheet(item: $selectedStageForSheet) { stage in

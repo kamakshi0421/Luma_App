@@ -25,74 +25,26 @@ struct PhasesView: View {
                         .padding(.horizontal)
                     
                     // Interactive Playground Banner
-                    Button {
+                    PastelActionCard(
+                        title: "Cycle Insights",
+                        subtitle: "Explore hormone cycles visually",
+                        icon: "waveform.path.ecg",
+                        tint: .lumaPinkBubble,
+                        iconColor: .lumaPinkBubble
+                    ) {
                         showPlayground = true
-                    } label: {
-                        HStack(spacing: 16) {
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("Cycle Insights")
-                                    .font(.headline)
-                                    .foregroundColor(.primary)
-                                
-                                Text("Explore hormone cycles visually")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                    .multilineTextAlignment(.leading)
-                            }
-                            
-                            Spacer()
-                            
-                            Image(systemName: "waveform.path.ecg")
-                                .font(.title)
-                                .foregroundColor(.lumaPinkBubble)
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                                .fill(Color.lumaPinkBubble.opacity(0.15))
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                                .stroke(Color.lumaPinkBubble.opacity(0.35), lineWidth: 1)
-                        )
-                        .shadow(color: Color.lumaPinkBubble.opacity(0.08), radius: 8, y: 4)
                     }
-                    .buttonStyle(.plain)
                     
                     // Uterus Simulator Banner
-                    Button {
+                    PastelActionCard(
+                        title: "Phase Simulator",
+                        subtitle: "Interactive 3D organ explorer",
+                        icon: "sparkles",
+                        tint: .purple,
+                        iconColor: .purple
+                    ) {
                         showUterusSimulator = true
-                    } label: {
-                        HStack(spacing: 16) {
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("Phase Simulator")
-                                    .font(.headline)
-                                    .foregroundColor(.primary)
-                                
-                                Text("Visually explore Phases, Conditions, and Organs")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                    .multilineTextAlignment(.leading)
-                            }
-                            
-                            Spacer()
-                            
-                            Image(systemName: "sparkles")
-                                .font(.title)
-                                .foregroundColor(.purple.opacity(0.7))
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                                .fill(Color.purple.opacity(0.15))
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                                .stroke(Color.purple.opacity(0.35), lineWidth: 1)
-                        )
-                        .shadow(color: Color.purple.opacity(0.08), radius: 8, y: 4)
                     }
-                    .buttonStyle(.plain)
                     
                     LazyVGrid(
                         columns: [

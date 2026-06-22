@@ -78,7 +78,7 @@ struct AskLumaView: View {
         
         ZStack {
             
-            Color.lumaSurface
+            LumaBackground()
                 .ignoresSafeArea()
                 .accessibilityHidden(true)
             
@@ -102,7 +102,7 @@ struct AskLumaView: View {
         if !UIAccessibility.isVoiceOverRunning {
             
             let utterance = AVSpeechUtterance(
-                string: "Hi, I’m Luma. How can I support you today?"
+                string: "Hi, I'm Luma. How can I support you today?"
             )
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
             utterance.rate = 0.5
@@ -118,6 +118,7 @@ struct AskLumaView: View {
     }
    
     
+    // MARK: - Premium Header
     var headerView: some View {
         HStack(spacing: 14) {
             
@@ -125,54 +126,92 @@ struct AskLumaView: View {
                 dismiss()
             } label: {
                 Image(systemName: "chevron.left")
-                    .font(.title3.weight(.semibold))
-                    .foregroundColor(Color.lumaPinkBubble)
+                    .font(.body.weight(.semibold))
+                    .foregroundColor(.primary)
+                    .padding(10)
+                    .background(Circle().fill(.ultraThinMaterial))
             }
             
+            // Luma avatar
+            Image("ProfileAvatar")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 38, height: 38)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.pink.opacity(0.2), lineWidth: 1))
+            
             VStack(alignment: .leading, spacing: 2) {
-                Text("Ask Luma 💬")
-                    .font(.headline)
-                    .foregroundColor(.lumaDarkGray)
+                HStack(spacing: 6) {
+                    Text("Luma")
+                        .font(.headline.weight(.bold))
+                        .foregroundColor(.primary)
+                    
+                    // Online indicator
+                    Circle()
+                        .fill(Color.green)
+                        .frame(width: 7, height: 7)
+                }
                 
-                Text("No judgement. Just soft support.")
+                Text(isSpeaking ? "Speaking..." : "Your wellness companion")
                     .font(.caption2)
-                    .foregroundColor(.lumaMidGray)
+                    .foregroundColor(.secondary)
             }
             
             Spacer()
             
             if isSpeaking {
                 MicPulseView()
+                    .frame(width: 36, height: 36)
             }
         }
-        .padding()
-        .background(Color.white.opacity(0.6))
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .ignoresSafeArea(edges: .top)
+        )
     }
 
     
+    // MARK: - Chat Area
     var chatArea: some View {
         ScrollViewReader { proxy in
             
             ScrollView(showsIndicators: false) {
                 
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
+                    
+                    // Date pill at the top
+                    Text("Today")
+                        .font(.caption2.weight(.medium))
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 6)
+                        .background(Capsule().fill(.ultraThinMaterial))
+                        .padding(.top, 12)
                     
                     ForEach(messages) { msg in
                         ChatBubble(message: msg)
                             .id(msg.id)
+                            .transition(.asymmetric(
+                                insertion: .scale(scale: 0.9).combined(with: .opacity),
+                                removal: .opacity
+                            ))
                     }
                     
                     if isTyping {
                         TypingDots()
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .transition(.scale(scale: 0.8).combined(with: .opacity))
                     }
                     
                     if !isTyping && messages.count <= 2 {
                         suggestionSection
                     }
                 }
-                .padding(.top, 16)
                 .padding(.horizontal)
+                .padding(.bottom, 8)
             }
             .onChange(of: messages.count) { _, newCount in
                 if let last = messages.last {
@@ -180,38 +219,69 @@ struct AskLumaView: View {
                         proxy.scrollTo(last.id, anchor: .bottom)
                     }
                 }
-            }        }
+            }
+        }
     }
  
     
+    // MARK: - Premium Input Bar
     var inputBar: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 10) {
             
-            TextField("Spill your mind...", text: $messageText)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 14)
-                .background(
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(Color.white)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.lumaPinkLight, lineWidth: 1)
-                )
+            HStack(spacing: 8) {
+                Image(systemName: "sparkles")
+                    .font(.caption)
+                    .foregroundColor(.pink.opacity(0.6))
+                
+                TextField("Ask me anything...", text: $messageText)
+                    .font(.subheadline)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 13)
+            .background(
+                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    .fill(Color.primary.opacity(0.04))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    .stroke(Color.primary.opacity(0.06), lineWidth: 1)
+            )
             
             Button {
                 sendMessage()
             } label: {
-                Image(systemName: "paperplane.fill")
+                Image(systemName: "arrow.up")
+                    .font(.body.weight(.bold))
                     .foregroundColor(.white)
-                    .padding(16)
-                    .background(Color.lumaPinkLight)
+                    .frame(width: 42, height: 42)
+                    .background(
+                        LinearGradient(
+                            colors: messageText.trimmingCharacters(in: .whitespaces).isEmpty
+                                ? [Color.gray.opacity(0.4), Color.gray.opacity(0.3)]
+                                : [Color.pink, Color.purple.opacity(0.8)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .clipShape(Circle())
+                    .shadow(
+                        color: messageText.trimmingCharacters(in: .whitespaces).isEmpty
+                            ? .clear
+                            : Color.pink.opacity(0.35),
+                        radius: 8,
+                        y: 4
+                    )
             }
             .disabled(messageText.trimmingCharacters(in: .whitespaces).isEmpty || isSending)
+            .animation(.easeInOut(duration: 0.2), value: messageText.isEmpty)
         }
-        .padding()
-        .background(Color.white.opacity(0.6))
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(
+            Color(.systemBackground)
+                .shadow(color: .black.opacity(0.03), radius: 10, y: -5)
+                .ignoresSafeArea(edges: .bottom)
+        )
     }
     
     
@@ -223,7 +293,9 @@ struct AskLumaView: View {
         isTyping = true
         isSending = true
         
-        messages.append(ChatMessage(text: trimmed, isUser: true))
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+            messages.append(ChatMessage(text: trimmed, isUser: true))
+        }
         
         Task {
             let reply = await chatbot.ask(question: trimmed)
@@ -231,7 +303,9 @@ struct AskLumaView: View {
             await MainActor.run {
                 isTyping = false
                 isSending = false
-                messages.append(ChatMessage(text: reply, isUser: false))
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                    messages.append(ChatMessage(text: reply, isUser: false))
+                }
             }
         }
     }
@@ -243,79 +317,140 @@ struct AskLumaView: View {
         sendMessage()
     }
     
+    // MARK: - Suggestion Section
     var suggestionSection: some View {
         
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 14) {
             
-            Text("You may explore 🌷")
-                .font(.caption)
-                .foregroundColor(.lumaMidGray)
+            HStack(spacing: 6) {
+                Image(systemName: "lightbulb.fill")
+                    .font(.caption2)
+                    .foregroundColor(.orange)
+                Text("Quick questions")
+                    .font(.caption.weight(.medium))
+                    .foregroundColor(.secondary)
+            }
+            .padding(.leading, 4)
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    
-                    ForEach(stageSuggestions, id: \.title) { item in
-                        
-                        SuggestionChip(text: item.title) {
-                            sendSuggestion(item.question)
-                        }
+            // Use a wrapping layout for chips
+            FlowLayout(spacing: 8) {
+                ForEach(stageSuggestions, id: \.title) { item in
+                    SuggestionChip(text: item.title) {
+                        sendSuggestion(item.question)
                     }
                 }
             }
         }
-        .padding(.top, 8)
+        .padding(.top, 12)
     }
 }
 
+// MARK: - Flow Layout for chips
+struct FlowLayout: Layout {
+    var spacing: CGFloat = 8
+    
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let result = arrange(proposal: proposal, subviews: subviews)
+        return result.size
+    }
+    
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let result = arrange(proposal: proposal, subviews: subviews)
+        for (index, position) in result.positions.enumerated() {
+            subviews[index].place(at: CGPoint(x: bounds.minX + position.x, y: bounds.minY + position.y), proposal: .unspecified)
+        }
+    }
+    
+    private func arrange(proposal: ProposedViewSize, subviews: Subviews) -> (size: CGSize, positions: [CGPoint]) {
+        let maxWidth = proposal.width ?? .infinity
+        var positions: [CGPoint] = []
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        var rowHeight: CGFloat = 0
+        
+        for subview in subviews {
+            let size = subview.sizeThatFits(.unspecified)
+            if x + size.width > maxWidth && x > 0 {
+                x = 0
+                y += rowHeight + spacing
+                rowHeight = 0
+            }
+            positions.append(CGPoint(x: x, y: y))
+            rowHeight = max(rowHeight, size.height)
+            x += size.width + spacing
+        }
+        
+        return (CGSize(width: maxWidth, height: y + rowHeight), positions)
+    }
+}
+
+// MARK: - Typing Dots
 struct TypingDots: View {
     
     @State private var animate = false
     
     var body: some View {
-        HStack(spacing: 6) {
-            Circle().frame(width: 7, height: 7)
-            Circle().frame(width: 7, height: 7)
-            Circle().frame(width: 7, height: 7)
+        HStack(spacing: 5) {
+            ForEach(0..<3, id: \.self) { index in
+                Circle()
+                    .fill(Color.pink.opacity(0.6))
+                    .frame(width: 8, height: 8)
+                    .scaleEffect(animate ? 1.0 : 0.5)
+                    .opacity(animate ? 1 : 0.3)
+                    .animation(
+                        .easeInOut(duration: 0.6)
+                        .repeatForever()
+                        .delay(Double(index) * 0.2),
+                        value: animate
+                    )
+            }
         }
-        .foregroundColor(Color.lumaPinkLight.opacity(0.7))
-        .opacity(animate ? 1 : 0.3)
-        .animation(.easeInOut(duration: 0.8).repeatForever(), value: animate)
         .onAppear { animate = true }
-        .padding(12)
+        .padding(.horizontal, 18)
+        .padding(.vertical, 14)
         .background(
-            RoundedRectangle(cornerRadius: 18)
-                .fill(Color.white)
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(.ultraThinMaterial)
         )
-        .shadow(color: .lumaPinkLight.opacity(0.1), radius: 8, y: 4)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(Color.white.opacity(0.3), lineWidth: 1)
+        )
     }
 }
 
+// MARK: - Suggestion Chip
 struct SuggestionChip: View {
     
     let text: String
     let action: () -> Void
+    @State private var isPressed = false
     
     var body: some View {
-        Button(action: action) {
+        Button {
+            action()
+        } label: {
             Text(text)
-                .font(.caption)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
+                .font(.caption.weight(.medium))
+                .foregroundColor(.primary)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 9)
                 .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white)
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .fill(.ultraThinMaterial)
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.lumaPinkLight.opacity(0.25), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .stroke(Color.pink.opacity(0.15), lineWidth: 1)
                 )
-                .foregroundColor(.lumaDarkGray)
-                .shadow(color: .lumaPinkLight.opacity(0.05), radius: 4, y: 2)
+                .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
         }
+        .buttonStyle(.plain)
     }
 }
 
 
+// MARK: - Mic Pulse
 struct MicPulseView: View {
     
     @State private var animate = false
@@ -324,14 +459,17 @@ struct MicPulseView: View {
         ZStack {
             
             Circle()
-                .fill(Color.lumaPinkLight.opacity(0.2))
-                .frame(width: 60, height: 60)
-                .scaleEffect(animate ? 1.4 : 1)
-                .opacity(animate ? 0 : 1)
+                .fill(Color.pink.opacity(0.15))
+                .scaleEffect(animate ? 1.5 : 1)
+                .opacity(animate ? 0 : 0.8)
             
-            Image(systemName: "mic.fill")
-                .foregroundColor(.lumaPinkLight)
-                .font(.title3)
+            Circle()
+                .fill(Color.pink.opacity(0.1))
+                .scaleEffect(animate ? 1.2 : 1)
+            
+            Image(systemName: "waveform")
+                .foregroundColor(.pink)
+                .font(.caption.weight(.bold))
         }
         .onAppear {
             withAnimation(

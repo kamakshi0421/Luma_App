@@ -29,14 +29,18 @@ struct ChatBubble: View {
             .padding(16)
             .foregroundColor(.white)
             .background(
-                RoundedRectangle(cornerRadius: 22)
-                    .fill(Color.lumaPinkLight)
+                LinearGradient(
+                    colors: [Color.pink.opacity(0.8), Color.purple.opacity(0.8)],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 22))
             )
             .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
                    alignment: .trailing)
             .fixedSize(horizontal: false, vertical: true)
             .shadow(
-                color: Color.lumaPinkLight.opacity(0.45),
+                color: Color.pink.opacity(0.3),
                 radius: 12,
                 y: 6
             )
@@ -57,7 +61,7 @@ struct ChatBubble: View {
                     .foregroundColor(
                         isEmergency
                         ? .red
-                        : Color.lumaDarkGray.opacity(0.9)
+                        : Color.primary
                     )
                     .lineSpacing(4)
                     .fixedSize(horizontal: false, vertical: true)
@@ -67,7 +71,7 @@ struct ChatBubble: View {
                 // Fallback for completely unstructured single-block responses
                 Text(message.text.replacingOccurrences(of: "**", with: ""))
                     .font(.system(size: 14))
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                     .lineSpacing(4)
                     .fixedSize(horizontal: false, vertical: true)
             } else {
@@ -100,28 +104,30 @@ struct ChatBubble: View {
         }
         .padding(20)
         .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color.white,
-                            Color(red: 0.99, green: 0.96, blue: 0.97)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(.ultraThinMaterial)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .fill(Color.pink.opacity(0.05))
                 )
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 24)
-                .stroke(Color.lumaPinkBubble.opacity(0.18), lineWidth: 1.5)
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(
+                    LinearGradient(
+                        colors: [Color.pink.opacity(0.3), Color.white.opacity(0.1)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 1
+                )
         )
         .shadow(
             color: isEmergency
-            ? Color.red.opacity(0.12)
-            : Color.lumaPinkBubble.opacity(0.04),
-            radius: 8,
-            y: 4
+            ? Color.red.opacity(0.15)
+            : Color.black.opacity(0.06),
+            radius: 12,
+            y: 6
         )
         .frame(maxWidth: UIScreen.main.bounds.width * 0.82,
                alignment: .leading)
@@ -170,14 +176,14 @@ struct ChatBubble: View {
                         
                         Text(line.text)
                             .font(.system(size: 14))
-                            .foregroundColor(.lumaDarkGray)
+                            .foregroundColor(.primary)
                             .lineSpacing(4)
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 } else {
                     Text(line.text)
                         .font(.system(size: 14))
-                        .foregroundColor(.lumaDarkGray)
+                        .foregroundColor(.primary)
                         .lineSpacing(4)
                         .fixedSize(horizontal: false, vertical: true)
                 }

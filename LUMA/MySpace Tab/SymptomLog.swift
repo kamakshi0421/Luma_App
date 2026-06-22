@@ -1,22 +1,21 @@
 import SwiftUI
+import SwiftData
 import Foundation
 
-struct SymptomLog: Identifiable , Codable {
+@available(iOS 26.0, *)
+@Model
+class SymptomLog: Identifiable {
+    @Attribute(.unique) var id: UUID
+    var date: Date
     
-    let id: UUID
-    let date: Date
-    
-   
     var mood: String
     var flow: String?
     var painLevel: Double?
     var energyLevel: Double?
     
-   
     var stress: Int
     var sleepHours: Double
     
-  
     var lifeStage: LifeStage
     
     init(

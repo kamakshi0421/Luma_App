@@ -1,16 +1,13 @@
 import SwiftUI
-import FirebaseAuth
 
 @available(iOS 26.0, *)
 struct LaunchView: View {
-    @EnvironmentObject var symptomStore: SymptomStore
     @AppStorage("hasSeenOnboarding") var hasSeenOnboarding = false
     
     @State private var showJourneyView = false
     @State private var goToHome = false
     @State private var animate = false
-    @State private var isLogoExpanded = false   
-    @State private var showLogin = false
+    @State private var isLogoExpanded = false
     
     @available(iOS 26.0, *)
     var body: some View {
@@ -98,10 +95,6 @@ struct LaunchView: View {
                     .presentationDetents([.large])
                     .presentationCornerRadius(28)
             }
-            .fullScreenCover(isPresented: $showLogin) {
-                LoginView()
-                    .environmentObject(symptomStore)
-            }
             .onChange(of: showJourneyView) { _, isPresented in
                 if !isPresented {
                     withAnimation(.easeInOut(duration: 0.5)) {
@@ -115,32 +108,17 @@ struct LaunchView: View {
                 withAnimation(.easeOut(duration: 0.9)) {
                     animate = true
                 }
-                
-                // Set up listener to watch auth changes
-                Auth.auth().addStateDidChangeListener { _, user in
-                    if user != nil {
-                        showLogin = false
-                    } else {
-                        withAnimation {
-                            goToHome = false
-                        }
-                    }
-                }
             }
         }
     }
     
     private func handleGetStarted() {
-        if Auth.auth().currentUser != nil {
-            if hasSeenOnboarding {
-                withAnimation {
-                    goToHome = true
-                }
-            } else {
-                showJourneyView = true
+        if hasSeenOnboarding {
+            withAnimation {
+                goToHome = true
             }
         } else {
-            showLogin = true
+            showJourneyView = true
         }
     }
 }

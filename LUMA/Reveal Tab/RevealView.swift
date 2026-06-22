@@ -20,6 +20,7 @@ struct RevealView: View {
     @State private var showScenarios = false
     @State private var searchText = ""
     @State private var dailyMyth: DecodedMyth?
+    @State private var showConstellation = false
     
     private var stageTopics: [NormalTopic] {
         NormalTopic.allTopics.filter {
@@ -83,12 +84,7 @@ struct RevealView: View {
                     
                     heroSection
                     
-                    if searchText.isEmpty {
-                        filterSection
-                    }
-                    
-                    mythFactSection
-                    
+
                     if searchText.isEmpty {
                         scenarioSection
                         concernsSection
@@ -109,12 +105,20 @@ struct RevealView: View {
         .navigationTitle("Reveal")
         .onAppear {
             if dailyMyth == nil {
-                dailyMyth = content.myths.randomElement()
+                let randomMyth = content.myths.filter { $0.stage == currentStage }.randomElement()
+                dailyMyth = randomMyth
+                if let cat = randomMyth?.category {
+                    selectedCategory = cat
+                }
             }
         }
         .onChange(of: currentStage) { _, newStage in
             content = DecodedContentLoader.load()
-            dailyMyth = content.myths.randomElement()
+            let randomMyth = content.myths.filter { $0.stage == newStage }.randomElement()
+            dailyMyth = randomMyth
+            if let cat = randomMyth?.category {
+                selectedCategory = cat
+            }
         }
         .sheet(item: $selectedTopic) { topic in
             ConcernDetailSheet(topic: topic)
@@ -123,6 +127,9 @@ struct RevealView: View {
         }
         .sheet(isPresented: $showScenarios) {
             ScenarioGameView(stage: currentStage)
+        }
+        .fullScreenCover(isPresented: $showConstellation) {
+            SymptomConstellationView()
         }
     }
 }
@@ -133,14 +140,20 @@ private extension RevealView {
         VStack(alignment: .leading, spacing: 12) {
             RevealSectionHeader(title: "Myth of the Day", emoji: "🌟")
             
+            if searchText.isEmpty {
+                filterSection
+            }
+            
             if let myth = dailyMyth {
                 MythFactInteractiveCard(
                     myth: myth.myth,
                     fact: myth.fact
                 )
+                .id(myth.id)
             }
         }
     }
+
 }
 
 // MARK: - Section Header
@@ -172,7 +185,13 @@ private extension RevealView {
                     
                     Button {
                         selectedCategory = category
-
+                        let newMyth = content.myths.filter {
+                            $0.stage == currentStage &&
+                            $0.category == category
+                        }.randomElement()
+                        if let newMyth = newMyth {
+                            dailyMyth = newMyth
+                        }
                     } label: {
                         
                         VStack(spacing: 8) {
@@ -197,39 +216,12 @@ private extension RevealView {
                                 )
                         )
                         .background(.thinMaterial, in: Circle())
+                        .opacity(selectedCategory == category ? 1.0 : 0.4)
                     }
                     .buttonStyle(.plain)
                 }
             }
 //            .padding(.vertical, 4)
-        }
-    }
-}
-
-
-
-@available(iOS 26.0, *)
-private extension RevealView {
-    
-    var mythFactSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            RevealSectionHeader(title: "Truth Behind Myths", emoji: "🎭")
-            
-
-            if filteredMyths.isEmpty {
-                Text(searchText.isEmpty ? "No myths available for this category." : "No matching myths found.")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            } else {
-                VStack(spacing: 16) {
-                    ForEach(filteredMyths) { myth in
-                        MythFactInteractiveCard(
-                            myth: myth.myth,
-                            fact: myth.fact
-                        )
-                    }
-                }
-            }
         }
     }
 }
@@ -249,6 +241,18 @@ private extension RevealView {
                 tint: .blue,
                 iconColor: .blue
             ) { showScenarios = true }
+            
+            PastelActionCard(
+                title: "Symptom Decoder",
+                subtitle: "Connect the dots to reveal hidden patterns in your body.",
+                icon: "sparkles",
+                tint: .purple,
+                iconColor: .purple
+            ) {
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+                showConstellation = true
+            }
         }
     }
 }
@@ -267,42 +271,15 @@ private extension RevealView {
                 let bgColor = pastelColors[index % pastelColors.count]
                 let strokeColor = pastelStrokes[index % pastelStrokes.count]
                 
-                Button {
+                PastelActionCard(
+                    title: concern.title,
+                    subtitle: concern.explanation,
+                    icon: "lightbulb",
+                    tint: strokeColor,
+                    iconColor: strokeColor
+                ) {
                     selectedTopic = topicForConcern(concern)
-                } label: {
-                    
-                    HStack(spacing: 12) {
-                        
-                        Image(systemName: "lightbulb")
-                            .foregroundColor(.lumaPinkBubble)
-                            .font(.system(size: 18, weight: .medium))
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            
-                            Text(concern.title)
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.primary)
-                            
-                            Text(concern.explanation)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .lineLimit(1)
-                        }
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.secondary)
-                    }
-                    .padding()
-                    .liquidGlass(cornerRadius: 20)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(strokeColor, lineWidth: 1)
-                    )
                 }
-                .buttonStyle(.plain)
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("\(concern.title). \(concern.explanation)")
                 .accessibilityHint("Double tap to learn more")
@@ -324,19 +301,36 @@ private extension RevealView {
             
             if let redFlag = stageRedFlag {
                 
-                VStack(alignment: .leading, spacing: 8) {
-                    ForEach(redFlag.points, id: \.self) { point in
-                        Text("• \(point)")
-                            .foregroundColor(.primary)
+                HStack(alignment: .top, spacing: 14) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.red.opacity(0.15))
+                            .frame(width: 44, height: 44)
+                        
+                        Image(systemName: "stethoscope")
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundColor(.red)
                     }
+                    
+                    VStack(alignment: .leading, spacing: 6) {
+                        ForEach(redFlag.points, id: \.self) { point in
+                            Text("• \(point)")
+                                .foregroundColor(.primary)
+                                .font(.subheadline)
+                        }
+                    }
+                    .padding(.top, 4)
+                    
+                    Spacer(minLength: 0)
                 }
-                .font(.caption)
                 .padding()
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .liquidGlass(cornerRadius: 22)
+                .background(
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .fill(Color.red.opacity(0.05))
+                )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 22)
-                        .stroke(Color.red.opacity(0.35), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .stroke(Color.red.opacity(0.2), lineWidth: 1)
                 )
             }
         }
@@ -355,214 +349,292 @@ struct MythFactInteractiveCard: View {
     @State private var dragPoints: [CGPoint] = []
     
     @State private var pollAnswer: String? = nil
-    @State private var yesCount: Int = 0
-    @State private var noCount: Int = 0
-    
-    @State private var removeListener: (() -> Void)? = nil
-    
-    private var totalVotes: Int {
-        max(yesCount + noCount, 1)
-    }
+    @State private var shimmerOffset: CGFloat = -200
     
     var body: some View {
         
         ZStack {
-            
             if showConfetti {
                 ConfettiBurstView()
                     .transition(.opacity)
             }
             
-            factCard // Always underneath
+            // Fact card always underneath
+            factCard
             
             if !flipped {
                 mythCard
-                    .mask(
-                        Canvas { context, size in
-                            context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(.white))
-                            
-                            var path = Path()
-                            if let first = dragPoints.first {
-                                path.move(to: first)
-                                for point in dragPoints.dropFirst() {
-                                    path.addLine(to: point)
-                                }
-                            }
-                            
-                            context.blendMode = .destinationOut
-                            context.stroke(path, with: .color(.clear), style: StrokeStyle(lineWidth: 50, lineCap: .round, lineJoin: .round))
+                    .onTapGesture {
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
+                            flipped = true
                         }
-                    )
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { value in
-                                dragPoints.append(value.location)
-                                if dragPoints.count > 70 && !flipped {
-                                    withAnimation(.easeOut(duration: 0.5)) {
-                                        flipped = true
-                                    }
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                        triggerConfetti()
-                                    }
-                                }
-                            }
-                    )
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            triggerConfetti()
+                        }
+                    }
                     .transition(.opacity)
             }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(flipped ? "Fact. \(fact)" : "Myth. \(myth)")
-        .accessibilityHint(flipped ? "Truth revealed" : "Scratch card to reveal the truth")
+        .accessibilityHint(flipped ? "Truth revealed" : "Tap to reveal the truth")
         .accessibilityAddTraits(.isButton)
-        .frame(minHeight: 240)
-        .animation(.easeOut(duration: 0.5), value: flipped)
+        .frame(minHeight: 280)
+        .animation(.spring(response: 0.5, dampingFraction: 0.8), value: flipped)
         .onAppear {
-            removeListener = MythPollManager.shared.attachPollListener(for: myth) { yes, no in
-                self.yesCount = yes
-                self.noCount = no
+            // Start shimmer animation
+            withAnimation(.linear(duration: 2.5).repeatForever(autoreverses: false)) {
+                shimmerOffset = 400
             }
-        }
-        .onDisappear {
-            removeListener?()
         }
     }
 }
 
-
+// MARK: - Myth Card (Scratch Surface)
 private extension MythFactInteractiveCard {
     
     var mythCard: some View {
-        VStack(alignment: .leading, spacing: 14) {
+        VStack(spacing: 0) {
+            // Top label
+            HStack {
+                HStack(spacing: 6) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.caption)
+                        .foregroundColor(.orange)
+                    Text("MYTH")
+                        .font(.caption.weight(.heavy))
+                        .foregroundColor(.orange)
+                        .tracking(1.5)
+                }
+                
+                Spacer()
+                
+                Button {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                        bookmarked.toggle()
+                    }
+                } label: {
+                    Image(systemName: bookmarked ? "bookmark.fill" : "bookmark")
+                        .font(.body)
+                        .foregroundColor(.orange)
+                        .scaleEffect(bookmarked ? 1.2 : 1.0)
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+            .padding(.bottom, 12)
             
-            header(title: "Myth", color: .orange)
-            
+            // Myth text
             Text(myth)
-                .font(.subheadline)
+                .font(.title3.weight(.semibold))
                 .foregroundColor(.primary)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
             
-            Divider()
+            Spacer(minLength: 16)
             
+            // Poll section
             pollSection(color: .orange)
+                .padding(.horizontal, 20)
             
-            Text("Scratch to reveal the truth ✨")
-                .font(.caption)
+            Spacer(minLength: 12)
+            
+            // Scratch prompt with shimmer
+            ZStack {
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color.orange.opacity(0.08),
+                                Color.orange.opacity(0.15),
+                                Color.orange.opacity(0.08)
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .frame(height: 44)
+                
+                // Shimmer overlay
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color.clear,
+                                Color.white.opacity(0.4),
+                                Color.clear
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .frame(height: 44)
+                    .offset(x: shimmerOffset)
+                    .mask(
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .frame(height: 44)
+                    )
+                
+                HStack(spacing: 8) {
+                    Image(systemName: "hand.tap.fill")
+                        .font(.subheadline)
+                    Text("Tap to reveal the truth")
+                        .font(.subheadline.weight(.semibold))
+                    Image(systemName: "sparkles")
+                        .font(.caption)
+                }
                 .foregroundColor(.orange)
-                .padding(.vertical, 6)
-                .frame(maxWidth: .infinity)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.orange.opacity(0.5), lineWidth: 1)
-                )
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
         }
-        .padding()
-        .liquidGlass(cornerRadius: 22)
-        .overlay(
-            RoundedRectangle(cornerRadius: 22)
-                .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+        .background(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(Color(.secondarySystemBackground))
         )
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color.orange.opacity(0.2), lineWidth: 1)
+        )
+        .shadow(color: Color.orange.opacity(0.08), radius: 16, y: 8)
     }
 }
 
-
+// MARK: - Fact Card (Revealed)
 private extension MythFactInteractiveCard {
     
     var factCard: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            
-            header(title: "Fact", color: .green)
-            
-            Text(fact)
-                .font(.subheadline)
-                .foregroundColor(.primary)
-            
-            Divider()
-            
-            pollSection(color: .green)
-        }
-        .padding()
-        .liquidGlass(cornerRadius: 22)
-        .overlay(
-            RoundedRectangle(cornerRadius: 22)
-                .stroke(Color.green.opacity(0.3), lineWidth: 1)
-        )
-    }
-}
-
-
-private extension MythFactInteractiveCard {
-    
-    func header(title: String, color: Color) -> some View {
-        HStack {
-            Text(title)
-                .font(.caption)
-                .foregroundColor(color)
-            
-            Spacer()
-            
-            Button {
-                bookmarked.toggle()
-            } label: {
-                Image(systemName: bookmarked ? "bookmark.fill" : "bookmark")
-                    .foregroundColor(color)
+        VStack(spacing: 0) {
+            // Top label
+            HStack {
+                HStack(spacing: 6) {
+                    Image(systemName: "checkmark.seal.fill")
+                        .font(.caption)
+                        .foregroundColor(.green)
+                    Text("TRUTH")
+                        .font(.caption.weight(.heavy))
+                        .foregroundColor(.green)
+                        .tracking(1.5)
+                }
+                
+                Spacer()
+                
+                Button {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                        bookmarked.toggle()
+                    }
+                } label: {
+                    Image(systemName: bookmarked ? "bookmark.fill" : "bookmark")
+                        .font(.body)
+                        .foregroundColor(.green)
+                        .scaleEffect(bookmarked ? 1.2 : 1.0)
+                }
             }
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+            .padding(.bottom, 12)
+            
+            // Crossed out myth
+            Text(myth)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .strikethrough(true, color: .red.opacity(0.6))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 8)
+            
+            // Fact text
+            Text(fact)
+                .font(.title3.weight(.semibold))
+                .foregroundColor(.primary)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+            
+            Spacer(minLength: 16)
+            
+            // Poll section
+            pollSection(color: .green)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
         }
+        .background(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(Color(.secondarySystemBackground))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color.green.opacity(0.2), lineWidth: 1)
+        )
+        .shadow(color: Color.green.opacity(0.08), radius: 16, y: 8)
     }
 }
 
-
+// MARK: - Poll Section
 private extension MythFactInteractiveCard {
     
     func pollSection(color: Color) -> some View {
-        
         VStack(alignment: .leading, spacing: 10) {
             
+            // Thin divider
+            Rectangle()
+                .fill(color.opacity(0.15))
+                .frame(height: 1)
+                .padding(.bottom, 4)
+            
             Text("Did you believe this?")
-                .font(.caption)
+                .font(.caption.weight(.medium))
                 .foregroundColor(.secondary)
                 .accessibilityAddTraits(.isHeader)
             
             if pollAnswer == nil {
-                
-                HStack(spacing: 12) {
-                    pollButton("Yes", color)
-                    pollButton("No", color)
+                HStack(spacing: 10) {
+                    pollButton("Yes", "hand.thumbsup", color)
+                    pollButton("No", "hand.thumbsdown", color)
                 }
-                
             } else {
+                HStack(spacing: 10) {
+                    pollButton("Yes", "hand.thumbsup", color)
+                        .opacity(pollAnswer == "Yes" ? 1.0 : 0.4)
+                        .scaleEffect(pollAnswer == "Yes" ? 1.05 : 1.0)
+                    pollButton("No", "hand.thumbsdown", color)
+                        .opacity(pollAnswer == "No" ? 1.0 : 0.4)
+                        .scaleEffect(pollAnswer == "No" ? 1.05 : 1.0)
+                }
+                .disabled(true)
                 
-                percentageBar(
-                    title: "Yes",
-                    value: Double(yesCount) / Double(totalVotes),
-                    color: color
-                )
-                
-                percentageBar(
-                    title: "No",
-                    value: Double(noCount) / Double(totalVotes),
-                    color: color.opacity(0.6)
-                )
+                Text("Thanks for sharing!")
+                    .font(.caption.weight(.medium))
+                    .foregroundColor(color)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 4)
             }
         }
     }
     
-    func pollButton(_ answer: String,
-                    _ color: Color) -> some View {
-        
+    func pollButton(_ answer: String, _ icon: String, _ color: Color) -> some View {
         Button {
             registerVote(answer)
         } label: {
-            Text(answer)
-                .font(.caption)
-                .fontWeight(.semibold)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 6)
-                .background(.thinMaterial, in: Capsule())
-                .foregroundColor(.primary)
-                .overlay(
-                    Capsule()
-                        .stroke(color.opacity(0.5), lineWidth: 1)
-                )
-                .clipShape(Capsule())
+            HStack(spacing: 6) {
+                Image(systemName: icon)
+                    .font(.caption)
+                Text(answer)
+                    .font(.subheadline.weight(.semibold))
+            }
+            .foregroundColor(color)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(color.opacity(0.08))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(color.opacity(0.25), lineWidth: 1)
+            )
         }
         .accessibilityLabel(answer)
         .accessibilityHint("Select your answer")
@@ -570,16 +642,12 @@ private extension MythFactInteractiveCard {
     }
     
     func registerVote(_ answer: String) {
-        pollAnswer = answer
-        
-        // Optimistic UI update
-        if answer == "Yes" {
-            yesCount += 1
-        } else {
-            noCount += 1
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+            pollAnswer = answer
         }
         
-        // Push to Firebase
+
+        
         MythPollManager.shared.registerVote(for: myth, answer: answer)
         
         UIAccessibility.post(
@@ -588,43 +656,10 @@ private extension MythFactInteractiveCard {
         )
     }
     
-    func percentageBar(title: String,
-                       value: Double,
-                       color: Color) -> some View {
-        
-        VStack(alignment: .leading, spacing: 4) {
-            
-            HStack {
-                Text(title)
-                    .font(.caption)
-                
-                Spacer()
-                
-                Text("\(Int(value * 100))%")
-                    .font(.caption)
-                    .bold()
-            }
-            
-            GeometryReader { geo in
-                ZStack(alignment: .leading) {
-                    
-                    Capsule()
-                        .fill(Color.white.opacity(0.5))
-                    
-                    Capsule()
-                        .fill(color)
-                        .frame(width: geo.size.width * value)
-                        .animation(.easeOut(duration: 0.6), value: value)
-                }
-            }
-            .frame(height: 8)
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(title) \(Int(value * 100)) percent")
-    }
+
 }
 
-
+// MARK: - Confetti
 private extension MythFactInteractiveCard {
     
     func triggerConfetti() {
