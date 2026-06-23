@@ -66,14 +66,22 @@ struct ProfileView: View {
                     .buttonStyle(.plain)
                     .padding(.top, 10)
                     
-                    // Name Edit (Clean Native Style)
-                    TextField("Your Name", text: $userName)
-                        .font(.system(size: 30, weight: .bold, design: .rounded))
-                        .foregroundColor(.primary)
-                        .multilineTextAlignment(.center)
-                        .submitLabel(.done)
-                        .autocorrectionDisabled()
-                        .padding(.top, 4)
+                    // Name Edit (Native iOS Style)
+                    HStack(alignment: .center, spacing: 6) {
+                        TextField("Your Name", text: $userName)
+                            .font(.title2.weight(.bold))
+                            .foregroundColor(.primary)
+                            .multilineTextAlignment(.center)
+                            .submitLabel(.done)
+                            .autocorrectionDisabled()
+                            .fixedSize() // Keeps the text field hugging the text
+                        
+                        Image(systemName: "pencil")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: 280)
+                    .padding(.top, 4)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
