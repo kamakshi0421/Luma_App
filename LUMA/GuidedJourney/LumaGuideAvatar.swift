@@ -116,18 +116,18 @@ struct LumaSpeechBubble: View {
             VStack(alignment: .leading, spacing: 0) {
                 // Triangle pointer
                 Triangle()
-                    .fill(Color.white)
+                    .fill(Color(.secondarySystemBackground))
                     .frame(width: 12, height: 8)
                     .rotationEffect(.degrees(-90))
                     .offset(x: -6, y: 12)
                 
                 Text(displayedText)
                     .font(.subheadline)
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                     .padding(14)
                     .background(
                         RoundedRectangle(cornerRadius: 16)
-                            .fill(Color.white)
+                            .fill(Color(.secondarySystemBackground))
                             .shadow(color: Color.black.opacity(0.06), radius: 6, y: 3)
                     )
                     .overlay(
@@ -186,14 +186,14 @@ struct LumaGuideGreeting: View {
                 .scaleEffect(appeared ? 1.0 : 0.5)
                 .opacity(appeared ? 1.0 : 0.0)
             
-            Text("Hi, I'm Luma! 💗")
+            Text("Hi, I'm Aarohi! 💗")
                 .font(.title3.bold())
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
                 .opacity(appeared ? 1.0 : 0.0)
             
             Text("Let me walk you through the \(stageName) stage.\nTap to explore each section!")
                 .font(.subheadline)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .opacity(appeared ? 1.0 : 0.0)
         }

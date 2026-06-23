@@ -7,7 +7,7 @@ struct ConditionDetailSheet: View {
     var body: some View {
         ZStack {
             
-            Color.lumaSurface
+            Color(.systemBackground)
                 .ignoresSafeArea()
             
             ScrollView {
@@ -32,11 +32,11 @@ struct ConditionDetailSheet: View {
                             Text(condition.name)
                                 .font(.title2)
                                 .fontWeight(.bold)
-                                .foregroundColor(.lumaDarkGray)
+                                .foregroundColor(.primary)
                             
                             Text(condition.shortDescription)
                                 .font(.subheadline)
-                                .foregroundColor(.lumaMidGray)
+                                .foregroundColor(.secondary)
                         }
                         
                        
@@ -66,14 +66,14 @@ struct ConditionDetailSheet: View {
                                         
                                         Text(symptom)
                                             .font(.subheadline)
-                                            .foregroundColor(.lumaDarkGray)
+                                            .foregroundColor(.primary)
                                         
                                         Spacer()
                                     }
                                     
                                     if index != condition.symptoms.count - 1 {
                                         Rectangle()
-                                            .fill(Color.lumaDarkGray.opacity(0.20))
+                                            .fill(Color.primary.opacity(0.20))
                                             .frame(height: 1)
                                     }
                                 }
@@ -97,14 +97,14 @@ struct ConditionDetailSheet: View {
                                         
                                         Text(tip)
                                             .font(.subheadline)
-                                            .foregroundColor(.lumaDarkGray)
+                                            .foregroundColor(.primary)
                                         
                                         Spacer()
                                     }
                                     
                                     if index != condition.basicCare.count - 1 {
                                         Rectangle()
-                                            .fill(Color.lumaDarkGray.opacity(0.20)) 
+                                            .fill(Color.primary.opacity(0.20)) 
                                             .frame(height: 1)
                                     }
                                 }
@@ -179,11 +179,11 @@ struct DetailCard: View {
                 Text(title)
                     .font(.headline)
             }
-            .foregroundColor(.lumaDarkGray)
+            .foregroundColor(.primary)
             
             Text(content)
                 .font(.subheadline)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)

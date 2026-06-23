@@ -11,7 +11,7 @@ struct AskLumaView: View {
     @State private var messageText = ""
     
     @State private var messages: [ChatMessage] = [
-        ChatMessage(text: "Luma is here. Take a deep breath 🌷", isUser: false)
+        ChatMessage(text: "Aarohi is here. Take a deep breath 🌷", isUser: false)
     ]
     var stageSuggestions: [(title: String, question: String)] {
         
@@ -102,7 +102,7 @@ struct AskLumaView: View {
         if !UIAccessibility.isVoiceOverRunning {
             
             let utterance = AVSpeechUtterance(
-                string: "Hi, I'm Luma. How can I support you today?"
+                string: "Hi, I'm Aarohi. How can I support you today?"
             )
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
             utterance.rate = 0.5
@@ -142,7 +142,7 @@ struct AskLumaView: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
-                    Text("Luma")
+                    Text("Aarohi")
                         .font(.headline.weight(.bold))
                         .foregroundColor(.primary)
                     

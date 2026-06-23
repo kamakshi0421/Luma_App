@@ -201,7 +201,7 @@ struct EmojiReactionView: View {
                         .font(.title)
                     Text("Thanks for sharing! 💗")
                         .font(.caption)
-                        .foregroundColor(.lumaMidGray)
+                        .foregroundColor(.secondary)
                 }
                 .padding(.vertical, 8)
                 .transition(.scale.combined(with: .opacity))
@@ -220,12 +220,12 @@ struct EmojiReactionView: View {
                                     .font(.title2)
                                 Text(labels[index])
                                     .font(.system(size: 9))
-                                    .foregroundColor(.lumaMidGray)
+                                    .foregroundColor(.secondary)
                             }
                             .padding(8)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.white)
+                                    .fill(Color(.secondarySystemBackground))
                                     .shadow(color: Color.black.opacity(0.04), radius: 4, y: 2)
                             )
                         }
@@ -290,21 +290,21 @@ struct GuidedSectionReveal<Content: View>: View {
                     HStack(spacing: 10) {
                         Image(systemName: "lock.fill")
                             .font(.caption)
-                            .foregroundColor(.lumaMidGray.opacity(0.5))
+                            .foregroundColor(.secondary.opacity(0.5))
                         
                         Text("Continue exploring to unlock")
                             .font(.caption)
-                            .foregroundColor(.lumaMidGray.opacity(0.5))
+                            .foregroundColor(.secondary.opacity(0.5))
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(
                         RoundedRectangle(cornerRadius: 16)
-                            .fill(Color.lumaDarkGray.opacity(0.04))
+                            .fill(Color.primary.opacity(0.04))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
                                     .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6, 4]))
-                                    .foregroundColor(.lumaDarkGray.opacity(0.1))
+                                    .foregroundColor(.primary.opacity(0.1))
                             )
                     )
                 }
@@ -334,7 +334,7 @@ struct JourneySummaryCard: View {
                 
                 Text("Journey Complete!")
                     .font(.headline)
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                 
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
@@ -344,7 +344,7 @@ struct JourneySummaryCard: View {
             
             Text("You've explored the \(stageName) stage")
                 .font(.subheadline)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
             
             // Key takeaways
             VStack(alignment: .leading, spacing: 10) {
@@ -361,7 +361,7 @@ struct JourneySummaryCard: View {
                         
                         Text(takeaway)
                             .font(.caption)
-                            .foregroundColor(.lumaDarkGray)
+                            .foregroundColor(.primary)
                     }
                     .opacity(appeared ? 1.0 : 0.0)
                     .offset(x: appeared ? 0 : -20)
@@ -380,7 +380,7 @@ struct JourneySummaryCard: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 22)
-                .fill(Color.white)
+                .fill(Color(.secondarySystemBackground))
                 .shadow(color: Color.lumaPinkBubble.opacity(0.15), radius: 12, y: 6)
         )
         .overlay(

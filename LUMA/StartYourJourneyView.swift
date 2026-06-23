@@ -31,7 +31,7 @@ struct StartYourJourneyView: View {
                                 )
                                 .shadow(color: Color.lumaPinkBubble.opacity(0.3), radius: 10, x: 0, y: 4)
                             
-                            Text("Hi, I’m Luma")
+                            Text("Hi, I’m Aarohi")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.primary)

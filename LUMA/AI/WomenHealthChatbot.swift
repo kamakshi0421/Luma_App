@@ -23,7 +23,7 @@ class WomenHealthChatbot: ObservableObject {
         if let emergencyItem = HealthKnowledgeService.shared.searchEmergencyContent(for: question) {
             
             let emergencyPrompt = """
-            You are Luma, a calm and serious health assistant.
+            You are Aarohi, a calm and serious health assistant.
             
             This situation may be urgent.
             

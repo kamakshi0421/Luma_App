@@ -72,18 +72,15 @@ struct MainTabView: View {
                                 .padding(.vertical, 12)
                                 .background(
                                     LinearGradient(
-                                        colors: [
-                                            Color(red: 0.92, green: 0.45, blue: 0.70),
-                                            Color(red: 0.82, green: 0.30, blue: 0.60)
-                                        ],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
+                                        colors: [Color.lumaPinkLight, Color.lumaPinkDark],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
                                     )
                                 )
                                 .clipShape(Capsule())
                                 .shadow(
-                                    color: Color(red: 0.82, green: 0.30, blue: 0.60).opacity(0.35),
-                                    radius: 10,
+                                    color: Color.lumaPinkDark.opacity(0.4),
+                                    radius: 12,
                                     y: 6
                                 )
                             }
@@ -100,28 +97,3 @@ struct MainTabView: View {
     }
 }
 
-
-struct AnimatedTabIcon: View {
-    
-    let systemName: String
-    let title: String
-    let isSelected: Bool
-    
-    var body: some View {
-        VStack(spacing: 4) {
-            
-            Image(systemName: systemName)
-                .font(.system(size: 18, weight: .semibold))
-                .scaleEffect(isSelected ? 1.15 : 1.0)
-                .foregroundColor(isSelected ? .lumaPinkBubble : .gray)
-                .animation(
-                    .spring(response: 0.3, dampingFraction: 0.6),
-                    value: isSelected
-                )
-            
-            Text(title)
-                .font(.caption2)
-                .foregroundColor(isSelected ? .lumaPinkBubble : .gray)
-        }
-    }
-}

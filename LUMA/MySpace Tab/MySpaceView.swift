@@ -50,13 +50,20 @@ struct MySpaceView: View {
         Color.pink
     }
     
+    @AppStorage("user_name") private var userName: String = ""
+    
     private var greetingText: String {
         let hour = Calendar.current.component(.hour, from: Date())
+        let name = userName.isEmpty ? "sunshine" : userName
+        let afternoonName = userName.isEmpty ? "beautiful" : userName
+        let eveningName = userName.isEmpty ? "love" : userName
+        let nightName = userName.isEmpty ? "dear" : userName
+        
         switch hour {
-        case 5..<12: return "Good morning, sunshine ☀️"
-        case 12..<17: return "Good afternoon, beautiful 🌸"
-        case 17..<21: return "Good evening, love 🌙"
-        default: return "Sweet dreams, dear 💫"
+        case 5..<12: return userName.isEmpty ? "Good morning, \(name) ☀️" : "Hey \(name), Good morning ☀️"
+        case 12..<17: return userName.isEmpty ? "Good afternoon, \(afternoonName) 🌸" : "Hey \(name), Good afternoon 🌸"
+        case 17..<21: return userName.isEmpty ? "Good evening, \(eveningName) 🌙" : "Hey \(name), Good evening 🌙"
+        default: return "Sweet dreams, \(nightName) 💫"
         }
     }
     
@@ -84,11 +91,11 @@ struct MySpaceView: View {
         .navigationTitle("MySpace")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showProfile = true
-                    } label: {
-                        Image(systemName: "person.crop.circle.fill")
-                            .font(.title3)
+                    NavigationLink(destination: ProfileView()) {
+                        Image(systemName: UserDefaults.standard.string(forKey: "user_avatar") ?? "person.crop.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 26, height: 26)
                             .foregroundStyle(
                                 LinearGradient(colors: [.feminineAccent, .feminineLilac], startPoint: .topLeading, endPoint: .bottomTrailing)
                             )
@@ -99,10 +106,7 @@ struct MySpaceView: View {
             .task {
                 await insightManager.generateInsight(from: logs)
             }
-            
-            .sheet(isPresented: $showProfile) {
-                ProfileView()
-            }
+
             
             .sheet(item: $selectedStageForSheet) { stage in
                 LifeStageDetailView(stage: stage)
@@ -202,16 +206,7 @@ private extension MySpaceView {
             MySpaceSectionHeader(title: "Where I Am", emoji: "🌿")
             
             LifeStageJourneyView(currentStage: currentStage)
-                .padding(16)
-                .background(
-                    RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .fill(Color.pastelLavender.opacity(0.15))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .stroke(Color.pastelLavender.opacity(0.35), lineWidth: 1)
-                )
-                .shadow(color: Color.feminineLilac.opacity(0.06), radius: 8, y: 4)
+                .padding(.vertical, 8)
         }
     }
     

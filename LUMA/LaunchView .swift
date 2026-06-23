@@ -15,7 +15,7 @@ struct LaunchView: View {
             MainTabView()
         } else {
             ZStack {
-                Color.lumaSurface
+                LumaBackground()
                     .ignoresSafeArea()
                 
                 if isLogoExpanded {
@@ -35,31 +35,35 @@ struct LaunchView: View {
                     Image("AppIconImage")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: isLogoExpanded ? 300 : 210,
-                               height: isLogoExpanded ? 300 : 210)
-                        .clipShape(RoundedRectangle(cornerRadius: 32))
+                        .frame(width: isLogoExpanded ? 320 : 220,
+                               height: isLogoExpanded ? 320 : 220)
+                        // Use a dynamic, slightly tighter corner radius to hide any baked-in logo corners
+                        .clipShape(RoundedRectangle(cornerRadius: isLogoExpanded ? 72 : 50, style: .continuous))
                         .shadow(color: .black.opacity(0.15),
-                                radius: isLogoExpanded ? 40 : 25,
+                                radius: isLogoExpanded ? 50 : 30,
                                 x: 0,
                                 y: 15)
-                        .scaleEffect(animate ? 1 : 0.9)
+                        .scaleEffect(animate ? 1 : 0.8)
                         .opacity(animate ? 1 : 0)
-                        .onTapGesture {
-                            withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-                                isLogoExpanded.toggle()
-                            }
+                        // Breathing animation
+                        .scaleEffect(isLogoExpanded ? 1.05 : 1.0)
+                        .animation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true), value: isLogoExpanded)
+                        .onAppear {
+                            // Start continuous breathing effect
+                            isLogoExpanded = true
                         }
                     
-                    if !isLogoExpanded {
+                    if true { // Always show text now
                         Text("AAROHI")
                             .font(.system(size: 44, weight: .bold, design: .rounded))
-                            .foregroundColor(.lumaDarkGray)
+                            // Revert to primary text color
+                            .foregroundColor(.primary)
                             .tracking(6)
                             .opacity(animate ? 1 : 0)
                         
                         Text("Because every stage deserves care")
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.lumaMidGray)
+                            .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 30)
                             .opacity(animate ? 1 : 0)
@@ -76,7 +80,7 @@ struct LaunchView: View {
                                 .padding(.vertical, 16)
                                 .background(
                                     RoundedRectangle(cornerRadius: 30)
-                                        .fill(Color.lumaPinkLight)
+                                        .fill(Color.lumaPinkLight) // Reverted to original button color
                                 )
                                 .shadow(color: .black.opacity(0.1),
                                         radius: 12,
@@ -103,7 +107,6 @@ struct LaunchView: View {
                 }
             }
             .onAppear {
-                hasSeenOnboarding = false // Reset for testing so the user can see the onboarding screen
                 
                 withAnimation(.easeOut(duration: 0.9)) {
                     animate = true

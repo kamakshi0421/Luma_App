@@ -23,7 +23,7 @@ struct DailyChallengeView: View {
             HStack {
                 Text("Today's Challenge")
                     .font(.title2.bold())
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                 
                 Spacer()
                 
@@ -53,11 +53,11 @@ struct DailyChallengeView: View {
         VStack(spacing: 16) {
             Text(challenge.title)
                 .font(.title3.bold())
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
             
             Text(challenge.description)
                 .font(.subheadline)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             
@@ -83,8 +83,7 @@ struct DailyChallengeView: View {
             }
         }
         .padding()
-        .background(Color.white.opacity(0.8))
-        .cornerRadius(20)
+        .background(Color(.secondarySystemBackground))
         .shadow(color: Color.black.opacity(0.05), radius: 10)
         .padding()
     }
@@ -97,11 +96,11 @@ struct DailyChallengeView: View {
             
             Text("Challenge Complete!")
                 .font(.title2.bold())
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
             
             Text("Come back tomorrow for a new challenge.")
                 .font(.subheadline)
-                .foregroundColor(.lumaMidGray)
+                .foregroundColor(.secondary)
             
             StreakDetailView(streakManager: streakManager)
                 .padding()
@@ -116,7 +115,7 @@ struct DailyChallengeView: View {
         VStack(spacing: 16) {
             Text(challenge.question ?? "")
                 .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
             
             if let options = challenge.options {
@@ -133,7 +132,7 @@ struct DailyChallengeView: View {
                     } label: {
                         Text(options[index])
                             .font(.headline)
-                            .foregroundColor(.lumaDarkGray)
+                            .foregroundColor(.primary)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(quizOptionColor(index: index, correctIndex: challenge.correctIndex))
@@ -149,7 +148,7 @@ struct DailyChallengeView: View {
                     .font(.subheadline)
                     .foregroundColor(selectedOption == challenge.correctIndex ? .green : .orange)
                     .padding()
-                    .background(Color.white)
+                    .background(Color(.secondarySystemBackground))
                     .cornerRadius(12)
                     .shadow(radius: 2)
                     .transition(.opacity)
@@ -166,13 +165,13 @@ struct DailyChallengeView: View {
     }
     
     func quizOptionColor(index: Int, correctIndex: Int?) -> Color {
-        guard showExplanation else { return .white }
+        guard showExplanation else { return Color(.secondarySystemBackground) }
         if index == correctIndex {
             return .green.opacity(0.2)
         } else if index == selectedOption {
             return .red.opacity(0.2)
         }
-        return .white
+        return Color(.secondarySystemBackground)
     }
     
     @ViewBuilder
@@ -181,7 +180,7 @@ struct DailyChallengeView: View {
             if let prompts = challenge.prompts, currentPromptIndex < prompts.count {
                 Text(prompts[currentPromptIndex])
                     .font(.headline)
-                    .foregroundColor(.lumaDarkGray)
+                    .foregroundColor(.primary)
                     .multilineTextAlignment(.center)
                 
                 HStack(spacing: 20) {
@@ -209,7 +208,7 @@ struct DailyChallengeView: View {
         VStack(spacing: 20) {
             Text(challenge.myth ?? "")
                 .font(.headline)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
                 .padding()
                 .background(Color.lumaPinkLight.opacity(0.2))
@@ -256,7 +255,7 @@ struct DailyChallengeView: View {
                     
                     Text(challenge.fact ?? "")
                         .font(.subheadline)
-                        .foregroundColor(.lumaDarkGray)
+                        .foregroundColor(.primary)
                         .multilineTextAlignment(.center)
                     
                     Button("Finish") {
@@ -265,7 +264,7 @@ struct DailyChallengeView: View {
                     .padding(.top)
                 }
                 .padding()
-                .background(Color.white)
+                .background(Color(.secondarySystemBackground))
                 .cornerRadius(16)
                 .shadow(radius: 5)
                 .transition(.scale)
@@ -278,7 +277,7 @@ struct DailyChallengeView: View {
         VStack(spacing: 20) {
             Text(challenge.storyText ?? "")
                 .font(.body)
-                .foregroundColor(.lumaDarkGray)
+                .foregroundColor(.primary)
                 .padding()
                 .background(Color.lumaPinkLight.opacity(0.1))
                 .cornerRadius(16)
@@ -291,7 +290,7 @@ struct DailyChallengeView: View {
                     
                     Text(challenge.moral ?? "")
                         .font(.subheadline)
-                        .foregroundColor(.lumaMidGray)
+                        .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                 }
                 .padding()
