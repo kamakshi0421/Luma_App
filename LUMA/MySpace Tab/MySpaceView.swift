@@ -206,7 +206,16 @@ private extension MySpaceView {
             MySpaceSectionHeader(title: "Where I Am", emoji: "🌿")
             
             LifeStageJourneyView(currentStage: currentStage)
-                .padding(.vertical, 8)
+                .padding(16)
+                .background(
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .fill(Color(.systemBackground).opacity(0.6))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .stroke(Color.feminineLilac.opacity(0.3), lineWidth: 1)
+                )
+                .shadow(color: Color.feminineLilac.opacity(0.1), radius: 8, y: 4)
         }
     }
     

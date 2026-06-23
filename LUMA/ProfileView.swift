@@ -128,11 +128,43 @@ struct ProfileView: View {
                     Label("Notifications", systemImage: "bell.badge.fill")
                 }
                 .tint(.lumaAccent)
+                .onChange(of: notificationsEnabled) { _, newValue in
+                    if newValue {
+                        NotificationManager.shared.requestPermission { granted in
+                            if !granted {
+                                notificationsEnabled = false
+                                dailyReminderEnabled = false
+                            }
+                        }
+                    } else {
+                        dailyReminderEnabled = false
+                        NotificationManager.shared.cancelAllNotifications()
+                    }
+                }
                 
                 Toggle(isOn: $dailyReminderEnabled) {
                     Label("Daily Reminders", systemImage: "calendar.badge.clock")
                 }
                 .tint(.lumaAccent)
+                .onChange(of: dailyReminderEnabled) { _, newValue in
+                    if newValue {
+                        if !notificationsEnabled {
+                            notificationsEnabled = true
+                            NotificationManager.shared.requestPermission { granted in
+                                if granted {
+                                    NotificationManager.shared.scheduleDailyReminder(userName: userName)
+                                } else {
+                                    notificationsEnabled = false
+                                    dailyReminderEnabled = false
+                                }
+                            }
+                        } else {
+                            NotificationManager.shared.scheduleDailyReminder(userName: userName)
+                        }
+                    } else {
+                        NotificationManager.shared.cancelAllNotifications()
+                    }
+                }
             }
             
             // ── Section 5: About Aarohi ──

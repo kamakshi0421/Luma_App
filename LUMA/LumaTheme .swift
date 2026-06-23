@@ -51,14 +51,14 @@ struct LumaBackground: View {
         ZStack {
             
             // Pure white base in light mode (no grey), dark rich plum in dark mode
-            Color(colorScheme == .dark ? UIColor(red: 0.12, green: 0.05, blue: 0.10, alpha: 1.0) : UIColor.white)
+            (colorScheme == .dark ? Color(red: 0.12, green: 0.05, blue: 0.10) : Color.white)
                 .ignoresSafeArea()
             
             // Vibrant pink gradient from the top
             LinearGradient(
                 colors: [
                     Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.3 : 0.25),
-                    Color.clear
+                    Color.lumaPinkBubble.opacity(0.0)
                 ],
                 startPoint: .top,
                 endPoint: .bottom
@@ -69,7 +69,7 @@ struct LumaBackground: View {
             RadialGradient(
                 colors: [
                     Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.2 : 0.15),
-                    Color.clear
+                    Color.lumaPinkBubble.opacity(0.0)
                 ],
                 center: .top,
                 startRadius: 0,

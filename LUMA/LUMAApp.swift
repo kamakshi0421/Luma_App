@@ -12,6 +12,11 @@ import SwiftData
 @main
 struct LUMAApp: App {
     @AppStorage("hasSeenOnboarding") var hasSeenOnboarding = false
+    
+    init() {
+        // Touch the shared instance to set up the notification delegate early
+        _ = NotificationManager.shared
+    }
 
     var body: some Scene {
         WindowGroup {
