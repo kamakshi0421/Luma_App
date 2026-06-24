@@ -65,6 +65,7 @@ extension SymptomTrackerView {
         .foregroundColor(.secondary)
         .padding(.horizontal)
     }
+    .frame(maxWidth: .infinity)
     .padding()
     .background(
       RoundedRectangle(cornerRadius: 24, style: .continuous)
@@ -194,18 +195,9 @@ extension SymptomTrackerView {
         .foregroundColor(.white)
         .frame(maxWidth: .infinity)
         .padding()
-        .background(
-          LinearGradient(
-            colors: [
-              stageAccentColor,
-              stageAccentColor.opacity(0.7)
-            ],
-            startPoint: .leading,
-            endPoint: .trailing
-          )
-        )
+        .background(stageAccentColor)
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .shadow(color: stageAccentColor.opacity(0.35), radius: 8, y: 4)
+        .shadow(color: stageAccentColor.opacity(0.25), radius: 8, y: 4)
     }
   }}
 
@@ -222,6 +214,7 @@ struct pastelCard<Content: View>: View {
   
   var body: some View {
     content
+      .frame(maxWidth: .infinity, alignment: .leading)
       .padding()
       .background(
         RoundedRectangle(cornerRadius: 22, style: .continuous)

@@ -29,11 +29,7 @@ struct ChatBubble: View {
       .padding(16)
       .foregroundColor(.white)
       .background(
-        LinearGradient(
-          colors: [Color.pink.opacity(0.8), Color.purple.opacity(0.8)],
-          startPoint: .topLeading,
-          endPoint: .bottomTrailing
-        )
+        Color.lumaPinkBubble
         .clipShape(RoundedRectangle(cornerRadius: 22))
       )
       .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
@@ -114,11 +110,7 @@ struct ChatBubble: View {
     .overlay(
       RoundedRectangle(cornerRadius: 24, style: .continuous)
         .stroke(
-          LinearGradient(
-            colors: [Color.pink.opacity(0.3), Color(.systemBackground).opacity(0.1)],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-          ),
+          Color.pink.opacity(0.2),
           lineWidth: 1
         )
     )

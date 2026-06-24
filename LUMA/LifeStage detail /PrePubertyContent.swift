@@ -120,6 +120,24 @@ struct PrePubertyContent {
          "Medical evaluation if concerned"
         ],
         whenToSeeDoctor: "If development milestones are significantly delayed."
+      ),
+      
+      StageCondition(
+        name: "Premature Thelarche",
+        shortDescription: "Isolated early breast development.",
+        overview: "A benign condition where breast tissue develops early (usually before age 3, or between 6-8) without other signs of puberty. It typically doesn't progress to full puberty.",
+        imageName: "thelarche_awareness",
+        symptoms: [
+         "Small breast buds in young girls",
+         "No other signs of puberty (like hair growth or rapid height)",
+         "Usually painless"
+        ],
+        basicCare: [
+         "Pediatric evaluation to rule out true precocious puberty",
+         "Reassurance that it is usually harmless",
+         "Routine monitoring"
+        ],
+        whenToSeeDoctor: "If accompanied by rapid growth or other signs of puberty."
       )
     ]
   )

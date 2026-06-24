@@ -4,10 +4,10 @@ import SwiftUI
 struct StartYourJourneyView: View {
   @AppStorage("hasSeenOnboarding") var hasSeenOnboarding = false
   @AppStorage("selectedStage") private var selectedStageRaw: String = LifeStage.reproductive.rawValue
-  @AppStorage("userName") private var userName: String = ""
+  @AppStorage("user_name") private var userName: String = ""
   @Environment(\.dismiss) private var dismiss
   
-  @State private var age: Int = 18
+  @AppStorage("user_age") private var age: Int = 18
   @State private var suggestedStage: LifeStage = .reproductive
   @State private var selectedStage: LifeStage = .reproductive
   
@@ -66,11 +66,12 @@ struct StartYourJourneyView: View {
                 .foregroundColor(.primary)
               
               HStack {
-                TextField("Your beautiful name...", text: $userName)
+                TextField("What should we call you?", text: $userName)
                   .font(.system(size: 20, weight: .medium, design: .rounded))
                   .foregroundColor(.primary)
                   .padding(.vertical, 16)
                   .padding(.horizontal, 20)
+                  .submitLabel(.done)
                 
                 if !userName.trimmingCharacters(in: .whitespaces).isEmpty {
                   Image(systemName: "checkmark.circle.fill")

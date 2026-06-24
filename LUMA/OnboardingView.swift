@@ -120,13 +120,7 @@ struct OnboardingSlideView: View {
       ZStack {
         // Soft glowing aura
         Circle()
-          .fill(
-            LinearGradient(
-              colors: [slide.accentColor.opacity(0.1), slide.accentColor.opacity(0.4)],
-              startPoint: .topLeading,
-              endPoint: .bottomTrailing
-            )
-          )
+          .fill(slide.accentColor.opacity(0.2))
           .frame(width: 240, height: 240)
           .blur(radius: 30)
           .scaleEffect(appear ? 1.1 : 0.9)
@@ -135,13 +129,7 @@ struct OnboardingSlideView: View {
         // Crisp Icon
         Image(systemName: slide.iconName)
           .font(.system(size: 90, weight: .ultraLight))
-          .foregroundStyle(
-            LinearGradient(
-              colors: [slide.accentColor.opacity(0.7), slide.accentColor],
-              startPoint: .topLeading,
-              endPoint: .bottomTrailing
-            )
-          )
+          .foregroundStyle(slide.accentColor)
           .shadow(color: slide.accentColor.opacity(0.3), radius: 10, x: 0, y: 10)
           .scaleEffect(appear ? 1.0 : 0.8)
           .opacity(appear ? 1.0 : 0)

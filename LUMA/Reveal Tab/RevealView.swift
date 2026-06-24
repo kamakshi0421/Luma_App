@@ -80,6 +80,11 @@ struct RevealView: View {
     ScrollView {
       VStack(alignment: .leading, spacing: 20) {
           
+          Text("Uncover the truth about your body.")
+            .font(.subheadline)
+            .foregroundColor(.lumaMidGray)
+            .frame(maxWidth: .infinity, alignment: .leading)
+          
           heroSection
           
 
@@ -99,7 +104,6 @@ struct RevealView: View {
     .background {
       LumaBackground()
     }
-    .searchable(text: $searchText, prompt: "Search myths, facts, or concerns...")
     .navigationTitle("Reveal")
     .onAppear {
       if dailyMyth == nil {
@@ -123,7 +127,7 @@ struct RevealView: View {
         .presentationDetents([.large])
         .presentationCornerRadius(28)
     }
-    .sheet(isPresented: $showScenarios) {
+    .navigationDestination(isPresented: $showScenarios) {
       ScenarioGameView(stage: currentStage)
     }
     .fullScreenCover(isPresented: $showConstellation) {
@@ -442,32 +446,12 @@ private extension MythFactInteractiveCard {
       // Scratch prompt with shimmer
       ZStack {
         RoundedRectangle(cornerRadius: 14, style: .continuous)
-          .fill(
-            LinearGradient(
-              colors: [
-                Color.orange.opacity(0.08),
-                Color.orange.opacity(0.15),
-                Color.orange.opacity(0.08)
-              ],
-              startPoint: .leading,
-              endPoint: .trailing
-            )
-          )
+          .fill(Color(.tertiarySystemFill))
           .frame(height: 44)
         
         // Shimmer overlay
         RoundedRectangle(cornerRadius: 14, style: .continuous)
-          .fill(
-            LinearGradient(
-              colors: [
-                Color.clear,
-                Color(.systemBackground).opacity(0.4),
-                Color.clear
-              ],
-              startPoint: .leading,
-              endPoint: .trailing
-            )
-          )
+          .fill(Color(.systemBackground).opacity(0.4))
           .frame(height: 44)
           .offset(x: shimmerOffset)
           .mask(
@@ -490,13 +474,9 @@ private extension MythFactInteractiveCard {
     }
     .background(
       RoundedRectangle(cornerRadius: 24, style: .continuous)
-        .fill(Color(.secondarySystemBackground))
+        .fill(Color(.secondarySystemGroupedBackground))
     )
-    .overlay(
-      RoundedRectangle(cornerRadius: 24, style: .continuous)
-        .stroke(Color.orange.opacity(0.2), lineWidth: 1)
-    )
-    .shadow(color: Color.orange.opacity(0.08), radius: 16, y: 8)
+    .shadow(color: Color.black.opacity(0.06), radius: 12, y: 6)
   }
 }
 

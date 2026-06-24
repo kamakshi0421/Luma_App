@@ -1,4 +1,6 @@
-import SwiftUI
+import os
+
+scenarios_code = """import SwiftUI
 
 struct ScenarioLibrary {
   static func scenarios(for stage: LifeStage) -> [Scenario] {
@@ -420,3 +422,8 @@ struct ScenarioLibrary {
     }
   }
 }
+"""
+
+with open("/Users/kamakshi/Documents/GitHub/Luma_App/LUMA/Scenarios/ScenarioData.swift", "w") as f:
+    f.write(scenarios_code)
+print("ScenarioData.swift updated successfully with many more scenarios!")

@@ -129,6 +129,25 @@ struct ReproductiveContent {
          "Regular monitoring"
         ],
         whenToSeeDoctor: "If pain disrupts daily life or periods are extremely painful."
+      ),
+      
+      StageCondition(
+        name: "Uterine Fibroids",
+        shortDescription: "Noncancerous growths in the uterus.",
+        overview: "Fibroids are common during reproductive years and can cause heavy bleeding or pelvic pressure, though many women have no symptoms.",
+        imageName: "fibroids_awareness",
+        symptoms: [
+         "Heavy menstrual bleeding",
+         "Prolonged periods (over a week)",
+         "Pelvic pressure or pain",
+         "Frequent urination"
+        ],
+        basicCare: [
+         "Regular medical checkups",
+         "Iron supplements if anemic",
+         "Pain relief strategies"
+        ],
+        whenToSeeDoctor: "If you have severe pelvic pain or extremely heavy/prolonged periods."
       )
     ]
   )

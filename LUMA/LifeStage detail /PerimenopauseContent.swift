@@ -145,6 +145,25 @@ struct PerimenopauseContent {
          "Medical consultation"
         ],
         whenToSeeDoctor: "If symptoms are persistent or worsening."
+      ),
+      
+      StageCondition(
+        name: "Depression and Anxiety",
+        shortDescription: "Mood disorders exacerbated by hormonal shifts.",
+        overview: "Fluctuating estrogen and progesterone levels during perimenopause can trigger new-onset depression and anxiety or worsen existing conditions.",
+        imageName: "mood_disorder_awareness",
+        symptoms: [
+         "Persistent sadness or emptiness",
+         "Excessive worry or panic attacks",
+         "Loss of interest in activities",
+         "Difficulty sleeping or concentrating"
+        ],
+        basicCare: [
+         "Therapy or counseling",
+         "Regular exercise and good sleep",
+         "Mindfulness practices"
+        ],
+        whenToSeeDoctor: "If feelings of depression or anxiety interfere with daily life or if you have thoughts of self-harm."
       )
     ]
   )

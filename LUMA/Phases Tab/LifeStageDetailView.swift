@@ -160,14 +160,7 @@ private extension LifeStageDetailView {
       }
       .padding(16)
       .background(
-        LinearGradient(
-          colors: [
-            Color.lumaPinkBubble,
-            Color.lumaAccent
-          ],
-          startPoint: .leading,
-          endPoint: .trailing
-        )
+        Color.lumaPinkBubble
       )
       .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
       .shadow(color: Color.lumaPinkBubble.opacity(0.3), radius: 8, y: 4)

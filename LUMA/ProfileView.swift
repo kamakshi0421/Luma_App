@@ -49,7 +49,7 @@ struct ProfileView: View {
                 .scaledToFit()
                 .frame(width: 90, height: 90)
                 .foregroundStyle(
-                  LinearGradient(colors: [Color.lumaPinkLight, Color.lumaPinkDark], startPoint: .topLeading, endPoint: .bottomTrailing)
+                  Color.lumaPinkBubble
                 )
                 .shadow(color: Color.lumaPinkLight.opacity(0.3), radius: 10, y: 4)
               
@@ -112,7 +112,7 @@ struct ProfileView: View {
             .font(.system(size: 14, weight: .semibold))
             .foregroundColor(.white)
             .frame(width: 28, height: 28)
-            .background(LinearGradient(colors: [.orange, .red], startPoint: .top, endPoint: .bottom))
+            .background(Color.orange)
             .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
           
           Text("Current Streak")
@@ -127,7 +127,7 @@ struct ProfileView: View {
             .font(.system(size: 14, weight: .semibold))
             .foregroundColor(.white)
             .frame(width: 28, height: 28)
-            .background(LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom))
+            .background(Color.yellow)
             .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
           
           Text("Longest Streak")
@@ -142,7 +142,7 @@ struct ProfileView: View {
             .font(.system(size: 14, weight: .semibold))
             .foregroundColor(.white)
             .frame(width: 28, height: 28)
-            .background(LinearGradient(colors: [Color.lumaPinkLight, Color.lumaPinkDark], startPoint: .top, endPoint: .bottom))
+            .background(Color.pink)
             .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
           
           Text("Phase Progress")
@@ -161,7 +161,7 @@ struct ProfileView: View {
               .font(.system(size: 14, weight: .semibold))
               .foregroundColor(.white)
               .frame(width: 28, height: 28)
-              .background(LinearGradient(colors: [.red, .pink], startPoint: .top, endPoint: .bottom))
+              .background(Color.red)
               .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
             Text("Notifications")
           }
@@ -187,7 +187,7 @@ struct ProfileView: View {
               .font(.system(size: 14, weight: .semibold))
               .foregroundColor(.white)
               .frame(width: 28, height: 28)
-              .background(LinearGradient(colors: [.purple, .indigo], startPoint: .top, endPoint: .bottom))
+              .background(Color.purple)
               .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
             Text("Daily Reminders")
           }
@@ -221,7 +221,7 @@ struct ProfileView: View {
             .font(.system(size: 14, weight: .semibold))
             .foregroundColor(.white)
             .frame(width: 28, height: 28)
-            .background(LinearGradient(colors: [.blue, .cyan], startPoint: .top, endPoint: .bottom))
+            .background(Color.blue)
             .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
           Text("Version")
           Spacer()
@@ -233,7 +233,7 @@ struct ProfileView: View {
               .font(.system(size: 14, weight: .semibold))
               .foregroundColor(.white)
               .frame(width: 28, height: 28)
-              .background(LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom))
+              .background(Color.yellow)
               .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
             Text("Rate Us")
               .foregroundColor(.primary)
@@ -245,7 +245,7 @@ struct ProfileView: View {
               .font(.system(size: 14, weight: .semibold))
               .foregroundColor(.white)
               .frame(width: 28, height: 28)
-              .background(LinearGradient(colors: [.green, .mint], startPoint: .top, endPoint: .bottom))
+              .background(Color.green)
               .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
             Text("Share App")
               .foregroundColor(.primary)
@@ -257,7 +257,7 @@ struct ProfileView: View {
               .font(.system(size: 14, weight: .semibold))
               .foregroundColor(.white)
               .frame(width: 28, height: 28)
-              .background(LinearGradient(colors: [.gray, .secondary], startPoint: .top, endPoint: .bottom))
+              .background(Color.gray)
               .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
             Text("Privacy Policy")
               .foregroundColor(.primary)
@@ -273,7 +273,7 @@ struct ProfileView: View {
               .font(.system(size: 14, weight: .semibold))
               .foregroundColor(.white)
               .frame(width: 28, height: 28)
-              .background(LinearGradient(colors: [.orange, .red], startPoint: .top, endPoint: .bottom))
+              .background(Color.orange)
               .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
             Text("Reset Onboarding")
           }
@@ -284,7 +284,7 @@ struct ProfileView: View {
               .font(.system(size: 14, weight: .semibold))
               .foregroundColor(.white)
               .frame(width: 28, height: 28)
-              .background(LinearGradient(colors: [.red, .pink], startPoint: .top, endPoint: .bottom))
+              .background(Color.red)
               .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
             Text("Clear All Data")
           }

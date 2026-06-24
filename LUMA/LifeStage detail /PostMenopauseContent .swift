@@ -124,6 +124,25 @@ struct PostMenopauseContent {
          "Cholesterol monitoring"
         ],
         whenToSeeDoctor: "Immediately if chest pain or breathing difficulty occurs."
+      ),
+      
+      StageCondition(
+        name: "Atrophic Vaginitis",
+        shortDescription: "Thinning and drying of vaginal walls.",
+        overview: "A drop in estrogen levels can cause the vaginal tissues to become thinner, drier, and more inflamed, known as genitourinary syndrome of menopause (GSM).",
+        imageName: "gsm_awareness",
+        symptoms: [
+         "Vaginal dryness or burning",
+         "Pain during intercourse",
+         "Frequent urinary tract infections (UTIs)",
+         "Urinary incontinence"
+        ],
+        basicCare: [
+         "Over-the-counter vaginal moisturizers",
+         "Water-based lubricants",
+         "Pelvic floor exercises"
+        ],
+        whenToSeeDoctor: "If symptoms interfere with your quality of life or if you experience unusual bleeding."
       )
     ]
   )

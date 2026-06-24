@@ -96,9 +96,7 @@ struct MySpaceView: View {
               .resizable()
               .scaledToFit()
               .frame(width: 26, height: 26)
-              .foregroundStyle(
-                LinearGradient(colors: [.feminineAccent, .feminineLilac], startPoint: .topLeading, endPoint: .bottomTrailing)
-              )
+              .foregroundStyle(Color.lumaPinkBubble)
           }
         }
       }
@@ -111,6 +109,7 @@ struct MySpaceView: View {
       .sheet(item: $selectedStageForSheet) { stage in
         LifeStageDetailView(stage: stage)
           .presentationDetents([.large])
+          .presentationDragIndicator(.visible)
       }
       
       .navigationDestination(isPresented: $showTracker) {
@@ -190,14 +189,10 @@ private extension MySpaceView {
     }
     .padding(22)
     .background(
-      RoundedRectangle(cornerRadius: 28, style: .continuous)
-        .fill(stageAccentColor.opacity(0.15))
+      RoundedRectangle(cornerRadius: 22, style: .continuous)
+        .fill(Color(.secondarySystemGroupedBackground))
     )
-    .overlay(
-      RoundedRectangle(cornerRadius: 28, style: .continuous)
-        .stroke(stageAccentColor.opacity(0.35), lineWidth: 1)
-    )
-    .shadow(color: stageAccentColor.opacity(0.1), radius: 12, y: 6)
+    .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
   }
   
   // MARK: Journey
@@ -209,13 +204,9 @@ private extension MySpaceView {
         .padding(16)
         .background(
           RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(.ultraThinMaterial)
+            .fill(Color(.secondarySystemGroupedBackground))
         )
-        .overlay(
-          RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .stroke(Color.feminineLilac.opacity(0.3), lineWidth: 1)
-        )
-        .shadow(color: Color.feminineLilac.opacity(0.1), radius: 8, y: 4)
+        .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
     }
   }
   
@@ -258,13 +249,9 @@ private extension MySpaceView {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
           RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(Color.pastelSky.opacity(0.15))
+            .fill(Color(.secondarySystemGroupedBackground))
         )
-        .overlay(
-          RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .stroke(Color.pastelSky.opacity(0.35), lineWidth: 1)
-        )
-        .shadow(color: Color.pastelSky.opacity(0.08), radius: 10, y: 5)
+        .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
         
         if insightManager.justUnlocked {
           InsightReadyBadge()
@@ -304,13 +291,9 @@ private extension MySpaceView {
           .frame(height: 120)
           .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-              .fill(Color.pastelLavender.opacity(0.15))
+              .fill(Color(.secondarySystemGroupedBackground))
           )
-          .overlay(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-              .stroke(Color.pastelLavender.opacity(0.35), lineWidth: 1)
-          )
-          .shadow(color: Color.pastelLavender.opacity(0.08), radius: 8, y: 4)
+          .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
         }
         
         // Daily Challenge
@@ -335,13 +318,9 @@ private extension MySpaceView {
           .frame(height: 120)
           .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-              .fill(Color.pastelPeach.opacity(0.15))
+              .fill(Color(.secondarySystemGroupedBackground))
           )
-          .overlay(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-              .stroke(Color.pastelPeach.opacity(0.35), lineWidth: 1)
-          )
-          .shadow(color: Color.pastelPeach.opacity(0.08), radius: 8, y: 4)
+          .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
         }
       }
     }
@@ -425,12 +404,9 @@ private extension MySpaceView {
         .padding(18)
         .background(
           RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(Color.pastelMint.opacity(0.15))
+            .fill(Color(.secondarySystemGroupedBackground))
         )
-        .overlay(
-          RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .stroke(Color.pastelMint.opacity(0.35), lineWidth: 1)
-        )
+        .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
     }
   }
 }
@@ -519,13 +495,9 @@ struct StageRiskCard: View {
     .frame(width: 200, height: 200)
     .background(
       RoundedRectangle(cornerRadius: 22, style: .continuous)
-        .fill(Color.pastelRose.opacity(0.15))
+        .fill(Color(.secondarySystemGroupedBackground))
     )
-    .overlay(
-      RoundedRectangle(cornerRadius: 22, style: .continuous)
-        .stroke(Color.pastelRose.opacity(0.35), lineWidth: 1)
-    )
-    .shadow(color: Color.pastelRose.opacity(0.06), radius: 8, y: 4)
+    .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
   }
 }
 
@@ -573,13 +545,9 @@ struct PastelActionCard: View {
       .frame(maxWidth: .infinity)
       .background(
         RoundedRectangle(cornerRadius: 20, style: .continuous)
-          .fill(tint.opacity(0.15))
+          .fill(Color(.secondarySystemGroupedBackground))
       )
-      .overlay(
-        RoundedRectangle(cornerRadius: 20, style: .continuous)
-          .stroke(tint.opacity(0.35), lineWidth: 1)
-      )
-      .shadow(color: tint.opacity(0.05), radius: 6, y: 3)
+      .shadow(color: Color.black.opacity(0.04), radius: 6, y: 3)
     }
   }
 }
@@ -593,10 +561,14 @@ struct LifeStageJourneyView: View {
   ]
   
   var visibleStages: [LifeStage] {
-    guard let index = stages.firstIndex(of: currentStage) else { return stages }
-    let lower = max(index - 1, 0)
-    let upper = min(index + 1, stages.count - 1)
-    return Array(stages[lower...upper])
+    guard let index = stages.firstIndex(of: currentStage) else { return Array(stages.prefix(3)) }
+    if index == 0 {
+      return Array(stages.prefix(3))
+    } else if index == stages.count - 1 {
+      return Array(stages.suffix(3))
+    } else {
+      return Array(stages[(index - 1)...(index + 1)])
+    }
   }
   
   var body: some View {
@@ -634,7 +606,7 @@ struct LifeStageJourneyView: View {
               .foregroundColor(textColor(for: stage))
               .frame(width: 80)
           }
-          .frame(maxWidth: .infinity)
+          .frame(width: 80) // Fixed width so lines can stretch between them
           
           if index < visibleStages.count - 1 {
             Capsule()
@@ -642,6 +614,7 @@ struct LifeStageJourneyView: View {
               .frame(height: 3)
               .frame(maxWidth: .infinity)
               .offset(y: -14)
+              .padding(.horizontal, -8) // slight negative padding to touch dots
           }
         }
       }

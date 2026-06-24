@@ -3,13 +3,22 @@ internal import Combine
 import Foundation
 
 class StreakManager: ObservableObject {
-  @AppStorage("currentStreak") var currentStreak: Int = 0
-  @AppStorage("longestStreak") var longestStreak: Int = 0
-  @AppStorage("lastCompletedDateString") private var lastCompletedDateString: String = ""
+  @Published var currentStreak: Int {
+    didSet { UserDefaults.standard.set(currentStreak, forKey: "currentStreak") }
+  }
+  @Published var longestStreak: Int {
+    didSet { UserDefaults.standard.set(longestStreak, forKey: "longestStreak") }
+  }
+  @Published private var lastCompletedDateString: String {
+    didSet { UserDefaults.standard.set(lastCompletedDateString, forKey: "lastCompletedDateString") }
+  }
   
   @Published var todayCompleted: Bool = false
   
   init() {
+    self.currentStreak = UserDefaults.standard.integer(forKey: "currentStreak")
+    self.longestStreak = UserDefaults.standard.integer(forKey: "longestStreak")
+    self.lastCompletedDateString = UserDefaults.standard.string(forKey: "lastCompletedDateString") ?? ""
     checkStreak()
   }
   

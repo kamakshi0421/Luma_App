@@ -122,16 +122,7 @@ struct AskLumaView: View {
   var headerView: some View {
     HStack(spacing: 14) {
       
-      Button {
-        dismiss()
-      } label: {
-        Image(systemName: "chevron.left")
-          .font(.body.weight(.semibold))
-          .foregroundColor(.primary)
-          .padding(10)
-          .background(Circle().fill(.ultraThinMaterial))
-      }
-      
+      // Back button removed as AskLumaView is now a root tab
       // Luma avatar
       Image("ProfileAvatar")
         .resizable()
@@ -255,13 +246,9 @@ struct AskLumaView: View {
           .foregroundColor(.white)
           .frame(width: 42, height: 42)
           .background(
-            LinearGradient(
-              colors: messageText.trimmingCharacters(in: .whitespaces).isEmpty
-                ? [Color.gray.opacity(0.4), Color.gray.opacity(0.3)]
-                : [Color.pink, Color.purple.opacity(0.8)],
-              startPoint: .topLeading,
-              endPoint: .bottomTrailing
-            )
+              messageText.trimmingCharacters(in: .whitespaces).isEmpty
+                ? Color.gray.opacity(0.3)
+                : Color.lumaPinkBubble
           )
           .clipShape(Circle())
           .shadow(

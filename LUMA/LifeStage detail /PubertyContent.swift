@@ -160,6 +160,24 @@ struct PubertyContent {
          "Monitoring heavy bleeding"
         ],
         whenToSeeDoctor: "If fatigue is severe or bleeding soaks pads hourly."
+      ),
+      
+      StageCondition(
+        name: "Dysmenorrhea",
+        shortDescription: "Severe menstrual cramps.",
+        overview: "While some cramping is normal, severe cramps that prevent you from attending school or doing normal activities are not.",
+        imageName: "dysmenorrhea_awareness",
+        symptoms: [
+         "Debilitating lower abdominal pain",
+         "Nausea or vomiting",
+         "Radiating pain to the lower back"
+        ],
+        basicCare: [
+         "Heating pads",
+         "Over-the-counter pain relief",
+         "Light exercise like stretching"
+        ],
+        whenToSeeDoctor: "If pain is not relieved by OTC medicine or causes you to miss school."
       )
     ]
     

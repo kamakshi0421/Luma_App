@@ -8,14 +8,7 @@ struct PopularQuestionSheet: View {
   var body: some View {
     ZStack {
       
-      LinearGradient(
-        colors: [
-          question.color.opacity(0.12),
-          Color(.systemBackground)
-        ],
-        startPoint: .top,
-        endPoint: .bottom
-      )
+      Color(UIColor.systemGroupedBackground)
       .ignoresSafeArea()
 
       ScrollView {

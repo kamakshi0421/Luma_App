@@ -55,22 +55,11 @@ struct ScenarioGameView: View {
           .padding(.top, 40)
         }
       }
-
-      // Dismiss button
-      Button {
-        dismiss()
-      } label: {
-        Image(systemName: "xmark")
-          .font(.system(size: 14, weight: .bold))
-          .foregroundColor(.secondary)
-          .padding(10)
-          .background(.ultraThinMaterial, in: Circle())
-      }
-      .padding(.top, 12)
-      .padding(.trailing, 20)
     }
     .onAppear {
-      scenarios = ScenarioLibrary.scenarios(for: stage)
+      if scenarios.isEmpty {
+        resetGame()
+      }
       withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
         iconPulse = true
       }
@@ -469,6 +458,8 @@ struct ScenarioGameView: View {
   }
 
   func resetGame() {
+    let allScenarios = ScenarioLibrary.scenarios(for: stage)
+    scenarios = Array(allScenarios.shuffled().prefix(3))
     currentScenarioIndex = 0
     selectedChoice = nil
     showResult = false

@@ -79,6 +79,7 @@ struct LaunchView: View {
         StartYourJourneyView()
           .presentationDetents([.large])
           .presentationCornerRadius(28)
+          .presentationDragIndicator(.visible)
       }
       .onChange(of: showJourneyView) { _, isPresented in
         if !isPresented {

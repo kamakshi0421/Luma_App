@@ -22,7 +22,6 @@ struct PhasesView: View {
             .font(.subheadline)
             .foregroundColor(.lumaMidGray)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal)
           
           // Interactive Playground Banner
           PastelActionCard(

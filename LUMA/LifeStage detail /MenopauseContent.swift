@@ -118,6 +118,25 @@ struct MenopauseContent {
          "Stress reduction"
         ],
         whenToSeeDoctor: "Immediately if experiencing chest pain or breathing difficulty."
+      ),
+      
+      StageCondition(
+        name: "Osteoporosis",
+        shortDescription: "Bone thinning and increased fracture risk.",
+        overview: "The drop in estrogen levels during menopause significantly accelerates bone loss, leading to fragile bones and a higher risk of fractures.",
+        imageName: "osteoporosis_awareness",
+        symptoms: [
+         "Back pain (caused by fractured or collapsed vertebra)",
+         "Loss of height over time",
+         "A stooped posture",
+         "Bone fractures that occur much more easily than expected"
+        ],
+        basicCare: [
+         "Adequate calcium and Vitamin D intake",
+         "Weight-bearing exercises",
+         "Fall prevention strategies"
+        ],
+        whenToSeeDoctor: "For routine DEXA scans or if you experience a bone fracture from a minor fall."
       )
     ]
   )
