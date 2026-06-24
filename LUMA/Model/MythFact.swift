@@ -15,85 +15,85 @@ extension MythFact {
     
     MythFact(
       myth: "You cannot get pregnant during your first period.",
-      fact: "Ovulation can happen before the first visible period, so pregnancy is biologically possible.",
+      fact: "Ovulation (the release of an egg) actually occurs before the first visible period bleeding happens, so pregnancy is biologically possible even before a girl gets her very first period.",
       stage: .puberty
     ),
     
     MythFact(
       myth: "Stress cannot delay periods.",
-      fact: "High stress levels can affect hormone balance and delay ovulation, which may delay periods.",
+      fact: "High physical or emotional stress levels drastically increase cortisol, which can suppress reproductive hormones and delay ovulation, ultimately causing a late or missed period.",
       stage: .reproductive
     ),
     
     MythFact(
       myth: "Hot flashes only happen after menopause.",
-      fact: "Hot flashes often begin during perimenopause, before periods fully stop.",
+      fact: "Hot flashes are actually most common during perimenopause (the transition phase leading up to menopause) and can begin years before periods fully stop.",
       stage: .perimenopause
     ),
     
     MythFact(
       myth: "Bone health doesn’t need attention after menopause.",
-      fact: "Estrogen decline after menopause increases osteoporosis risk, making bone health very important.",
+      fact: "The sharp decline in estrogen after menopause significantly increases the risk of osteoporosis, making calcium, Vitamin D, and weight-bearing exercise absolutely critical.",
       stage: .postMenopause
     ),
     
     MythFact(
       myth: "Periods sync up when women spend time together.",
-      fact: "While popular in culture, scientific studies show that 'menstrual synchrony' is largely a mathematical coincidence, not biology.",
+      fact: "While 'menstrual synchrony' is a popular cultural belief, rigorous scientific studies show that cycles overlapping is largely a mathematical coincidence due to differing cycle lengths, not a biological syncing.",
       stage: .reproductive
     ),
     
     MythFact(
       myth: "You shouldn't exercise during your period.",
-      fact: "Light to moderate exercise can actually relieve menstrual cramps and improve your mood by releasing endorphins.",
+      fact: "Light to moderate exercise (like yoga or walking) increases blood circulation and releases endorphins, which act as natural painkillers and can significantly relieve menstrual cramps.",
       stage: .reproductive
     ),
     
     MythFact(
       myth: "PMS is all in your head.",
-      fact: "Premenstrual Syndrome is a recognized medical condition caused by intense hormonal fluctuations affecting serotonin levels.",
+      fact: "Premenstrual Syndrome is a clinically recognized medical condition caused by intense hormonal fluctuations (especially dropping progesterone) that directly affect serotonin and other mood-regulating neurotransmitters in the brain.",
       stage: .reproductive
     ),
     
     MythFact(
       myth: "Menopause means you instantly lose your sex drive.",
-      fact: "While hormonal changes can cause vaginal dryness, many women maintain or even experience an increased libido post-menopause.",
+      fact: "While hormonal changes can cause physical symptoms like vaginal dryness, many women maintain a healthy libido, and some even experience an increased sex drive post-menopause due to the absence of pregnancy anxiety.",
       stage: .postMenopause
     ),
     
     MythFact(
       myth: "A normal menstrual cycle is always exactly 28 days.",
-      fact: "A healthy cycle can range anywhere from 21 to 35 days, and it can fluctuate naturally month to month.",
+      fact: "A perfectly healthy menstrual cycle can range anywhere from 21 to 35 days, and it is completely normal for it to fluctuate slightly from month to month based on stress, travel, or diet.",
       stage: .reproductive
     ),
     
     MythFact(
       myth: "Cramps are a sign of weakness or low pain tolerance.",
-      fact: "Menstrual cramps (dysmenorrhea) are caused by prostaglandins forcing the uterus to contract. Severe pain may indicate conditions like endometriosis.",
+      fact: "Menstrual cramps (dysmenorrhea) are a real biological response caused by prostaglandins forcing the uterus to contract. Extremely severe pain may indicate underlying conditions like endometriosis and should be evaluated by a doctor.",
       stage: .reproductive
     ),
     
     MythFact(
       myth: "You lose a massive amount of blood during a period.",
-      fact: "The average blood loss during a period is only about 2 to 3 tablespoons (30-40ml).",
+      fact: "Despite how it may look, the average blood loss during an entire menstrual period is only about 2 to 3 tablespoons (30-40ml) of actual blood.",
       stage: .reproductive
     ),
     
     MythFact(
       myth: "Using tampons can cause you to lose your virginity.",
-      fact: "Virginity is a social concept related to sexual intercourse. Using a tampon does not change your virginity status.",
+      fact: "Virginity is a social concept related to sexual intercourse. Using a tampon simply stretches or passes through the hymen, but it absolutely does not change your virginity status.",
       stage: .puberty
     ),
     
     MythFact(
       myth: "Hormonal birth control makes you gain weight permanently.",
-      fact: "Some methods may cause temporary water retention, but studies show no direct link between most modern birth control pills and long-term fat gain.",
+      fact: "Some methods may cause temporary water retention or increased appetite initially, but extensive medical studies show no direct biological link between modern birth control pills and long-term permanent fat gain.",
       stage: .reproductive
     ),
     
     MythFact(
       myth: "Menopause happens overnight.",
-      fact: "The transition, called perimenopause, is gradual and can last anywhere from 4 to 10 years before periods fully stop.",
+      fact: "The transition into menopause, called perimenopause, is a highly gradual process involving widely fluctuating hormones that can last anywhere from 4 to 10 years before menstrual periods fully and permanently stop.",
       stage: .perimenopause
     ),
     

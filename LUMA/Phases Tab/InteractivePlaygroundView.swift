@@ -15,13 +15,23 @@ struct InteractivePlaygroundView: View {
       LumaBackground()
       
       VStack(spacing: 0) {
-        // Native navigation handles header
+        // Sleek Custom Header
+        VStack(spacing: 4) {
+          Text("Cycle Insights")
+            .font(.title2.bold())
+            .foregroundColor(.primary)
+          
+          Text("Explore hormone cycles visually")
+            .font(.subheadline)
+            .foregroundColor(.secondary)
+        }
+        .padding(.top, 10)
+        .padding(.bottom, 20)
         
         HormoneSimulatorView()
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
     }
-    .navigationTitle("Cycle Insights")
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       hideGlobalFAB = true
@@ -260,6 +270,15 @@ struct HormoneSimulatorView: View {
             IndicatorProgressView(title: "Skin Clarity", value: getSkinValue(for: day), color: .teal, icon: "sparkles")
             IndicatorProgressView(title: "Basal Temperature", value: getTempValue(for: day), color: .red, icon: "thermometer.medium", suffix: "°C")
           }
+          
+          HStack(alignment: .top, spacing: 6) {
+            Image(systemName: "info.circle.fill")
+              .offset(y: 2)
+            Text("These are standard biological trends. Every body is wonderfully unique, so your personal experience may vary.")
+          }
+          .font(.system(size: 12, weight: .medium, design: .rounded))
+          .foregroundColor(.secondary.opacity(0.7))
+          .padding(.top, 4)
         }
         .padding(20)
         .liquidGlass(cornerRadius: 20)

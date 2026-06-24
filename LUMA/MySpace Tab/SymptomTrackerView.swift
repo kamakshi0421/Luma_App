@@ -21,7 +21,7 @@ struct SymptomTrackerView: View {
   @State private var hotFlashLevel: Double = 0
   @State private var energyLevel: Double = 5
   
-  let moods = ["face.smiling", "face.dashed", "circle.dotted", "cloud.rain", "cloud.heavyrain"]
+  let moods = ["😄", "🙂", "😐", "😔", "😢"]
   
   var body: some View {
     ZStack {
@@ -62,7 +62,7 @@ extension SymptomTrackerView {
       Text(currentStage.description)
         .font(.subheadline)
         .multilineTextAlignment(.center)
-        .foregroundColor(stageAccentColor)
+        .foregroundColor(.secondary)
         .padding(.horizontal)
     }
     .padding()
@@ -91,8 +91,8 @@ extension SymptomTrackerView {
         HStack(spacing: 14) {
           ForEach(moods, id: \.self) { emoji in
             Text(emoji)
-              .font(.system(size: 28))
-              .padding(12)
+              .font(.system(size: 30))
+              .frame(width: 48, height: 48)
               .background(
                 Circle()
                   .fill(mood == emoji ?

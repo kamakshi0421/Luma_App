@@ -21,14 +21,7 @@ struct LaunchView: View {
         LumaBackground()
           .ignoresSafeArea()
         
-        // Invisible tap target covering the whole screen
-        Color.white.opacity(0.001)
-          .ignoresSafeArea()
-          .onTapGesture {
-            if !animationTriggered {
-              triggerAnimation()
-            }
-          }
+        // Removed manual tap target
         
         VStack(spacing: 28) {
           Spacer() // Top spacer keeps logo centered initially
@@ -41,14 +34,7 @@ struct LaunchView: View {
             .shadow(color: .black.opacity(0.15), radius: 30, y: 15)
             .scaleEffect(logoScale)
           
-          if showHint {
-            Text("Tap to wake")
-              .font(.caption.weight(.medium))
-              .foregroundColor(.secondary)
-              .opacity(0.6)
-              .transition(.opacity)
-              .padding(.top, 10)
-          }
+          // Hint removed
           
           if showContent {
             VStack(spacing: 16) {
@@ -77,7 +63,7 @@ struct LaunchView: View {
                 .padding(.vertical, 16)
                 .background(
                   RoundedRectangle(cornerRadius: 30)
-                    .fill(Color.lumaPinkLight)
+                    .fill(Color.lumaPinkBubble)
                 )
                 .shadow(color: .black.opacity(0.1), radius: 12, y: 6)
             }
@@ -98,6 +84,13 @@ struct LaunchView: View {
         if !isPresented {
           withAnimation(.easeInOut(duration: 0.5)) {
             goToHome = true
+          }
+        }
+      }
+      .onAppear {
+        if !animationTriggered {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            triggerAnimation()
           }
         }
       }

@@ -178,7 +178,7 @@ struct EmojiReactionView: View {
   @State private var selectedEmoji: String? = nil
   @State private var appeared = false
   
-  private let emojis = ["hand.thumbsup.fill", "questionmark.circle.fill", "exclamationmark.circle.fill", "bolt.fill", "heart.fill"]
+  private let emojis = ["👍", "🤔", "😮", "💪", "❤️"]
   private let labels = ["Okay!", "Thinking", "Surprised", "Strong", "Love it"]
   
   var body: some View {

@@ -4,11 +4,23 @@ import SwiftUI
 struct StartYourJourneyView: View {
   @AppStorage("hasSeenOnboarding") var hasSeenOnboarding = false
   @AppStorage("selectedStage") private var selectedStageRaw: String = LifeStage.reproductive.rawValue
+  @AppStorage("userName") private var userName: String = ""
   @Environment(\.dismiss) private var dismiss
   
   @State private var age: Int = 18
   @State private var suggestedStage: LifeStage = .reproductive
   @State private var selectedStage: LifeStage = .reproductive
+  
+  private func color(for stage: LifeStage) -> Color {
+    switch stage {
+    case .prePuberty: return .pastelRose
+    case .puberty: return .pastelMint
+    case .reproductive: return .pastelSky
+    case .perimenopause: return .orange
+    case .menopause: return .purple
+    case .postMenopause: return .teal
+    }
+  }
   
   var body: some View {
     NavigationStack {
@@ -32,12 +44,11 @@ struct StartYourJourneyView: View {
                 .shadow(color: Color.lumaPinkBubble.opacity(0.3), radius: 10, x: 0, y: 4)
               
               Text("Hi, I’m Aarohi")
-                .font(.title3)
-                .fontWeight(.semibold)
+                .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundColor(.primary)
               
               Text("Let’s understand your body, together.")
-                .font(.subheadline)
+                .font(.system(size: 16, weight: .regular))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
             }
@@ -48,10 +59,50 @@ struct StartYourJourneyView: View {
             .padding(.horizontal)
             .padding(.top, 24)
             
+            // Name Card
+            VStack(alignment: .leading, spacing: 12) {
+              Text("What should I call you?")
+                .font(.system(size: 18, weight: .semibold, design: .rounded))
+                .foregroundColor(.primary)
+              
+              HStack {
+                TextField("Your beautiful name...", text: $userName)
+                  .font(.system(size: 20, weight: .medium, design: .rounded))
+                  .foregroundColor(.primary)
+                  .padding(.vertical, 16)
+                  .padding(.horizontal, 20)
+                
+                if !userName.trimmingCharacters(in: .whitespaces).isEmpty {
+                  Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 22))
+                    .foregroundColor(.green)
+                    .transition(.scale.combined(with: .opacity))
+                    .padding(.trailing, 20)
+                }
+              }
+              .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                  .fill(Color(.systemBackground).opacity(0.6))
+                  .shadow(color: Color.black.opacity(0.04), radius: 10, x: 0, y: 4)
+              )
+              .overlay(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                  .stroke(
+                    !userName.trimmingCharacters(in: .whitespaces).isEmpty ? Color.green.opacity(0.4) : Color.gray.opacity(0.15),
+                    lineWidth: 1.5
+                  )
+              )
+              .animation(.spring(response: 0.4, dampingFraction: 0.7), value: userName)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .liquidGlass()
+            .padding(.horizontal)
+            
             // Age Card
             VStack(alignment: .leading, spacing: 12) {
               Text("How old are you?")
-                .font(.headline)
+                .font(.system(size: 18, weight: .semibold, design: .rounded))
                 .foregroundColor(.primary)
               
               Stepper(value: $age, in: 9...70) {
@@ -76,7 +127,7 @@ struct StartYourJourneyView: View {
                 .foregroundColor(.secondary)
               
               Text(suggestedStage.title)
-                .font(.headline)
+                .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundColor(.primary)
             }
             .padding(.horizontal, 24)
@@ -101,17 +152,17 @@ struct StartYourJourneyView: View {
                       .padding(.horizontal, 20)
                       .background(
                         selectedStage == stage ?
-                        Color.lumaAccent :
+                        color(for: stage) :
                         Color.gray.opacity(0.15)
                       )
-                      .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                      .clipShape(Capsule())
                       .overlay(
-                        RoundedRectangle(cornerRadius: 24)
+                        Capsule()
                           .stroke(Color(.systemBackground).opacity(0.2), lineWidth: 1)
                       )
                       .shadow(
                         color: selectedStage == stage ?
-                        Color.lumaAccent.opacity(0.3) :
+                        color(for: stage).opacity(0.4) :
                         .clear,
                         radius: 6,
                         x: 0,
@@ -130,8 +181,8 @@ struct StartYourJourneyView: View {
                 .foregroundColor(.secondary)
               
               Text(selectedStage.title)
-                .font(.headline)
-                .foregroundColor(.lumaPinkBubble)
+                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .foregroundColor(color(for: selectedStage))
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -147,16 +198,18 @@ struct StartYourJourneyView: View {
               })
             } label: {
               Text("Confirm & Continue")
-                .fontWeight(.semibold)
+                .font(.system(size: 18, weight: .semibold, design: .rounded))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.lumaAccent)
-                .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-                .shadow(color: Color.lumaAccent.opacity(0.3), radius: 8, y: 4)
+                .padding(.vertical, 18)
+                .background(
+                  Capsule()
+                    .fill(Color.lumaPinkBubble)
+                )
+                .shadow(color: Color.lumaPinkBubble.opacity(0.4), radius: 12, x: 0, y: 8)
             }
-            .padding(.horizontal)
-            .padding(.bottom, 32)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 40)
             
             Spacer()
           }

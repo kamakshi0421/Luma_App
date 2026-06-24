@@ -29,8 +29,8 @@ struct PhasesView: View {
             title: "Cycle Insights",
             subtitle: "Explore hormone cycles visually",
             icon: "waveform.path.ecg",
-            tint: .pastelMint,
-            iconColor: Color(red: 0.40, green: 0.72, blue: 0.60)
+            tint: .lumaPinkBubble,
+            iconColor: .lumaPinkBubble
           ) {
             showPlayground = true
           }
@@ -40,8 +40,8 @@ struct PhasesView: View {
             title: "Phase Simulator",
             subtitle: "Interactive 3D organ explorer",
             icon: "sparkles",
-            tint: .pastelSky,
-            iconColor: Color(red: 0.45, green: 0.60, blue: 0.82)
+            tint: .purple,
+            iconColor: .purple
           ) {
             showUterusSimulator = true
           }
@@ -123,18 +123,9 @@ struct LifeStageCard: View {
         .multilineTextAlignment(.center)
         .lineLimit(2)
         .frame(maxWidth: .infinity)
-        
-      HStack(spacing: 4) {
-        Image(systemName: "play.circle.fill")
-          .foregroundColor(stageColor)
-        Text("Live the Story")
-          .font(.caption2)
-          .foregroundColor(stageColor)
-      }
-      .padding(.top, -4)
     }
     .padding()
-    .frame(height: 190) 
+    .frame(height: 170) // Reduced height since we removed the button
     .liquidGlass(cornerRadius: 22)
   }
 }

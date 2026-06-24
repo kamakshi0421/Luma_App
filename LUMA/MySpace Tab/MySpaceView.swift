@@ -5,7 +5,7 @@ import SwiftData
 import FoundationModels
 
 // MARK: - Pastel Color Palette
-private extension Color {
+extension Color {
   // Standard system colors match the RevealView pastel look when used with .opacity(0.15)
   static let pastelRose   = Color.pink
   static let pastelLavender = Color.purple
