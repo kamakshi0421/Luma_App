@@ -418,9 +418,6 @@ private struct MySpaceSectionHeader: View {
   
   var body: some View {
     HStack(spacing: 6) {
-      Image(systemName: icon)
-        .font(.subheadline)
-        .foregroundColor(.lumaPinkBubble)
       Text(title)
         .font(.headline)
         .foregroundColor(.feminineText)

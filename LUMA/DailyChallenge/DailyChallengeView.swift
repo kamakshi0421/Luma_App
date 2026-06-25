@@ -61,7 +61,7 @@ struct DailyChallengeView: View {
         .multilineTextAlignment(.center)
         .padding(.horizontal)
       
-      Divider().padding(.vertical, 8)
+      // Removed extra divider and padding
       
       switch challenge.type {
       case .quiz:
@@ -84,6 +84,7 @@ struct DailyChallengeView: View {
     }
     .padding()
     .background(Color(.secondarySystemBackground))
+    .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
     .shadow(color: Color.black.opacity(0.05), radius: 10)
     .padding()
   }
