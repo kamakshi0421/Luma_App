@@ -83,7 +83,7 @@ struct DailyChallengeView: View {
       }
     }
     .padding()
-    .background(Color(.secondarySystemBackground))
+    .background(.ultraThinMaterial)
     .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
     .shadow(color: Color.black.opacity(0.05), radius: 10)
     .padding()
@@ -136,6 +136,7 @@ struct DailyChallengeView: View {
               .foregroundColor(.primary)
               .padding()
               .frame(maxWidth: .infinity)
+              .background(.ultraThinMaterial)
               .background(quizOptionColor(index: index, correctIndex: challenge.correctIndex))
               .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
               .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.lumaPinkLight, lineWidth: 1))
@@ -149,7 +150,7 @@ struct DailyChallengeView: View {
           .font(.subheadline)
           .foregroundColor(selectedOption == challenge.correctIndex ? .green : .orange)
           .padding()
-          .background(Color(.secondarySystemBackground))
+          .background(.ultraThinMaterial)
           .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
           .shadow(radius: 2)
           .transition(.opacity)
@@ -166,13 +167,13 @@ struct DailyChallengeView: View {
   }
   
   func quizOptionColor(index: Int, correctIndex: Int?) -> Color {
-    guard showExplanation else { return Color(.secondarySystemBackground) }
+    guard showExplanation else { return .clear }
     if index == correctIndex {
       return .green.opacity(0.2)
     } else if index == selectedOption {
       return .red.opacity(0.2)
     }
-    return Color(.secondarySystemBackground)
+    return .clear
   }
   
   @ViewBuilder
@@ -265,7 +266,7 @@ struct DailyChallengeView: View {
           .padding(.top)
         }
         .padding()
-        .background(Color(.secondarySystemBackground))
+        .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .shadow(radius: 5)
         .transition(.scale)

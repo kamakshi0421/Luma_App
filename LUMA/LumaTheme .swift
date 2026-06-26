@@ -25,8 +25,36 @@ extension Color {
 
 
 struct LumaBackground: View {
+  @Environment(\.colorScheme) var colorScheme
+  
   var body: some View {
-    Color(UIColor.systemGroupedBackground)
+    ZStack {
+      // Pure white base in light mode (no grey), dark rich plum in dark mode
+      (colorScheme == .dark ? Color(red: 0.12, green: 0.05, blue: 0.10) : Color.white)
+        .ignoresSafeArea()
+      
+      // Vibrant pink gradient from the top
+      LinearGradient(
+        colors: [
+          Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.3 : 0.25),
+          Color.lumaPinkBubble.opacity(0.0)
+        ],
+        startPoint: .top,
+        endPoint: .bottom
+      )
       .ignoresSafeArea()
+      
+      // Extra beautiful glow
+      RadialGradient(
+        colors: [
+          Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.2 : 0.15),
+          Color.lumaPinkBubble.opacity(0.0)
+        ],
+        center: .top,
+        startRadius: 0,
+        endRadius: 500
+      )
+      .ignoresSafeArea()
+    }
   }
 }
