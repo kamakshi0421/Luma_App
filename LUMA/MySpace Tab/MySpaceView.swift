@@ -190,7 +190,7 @@ private extension MySpaceView {
     .padding(22)
     .background(
       RoundedRectangle(cornerRadius: 22, style: .continuous)
-        .fill(Color(UIColor.systemBackground).opacity(0.9))
+        .fill(.ultraThinMaterial)
     )
     .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
   }
@@ -204,7 +204,7 @@ private extension MySpaceView {
         .padding(16)
         .background(
           RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(Color(UIColor.systemBackground).opacity(0.9))
+            .fill(.ultraThinMaterial)
         )
         .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
     }
@@ -249,7 +249,7 @@ private extension MySpaceView {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
           RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(Color(UIColor.systemBackground).opacity(0.9))
+            .fill(.ultraThinMaterial)
         )
         .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
         
@@ -291,7 +291,7 @@ private extension MySpaceView {
           .frame(height: 120)
           .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-              .fill(Color(UIColor.systemBackground).opacity(0.9))
+              .fill(.ultraThinMaterial)
           )
           .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
         }
@@ -318,7 +318,7 @@ private extension MySpaceView {
           .frame(height: 120)
           .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-              .fill(Color(UIColor.systemBackground).opacity(0.9))
+              .fill(.ultraThinMaterial)
           )
           .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
         }
@@ -404,7 +404,7 @@ private extension MySpaceView {
         .padding(18)
         .background(
           RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(Color(UIColor.systemBackground).opacity(0.9))
+            .fill(.ultraThinMaterial)
         )
         .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
     }
@@ -492,7 +492,7 @@ struct StageRiskCard: View {
     .frame(width: 200, height: 200)
     .background(
       RoundedRectangle(cornerRadius: 22, style: .continuous)
-        .fill(Color(UIColor.systemBackground).opacity(0.9))
+        .fill(.ultraThinMaterial)
     )
     .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
   }
@@ -542,7 +542,7 @@ struct PastelActionCard: View {
       .frame(maxWidth: .infinity)
       .background(
         RoundedRectangle(cornerRadius: 20, style: .continuous)
-          .fill(Color(UIColor.systemBackground).opacity(0.9))
+          .fill(.ultraThinMaterial)
       )
       .shadow(color: Color.black.opacity(0.04), radius: 6, y: 3)
     }

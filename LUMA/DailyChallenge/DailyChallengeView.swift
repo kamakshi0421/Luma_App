@@ -83,7 +83,7 @@ struct DailyChallengeView: View {
       }
     }
     .padding()
-    .background(Color(UIColor.systemBackground).opacity(0.9))
+    .background(.ultraThinMaterial)
     .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
     .shadow(color: Color.black.opacity(0.05), radius: 10)
     .padding()
@@ -136,7 +136,7 @@ struct DailyChallengeView: View {
               .foregroundColor(.primary)
               .padding()
               .frame(maxWidth: .infinity)
-              .background(Color(UIColor.systemBackground).opacity(0.9))
+              .background(.ultraThinMaterial)
               .background(quizOptionColor(index: index, correctIndex: challenge.correctIndex))
               .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
               .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.lumaPinkLight, lineWidth: 1))
@@ -150,7 +150,7 @@ struct DailyChallengeView: View {
           .font(.subheadline)
           .foregroundColor(selectedOption == challenge.correctIndex ? .green : .orange)
           .padding()
-          .background(Color(UIColor.systemBackground).opacity(0.9))
+          .background(.ultraThinMaterial)
           .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
           .shadow(radius: 2)
           .transition(.opacity)
@@ -266,7 +266,7 @@ struct DailyChallengeView: View {
           .padding(.top)
         }
         .padding()
-        .background(Color(UIColor.systemBackground).opacity(0.9))
+        .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .shadow(radius: 5)
         .transition(.scale)
