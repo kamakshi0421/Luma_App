@@ -28,34 +28,35 @@ struct LumaBackground: View {
   @Environment(\.colorScheme) var colorScheme
   
   var body: some View {
-    ZStack {
-      // White in light mode, very deep violet (like the logo) in dark mode
-      (colorScheme == .dark ? Color(red: 0.12, green: 0.02, blue: 0.20) : Color.white)
+    Color.clear
+      .overlay(
+        ZStack {
+          // White in light mode, very deep violet (like the logo) in dark mode
+          (colorScheme == .dark ? Color(red: 0.12, green: 0.02, blue: 0.20) : Color.white)
+          
+          // Vibrant magenta to deep purple gradient
+          LinearGradient(
+            colors: [
+              Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.35 : 0.20),
+              (colorScheme == .dark ? Color.lumaPurpleDeep.opacity(0.3) : Color.lumaPinkBubble.opacity(0.0)),
+              Color.clear
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+          )
+          
+          // Extra beautiful glow
+          RadialGradient(
+            colors: [
+              Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.3 : 0.15),
+              Color.clear
+            ],
+            center: .top,
+            startRadius: 0,
+            endRadius: 600
+          )
+        }
         .ignoresSafeArea()
-      
-      // Vibrant magenta to deep purple gradient
-      LinearGradient(
-        colors: [
-          Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.35 : 0.20),
-          (colorScheme == .dark ? Color.lumaPurpleDeep.opacity(0.3) : Color.lumaPinkBubble.opacity(0.0)),
-          Color.clear
-        ],
-        startPoint: .top,
-        endPoint: .bottom
       )
-      .ignoresSafeArea()
-      
-      // Extra beautiful glow
-      RadialGradient(
-        colors: [
-          Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.3 : 0.15),
-          Color.clear
-        ],
-        center: .top,
-        startRadius: 0,
-        endRadius: 600
-      )
-      .ignoresSafeArea()
-    }
   }
 }

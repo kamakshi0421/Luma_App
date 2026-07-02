@@ -6,12 +6,7 @@ struct PopularQuestionSheet: View {
   let question: PopularQuestion
   
   var body: some View {
-    ZStack {
-      
-      Color(UIColor.systemGroupedBackground)
-      .ignoresSafeArea()
-
-      ScrollView {
+    ScrollView {
         
         VStack {
           
@@ -75,7 +70,7 @@ struct PopularQuestionSheet: View {
           .frame(maxWidth: .infinity)
         }
       }
-    }
+      .background(Color(UIColor.systemGroupedBackground).ignoresSafeArea())
   }
 }
 struct PopularQuestionDetailCard: View {
