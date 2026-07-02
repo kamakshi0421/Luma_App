@@ -436,7 +436,7 @@ struct LiquidGlassModifier: ViewModifier {
             LinearGradient(
               colors: [
                 Color.white.opacity(colorScheme == .dark ? 0.4 : 1.0),
-                Color.white.opacity(colorScheme == .dark ? 0.1 : 0.3)
+                (colorScheme == .dark ? Color.white.opacity(0.1) : Color.gray.opacity(0.15))
               ],
               startPoint: .topLeading,
               endPoint: .bottomTrailing
@@ -444,8 +444,8 @@ struct LiquidGlassModifier: ViewModifier {
             lineWidth: 1
           )
       )
-      // 4. Very soft, delicate shadow to lift it off the background
-      .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.2 : 0.05), radius: 10, x: 0, y: 4)
+      // 4. Soft shadow to lift it off the background (boosted slightly for light mode contrast)
+      .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.2 : 0.12), radius: 12, x: 0, y: 4)
   }
 }
 

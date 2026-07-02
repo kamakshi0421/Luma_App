@@ -264,5 +264,38 @@ struct SymptomConstellationView: View {
         break
       }
     }
+    }
+  }
+
+
+// MARK: - Confetti
+struct ConfettiBurstView: View {
+  
+  @State private var animate = false
+  
+  var body: some View {
+    GeometryReader { geo in
+      ForEach(0..<25, id: \.self) { _ in
+        Circle()
+          .fill([
+            Color.orange.opacity(0.7),
+            Color.green.opacity(0.7),
+            Color.lumaPinkBubble.opacity(0.7),
+            Color.blue.opacity(0.7)
+          ].randomElement()!)
+          .frame(width: 8, height: 8)
+          .position(
+            x: CGFloat.random(in: 0...geo.size.width),
+            y: animate ? geo.size.height + 40 : -20
+          )
+          .animation(
+            .linear(duration: Double.random(in: 0.8...1.4)),
+            value: animate
+          )
+      }
+      .onAppear { animate = true }
+    }
+    .ignoresSafeArea()
+    .accessibilityHidden(true)
   }
 }

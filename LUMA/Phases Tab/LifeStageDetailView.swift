@@ -8,7 +8,6 @@ struct LifeStageDetailView: View {
   
   // Guided journey state
   @State private var revealedSections: Int = 0
-  @State private var showGuideGreeting = true
   
   var body: some View {
     
@@ -19,11 +18,6 @@ struct LifeStageDetailView: View {
       ScrollView {
         VStack(spacing: 32) {
           
-          // Luma Guide Greeting
-          if showGuideGreeting {
-            LumaGuideGreeting(stageName: stage.title)
-              .transition(.scale.combined(with: .opacity))
-          }
           
           heroSection
           
@@ -97,9 +91,6 @@ struct LifeStageDetailView: View {
               stageName: stage.title,
               keyTakeaways: JourneyTakeaways.takeaways(for: stage)
             )
-            .onAppear {
-              showGuideGreeting = false
-            }
           }
           
           Text("Every body experiences this stage differently.")
@@ -160,10 +151,10 @@ private extension LifeStageDetailView {
       }
       .padding(16)
       .background(
-        Color.lumaPinkBubble
+        stage.themeColor
       )
       .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-      .shadow(color: Color.lumaPinkBubble.opacity(0.3), radius: 8, y: 4)
+      .shadow(color: stage.themeColor.opacity(0.3), radius: 8, y: 4)
     }
     .buttonStyle(.plain)
   }

@@ -39,7 +39,9 @@ struct MainTabView: View {
             }
           
           NavigationStack {
-            RevealView()
+            RevealView(onNavigateToAarohi: {
+              selectedTab = .Aarohi
+            })
           }
             .id(savedStageRaw)
             .tag(Tab.Reveal)

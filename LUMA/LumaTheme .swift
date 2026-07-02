@@ -31,30 +31,29 @@ struct LumaBackground: View {
     Color.clear
       .overlay(
         ZStack {
-          // White in light mode, very deep violet (like the logo) in dark mode
-          (colorScheme == .dark ? Color(red: 0.12, green: 0.02, blue: 0.20) : Color.white)
+          // Base color
+          (colorScheme == .dark ? Color(red: 0.12, green: 0.02, blue: 0.15) : Color(white: 0.98))
           
-          // Vibrant magenta to deep purple gradient
-          LinearGradient(
-            colors: [
-              Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.35 : 0.20),
-              (colorScheme == .dark ? Color.lumaPurpleDeep.opacity(0.3) : Color.lumaPinkBubble.opacity(0.0)),
-              Color.clear
-            ],
-            startPoint: .top,
-            endPoint: .bottom
-          )
+          // Fluid Mesh Element 1 (Top Right)
+          Circle()
+            .fill(Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.7 : 0.4))
+            .frame(width: 400, height: 400)
+            .offset(x: 150, y: -200)
+            .blur(radius: 80)
           
-          // Extra beautiful glow
-          RadialGradient(
-            colors: [
-              Color.lumaPinkBubble.opacity(colorScheme == .dark ? 0.3 : 0.15),
-              Color.clear
-            ],
-            center: .top,
-            startRadius: 0,
-            endRadius: 600
-          )
+          // Fluid Mesh Element 2 (Middle Left)
+          Circle()
+            .fill(Color.lumaPinkLight.opacity(colorScheme == .dark ? 0.5 : 0.3))
+            .frame(width: 350, height: 350)
+            .offset(x: -150, y: 50)
+            .blur(radius: 60)
+            
+          // Fluid Mesh Element 3 (Bottom Center)
+          Circle()
+            .fill(Color.lumaPurpleDeep.opacity(colorScheme == .dark ? 0.8 : 0.2))
+            .frame(width: 500, height: 500)
+            .offset(x: 50, y: 300)
+            .blur(radius: 90)
         }
         .ignoresSafeArea()
       )

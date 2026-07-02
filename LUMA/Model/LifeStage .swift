@@ -69,6 +69,17 @@ extension LifeStage {
     case .postMenopause: return "stage_post_menopause"
     }
   }
+  
+  var themeColor: Color {
+    switch self {
+    case .prePuberty: return .pastelRose
+    case .puberty: return .pastelMint
+    case .reproductive: return .pastelSky
+    case .perimenopause: return Color(red: 0.9, green: 0.6, blue: 0.4) // Warm Peach
+    case .menopause: return Color(red: 0.7, green: 0.5, blue: 0.8) // Soft Violet
+    case .postMenopause: return Color(red: 0.4, green: 0.7, blue: 0.7) // Soft Teal
+    }
+  }
 }
 extension LifeStage {
   

@@ -85,22 +85,11 @@ struct PhasesView: View {
 struct LifeStageCard: View {
   let stage: LifeStage
   
-  var stageColor: Color {
-    switch stage {
-    case .prePuberty: return .pastelRose
-    case .puberty: return .pastelMint
-    case .reproductive: return .pastelSky
-    case .perimenopause: return .orange
-    case .menopause: return .purple
-    case .postMenopause: return .teal
-    }
-  }
-  
   var body: some View {
     VStack(spacing: 12) {
       ZStack {
         RoundedRectangle(cornerRadius: 16)
-          .fill(stageColor.opacity(0.25))
+          .fill(stage.themeColor.opacity(0.25))
         
         if let uiImage = UIImage(named: stage.imageName) {
           Image(uiImage: uiImage)
@@ -110,7 +99,7 @@ struct LifeStageCard: View {
         } else {
           Image(systemName: "leaf.fill")
             .font(.system(size: 36))
-            .foregroundColor(stageColor)
+            .foregroundColor(stage.themeColor)
         }
       }
       .frame(height: 110)
@@ -120,7 +109,7 @@ struct LifeStageCard: View {
         .fontWeight(.medium)
         .foregroundColor(.primary)
         .multilineTextAlignment(.center)
-        .lineLimit(2)
+        .fixedSize(horizontal: false, vertical: true)
         .frame(maxWidth: .infinity)
     }
     .padding()

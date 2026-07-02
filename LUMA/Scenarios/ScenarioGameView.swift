@@ -21,6 +21,21 @@ struct ScenarioGameView: View {
     return CGFloat(currentScenarioIndex + 1) / CGFloat(scenarios.count)
   }
 
+  var themeColor: Color {
+    let colors: [Color] = [
+      .lumaPinkBubble,
+      .lumaAccent,
+      Color(red: 0.85, green: 0.4, blue: 0.5), // Deep Rose
+      Color(red: 0.9, green: 0.5, blue: 0.4),  // Warm Peach
+      Color(red: 0.6, green: 0.3, blue: 0.8),  // Soft Violet
+      Color(red: 0.9, green: 0.3, blue: 0.5)   // Coral Pink
+    ]
+    guard !scenarios.isEmpty else { return .lumaPinkBubble }
+    let scenario = scenarios[min(currentScenarioIndex, scenarios.count - 1)]
+    let index = abs(scenario.title.hashValue) % colors.count
+    return colors[index]
+  }
+
   var body: some View {
     ZStack(alignment: .topTrailing) {
       LumaBackground()
@@ -77,17 +92,17 @@ struct ScenarioGameView: View {
         Spacer()
         Text("\(Int(progress * 100))%")
           .font(.caption.weight(.bold))
-          .foregroundColor(.lumaPinkBubble)
+          .foregroundColor(themeColor)
       }
 
       GeometryReader { geo in
         ZStack(alignment: .leading) {
           Capsule()
-            .fill(Color.lumaPinkBubble.opacity(0.15))
+            .fill(themeColor.opacity(0.15))
             .frame(height: 8)
 
           Capsule()
-            .fill(Color.lumaPinkBubble)
+            .fill(themeColor)
             .frame(width: geo.size.width * progress, height: 8)
             .animation(.spring(response: 0.6, dampingFraction: 0.8), value: progress)
         }
@@ -103,30 +118,30 @@ struct ScenarioGameView: View {
       // Animated icon
       ZStack {
         Circle()
-          .fill(Color.lumaPinkBubble.opacity(0.12))
+          .fill(themeColor.opacity(0.12))
           .frame(width: 80, height: 80)
           .scaleEffect(iconPulse ? 1.1 : 1.0)
 
         Circle()
-          .fill(Color.lumaPinkBubble.opacity(0.06))
+          .fill(themeColor.opacity(0.06))
           .frame(width: 100, height: 100)
           .scaleEffect(iconPulse ? 1.15 : 0.95)
 
         Image(systemName: scenario.icon)
           .font(.system(size: 34))
-          .foregroundColor(.lumaPinkBubble)
+          .foregroundColor(themeColor)
       }
       .padding(.top, 8)
 
       // Title pill
       Text(scenario.title)
         .font(.caption.weight(.semibold))
-        .foregroundColor(.lumaPinkBubble)
+        .foregroundColor(themeColor)
         .padding(.horizontal, 14)
         .padding(.vertical, 6)
         .background(
           Capsule()
-            .fill(Color.lumaPinkBubble.opacity(0.1))
+            .fill(themeColor.opacity(0.1))
         )
 
       // Situation text
@@ -157,7 +172,7 @@ struct ScenarioGameView: View {
     let isSelected = selectedChoice?.id == choice.id
     let letterLabels = ["A", "B", "C", "D", "E"]
     let letter = index < letterLabels.count ? letterLabels[index] : "\(index + 1)"
-    let accentColor = isSelected ? choice.quality.color : Color.lumaPinkBubble.opacity(0.3)
+    let accentColor = isSelected ? choice.quality.color : themeColor.opacity(0.3)
 
     return Button {
       handleChoice(choice)
@@ -171,7 +186,7 @@ struct ScenarioGameView: View {
             .frame(width: 32, height: 32)
             .background(
               Circle()
-                .fill(isSelected ? choice.quality.color : Color.lumaPinkBubble.opacity(0.12))
+                .fill(isSelected ? choice.quality.color : themeColor.opacity(0.12))
             )
 
           // Choice text
@@ -219,12 +234,12 @@ struct ScenarioGameView: View {
                 Text("Learn More")
                   .font(.caption.weight(.semibold))
               }
-              .foregroundColor(.lumaPinkBubble)
+              .foregroundColor(themeColor)
               .padding(.horizontal, 10)
               .padding(.vertical, 5)
               .background(
                 Capsule()
-                  .fill(Color.lumaPinkBubble.opacity(0.1))
+                  .fill(themeColor.opacity(0.1))
               )
               .onTapGesture {
                 showLearnMore = true
@@ -289,9 +304,9 @@ struct ScenarioGameView: View {
       .padding(.vertical, 16)
       .background(
         RoundedRectangle(cornerRadius: 16, style: .continuous)
-          .fill(Color.lumaPinkBubble)
+          .fill(themeColor)
       )
-      .shadow(color: Color.lumaPinkBubble.opacity(0.3), radius: 10, y: 5)
+      .shadow(color: themeColor.opacity(0.3), radius: 10, y: 5)
     }
   }
 
@@ -350,9 +365,9 @@ struct ScenarioGameView: View {
         .padding(.vertical, 16)
         .background(
           RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .fill(Color.lumaPinkBubble)
+            .fill(themeColor)
         )
-        .shadow(color: Color.lumaPinkBubble.opacity(0.3), radius: 10, y: 5)
+        .shadow(color: themeColor.opacity(0.3), radius: 10, y: 5)
       }
       .padding(.horizontal, 24)
       .padding(.bottom, 40)

@@ -27,7 +27,7 @@ struct ConditionCard: View {
           Text(condition.shortDescription)
             .font(.caption)
             .foregroundColor(.lumaMidGray)
-            .lineLimit(2)
+            .fixedSize(horizontal: false, vertical: true)
         }
       }
       .padding()

@@ -4,6 +4,7 @@ import SwiftUI
 @available(iOS 26.0, *)
 struct RevealView: View {
   
+  var onNavigateToAarohi: () -> Void = {}
   
   @AppStorage("selectedStage")
   private var savedStageRaw: String = LifeStage.reproductive.rawValue
@@ -140,7 +141,7 @@ private extension RevealView {
   
   var heroSection: some View {
     VStack(alignment: .leading, spacing: 12) {
-      RevealSectionHeader(title: "Myth of the Day", icon: "star.fill")
+      RevealSectionHeader(title: "Myth of the Day")
       
       if searchText.isEmpty {
         filterSection
@@ -149,7 +150,8 @@ private extension RevealView {
       if let myth = dailyMyth {
         MythFactInteractiveCard(
           myth: myth.myth,
-          fact: myth.fact
+          fact: myth.fact,
+          onNavigateToAarohi: onNavigateToAarohi
         )
         .id(myth.id)
       }
@@ -161,13 +163,9 @@ private extension RevealView {
 // MARK: - Section Header
 private struct RevealSectionHeader: View {
   let title: String
-  let icon: String
   
   var body: some View {
     HStack(spacing: 6) {
-      Image(systemName: icon)
-        .font(.subheadline)
-        .foregroundColor(.lumaPinkBubble)
       Text(title)
         .font(.headline)
         .foregroundColor(.primary)
@@ -232,7 +230,7 @@ private extension RevealView {
   
   var scenarioSection: some View {
     VStack(alignment: .leading, spacing: 12) {
-      RevealSectionHeader(title: "Real Life Scenarios", icon: "play.rectangle.fill")
+      RevealSectionHeader(title: "Real Life Scenarios")
       
       PastelActionCard(
         title: "What Would You Do?",
@@ -264,7 +262,7 @@ private extension RevealView {
     
     VStack(alignment: .leading, spacing: 12) {
       
-      RevealSectionHeader(title: "Is It Normal?", icon: "questionmark.bubble.fill")
+      RevealSectionHeader(title: "Is It Normal?")
       
       ForEach(Array(filteredConcerns.enumerated()), id: \.element.id) { index, concern in
         
@@ -297,7 +295,7 @@ private extension RevealView {
     
     VStack(alignment: .leading, spacing: 12) {
       
-      RevealSectionHeader(title: "When to See a Doctor", icon: "stethoscope")
+      RevealSectionHeader(title: "When to See a Doctor")
       
       if let redFlag = stageRedFlag {
         
@@ -335,23 +333,17 @@ struct MythFactInteractiveCard: View {
   
   let myth: String
   let fact: String
+  var onNavigateToAarohi: () -> Void = {}
   
   @State private var flipped = false
   @State private var bookmarked = false
-  @State private var showConfetti = false
   @State private var dragPoints: [CGPoint] = []
   
   @State private var pollAnswer: String? = nil
-  @State private var shimmerOffset: CGFloat = -200
   
   var body: some View {
     
     ZStack {
-      if showConfetti {
-        ConfettiBurstView()
-          .transition(.opacity)
-      }
-      
       // Fact card always underneath
       factCard
       
@@ -360,9 +352,6 @@ struct MythFactInteractiveCard: View {
           .onTapGesture {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
               flipped = true
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-              triggerConfetti()
             }
           }
           .transition(.opacity)
@@ -374,17 +363,24 @@ struct MythFactInteractiveCard: View {
     .accessibilityAddTraits(.isButton)
     .frame(minHeight: 280)
     .animation(.spring(response: 0.5, dampingFraction: 0.8), value: flipped)
-    .onAppear {
-      // Start shimmer animation
-      withAnimation(.linear(duration: 2.5).repeatForever(autoreverses: false)) {
-        shimmerOffset = 400
-      }
-    }
   }
 }
 
 // MARK: - Myth Card (Scratch Surface)
 private extension MythFactInteractiveCard {
+  
+  var themeColor: Color {
+    let colors: [Color] = [
+      .lumaPinkBubble,
+      .lumaAccent,
+      Color(red: 0.85, green: 0.4, blue: 0.5), // Deep Rose
+      Color(red: 0.9, green: 0.5, blue: 0.4),  // Warm Peach
+      Color(red: 0.6, green: 0.3, blue: 0.8),  // Soft Violet
+      Color(red: 0.9, green: 0.3, blue: 0.5)   // Coral Pink
+    ]
+    let index = abs(myth.hashValue) % colors.count
+    return colors[index]
+  }
   
   var mythCard: some View {
     VStack(spacing: 0) {
@@ -397,7 +393,7 @@ private extension MythFactInteractiveCard {
             .font(.caption.weight(.heavy))
             .tracking(2.0)
         }
-        .foregroundColor(Color.lumaPinkBubble)
+        .foregroundColor(themeColor)
         
         Spacer()
         
@@ -408,7 +404,7 @@ private extension MythFactInteractiveCard {
         } label: {
           Image(systemName: bookmarked ? "bookmark.fill": "bookmark")
             .font(.body)
-            .foregroundColor(Color.lumaPinkBubble)
+            .foregroundColor(themeColor)
             .scaleEffect(bookmarked ? 1.2 : 1.0)
         }
       }
@@ -420,7 +416,7 @@ private extension MythFactInteractiveCard {
         // Subtle Watermark
         Image(systemName: "quote.opening")
           .font(.system(size: 80))
-          .foregroundColor(Color.lumaPinkBubble.opacity(0.05))
+          .foregroundColor(themeColor.opacity(0.08))
           .frame(maxWidth: .infinity, alignment: .topLeading)
           .offset(x: -10, y: -20)
         
@@ -437,36 +433,19 @@ private extension MythFactInteractiveCard {
       Spacer(minLength: 16)
       
       // Poll section
-      pollSection(color: Color.lumaPinkBubble)
+      pollSection(color: themeColor)
         .padding(.horizontal, 20)
       
       Spacer(minLength: 12)
       
-      // Scratch prompt with shimmer
-      ZStack {
-        Capsule()
-          .fill(Color.lumaPinkBubble.opacity(0.1))
-          .frame(height: 48)
-        
-        // Shimmer overlay
-        Capsule()
-          .fill(Color.white.opacity(0.4))
-          .frame(height: 48)
-          .offset(x: shimmerOffset)
-          .mask(
-            Capsule()
-              .frame(height: 48)
-          )
-        
-        HStack(spacing: 8) {
-          Image(systemName: "hand.tap.fill")
-            .font(.subheadline)
-          Text("Tap to reveal the truth")
-            .font(.subheadline.weight(.semibold))
-        }
-        .foregroundColor(Color.lumaPinkBubble)
+      // Clean, premium text link (no background)
+      HStack(spacing: 6) {
+        Text("Tap to reveal truth")
+          .font(.subheadline.weight(.medium))
+        Image(systemName: "arrow.right")
       }
-      .padding(.horizontal, 24)
+      .foregroundColor(themeColor)
+      .padding(.vertical, 8)
       .padding(.bottom, 24)
     }
     .liquidGlass(cornerRadius: 24)
@@ -527,9 +506,26 @@ private extension MythFactInteractiveCard {
       Spacer(minLength: 16)
       
       // Poll section
-      pollSection(color: .green)
+      pollSection(color: themeColor)
         .padding(.horizontal, 20)
-        .padding(.bottom, 20)
+      
+      Spacer(minLength: 16)
+      
+      // Navigate to Aarohi Button
+      Button(action: onNavigateToAarohi) {
+        HStack(spacing: 6) {
+          Image(systemName: "bubble.left.and.bubble.right.fill")
+          Text("Ask Aarohi to learn more")
+            .font(.subheadline.weight(.semibold))
+        }
+        .foregroundColor(themeColor)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 14)
+        .background(themeColor.opacity(0.1))
+        .cornerRadius(16)
+      }
+      .padding(.horizontal, 20)
+      .padding(.bottom, 20)
     }
     .liquidGlass(cornerRadius: 24)
   }
@@ -567,12 +563,6 @@ private extension MythFactInteractiveCard {
             .scaleEffect(pollAnswer == "No" ? 1.05 : 1.0)
         }
         .disabled(true)
-        
-        Text("Thanks for sharing!")
-          .font(.caption.weight(.medium))
-          .foregroundColor(color)
-          .frame(maxWidth: .infinity, alignment: .center)
-          .padding(.top, 4)
       }
     }
   }
@@ -623,46 +613,7 @@ private extension MythFactInteractiveCard {
 
 }
 
-// MARK: - Confetti
-private extension MythFactInteractiveCard {
-  
-  func triggerConfetti() {
-    showConfetti = true
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-      showConfetti = false
-    }
-  }
-}
-struct ConfettiBurstView: View {
-  
-  @State private var animate = false
-  
-  var body: some View {
-    GeometryReader { geo in
-      ForEach(0..<25, id: \.self) { _ in
-        Circle()
-          .fill([
-            Color.orange.opacity(0.7),
-            Color.green.opacity(0.7),
-            Color.lumaPinkBubble.opacity(0.7),
-            Color.blue.opacity(0.7)
-          ].randomElement()!)
-          .frame(width: 8, height: 8)
-          .position(
-            x: CGFloat.random(in: 0...geo.size.width),
-            y: animate ? geo.size.height + 40 : -20
-          )
-          .animation(
-            .linear(duration: Double.random(in: 0.8...1.4)),
-            value: animate
-          )
-      }
-      .onAppear { animate = true }
-    }
-    .ignoresSafeArea()
-    .accessibilityHidden(true)
-  }
-}
+
 private let pastelColors: [Color] = [
   Color.pink.opacity(0.15),
   Color.purple.opacity(0.15),
