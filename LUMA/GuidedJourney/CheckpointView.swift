@@ -241,14 +241,7 @@ struct EmojiReactionView: View {
       }
     }
     .padding(16)
-    .background(
-      RoundedRectangle(cornerRadius: 20)
-        .fill(Color.lumaPinkLight.opacity(0.15))
-    )
-    .overlay(
-      RoundedRectangle(cornerRadius: 20)
-        .stroke(Color.lumaPinkBubble.opacity(0.15), lineWidth: 1)
-    )
+    .liquidGlass(cornerRadius: 20)
     .onAppear {
       appeared = true
     }
@@ -378,22 +371,7 @@ struct JourneySummaryCard: View {
       )
     }
     .padding(20)
-    .background(
-      RoundedRectangle(cornerRadius: 22)
-        .fill(Color(.secondarySystemBackground))
-        .shadow(color: Color.lumaPinkBubble.opacity(0.15), radius: 12, y: 6)
-    )
-    .overlay(
-      RoundedRectangle(cornerRadius: 22)
-        .stroke(
-          LinearGradient(
-            colors: [Color.lumaPinkBubble.opacity(0.3), Color.purple.opacity(0.2)],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-          ),
-          lineWidth: 1.5
-        )
-    )
+    .liquidGlass(cornerRadius: 22)
     .onAppear {
       withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
         appeared = true

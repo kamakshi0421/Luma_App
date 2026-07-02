@@ -105,13 +105,6 @@ struct ConcernInfoCard: View {
     }
     .padding()
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      RoundedRectangle(cornerRadius: 22, style: .continuous)
-        .fill(tintColor.opacity(0.05))
-    )
-    .overlay(
-      RoundedRectangle(cornerRadius: 22, style: .continuous)
-        .stroke(tintColor.opacity(0.2), lineWidth: 1)
-    )
+    .liquidGlass(cornerRadius: 22)
   }
 }

@@ -128,9 +128,7 @@ struct StreakDetailView: View {
         .multilineTextAlignment(.center)
     }
     .padding()
-    .background(Color(.systemBackground))
-    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-    .shadow(radius: 5)
+    .liquidGlass(cornerRadius: 20)
   }
   
   var motivationalMessage: String {

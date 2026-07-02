@@ -327,14 +327,7 @@ private extension RevealView {
           Spacer(minLength: 0)
         }
         .padding()
-        .background(
-          RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(Color.red.opacity(0.05))
-        )
-        .overlay(
-          RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .stroke(Color.red.opacity(0.2), lineWidth: 1)
-        )
+        .liquidGlass(cornerRadius: 22)
       }
     }
   }
@@ -472,11 +465,7 @@ private extension MythFactInteractiveCard {
       .padding(.horizontal, 20)
       .padding(.bottom, 20)
     }
-    .background(
-      RoundedRectangle(cornerRadius: 24, style: .continuous)
-        .fill(Color(.secondarySystemGroupedBackground))
-    )
-    .shadow(color: Color.black.opacity(0.06), radius: 12, y: 6)
+    .liquidGlass(cornerRadius: 24)
   }
 }
 
@@ -538,15 +527,7 @@ private extension MythFactInteractiveCard {
         .padding(.horizontal, 20)
         .padding(.bottom, 20)
     }
-    .background(
-      RoundedRectangle(cornerRadius: 24, style: .continuous)
-        .fill(Color(.secondarySystemBackground))
-    )
-    .overlay(
-      RoundedRectangle(cornerRadius: 24, style: .continuous)
-        .stroke(Color.green.opacity(0.2), lineWidth: 1)
-    )
-    .shadow(color: Color.green.opacity(0.08), radius: 16, y: 8)
+    .liquidGlass(cornerRadius: 24)
   }
 }
 

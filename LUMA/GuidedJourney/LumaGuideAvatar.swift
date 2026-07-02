@@ -125,15 +125,7 @@ struct LumaSpeechBubble: View {
           .font(.subheadline)
           .foregroundColor(.primary)
           .padding(14)
-          .background(
-            RoundedRectangle(cornerRadius: 16)
-              .fill(Color(.secondarySystemBackground))
-              .shadow(color: Color.black.opacity(0.06), radius: 6, y: 3)
-          )
-          .overlay(
-            RoundedRectangle(cornerRadius: 16)
-              .stroke(accentColor.opacity(0.15), lineWidth: 1)
-          )
+          .liquidGlass(cornerRadius: 16)
       }
     }
     .onAppear {

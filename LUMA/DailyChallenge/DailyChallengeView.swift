@@ -83,9 +83,7 @@ struct DailyChallengeView: View {
       }
     }
     .padding()
-    .background(.ultraThinMaterial)
-    .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-    .shadow(color: Color.black.opacity(0.05), radius: 10)
+    .liquidGlass(cornerRadius: 24)
     .padding()
   }
   
@@ -136,10 +134,8 @@ struct DailyChallengeView: View {
               .foregroundColor(.primary)
               .padding()
               .frame(maxWidth: .infinity)
-              .background(.ultraThinMaterial)
               .background(quizOptionColor(index: index, correctIndex: challenge.correctIndex))
-              .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-              .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.lumaPinkLight, lineWidth: 1))
+              .liquidGlass(cornerRadius: 16)
           }
           .disabled(showExplanation)
         }
@@ -150,9 +146,7 @@ struct DailyChallengeView: View {
           .font(.subheadline)
           .foregroundColor(selectedOption == challenge.correctIndex ? .green : .orange)
           .padding()
-          .background(.ultraThinMaterial)
-          .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-          .shadow(radius: 2)
+          .liquidGlass(cornerRadius: 12)
           .transition(.opacity)
         
         if selectedOption != challenge.correctIndex {
@@ -266,9 +260,7 @@ struct DailyChallengeView: View {
           .padding(.top)
         }
         .padding()
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .shadow(radius: 5)
+        .liquidGlass(cornerRadius: 16)
         .transition(.scale)
       }
     }

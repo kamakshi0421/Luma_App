@@ -12,8 +12,6 @@ struct LumaCard<Content: View>: View {
     content
       .padding(18)
       .frame(maxWidth: .infinity, minHeight: 110, alignment: .leading)
-      .background(Color(.secondarySystemGroupedBackground))
-      .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-      .shadow(color: Color.black.opacity(0.05), radius: 8, y: 4)
+      .liquidGlass(cornerRadius: 22)
   }
 }

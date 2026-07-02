@@ -188,11 +188,7 @@ private extension MySpaceView {
         .frame(width: 100)
     }
     .padding(22)
-    .background(
-      RoundedRectangle(cornerRadius: 22, style: .continuous)
-        .fill(.ultraThinMaterial)
-    )
-    .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
+    .liquidGlass(cornerRadius: 22)
   }
   
   // MARK: Journey
@@ -202,11 +198,7 @@ private extension MySpaceView {
       
       LifeStageJourneyView(currentStage: currentStage)
         .padding(16)
-        .background(
-          RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(.ultraThinMaterial)
-        )
-        .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
+        .liquidGlass(cornerRadius: 22)
     }
   }
   
@@ -247,11 +239,7 @@ private extension MySpaceView {
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-          RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(.ultraThinMaterial)
-        )
-        .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
+        .liquidGlass(cornerRadius: 22)
         
         if insightManager.justUnlocked {
           InsightReadyBadge()
@@ -289,11 +277,7 @@ private extension MySpaceView {
           .padding(16)
           .frame(maxWidth: .infinity, alignment: .leading)
           .frame(height: 120)
-          .background(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-              .fill(.ultraThinMaterial)
-          )
-          .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
+          .liquidGlass(cornerRadius: 22)
         }
         
         // Daily Challenge
@@ -316,11 +300,7 @@ private extension MySpaceView {
           .padding(16)
           .frame(maxWidth: .infinity, alignment: .leading)
           .frame(height: 120)
-          .background(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-              .fill(.ultraThinMaterial)
-          )
-          .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
+          .liquidGlass(cornerRadius: 22)
         }
       }
     }
@@ -402,11 +382,7 @@ private extension MySpaceView {
         .foregroundColor(.feminineText)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(18)
-        .background(
-          RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(.ultraThinMaterial)
-        )
-        .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
+        .liquidGlass(cornerRadius: 22)
     }
   }
 }
@@ -490,11 +466,7 @@ struct StageRiskCard: View {
     }
     .padding(14)
     .frame(width: 200, height: 200)
-    .background(
-      RoundedRectangle(cornerRadius: 22, style: .continuous)
-        .fill(.ultraThinMaterial)
-    )
-    .shadow(color: Color.black.opacity(0.04), radius: 8, y: 4)
+    .liquidGlass(cornerRadius: 22)
   }
 }
 
@@ -540,11 +512,7 @@ struct PastelActionCard: View {
       }
       .padding(16)
       .frame(maxWidth: .infinity)
-      .background(
-        RoundedRectangle(cornerRadius: 20, style: .continuous)
-          .fill(.ultraThinMaterial)
-      )
-      .shadow(color: Color.black.opacity(0.04), radius: 6, y: 3)
+      .liquidGlass(cornerRadius: 20)
     }
   }
 }

@@ -32,19 +32,7 @@ struct ConditionCard: View {
       }
       .padding()
       .frame(maxWidth: .infinity)
-      .background(
-        RoundedRectangle(cornerRadius: 24)
-          .fill(Color.purple.opacity(0.07))
-      )
-      .overlay(
-        RoundedRectangle(cornerRadius: 24)
-          .stroke(Color.purple.opacity(0.18), lineWidth: 1)
-      )
-      .shadow(
-        color: Color.purple.opacity(0.10),  
-        radius: 10,
-        y: 4
-      )
+      .liquidGlass(cornerRadius: 24)
     }
     .buttonStyle(.plain)
   }

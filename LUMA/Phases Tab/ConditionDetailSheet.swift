@@ -158,10 +158,7 @@ struct StandardCard<Content: View>: View {
     }
     .padding(18)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      RoundedRectangle(cornerRadius: 20)
-        .fill(Color.lumaPinkLight.opacity(0.18))
-    )
+    .liquidGlass(cornerRadius: 20)
   }
 }
 struct DetailCard: View {
@@ -187,9 +184,6 @@ struct DetailCard: View {
     }
     .padding(18)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      RoundedRectangle(cornerRadius: 20)
-        .fill(backgroundColor)
-    )
+    .liquidGlass(cornerRadius: 20)
   }
 }

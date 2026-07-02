@@ -140,28 +140,7 @@ struct ScenarioGameView: View {
     }
     .padding(24)
     .frame(maxWidth: .infinity)
-    .background(
-      ZStack {
-        RoundedRectangle(cornerRadius: 24, style: .continuous)
-          .fill(.ultraThinMaterial)
-
-        RoundedRectangle(cornerRadius: 24, style: .continuous)
-          .fill(
-            LinearGradient(
-              colors: [
-                Color.lumaPinkBubble.opacity(0.05),
-                Color.clear
-              ],
-              startPoint: .topLeading,
-              endPoint: .bottomTrailing
-            )
-          )
-
-        RoundedRectangle(cornerRadius: 24, style: .continuous)
-          .stroke(Color.lumaPinkBubble.opacity(0.1), lineWidth: 1)
-      }
-    )
-    .shadow(color: Color.black.opacity(0.04), radius: 12, y: 6)
+    .liquidGlass(cornerRadius: 24)
   }
 
   // MARK: - Choice Cards
@@ -261,29 +240,7 @@ struct ScenarioGameView: View {
       }
       .padding(16)
       .frame(maxWidth: .infinity, alignment: .leading)
-      .background(
-        ZStack(alignment: .leading) {
-          RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .fill(
-              isSelected
-                ? choice.quality.color.opacity(0.06)
-                : Color(.secondarySystemBackground)
-            )
-
-          // Left accent bar
-          RoundedRectangle(cornerRadius: 2)
-            .fill(accentColor)
-            .frame(width: 4)
-            .padding(.vertical, 8)
-        }
-      )
-      .overlay(
-        RoundedRectangle(cornerRadius: 16, style: .continuous)
-          .stroke(
-            isSelected ? choice.quality.color.opacity(0.3) : Color.clear,
-            lineWidth: 1.5
-          )
-      )
+      .liquidGlass(cornerRadius: 16)
       .opacity(showResult && !isSelected ? 0.45 : 1.0)
       .animation(.spring(response: 0.4, dampingFraction: 0.75), value: isSelected)
       .animation(.spring(response: 0.4, dampingFraction: 0.75), value: showResult)

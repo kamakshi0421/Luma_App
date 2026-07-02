@@ -388,8 +388,7 @@ struct PremiumOrganInfoSheet: View {
             .background(
               LinearGradient(colors: [Color.orange.opacity(0.85), Color.pink.opacity(0.85)], startPoint: .topLeading, endPoint: .bottomTrailing)
             )
-            .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-            .shadow(color: .orange.opacity(0.2), radius: 15, y: 8)
+            .liquidGlass(cornerRadius: 24)
           }
           
           VStack(alignment: .leading, spacing: 12) {
@@ -408,9 +407,7 @@ struct PremiumOrganInfoSheet: View {
           }
           .padding(24)
           .frame(maxWidth: .infinity, alignment: .leading)
-          .background(Color(UIColor.secondarySystemGroupedBackground))
-          .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-          .shadow(color: .primary.opacity(0.04), radius: 15, y: 5)
+          .liquidGlass(cornerRadius: 24)
           
         }
         .padding(.horizontal, 24)

@@ -104,10 +104,6 @@ struct PopularQuestionDetailCard: View {
     }
     .padding(20)
     .frame(maxWidth: .infinity)
-    .background(
-      RoundedRectangle(cornerRadius: 22)
-        .fill(Color(.systemBackground))
-        .shadow(color: color.opacity(0.25), radius: 10, y: 6)
-    )
+    .liquidGlass(cornerRadius: 22)
   }
 }

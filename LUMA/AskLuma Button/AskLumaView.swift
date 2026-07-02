@@ -395,14 +395,7 @@ struct TypingDots: View {
     .onAppear { animate = true }
     .padding(.horizontal, 18)
     .padding(.vertical, 14)
-    .background(
-      RoundedRectangle(cornerRadius: 20, style: .continuous)
-        .fill(.ultraThinMaterial)
-    )
-    .overlay(
-      RoundedRectangle(cornerRadius: 20, style: .continuous)
-        .stroke(Color(.systemBackground).opacity(0.3), lineWidth: 1)
-    )
+    .liquidGlass(cornerRadius: 20)
   }
 }
 

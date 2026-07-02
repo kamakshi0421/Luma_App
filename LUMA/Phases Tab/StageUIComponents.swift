@@ -31,12 +31,7 @@ struct SectionCard: View {
     }
     .padding(20)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(background)
     .liquidGlass(cornerRadius: 24)
-    .overlay(
-      RoundedRectangle(cornerRadius: 24)
-        .stroke(Color(.systemBackground).opacity(0.4), lineWidth: 1)
-    )
     
   }
 }
@@ -69,15 +64,7 @@ struct MiniInsightCard: View {
     }
     .padding(18)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      RoundedRectangle(cornerRadius: 20)
-        .fill(Color.indigo.opacity(0.08)) 
-    )
-    .overlay(
-      RoundedRectangle(cornerRadius: 20)
-        .stroke(Color.indigo.opacity(0.15), lineWidth: 1)
-    )
-    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+    .liquidGlass(cornerRadius: 20)
   }
 }
 struct DidYouKnowBubble: View {
@@ -100,14 +87,6 @@ struct DidYouKnowBubble: View {
     }
     .padding(18)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      RoundedRectangle(cornerRadius: 20)
-        .fill(Color.gray.opacity(0.06))
-    )
-    .overlay(
-      RoundedRectangle(cornerRadius: 20)
-        .stroke(Color.gray.opacity(0.15), lineWidth: 1)
-    )
-    .shadow(color: .black.opacity(0.04), radius: 6, x: 0, y: 3)
+    .liquidGlass(cornerRadius: 20)
   }
 }

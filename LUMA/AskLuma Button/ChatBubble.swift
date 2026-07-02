@@ -99,28 +99,7 @@ struct ChatBubble: View {
       }
     }
     .padding(20)
-    .background(
-      RoundedRectangle(cornerRadius: 24, style: .continuous)
-        .fill(.ultraThinMaterial)
-        .overlay(
-          RoundedRectangle(cornerRadius: 24, style: .continuous)
-            .fill(Color.pink.opacity(0.05))
-        )
-    )
-    .overlay(
-      RoundedRectangle(cornerRadius: 24, style: .continuous)
-        .stroke(
-          Color.pink.opacity(0.2),
-          lineWidth: 1
-        )
-    )
-    .shadow(
-      color: isEmergency
-      ? Color.red.opacity(0.15)
-      : Color.black.opacity(0.06),
-      radius: 12,
-      y: 6
-    )
+    .liquidGlass(cornerRadius: 24)
     .frame(maxWidth: UIScreen.main.bounds.width * 0.82,
         alignment: .leading)
     .fixedSize(horizontal: false, vertical: true)

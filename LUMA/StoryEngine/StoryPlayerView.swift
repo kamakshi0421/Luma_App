@@ -152,11 +152,7 @@ struct StoryPlayerView: View {
                   .padding(.top)
                 }
                 .padding()
-                .background(
-                  RoundedRectangle(cornerRadius: 20)
-                    .fill(LinearGradient(colors: [Color.purple.opacity(0.1), Color.lumaPinkBubble.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing))
-                )
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.purple.opacity(0.3), lineWidth: 2))
+                .liquidGlass(cornerRadius: 20)
                 .padding()
               } else if let choices = scene.choices, !choices.isEmpty {
                 VStack(spacing: 12) {
