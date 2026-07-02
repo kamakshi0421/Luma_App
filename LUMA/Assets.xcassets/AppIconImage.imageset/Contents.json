@@ -1,19 +1,9 @@
 {
   "images" : [
     {
-      "filename" : "LumaLogo.png",
+      "filename" : "luma_logo.jpg",
       "idiom" : "universal",
       "scale" : "1x"
-    },
-    {
-      "filename" : "LumaLogo 1.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "LumaLogo 2.png",
-      "idiom" : "universal",
-      "scale" : "3x"
     }
   ],
   "info" : {

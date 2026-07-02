@@ -67,15 +67,7 @@ extension SymptomTrackerView {
     }
     .frame(maxWidth: .infinity)
     .padding()
-    .background(
-      RoundedRectangle(cornerRadius: 24, style: .continuous)
-        .fill(stageAccentColor.opacity(0.15))
-    )
-    .overlay(
-      RoundedRectangle(cornerRadius: 24, style: .continuous)
-        .stroke(stageAccentColor.opacity(0.35), lineWidth: 1)
-    )
-    .shadow(color: stageAccentColor.opacity(0.08), radius: 8, y: 4)
+    .liquidGlass(cornerRadius: 24)
   }
 }
 
@@ -216,15 +208,7 @@ struct pastelCard<Content: View>: View {
     content
       .frame(maxWidth: .infinity, alignment: .leading)
       .padding()
-      .background(
-        RoundedRectangle(cornerRadius: 22, style: .continuous)
-          .fill(stageAccentColor.opacity(0.15))
-      )
-      .overlay(
-        RoundedRectangle(cornerRadius: 22, style: .continuous)
-          .stroke(stageAccentColor.opacity(0.35), lineWidth: 1)
-      )
-      .shadow(color: stageAccentColor.opacity(0.08), radius: 8, y: 4)
+      .liquidGlass(cornerRadius: 22)
   }
 }
 

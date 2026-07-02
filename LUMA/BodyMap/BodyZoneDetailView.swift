@@ -67,8 +67,6 @@ struct InfoCard: View {
     }
     .padding()
     .frame(maxWidth: .infinity, alignment: .leading)
-    .background(color)
-    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-    .shadow(color: Color.black.opacity(0.05), radius: 5, y: 2)
+    .liquidGlass(cornerRadius: 16)
   }
 }

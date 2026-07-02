@@ -420,16 +420,32 @@ struct PremiumOrganInfoSheet: View {
 
 struct LiquidGlassModifier: ViewModifier {
   var cornerRadius: CGFloat
+  @Environment(\.colorScheme) var colorScheme
   
   func body(content: Content) -> some View {
     content
+      // 1. Core frosted glass blur
       .background(.ultraThinMaterial)
+      // 2. White tint to make it visible on light backgrounds (like pale pink)
+      .background(Color.white.opacity(colorScheme == .dark ? 0.05 : 0.6))
       .cornerRadius(cornerRadius)
+      // 3. Crisp edge highlight to define the boundary
       .overlay(
         RoundedRectangle(cornerRadius: cornerRadius)
-          .stroke(LinearGradient(colors: [.white.opacity(0.25), .clear, .white.opacity(0.05)], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 0.8)
+          .stroke(
+            LinearGradient(
+              colors: [
+                Color.white.opacity(colorScheme == .dark ? 0.4 : 1.0),
+                Color.white.opacity(colorScheme == .dark ? 0.1 : 0.3)
+              ],
+              startPoint: .topLeading,
+              endPoint: .bottomTrailing
+            ),
+            lineWidth: 1
+          )
       )
-      .shadow(color: .black.opacity(0.1), radius: 10, y: 10)
+      // 4. Very soft, delicate shadow to lift it off the background
+      .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.2 : 0.05), radius: 10, x: 0, y: 4)
   }
 }
 

@@ -180,51 +180,48 @@ private struct RevealSectionHeader: View {
 private extension RevealView {
   
   var filterSection: some View {
-    
     ScrollView(.horizontal, showsIndicators: false) {
-      HStack(spacing: 16) {
-        
+      HStack(spacing: 12) {
         ForEach(MythCategory.allCases) { category in
-          
           Button {
-            selectedCategory = category
-            let newMyth = content.myths.filter {
-              $0.stage == currentStage &&
-              $0.category == category
-            }.randomElement()
-            if let newMyth = newMyth {
-              dailyMyth = newMyth
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+              selectedCategory = category
+              let newMyth = content.myths.filter {
+                $0.stage == currentStage &&
+                $0.category == category
+              }.randomElement()
+              if let newMyth = newMyth {
+                dailyMyth = newMyth
+              }
             }
           } label: {
-            
-            VStack(spacing: 8) {
+            HStack(spacing: 8) {
               Image(systemName: category.icon)
-                .font(.system(size: 18))
+                .font(.system(size: 15, weight: .semibold))
               
               Text(category.rawValue)
-                .font(.caption2)
+                .font(.subheadline.weight(.medium))
             }
             .foregroundColor(
-              selectedCategory == category
-              ? .white
-              : .primary
+              selectedCategory == category ? .white : .primary.opacity(0.8)
             )
-            .frame(width: 80, height: 80)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 12)
             .background(
-              Circle()
-                .fill(
-                  selectedCategory == category
-                  ? Color.lumaPinkBubble
-                  : Color.gray.opacity(0.15)
-                )
+              Capsule()
+                .fill(selectedCategory == category ? Color.lumaPinkBubble : Color.clear)
             )
-            .background(.thinMaterial, in: Circle())
-            .opacity(selectedCategory == category ? 1.0 : 0.4)
+            .background(.ultraThinMaterial, in: Capsule())
+            .overlay(
+              Capsule()
+                .stroke(selectedCategory == category ? Color.clear : Color.white.opacity(0.3), lineWidth: 1)
+            )
+            .scaleEffect(selectedCategory == category ? 1.05 : 1.0)
           }
           .buttonStyle(.plain)
         }
       }
-//      .padding(.vertical, 4)
+      .padding(.vertical, 10)
     }
   }
 }
@@ -394,14 +391,13 @@ private extension MythFactInteractiveCard {
       // Top label
       HStack {
         HStack(spacing: 6) {
-          Image(systemName: "exclamationmark.triangle.fill")
+          Image(systemName: "sparkles")
             .font(.caption)
-            .foregroundColor(.orange)
           Text("MYTH")
             .font(.caption.weight(.heavy))
-            .foregroundColor(.orange)
-            .tracking(1.5)
+            .tracking(2.0)
         }
+        .foregroundColor(Color.lumaPinkBubble)
         
         Spacer()
         
@@ -412,44 +408,54 @@ private extension MythFactInteractiveCard {
         } label: {
           Image(systemName: bookmarked ? "bookmark.fill": "bookmark")
             .font(.body)
-            .foregroundColor(.orange)
+            .foregroundColor(Color.lumaPinkBubble)
             .scaleEffect(bookmarked ? 1.2 : 1.0)
         }
       }
-      .padding(.horizontal, 20)
-      .padding(.top, 20)
-      .padding(.bottom, 12)
+      .padding(.horizontal, 24)
+      .padding(.top, 24)
+      .padding(.bottom, 16)
       
-      // Myth text
-      Text(myth)
-        .font(.title3.weight(.semibold))
-        .foregroundColor(.primary)
-        .multilineTextAlignment(.leading)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 20)
+      ZStack {
+        // Subtle Watermark
+        Image(systemName: "quote.opening")
+          .font(.system(size: 80))
+          .foregroundColor(Color.lumaPinkBubble.opacity(0.05))
+          .frame(maxWidth: .infinity, alignment: .topLeading)
+          .offset(x: -10, y: -20)
+        
+        // Myth text
+        Text(myth)
+          .font(.system(size: 22, weight: .bold, design: .serif))
+          .foregroundColor(.primary.opacity(0.9))
+          .multilineTextAlignment(.leading)
+          .lineSpacing(4)
+          .frame(maxWidth: .infinity, alignment: .leading)
+      }
+      .padding(.horizontal, 24)
       
       Spacer(minLength: 16)
       
       // Poll section
-      pollSection(color: .orange)
+      pollSection(color: Color.lumaPinkBubble)
         .padding(.horizontal, 20)
       
       Spacer(minLength: 12)
       
       // Scratch prompt with shimmer
       ZStack {
-        RoundedRectangle(cornerRadius: 14, style: .continuous)
-          .fill(Color(.tertiarySystemFill))
-          .frame(height: 44)
+        Capsule()
+          .fill(Color.lumaPinkBubble.opacity(0.1))
+          .frame(height: 48)
         
         // Shimmer overlay
-        RoundedRectangle(cornerRadius: 14, style: .continuous)
-          .fill(Color(.systemBackground).opacity(0.4))
-          .frame(height: 44)
+        Capsule()
+          .fill(Color.white.opacity(0.4))
+          .frame(height: 48)
           .offset(x: shimmerOffset)
           .mask(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-              .frame(height: 44)
+            Capsule()
+              .frame(height: 48)
           )
         
         HStack(spacing: 8) {
@@ -457,13 +463,11 @@ private extension MythFactInteractiveCard {
             .font(.subheadline)
           Text("Tap to reveal the truth")
             .font(.subheadline.weight(.semibold))
-          Image(systemName: "sparkles")
-            .font(.caption)
         }
-        .foregroundColor(.orange)
+        .foregroundColor(Color.lumaPinkBubble)
       }
-      .padding(.horizontal, 20)
-      .padding(.bottom, 20)
+      .padding(.horizontal, 24)
+      .padding(.bottom, 24)
     }
     .liquidGlass(cornerRadius: 24)
   }
@@ -480,10 +484,10 @@ private extension MythFactInteractiveCard {
           Image(systemName: "checkmark.seal.fill")
             .font(.caption)
             .foregroundColor(.green)
-          Text("TRUTH")
+          Text("THE TRUTH")
             .font(.caption.weight(.heavy))
             .foregroundColor(.green)
-            .tracking(1.5)
+            .tracking(2.0)
         }
         
         Spacer()

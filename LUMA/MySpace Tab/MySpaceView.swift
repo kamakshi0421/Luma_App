@@ -163,7 +163,7 @@ private extension MySpaceView {
         Text(currentStage.description)
           .font(.subheadline)
           .foregroundColor(.feminineSubtext)
-          .lineLimit(3)
+          .fixedSize(horizontal: false, vertical: true)
         
         Button {
           selectedStageForSheet = currentStage
@@ -569,6 +569,8 @@ struct LifeStageJourneyView: View {
               .font(.caption2)
               .multilineTextAlignment(.center)
               .foregroundColor(textColor(for: stage))
+              .minimumScaleFactor(0.8)
+              .fixedSize(horizontal: false, vertical: true)
               .frame(width: 80)
           }
           .frame(width: 80) // Fixed width so lines can stretch between them

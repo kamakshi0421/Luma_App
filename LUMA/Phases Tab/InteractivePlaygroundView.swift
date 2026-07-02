@@ -617,13 +617,7 @@ struct SwipeCardView: View {
             .foregroundColor(.lumaMidGray)
         }
         .padding(24)
-        .background(Color(.systemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .shadow(color: Color.black.opacity(0.05), radius: 10, y: 5)
-        .overlay(
-          RoundedRectangle(cornerRadius: 24)
-            .stroke(Color.lumaPinkLight.opacity(0.5), lineWidth: 2)
-        )
+        .liquidGlass(cornerRadius: 24)
       }
     }
     .offset(offset)
