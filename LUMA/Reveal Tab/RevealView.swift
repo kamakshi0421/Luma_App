@@ -85,7 +85,7 @@ struct RevealView: View {
             .font(.subheadline)
             .foregroundColor(.lumaMidGray)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, -12)
+            .padding(.top, 4)
           
           heroSection
           
@@ -237,7 +237,7 @@ private extension RevealView {
       
       PastelActionCard(
         title: "What Would You Do?",
-        subtitle: "Practice making choices in real-life situations.",
+        subtitle: "Real-life choices, real learning.",
         icon: "play.circle.fill",
         tint: .blue,
         iconColor: .blue
@@ -245,7 +245,7 @@ private extension RevealView {
       
       PastelActionCard(
         title: "Symptom Decoder",
-        subtitle: "Connect the dots to reveal hidden patterns in your body.",
+        subtitle: "Reveal hidden patterns in your body.",
         icon: "sparkles",
         tint: .purple,
         iconColor: .purple

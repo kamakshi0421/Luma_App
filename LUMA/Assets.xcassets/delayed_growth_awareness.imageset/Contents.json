@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "delayed_growth_awareness.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "delayed_growth_awareness.heic",
       "idiom" : "universal",
       "scale" : "2x"
     },

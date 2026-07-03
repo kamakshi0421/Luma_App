@@ -15,8 +15,8 @@ struct LifeStageDetailView: View {
       LumaBackground()
         .ignoresSafeArea()
       
-      ScrollView {
-        VStack(spacing: 32) {
+      ScrollView(.vertical, showsIndicators: false) {
+        VStack(spacing: 16) {
           
           
           heroSection
@@ -101,6 +101,7 @@ struct LifeStageDetailView: View {
         }
         .padding()
       }
+      .scrollBounceBehavior(.basedOnSize)
     }
     .sheet(item: $selectedCondition) { condition in
       ConditionDetailSheet(condition: condition)
@@ -383,17 +384,17 @@ private extension LifeStageDetailView {
   var stageQuickCheckQuestion: String {
     switch stage {
     case .prePuberty:
-      return "True or False: Learning about body changes early causes unnecessary anxiety."
+      return "Learning about body changes early causes unnecessary anxiety."
     case .puberty:
-      return "True or False: Exercise during your period makes cramps worse."
+      return "Exercise during your period makes cramps worse."
     case .reproductive:
-      return "True or False: Stress cannot physically affect your menstrual cycle."
+      return "Stress cannot physically affect your menstrual cycle."
     case .perimenopause:
-      return "True or False: Once perimenopause starts, you can no longer get pregnant."
+      return "Once perimenopause starts, you can no longer get pregnant."
     case .menopause:
-      return "True or False: All symptoms disappear immediately once menopause is reached."
+      return "All symptoms disappear immediately once menopause is reached."
     case .postMenopause:
-      return "True or False: Any vaginal bleeding after menopause is completely normal."
+      return "Any vaginal bleeding after menopause is completely normal."
     }
   }
   

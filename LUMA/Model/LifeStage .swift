@@ -35,7 +35,7 @@ extension LifeStage {
     switch self {
     case .prePuberty: return "Pre-Puberty"
     case .puberty: return "Puberty"
-    case .reproductive: return "Reproductive Phase"
+    case .reproductive: return "Reproductive"
     case .perimenopause: return "Perimenopause"
     case .menopause: return "Menopause"
     case .postMenopause: return "Post-Menopause"

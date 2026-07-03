@@ -7,7 +7,7 @@ import FoundationModels
 // MARK: - Pastel Color Palette
 extension Color {
   // Standard system colors match the RevealView pastel look when used with .opacity(0.15)
-  static let pastelRose   = Color.pink
+  static let pastelRose   = Color(red: 0.92, green: 0.55, blue: 0.65)
   static let pastelLavender = Color.purple
   static let pastelPeach  = Color.orange
   static let pastelMint   = Color.green
@@ -500,7 +500,7 @@ struct PastelActionCard: View {
           Text(subtitle)
             .font(.caption)
             .foregroundColor(.feminineSubtext)
-            .fixedSize(horizontal: false, vertical: true)
+            .lineLimit(1)
         }
         
         Spacer()

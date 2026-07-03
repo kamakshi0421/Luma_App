@@ -11,6 +11,7 @@ struct CheckpointView: View {
   
   @State private var isRevealed = false
   @State private var appeared = false
+  @State private var selectedMythAnswer: Bool? = nil
   
   enum CheckpointStyle {
     case didYouKnow
@@ -52,109 +53,246 @@ struct CheckpointView: View {
   
   var body: some View {
     VStack(spacing: 0) {
-      // Question Card
-      VStack(spacing: 14) {
-        HStack(spacing: 10) {
-          Image(systemName: style.icon)
-            .font(.title3)
-            .foregroundColor(style.iconColor)
-          
-          Text(checkpointLabel)
-            .font(.caption.bold())
-            .foregroundColor(style.iconColor)
-            .textCase(.uppercase)
-            .tracking(1)
-          
-          Spacer()
-          
-          Image(systemName: "sparkle")
-            .font(.caption)
-            .foregroundColor(style.iconColor.opacity(0.6))
-            .scaleEffect(appeared ? 1.2 : 0.8)
-            .animation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true), value: appeared)
-        }
-        
-        Text(question)
-          .font(.subheadline)
-          .fontWeight(.medium)
-          .foregroundColor(.primary)
-          .frame(maxWidth: .infinity, alignment: .leading)
-        
-        if !isRevealed {
-          // Tap to reveal button
-          Button {
-            withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-              isRevealed = true
-            }
-          } label: {
-            HStack(spacing: 8) {
-              Image(systemName: "hand.tap.fill")
-                .font(.caption)
-              Text("Tap to reveal")
-                .font(.caption.bold())
-            }
-            .foregroundColor(style.iconColor)
-            .padding(.horizontal, 18)
-            .padding(.vertical, 10)
-            .background(
-              Capsule()
-                .fill(style.iconColor.opacity(0.1))
-            )
-            .overlay(
-              Capsule()
-                .stroke(style.iconColor.opacity(0.3), lineWidth: 1)
-            )
-          }
-          .buttonStyle(.plain)
-          .frame(maxWidth: .infinity)
-        } else {
-          // Revealed answer
-          VStack(spacing: 10) {
-            Rectangle()
-              .fill(style.borderColor)
-              .frame(height: 1)
-            
-            HStack(alignment: .top, spacing: 10) {
-              Image(systemName: "checkmark.circle.fill")
-                .foregroundColor(.green)
-                .font(.subheadline)
-                .padding(.top, 2)
-              
-              Text(answer)
-                .font(.subheadline)
-                .foregroundColor(.primary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-          }
-          .transition(.asymmetric(
-            insertion: .scale(scale: 0.9).combined(with: .opacity),
-            removal: .opacity
-          ))
-        }
+      if style == .trueFalse {
+        mythCard
+      } else {
+        standardCard
       }
-      .padding(18)
-      .background(
-        Group {
-          LinearGradient(
-            colors: style.gradientColors,
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-          )
-        }
-      )
-      .liquidGlass(cornerRadius: 20)
-      .overlay(
-        RoundedRectangle(cornerRadius: 20)
-          .stroke(style.borderColor, lineWidth: 1.5)
-      )
-      .scaleEffect(appeared ? 1.0 : 0.95)
-      .opacity(appeared ? 1.0 : 0.0)
     }
     .onAppear {
       withAnimation(.spring(response: 0.5, dampingFraction: 0.8).delay(0.1)) {
         appeared = true
       }
     }
+  }
+  
+  private var mythCard: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      // Header
+      HStack {
+        Image(systemName: "sparkles")
+          .font(.headline)
+        Text("MYTH")
+          .font(.headline.bold())
+          .tracking(2)
+        Spacer()
+        Image(systemName: "bookmark")
+          .font(.title3)
+      }
+      .foregroundColor(Color(red: 0.55, green: 0.3, blue: 0.95))
+      
+      // Icon and Text
+      HStack(spacing: 20) {
+        ZStack {
+          Circle()
+            .fill(Color(red: 0.55, green: 0.3, blue: 0.95).opacity(0.12))
+            .frame(width: 80, height: 80)
+          Image(systemName: "face.dashed")
+            .font(.system(size: 40, weight: .regular))
+            .foregroundColor(Color(red: 0.55, green: 0.3, blue: 0.95))
+        }
+        
+        Text(question)
+          .font(.system(size: 26, weight: .bold, design: .serif))
+          .foregroundColor(Color(red: 0.05, green: 0.1, blue: 0.3)) // Dark navy
+          .fixedSize(horizontal: false, vertical: true)
+      }
+      .padding(.vertical, 8)
+      
+      Divider()
+        .padding(.vertical, 4)
+      
+      if !isRevealed {
+        VStack(alignment: .leading, spacing: 16) {
+          Text("Did you believe this?")
+            .font(.subheadline)
+            .foregroundColor(.secondary)
+          
+          HStack(spacing: 12) {
+            Button {
+              withAnimation { selectedMythAnswer = true }
+            } label: {
+              HStack {
+                Image(systemName: "hand.thumbsup")
+                Text("Yes")
+              }
+              .font(.title3.weight(.medium))
+              .frame(maxWidth: .infinity)
+              .padding(.vertical, 16)
+              .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                  .fill(Color(red: 0.55, green: 0.3, blue: 0.95).opacity(selectedMythAnswer == false ? 0.1 : (selectedMythAnswer == true ? 1.0 : 0.8)))
+              )
+              .foregroundColor(selectedMythAnswer == false ? Color(red: 0.55, green: 0.3, blue: 0.95) : .white)
+            }
+            .buttonStyle(.plain)
+            
+            Button {
+              withAnimation { selectedMythAnswer = false }
+            } label: {
+              HStack {
+                Image(systemName: "hand.thumbsdown")
+                Text("No")
+              }
+              .font(.title3.weight(.medium))
+              .frame(maxWidth: .infinity)
+              .padding(.vertical, 16)
+              .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                  .fill(Color(red: 0.55, green: 0.3, blue: 0.95).opacity(selectedMythAnswer == false ? 1.0 : 0.08))
+              )
+              .foregroundColor(selectedMythAnswer == false ? .white : Color(red: 0.55, green: 0.3, blue: 0.95))
+            }
+            .buttonStyle(.plain)
+          }
+          
+          Button {
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+              isRevealed = true
+            }
+          } label: {
+            HStack {
+              Text("Tap to reveal truth")
+              Image(systemName: "arrow.right")
+            }
+            .font(.headline.bold())
+            .foregroundColor(Color(red: 0.55, green: 0.3, blue: 0.95))
+            .frame(maxWidth: .infinity)
+            .padding(.top, 12)
+          }
+          .buttonStyle(.plain)
+        }
+      } else {
+        // Revealed answer
+        VStack(alignment: .leading, spacing: 10) {
+          HStack(spacing: 8) {
+            Text("FACT")
+              .font(.caption.bold())
+              .foregroundColor(.green)
+              .padding(.horizontal, 8)
+              .padding(.vertical, 4)
+              .background(Color.green.opacity(0.1))
+              .clipShape(Capsule())
+            
+            Spacer()
+          }
+          
+          Text(answer)
+            .font(.subheadline)
+            .foregroundColor(.primary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .transition(.asymmetric(
+          insertion: .scale(scale: 0.95).combined(with: .opacity),
+          removal: .opacity
+        ))
+      }
+    }
+    .padding(20)
+    .background(Color(.secondarySystemBackground))
+    .clipShape(RoundedRectangle(cornerRadius: 24))
+    .shadow(color: Color.black.opacity(0.05), radius: 10, y: 5)
+    .scaleEffect(appeared ? 1.0 : 0.95)
+    .opacity(appeared ? 1.0 : 0.0)
+  }
+  
+  private var standardCard: some View {
+    VStack(spacing: 14) {
+      HStack(spacing: 10) {
+        Image(systemName: style.icon)
+          .font(.title3)
+          .foregroundColor(style.iconColor)
+        
+        Text(checkpointLabel)
+          .font(.caption.bold())
+          .foregroundColor(style.iconColor)
+          .textCase(.uppercase)
+          .tracking(1)
+        
+        Spacer()
+        
+        Image(systemName: "sparkle")
+          .font(.caption)
+          .foregroundColor(style.iconColor.opacity(0.6))
+          .scaleEffect(appeared ? 1.2 : 0.8)
+          .animation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true), value: appeared)
+      }
+      
+      Text(question)
+        .font(.subheadline)
+        .fontWeight(.medium)
+        .foregroundColor(.primary)
+        .frame(maxWidth: .infinity, alignment: .leading)
+      
+      if !isRevealed {
+        // Tap to reveal button
+        Button {
+          withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+            isRevealed = true
+          }
+        } label: {
+          HStack(spacing: 8) {
+            Image(systemName: "hand.tap.fill")
+              .font(.caption)
+            Text("Tap to reveal")
+              .font(.caption.bold())
+          }
+          .foregroundColor(style.iconColor)
+          .padding(.horizontal, 18)
+          .padding(.vertical, 10)
+          .background(
+            Capsule()
+              .fill(style.iconColor.opacity(0.1))
+          )
+          .overlay(
+            Capsule()
+              .stroke(style.iconColor.opacity(0.3), lineWidth: 1)
+          )
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity)
+      } else {
+        // Revealed answer
+        VStack(spacing: 10) {
+          Rectangle()
+            .fill(style.borderColor)
+            .frame(height: 1)
+          
+          HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "checkmark.circle.fill")
+              .foregroundColor(.green)
+              .font(.subheadline)
+              .padding(.top, 2)
+            
+            Text(answer)
+              .font(.subheadline)
+              .foregroundColor(.primary)
+              .frame(maxWidth: .infinity, alignment: .leading)
+          }
+        }
+        .transition(.asymmetric(
+          insertion: .scale(scale: 0.9).combined(with: .opacity),
+          removal: .opacity
+        ))
+      }
+    }
+    .padding(18)
+    .background(
+      Group {
+        LinearGradient(
+          colors: style.gradientColors,
+          startPoint: .topLeading,
+          endPoint: .bottomTrailing
+        )
+      }
+    )
+    .liquidGlass(cornerRadius: 20)
+    .overlay(
+      RoundedRectangle(cornerRadius: 20)
+        .stroke(style.borderColor, lineWidth: 1.5)
+    )
+    .scaleEffect(appeared ? 1.0 : 0.95)
+    .opacity(appeared ? 1.0 : 0.0)
   }
   
   private var checkpointLabel: String {
@@ -178,7 +316,8 @@ struct EmojiReactionView: View {
   @State private var selectedEmoji: String? = nil
   @State private var appeared = false
   
-  private let emojis = ["👍", "🤔", "😮", "💪", "❤️"]
+  private let sfSymbols = ["hand.thumbsup.fill", "brain.head.profile.fill", "exclamationmark.bubble.fill", "bolt.heart.fill", "heart.fill"]
+  private let symbolColors: [Color] = [.blue, .purple, .orange, .green, .pink]
   private let labels = ["Okay!", "Thinking", "Surprised", "Strong", "Love it"]
   
   var body: some View {
@@ -197,8 +336,11 @@ struct EmojiReactionView: View {
       if let selected = selectedEmoji {
         // Show selected reaction
         HStack(spacing: 8) {
-          Text(selected)
-            .font(.title)
+          if let idx = sfSymbols.firstIndex(of: selected) {
+            Image(systemName: selected)
+              .font(.title)
+              .foregroundColor(symbolColors[idx])
+          }
           Text("Thanks for sharing! ")
             .font(.caption)
             .foregroundColor(.secondary)
@@ -206,18 +348,19 @@ struct EmojiReactionView: View {
         .padding(.vertical, 8)
         .transition(.scale.combined(with: .opacity))
       } else {
-        // Emoji buttons
+        // SF Symbol buttons
         HStack(spacing: 16) {
-          ForEach(Array(emojis.enumerated()), id: \.offset) { index, emoji in
+          ForEach(Array(sfSymbols.enumerated()), id: \.offset) { index, symbol in
             Button {
               withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
-                selectedEmoji = emoji
+                selectedEmoji = symbol
               }
-              onReaction?(emoji)
+              onReaction?(symbol)
             } label: {
               VStack(spacing: 4) {
-                Text(emoji)
+                Image(systemName: symbol)
                   .font(.title2)
+                  .foregroundColor(symbolColors[index])
                 Text(labels[index])
                   .font(.system(size: 9))
                   .foregroundColor(.secondary)

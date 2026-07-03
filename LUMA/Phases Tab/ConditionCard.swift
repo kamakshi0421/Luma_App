@@ -13,7 +13,8 @@ struct ConditionCard: View {
         
         Image(condition.imageName)
           .resizable()
-          .scaledToFit()
+          .scaledToFill()
+          .frame(maxWidth: .infinity)
           .frame(height: 150)
           .clipped()
           .clipShape(RoundedRectangle(cornerRadius: 16))

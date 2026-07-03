@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "osteoporosis_awareness.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "osteoporosis_awareness.heic",
       "idiom" : "universal",
       "scale" : "2x"
     },

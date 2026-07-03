@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "thyroid_awareness.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "thyroid_awareness.heic",
       "idiom" : "universal",
       "scale" : "2x"
     },

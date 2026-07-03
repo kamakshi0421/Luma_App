@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "heart_health_awareness.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "heart_health_awareness.imageset.heic",
       "idiom" : "universal",
       "scale" : "2x"
     },

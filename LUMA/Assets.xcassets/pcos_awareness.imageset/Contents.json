@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "pcos_awareness.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "pcos_awareness.heic",
       "idiom" : "universal",
       "scale" : "2x"
     },

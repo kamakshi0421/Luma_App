@@ -1,12 +1,10 @@
 import SwiftUI
 import SwiftData
 
-
 struct SymptomTrackerView: View {
   
   @Environment(\.modelContext) private var modelContext
   @Environment(\.dismiss) var dismiss
-  
   
   @AppStorage("selectedStage") private var savedStageRaw: String = LifeStage.reproductive.rawValue
   @AppStorage("hideGlobalFAB") private var hideGlobalFAB: Bool = false
@@ -16,26 +14,33 @@ struct SymptomTrackerView: View {
   }
   
   @State private var mood: String = ""
-  @State private var painLevel: Double = 3
+  @State private var flow: String = ""
+  @State private var painLevel: Double = 0
   @State private var acneLevel: Double = 0
   @State private var hotFlashLevel: Double = 0
   @State private var energyLevel: Double = 5
-  
-  let moods = ["😄", "🙂", "😐", "😔", "😢"]
   
   var body: some View {
     ZStack {
       LumaBackground()
       
-      ScrollView {
+      ScrollView(showsIndicators: false) {
         VStack(spacing: 24) {
           stageHeader
-          moodSection
-          stageSpecificSymptoms
-          energySection
+            .padding(.horizontal)
+          
+          VStack(spacing: 32) {
+            stageSpecificSymptoms
+            energySection
+            moodSection
+          }
+          .padding(.vertical, 8)
+          
           saveButton
+            .padding(.horizontal)
+            .padding(.bottom, 40)
         }
-        .padding()
+        .padding(.vertical)
       }
     }
     .navigationTitle("Track Today's Health")
@@ -46,11 +51,10 @@ struct SymptomTrackerView: View {
   }
 }
 
+// MARK: - Components
 extension SymptomTrackerView {
-  
   var stageHeader: some View {
     VStack(spacing: 12) {
-      
       Image(currentStage.imageName)
         .resizable()
         .scaledToFit()
@@ -69,118 +73,101 @@ extension SymptomTrackerView {
     .padding()
     .liquidGlass(cornerRadius: 24)
   }
-}
-
-
-extension SymptomTrackerView {
   
   var moodSection: some View {
-    pastelCard {
-      VStack(alignment: .leading, spacing: 14) {
-        
-        Text("Mood")
-          .font(.headline)
-        
-        HStack(spacing: 14) {
-          ForEach(moods, id: \.self) { emoji in
-            Text(emoji)
-              .font(.system(size: 30))
-              .frame(width: 48, height: 48)
-              .background(
-                Circle()
-                  .fill(mood == emoji ?
-                      stageAccentColor.opacity(0.3) :
-                      Color.secondary.opacity(0.2))
-                   .shadow(color: stageAccentColor.opacity(0.25), radius: 4, y: 3)
-              )
-              .shadow(color: .pink.opacity(0.15), radius: 4, y: 3)
-              .onTapGesture {
-                mood = emoji
-              }
-          }
-        }
-      }
-    }
+    trackerStringRow(
+      title: "Mood",
+      options: [
+        ("Sad", "face.dashed"),
+        ("Angry", "bolt.fill"),
+        ("Happy", "sun.max.fill"),
+        ("Depressed", "tornado"),
+        ("Stressed", "lightbulb.fill")
+      ],
+      selection: $mood
+    )
   }
-}
-
-
-extension SymptomTrackerView {
+  
+  var energySection: some View {
+    trackerRow(
+      title: "Energy Level",
+      options: [
+        ("Low", "battery.25", 2),
+        ("Moderate", "battery.50", 5),
+        ("High", "battery.100", 8)
+      ],
+      selection: $energyLevel
+    )
+  }
   
   @ViewBuilder
   var stageSpecificSymptoms: some View {
-    
     switch currentStage {
-      
     case .prePuberty:
-      pastelCard {
-        sliderView(title: "General Comfort", value: $painLevel)
-      }
+      trackerRow(title: "General Comfort", options: painOptions, selection: $painLevel)
       
     case .puberty:
-      pastelCard {
-        VStack(spacing: 16) {
-          sliderView(title: "Body Discomfort", value: $painLevel)
-          sliderView(title: "Skin Changes / Acne", value: $acneLevel)
-        }
-      }
+      trackerRow(title: "Body Discomfort", options: painOptions, selection: $painLevel)
+      trackerRow(title: "Skin Changes / Acne", options: [
+        ("Clear", "face.smiling", 0),
+        ("Mild", "sparkles", 3),
+        ("Moderate", "circle.grid.2x2", 6),
+        ("Severe", "circle.grid.3x3.fill", 9)
+      ], selection: $acneLevel)
       
-
     case .reproductive:
-      pastelCard {
-        sliderView(title: "Cycle Pain / Cramps", value: $painLevel)
-      }
+      trackerStringRow(title: "Period Flow", options: [
+        ("Slight", "drop"),
+        ("Spotting", "sparkles"),
+        ("Moderate", "drop.halffull"),
+        ("Heavy", "drop.fill")
+      ], selection: $flow)
+      trackerRow(title: "Cramps", options: painOptions, selection: $painLevel)
       
     case .perimenopause:
-      pastelCard {
-        VStack(spacing: 16) {
-          sliderView(title: "Hot Flash Intensity", value: $hotFlashLevel)
-          sliderView(title: "Mood Swings", value: $painLevel)
-        }
-      }
+      trackerRow(title: "Hot Flashes", options: [
+        ("None", "thermometer.snowflake", 0),
+        ("Mild", "thermometer.sun", 3),
+        ("Moderate", "thermometer.sun.fill", 6),
+        ("Severe", "flame.fill", 9)
+      ], selection: $hotFlashLevel)
+      trackerRow(title: "Joint Pain", options: painOptions, selection: $painLevel)
       
     case .menopause:
-      pastelCard {
-        sliderView(title: "Hot Flash Intensity", value: $hotFlashLevel)
-      }
+      trackerRow(title: "Hot Flashes", options: [
+        ("None", "thermometer.snowflake", 0),
+        ("Mild", "thermometer.sun", 3),
+        ("Moderate", "thermometer.sun.fill", 6),
+        ("Severe", "flame.fill", 9)
+      ], selection: $hotFlashLevel)
       
     case .postMenopause:
-      pastelCard {
-        sliderView(title: "Joint / Body Comfort", value: $painLevel)
-      }
+      trackerRow(title: "Joint / Body Comfort", options: painOptions, selection: $painLevel)
     }
   }
-}
-
-
-extension SymptomTrackerView {
   
-  var energySection: some View {
-    pastelCard {
-      sliderView(title: "Energy Level", value: $energyLevel)
-    }
+  var painOptions: [(String, String, Double)] {
+    [
+      ("Normal", "circle.circle", 0),
+      ("Mild", "circle.dashed.inset.filled", 3),
+      ("Moderate", "circle.grid.cross", 6),
+      ("Extreme", "circle.circle.fill", 10)
+    ]
   }
-}
-
-
-extension SymptomTrackerView {
   
   var saveButton: some View {
     Button {
-      
       let log = SymptomLog(
         mood: mood,
-        flow: nil,
+        flow: flow.isEmpty ? nil : flow,
         painLevel: painLevel,
         energyLevel: energyLevel,
         stress: 0,
         sleepHours: 7,
         lifeStage: currentStage
       )
-      
       modelContext.insert(log)
       dismiss()
-      
     } label: {
       Text("Save Today’s Log")
         .fontWeight(.semibold)
@@ -191,92 +178,95 @@ extension SymptomTrackerView {
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .shadow(color: stageAccentColor.opacity(0.25), radius: 8, y: 4)
     }
-  }}
-
-struct pastelCard<Content: View>: View {
-  let content: Content
-  
-  init(@ViewBuilder content: () -> Content) {
-    self.content = content()
   }
+}
+
+// MARK: - Reusable Trackers
+extension SymptomTrackerView {
   
-  var stageAccentColor: Color {
+  private var stageAccentColor: Color {
     Color(red: 0.93, green: 0.55, blue: 0.70)
   }
   
-  var body: some View {
-    content
-      .frame(maxWidth: .infinity, alignment: .leading)
-      .padding()
-      .liquidGlass(cornerRadius: 22)
-  }
-}
-
-extension SymptomTrackerView {
-  
-  func sliderView(title: String, value: Binding<Double>) -> some View {
-    VStack(alignment: .leading, spacing: 12) {
-      HStack {
-        Text(title)
-          .font(.headline)
-          .foregroundColor(.primary)
-        
-        Spacer()
-        
-        Text(painDescription(for: value.wrappedValue))
-          .font(.subheadline.bold())
-          .foregroundColor(painColor(for: value.wrappedValue))
-      }
+  func trackerRow(title: String, options: [(title: String, icon: String, value: Double)], selection: Binding<Double>) -> some View {
+    VStack(alignment: .leading, spacing: 16) {
+      Text(title)
+        .font(.headline.bold())
+        .padding(.horizontal, 20)
       
-      HStack(spacing: 12) {
-        Image(systemName: sliderIcon(for: title, isLow: true))
-          .foregroundColor(.secondary)
-          .font(.subheadline)
-        
-        Slider(value: value, in: 0...10, step: 1)
-          .tint(painColor(for: value.wrappedValue))
-        
-        Image(systemName: sliderIcon(for: title, isLow: false))
-          .foregroundColor(painColor(for: value.wrappedValue))
-          .font(.subheadline)
+      ScrollView(.horizontal, showsIndicators: false) {
+        HStack(spacing: 12) {
+          Spacer().frame(width: 8)
+          ForEach(options, id: \.title) { option in
+            TrackerOptionCard(
+              title: option.title,
+              icon: option.icon,
+              isSelected: selection.wrappedValue == option.value,
+              tintColor: stageAccentColor,
+              action: { selection.wrappedValue = option.value }
+            )
+          }
+          Spacer().frame(width: 8)
+        }
       }
     }
   }
   
-  func painDescription(for level: Double) -> String {
-    switch level {
-    case 0...2: return "Very Mild "
-    case 3...5: return "Moderate "
-    case 6...8: return "Intense "
-    default: return "Severe "
-    }
-  }
-  
-  func painColor(for level: Double) -> Color {
-    switch level {
-    case 0...2: return stageAccentColor.opacity(0.5)
-    case 3...5: return stageAccentColor.opacity(0.75)
-    case 6...8: return stageAccentColor.opacity(0.9)
-    default: return stageAccentColor
-    }
-  }
-  
-  func sliderIcon(for title: String, isLow: Bool) -> String {
-    let lowCaseTitle = title.lowercased()
-    if lowCaseTitle.contains("energy") {
-      return isLow ? "battery.25": "battery.100.bolt"
-    } else if lowCaseTitle.contains("skin") || lowCaseTitle.contains("acne") {
-      return isLow ? "face.smiling": "face.dashed"
-    } else if lowCaseTitle.contains("flash") {
-      return isLow ? "thermometer.snowflake": "thermometer.sun.fill"
-    } else {
-      return isLow ? "heart": "heart.text.square.fill"
+  func trackerStringRow(title: String, options: [(title: String, icon: String)], selection: Binding<String>) -> some View {
+    VStack(alignment: .leading, spacing: 16) {
+      Text(title)
+        .font(.headline.bold())
+        .padding(.horizontal, 20)
+      
+      ScrollView(.horizontal, showsIndicators: false) {
+        HStack(spacing: 12) {
+          Spacer().frame(width: 8)
+          ForEach(options, id: \.title) { option in
+            TrackerOptionCard(
+              title: option.title,
+              icon: option.icon,
+              isSelected: selection.wrappedValue == option.title,
+              tintColor: stageAccentColor,
+              action: { selection.wrappedValue = option.title }
+            )
+          }
+          Spacer().frame(width: 8)
+        }
+      }
     }
   }
 }
 
-private extension SymptomTrackerView {
-  private var stageAccentColor: Color {
-    Color(red: 0.93, green: 0.55, blue: 0.70) 
+struct TrackerOptionCard: View {
+  let title: String
+  let icon: String
+  let isSelected: Bool
+  let tintColor: Color
+  let action: () -> Void
+  
+  var body: some View {
+    Button(action: {
+      withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+        action()
+      }
+    }) {
+      VStack(spacing: 14) {
+        Image(systemName: icon)
+          .font(.system(size: 32, weight: .regular))
+        Text(title)
+          .font(.subheadline)
+      }
+      .foregroundColor(tintColor)
+      .frame(width: 100, height: 110)
+      .background(
+        RoundedRectangle(cornerRadius: 16)
+          .fill(isSelected ? tintColor.opacity(0.15) : Color(.secondarySystemBackground))
+      )
+      .overlay(
+        RoundedRectangle(cornerRadius: 16)
+          .stroke(isSelected ? tintColor : Color.clear, lineWidth: 2)
+      )
+    }
+    .buttonStyle(.plain)
   }
 }
