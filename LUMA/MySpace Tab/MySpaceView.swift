@@ -47,7 +47,7 @@ struct MySpaceView: View {
   }
   
   private var stageAccentColor: Color {
-    Color.pink
+    currentStage.themeColor
   }
   
   @AppStorage("user_name") private var userName: String = ""
