@@ -20,6 +20,7 @@ struct UterusSimulatorView: View {
   @State private var organConditionContext: UterusCondition = .normal
   
   @AppStorage("hideGlobalFAB") private var hideGlobalFAB: Bool = false
+  @AppStorage("selectedStage") private var savedStageRaw: String = LifeStage.reproductive.rawValue
   
   @State private var uterusScene: UterusScene = { let s = UterusScene(); s.scaleMode = .resizeFill; return s }()
   @State private var brainScene: BrainScene = { let s = BrainScene(); s.scaleMode = .resizeFill; return s }()
@@ -220,6 +221,9 @@ struct UterusSimulatorView: View {
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
+      if let stage = LifeStage(rawValue: savedStageRaw) {
+        selectedStage = stage
+      }
       hideGlobalFAB = true // Hide global Ask Aarohi button
       
       let handleTap: (String, UterusCondition) -> Void = { organName, condition in

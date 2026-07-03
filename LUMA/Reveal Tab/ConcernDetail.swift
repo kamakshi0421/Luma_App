@@ -13,9 +13,9 @@ struct ConcernDetailSheet: View {
           Text(topic.shortDescription)
             .font(.subheadline)
             .foregroundColor(.secondary)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal)
-            .padding(.top, 8)
+            .multilineTextAlignment(.leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, -8)
           
           ConcernInfoCard(
             title: "Why this happens",
@@ -44,29 +44,17 @@ struct ConcernDetailSheet: View {
             tintColor: .orange,
             content: topic.whenToSeekHelp
           )
+          
+          Text("Your body communicates through patterns. Listening to it is a strength.")
+            .font(.caption2)
+            .foregroundColor(.secondary)
+            .multilineTextAlignment(.center)
+            .padding(.top, 8)
         }
         .padding()
       }
       .navigationTitle(topic.title)
       .navigationBarTitleDisplayMode(.large)
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            dismiss()
-          } label: {
-            Image(systemName: "xmark.circle.fill")
-              .foregroundColor(.secondary)
-              .font(.title3)
-          }
-        }
-      }
-      .safeAreaInset(edge: .bottom) {
-        Text("Your body communicates through patterns. Listening to it is a strength.")
-          .font(.caption2)
-          .foregroundColor(.secondary)
-          .multilineTextAlignment(.center)
-          .padding()
-      }
     }
     .presentationDetents([.medium, .large])
     .presentationDragIndicator(.visible)

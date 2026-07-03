@@ -87,7 +87,7 @@ struct SymptomConstellationView: View {
         VStack(spacing: 8) {
           HStack {
             Button(action: { dismiss() }) {
-              Image(systemName: "xmark.circle.fill")
+              Image(systemName: "chevron.left.circle.fill")
                 .font(.title)
                 .foregroundColor(.primary.opacity(0.8))
             }

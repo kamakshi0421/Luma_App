@@ -22,14 +22,15 @@ struct PhasesView: View {
             .font(.subheadline)
             .foregroundColor(.lumaMidGray)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, -12)
           
           // Interactive Playground Banner
           PastelActionCard(
             title: "Cycle Insights",
             subtitle: "Explore hormone cycles visually",
             icon: "waveform.path.ecg",
-            tint: .lumaPinkBubble,
-            iconColor: .lumaPinkBubble
+            tint: .orange,
+            iconColor: .orange
           ) {
             showPlayground = true
           }
@@ -39,8 +40,8 @@ struct PhasesView: View {
             title: "Phase Simulator",
             subtitle: "Interactive 3D organ explorer",
             icon: "sparkles",
-            tint: .purple,
-            iconColor: .purple
+            tint: .indigo,
+            iconColor: .indigo
           ) {
             showUterusSimulator = true
           }
@@ -84,12 +85,13 @@ struct PhasesView: View {
 
 struct LifeStageCard: View {
   let stage: LifeStage
+  @Environment(\.colorScheme) var colorScheme
   
   var body: some View {
     VStack(spacing: 12) {
       ZStack {
         RoundedRectangle(cornerRadius: 16)
-          .fill(stage.themeColor.opacity(0.25))
+          .fill(stage.themeColor.opacity(colorScheme == .dark ? 0.5 : 0.25))
         
         if let uiImage = UIImage(named: stage.imageName) {
           Image(uiImage: uiImage)

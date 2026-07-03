@@ -85,6 +85,7 @@ struct RevealView: View {
             .font(.subheadline)
             .foregroundColor(.lumaMidGray)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, -12)
           
           heroSection
           
@@ -193,18 +194,18 @@ private extension RevealView {
               }
             }
           } label: {
-            HStack(spacing: 8) {
+            HStack(spacing: 6) {
               Image(systemName: category.icon)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.system(size: 13, weight: .semibold))
               
               Text(category.rawValue)
-                .font(.subheadline.weight(.medium))
+                .font(.footnote.weight(.medium))
             }
             .foregroundColor(
               selectedCategory == category ? .white : .primary.opacity(0.8)
             )
-            .padding(.horizontal, 18)
-            .padding(.vertical, 12)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
             .background(
               Capsule()
                 .fill(selectedCategory == category ? Color.lumaPinkBubble : Color.clear)
@@ -219,8 +220,10 @@ private extension RevealView {
           .buttonStyle(.plain)
         }
       }
-      .padding(.vertical, 10)
+      .padding(.horizontal, 20)
+      .padding(.vertical, 8)
     }
+    .padding(.horizontal, -20) // Extend scrollview to screen edges
   }
 }
 
@@ -518,11 +521,15 @@ private extension MythFactInteractiveCard {
           Text("Ask Aarohi to learn more")
             .font(.subheadline.weight(.semibold))
         }
-        .foregroundColor(themeColor)
+        .foregroundColor(.primary)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 14)
-        .background(themeColor.opacity(0.1))
+        .background(themeColor.opacity(0.25))
         .cornerRadius(16)
+        .overlay(
+          RoundedRectangle(cornerRadius: 16)
+            .stroke(themeColor.opacity(0.5), lineWidth: 1)
+        )
       }
       .padding(.horizontal, 20)
       .padding(.bottom, 20)
@@ -577,17 +584,17 @@ private extension MythFactInteractiveCard {
         Text(answer)
           .font(.subheadline.weight(.semibold))
       }
-      .foregroundColor(color)
+      .foregroundColor(.primary)
       .padding(.horizontal, 20)
       .padding(.vertical, 10)
       .frame(maxWidth: .infinity)
       .background(
         RoundedRectangle(cornerRadius: 12, style: .continuous)
-          .fill(color.opacity(0.08))
+          .fill(color.opacity(0.2))
       )
       .overlay(
         RoundedRectangle(cornerRadius: 12, style: .continuous)
-          .stroke(color.opacity(0.25), lineWidth: 1)
+          .stroke(color.opacity(0.5), lineWidth: 1.5)
       )
     }
     .accessibilityLabel(answer)
@@ -623,9 +630,9 @@ private let pastelColors: [Color] = [
 ]
 
 private let pastelStrokes: [Color] = [
-  Color.pink.opacity(0.35),
-  Color.purple.opacity(0.35),
-  Color.blue.opacity(0.35),
-  Color.green.opacity(0.35),
-  Color.orange.opacity(0.35)
+  Color.pink,
+  Color.purple,
+  Color.blue,
+  Color.green,
+  Color.orange
 ]

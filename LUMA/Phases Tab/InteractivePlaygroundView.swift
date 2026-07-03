@@ -143,7 +143,7 @@ struct HormoneSimulatorView: View {
             .foregroundColor(.primary)
             .multilineTextAlignment(.center)
             .padding(.horizontal)
-            .frame(height: 50)
+            .frame(minHeight: 50)
         }
         .frame(maxWidth: .infinity)
         .padding()

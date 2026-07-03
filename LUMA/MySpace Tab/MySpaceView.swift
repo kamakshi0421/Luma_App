@@ -459,8 +459,7 @@ struct StageRiskCard: View {
       Text(condition.shortDescription)
         .font(.caption)
         .foregroundColor(.feminineSubtext)
-        .lineLimit(2)
-        .frame(height: 34, alignment: .top)
+        .fixedSize(horizontal: false, vertical: true)
       
       Spacer(minLength: 0)
     }
@@ -501,7 +500,7 @@ struct PastelActionCard: View {
           Text(subtitle)
             .font(.caption)
             .foregroundColor(.feminineSubtext)
-            .lineLimit(1)
+            .fixedSize(horizontal: false, vertical: true)
         }
         
         Spacer()
@@ -538,7 +537,7 @@ struct LifeStageJourneyView: View {
   
   var body: some View {
     VStack(spacing: 12) {
-      HStack(spacing: 0) {
+      HStack(alignment: .top, spacing: 0) {
         ForEach(visibleStages.indices, id: \.self) { index in
           let stage = visibleStages[index]
           
@@ -564,6 +563,7 @@ struct LifeStageJourneyView: View {
                   .frame(width: 22, height: 22)
               }
             }
+            .frame(height: 22, alignment: .center)
             
             Text(stage.title)
               .font(.caption2)
@@ -580,7 +580,7 @@ struct LifeStageJourneyView: View {
               .fill(lineColor(for: stage))
               .frame(height: 3)
               .frame(maxWidth: .infinity)
-              .offset(y: -14)
+              .offset(y: 9.5)
               .padding(.horizontal, -8) // slight negative padding to touch dots
           }
         }

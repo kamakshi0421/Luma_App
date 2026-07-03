@@ -189,8 +189,9 @@ struct DailyChallengeView: View {
                 }
               }
             } label: {
-              Text(emoji)
+              Image(systemName: emoji)
                 .font(.system(size: 40))
+                .foregroundColor(.lumaPinkBubble)
             }
           }
         }
