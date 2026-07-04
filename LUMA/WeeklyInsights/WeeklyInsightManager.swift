@@ -39,9 +39,19 @@ class WeeklyInsightManager: ObservableObject {
   func generateInsight(from logs: [SymptomLog]) async {
     
     let weeklyLogs = logsThisWeek(from: logs)
-    currentLogCount = weeklyLogs.count
     
-    guard weeklyLogs.count >= 3 else {
+    // Deduplicate to find unique days
+    let calendar = Calendar.current
+    var latestLogPerDay: [Date: SymptomLog] = [:]
+    for log in weeklyLogs {
+      let day = calendar.startOfDay(for: log.date)
+      latestLogPerDay[day] = log
+    }
+    let distinctLogs = latestLogPerDay.values.sorted { $0.date < $1.date }
+    
+    currentLogCount = distinctLogs.count
+    
+    guard currentLogCount >= 3 else {
       title = ""
       message = ""
       isLoading = false
@@ -50,7 +60,7 @@ class WeeklyInsightManager: ObservableObject {
     
     isLoading = true
     
-    let summary = weeklyLogs.enumerated().map { index, log in
+    let summary = distinctLogs.enumerated().map { index, log in
      "Day \(index+1): Stress \(log.stress), Mood \(log.mood)"
     }.joined(separator: "\n")
     

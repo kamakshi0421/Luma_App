@@ -42,6 +42,7 @@ struct BodyMapView: View {
           Spacer()
           
           SpriteView(scene: scene, options: [.allowsTransparency])
+            .scaleEffect(1.25)
             .padding()
         }
       }

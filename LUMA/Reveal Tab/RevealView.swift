@@ -152,7 +152,8 @@ private extension RevealView {
         MythFactInteractiveCard(
           myth: myth.myth,
           fact: myth.fact,
-          onNavigateToAarohi: onNavigateToAarohi
+          onNavigateToAarohi: onNavigateToAarohi,
+          imageName: currentStage.imageName
         )
         .id(myth.id)
       }
@@ -337,6 +338,7 @@ struct MythFactInteractiveCard: View {
   let myth: String
   let fact: String
   var onNavigateToAarohi: () -> Void = {}
+  var imageName: String? = nil
   
   @State private var flipped = false
   @State private var bookmarked = false
@@ -364,7 +366,7 @@ struct MythFactInteractiveCard: View {
     .accessibilityLabel(flipped ? "Fact. \(fact)": "Myth. \(myth)")
     .accessibilityHint(flipped ? "Truth revealed": "Tap to reveal the truth")
     .accessibilityAddTraits(.isButton)
-    .frame(minHeight: 280)
+    .frame(minHeight: 230)
     .animation(.spring(response: 0.5, dampingFraction: 0.8), value: flipped)
   }
 }
@@ -386,42 +388,52 @@ private extension MythFactInteractiveCard {
   }
   
   var mythCard: some View {
-    VStack(spacing: 0) {
-      // Top label
-      HStack {
-        HStack(spacing: 6) {
-          Image(systemName: "sparkles")
-            .font(.caption)
-          Text("MYTH")
-            .font(.caption.weight(.heavy))
-            .tracking(2.0)
-        }
-        .foregroundColor(themeColor)
-        
-        Spacer()
-        
-        Button {
-          withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
-            bookmarked.toggle()
-          }
-        } label: {
-          Image(systemName: bookmarked ? "bookmark.fill": "bookmark")
-            .font(.body)
-            .foregroundColor(themeColor)
-            .scaleEffect(bookmarked ? 1.2 : 1.0)
-        }
-      }
-      .padding(.horizontal, 24)
-      .padding(.top, 24)
-      .padding(.bottom, 16)
-      
-      ZStack {
-        // Subtle Watermark
+    ZStack {
+      // Subtle Watermark
+      if let imgName = imageName, let uiImage = UIImage(named: imgName) {
+        Image(uiImage: uiImage)
+          .resizable()
+          .scaledToFit()
+          .frame(width: 180, height: 180)
+          .opacity(0.12)
+          .frame(maxWidth: .infinity, alignment: .center)
+          .offset(y: -10)
+      } else {
         Image(systemName: "quote.opening")
           .font(.system(size: 80))
           .foregroundColor(themeColor.opacity(0.08))
           .frame(maxWidth: .infinity, alignment: .topLeading)
           .offset(x: -10, y: -20)
+      }
+      
+      VStack(spacing: 0) {
+        // Top label
+        HStack {
+          HStack(spacing: 6) {
+            Image(systemName: "sparkles")
+              .font(.caption)
+            Text("MYTH")
+              .font(.caption.weight(.heavy))
+              .tracking(2.0)
+          }
+          .foregroundColor(themeColor)
+          
+          Spacer()
+          
+          Button {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+              bookmarked.toggle()
+            }
+          } label: {
+            Image(systemName: bookmarked ? "bookmark.fill": "bookmark")
+              .font(.body)
+              .foregroundColor(themeColor)
+              .scaleEffect(bookmarked ? 1.2 : 1.0)
+          }
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 24)
+        .padding(.bottom, 16)
         
         // Myth text
         Text(myth)
@@ -430,16 +442,9 @@ private extension MythFactInteractiveCard {
           .multilineTextAlignment(.leading)
           .lineSpacing(4)
           .frame(maxWidth: .infinity, alignment: .leading)
-      }
-      .padding(.horizontal, 24)
-      
-      Spacer(minLength: 16)
-      
-      // Poll section
-      pollSection(color: themeColor)
-        .padding(.horizontal, 20)
-      
-      Spacer(minLength: 12)
+          .padding(.horizontal, 24)
+        
+        Spacer(minLength: 16)
       
       // Clean, premium text link (no background)
       HStack(spacing: 6) {
@@ -450,6 +455,7 @@ private extension MythFactInteractiveCard {
       .foregroundColor(themeColor)
       .padding(.vertical, 8)
       .padding(.bottom, 24)
+      }
     }
     .liquidGlass(cornerRadius: 24)
   }
@@ -459,7 +465,18 @@ private extension MythFactInteractiveCard {
 private extension MythFactInteractiveCard {
   
   var factCard: some View {
-    VStack(spacing: 0) {
+    ZStack {
+      if let imgName = imageName, let uiImage = UIImage(named: imgName) {
+        Image(uiImage: uiImage)
+          .resizable()
+          .scaledToFit()
+          .frame(width: 180, height: 180)
+          .opacity(0.12)
+          .frame(maxWidth: .infinity, alignment: .center)
+          .offset(y: -10)
+      }
+      
+      VStack(spacing: 0) {
       // Top label
       HStack {
         HStack(spacing: 6) {
@@ -508,31 +525,30 @@ private extension MythFactInteractiveCard {
       
       Spacer(minLength: 16)
       
-      // Poll section
-      pollSection(color: themeColor)
-        .padding(.horizontal, 20)
-      
-      Spacer(minLength: 16)
-      
       // Navigate to Aarohi Button
-      Button(action: onNavigateToAarohi) {
-        HStack(spacing: 6) {
-          Image(systemName: "bubble.left.and.bubble.right.fill")
-          Text("Ask Aarohi to learn more")
-            .font(.subheadline.weight(.semibold))
+      HStack {
+        Button(action: onNavigateToAarohi) {
+          HStack(spacing: 4) {
+            Image(systemName: "bubble.left.and.bubble.right.fill")
+              .font(.caption)
+            Text("Ask Aarohi to learn more")
+              .font(.footnote.weight(.medium))
+          }
+          .foregroundColor(themeColor)
+          .padding(.horizontal, 16)
+          .padding(.vertical, 10)
+          .background(themeColor.opacity(0.15))
+          .clipShape(Capsule())
+          .overlay(
+            Capsule()
+              .stroke(themeColor.opacity(0.4), lineWidth: 1)
+          )
         }
-        .foregroundColor(.primary)
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 14)
-        .background(themeColor.opacity(0.25))
-        .cornerRadius(16)
-        .overlay(
-          RoundedRectangle(cornerRadius: 16)
-            .stroke(themeColor.opacity(0.5), lineWidth: 1)
-        )
+        Spacer()
       }
       .padding(.horizontal, 20)
       .padding(.bottom, 20)
+    }
     }
     .liquidGlass(cornerRadius: 24)
   }

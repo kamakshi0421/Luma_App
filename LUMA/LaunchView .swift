@@ -53,22 +53,26 @@ struct LaunchView: View {
             
             Spacer() // This pushes the logo and text upwards smoothly
             
-            Button {
-              handleGetStarted()
-            } label: {
-              Text("Get Started")
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(.white)
-                .padding(.horizontal, 48)
-                .padding(.vertical, 16)
-                .background(
-                  RoundedRectangle(cornerRadius: 30)
-                    .fill(Color.lumaPinkBubble)
-                )
-                .shadow(color: .black.opacity(0.1), radius: 12, y: 6)
+            if !hasSeenOnboarding {
+              Button {
+                handleGetStarted()
+              } label: {
+                Text("Get Started")
+                  .font(.system(size: 16, weight: .semibold))
+                  .foregroundColor(.white)
+                  .padding(.horizontal, 48)
+                  .padding(.vertical, 16)
+                  .background(
+                    RoundedRectangle(cornerRadius: 30)
+                      .fill(Color.lumaPinkBubble)
+                  )
+                  .shadow(color: .black.opacity(0.1), radius: 12, y: 6)
+              }
+              .transition(.opacity.combined(with: .move(edge: .bottom)))
+              .padding(.bottom, 50)
+            } else {
+              Spacer().frame(height: 50) // To keep the layout perfectly balanced
             }
-            .transition(.opacity.combined(with: .move(edge: .bottom)))
-            .padding(.bottom, 50)
           } else {
             Spacer() // Bottom spacer keeps logo centered
           }
@@ -79,12 +83,18 @@ struct LaunchView: View {
         StartYourJourneyView()
           .presentationDetents([.large])
           .presentationCornerRadius(28)
-          .presentationDragIndicator(.visible)
+          .presentationDragIndicator(.hidden)
+          .interactiveDismissDisabled(true)
       }
       .onChange(of: showJourneyView) { _, isPresented in
         if !isPresented {
-          withAnimation(.easeInOut(duration: 0.5)) {
-            goToHome = true
+          if hasSeenOnboarding {
+            withAnimation(.easeInOut(duration: 0.5)) {
+              goToHome = true
+            }
+          } else {
+            // If it somehow dismisses without finishing, re-present it
+            showJourneyView = true
           }
         }
       }
@@ -115,6 +125,15 @@ struct LaunchView: View {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
       withAnimation(.spring(response: 0.7, dampingFraction: 0.8)) {
         showContent = true
+      }
+      
+      // Auto-transition if already onboarded
+      if hasSeenOnboarding {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+          withAnimation(.easeInOut(duration: 0.6)) {
+            goToHome = true
+          }
+        }
       }
     }
   }

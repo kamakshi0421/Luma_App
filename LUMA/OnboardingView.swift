@@ -17,21 +17,21 @@ struct OnboardingView: View {
   
   let slides: [OnboardingSlide] = [
     OnboardingSlide(
-      iconName: "waveform.path.ecg",
-      title: "Your Personal Space",
-      description: "Track your daily health, monitor symptoms, and understand how your cycle affects your body and mind.",
-      accentColor: .lumaAccent
-    ),
-    OnboardingSlide(
       iconName: "figure.mind.and.body",
       title: "Explore Your Body",
       description: "Interact with the 3D Body Map to discover exactly what's happening inside you during every phase of life.",
       accentColor: .lumaPinkBubble
     ),
     OnboardingSlide(
-      iconName: "ellipsis.message",
+      iconName: "heart.text.square",
+      title: "Tailored to Your Stage",
+      description: "From pre-puberty to post-menopause, get personalized guidance and insights perfectly matched to your current life stage.",
+      accentColor: .pastelSky
+    ),
+    OnboardingSlide(
+      iconName: "sparkles.tv",
       title: "Meet Aarohi",
-      description: "Your intelligent AI companion. Ask Aarohi any question about your health, anytime, securely and privately.",
+      description: "Your intelligent AI health companion. Ask Aarohi any question, anytime, securely and privately without judgment.",
       accentColor: .purple
     )
   ]
@@ -43,11 +43,16 @@ struct OnboardingView: View {
       VStack {
         HStack {
           Spacer()
-          Button("Skip") {
+          Button {
             completeOnboarding()
+          } label: {
+            Text("Skip")
+              .font(.subheadline.weight(.medium))
+              .foregroundColor(.primary.opacity(0.8))
+              .padding(.horizontal, 16)
+              .padding(.vertical, 8)
+              .liquidGlass(cornerRadius: 18)
           }
-          .font(.subheadline.weight(.semibold))
-          .foregroundColor(.secondary)
           .padding(.horizontal, 24)
           .padding(.top, 16)
         }
@@ -59,7 +64,7 @@ struct OnboardingView: View {
           }
         }
         .tabViewStyle(.page(indexDisplayMode: .always))
-        .indexViewStyle(.page(backgroundDisplayMode: .always))
+        .indexViewStyle(.page(backgroundDisplayMode: .never))
         
         // Bottom Button
         Button {
@@ -152,6 +157,8 @@ struct OnboardingSlideView: View {
           .multilineTextAlignment(.center)
           .padding(.horizontal, 40)
           .lineSpacing(6)
+          .minimumScaleFactor(0.8)
+          .fixedSize(horizontal: false, vertical: true)
           .opacity(appear ? 1.0 : 0)
           .offset(y: appear ? 0 : 20)
           .animation(.easeOut(duration: 0.6).delay(0.3), value: appear)

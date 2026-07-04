@@ -11,16 +11,9 @@ struct StartYourJourneyView: View {
   @State private var suggestedStage: LifeStage = .reproductive
   @State private var selectedStage: LifeStage = .reproductive
   
-  private func color(for stage: LifeStage) -> Color {
-    switch stage {
-    case .prePuberty: return .pastelRose
-    case .puberty: return .pastelMint
-    case .reproductive: return .pastelSky
-    case .perimenopause: return .orange
-    case .menopause: return .purple
-    case .postMenopause: return .teal
-    }
-  }
+  @AppStorage("notificationsEnabled") private var notificationsEnabled = false
+  @AppStorage("dailyReminderEnabled") private var dailyReminderEnabled = false
+  @State private var askNotifications = true
   
   var body: some View {
     NavigationStack {
@@ -76,7 +69,7 @@ struct StartYourJourneyView: View {
                 if !userName.trimmingCharacters(in: .whitespaces).isEmpty {
                   Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 22))
-                    .foregroundColor(.green)
+                    .foregroundColor(selectedStage.themeColor)
                     .transition(.scale.combined(with: .opacity))
                     .padding(.trailing, 20)
                 }
@@ -89,7 +82,7 @@ struct StartYourJourneyView: View {
               .overlay(
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
                   .stroke(
-                    !userName.trimmingCharacters(in: .whitespaces).isEmpty ? Color.green.opacity(0.4) : Color.gray.opacity(0.15),
+                    !userName.trimmingCharacters(in: .whitespaces).isEmpty ? selectedStage.themeColor.opacity(0.4) : Color.gray.opacity(0.15),
                     lineWidth: 1.5
                   )
               )
@@ -115,6 +108,25 @@ struct StartYourJourneyView: View {
               Text("You can change this anytime later.")
                 .font(.caption)
                 .foregroundColor(.secondary)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .liquidGlass()
+            .padding(.horizontal)
+            
+            // Notifications Card
+            VStack(alignment: .leading, spacing: 12) {
+              Toggle(isOn: $askNotifications) {
+                VStack(alignment: .leading, spacing: 4) {
+                  Text("Daily Reminders")
+                    .font(.system(size: 18, weight: .semibold, design: .rounded))
+                    .foregroundColor(.primary)
+                  Text("Allow Aarohi to send you helpful insights and check-ins.")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                }
+              }
+              .tint(selectedStage.themeColor)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -153,7 +165,7 @@ struct StartYourJourneyView: View {
                       .padding(.horizontal, 20)
                       .background(
                         selectedStage == stage ?
-                        color(for: stage) :
+                        stage.themeColor :
                         Color.gray.opacity(0.15)
                       )
                       .clipShape(Capsule())
@@ -163,7 +175,7 @@ struct StartYourJourneyView: View {
                       )
                       .shadow(
                         color: selectedStage == stage ?
-                        color(for: stage).opacity(0.4) :
+                        stage.themeColor.opacity(0.4) :
                         .clear,
                         radius: 6,
                         x: 0,
@@ -183,7 +195,7 @@ struct StartYourJourneyView: View {
               
               Text(selectedStage.title)
                 .font(.system(size: 20, weight: .bold, design: .rounded))
-                .foregroundColor(color(for: selectedStage))
+                .foregroundColor(selectedStage.themeColor)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -194,6 +206,17 @@ struct StartYourJourneyView: View {
             NavigationLink {
               OnboardingView(onComplete: {
                 selectedStageRaw = selectedStage.rawValue
+                
+                if askNotifications {
+                  NotificationManager.shared.requestPermission { granted in
+                    if granted {
+                      notificationsEnabled = true
+                      dailyReminderEnabled = true
+                      NotificationManager.shared.scheduleDailyReminder(userName: userName.isEmpty ? "Friend" : userName)
+                    }
+                  }
+                }
+                
                 hasSeenOnboarding = true
                 dismiss()
               })
@@ -205,9 +228,9 @@ struct StartYourJourneyView: View {
                 .padding(.vertical, 18)
                 .background(
                   Capsule()
-                    .fill(Color.lumaPinkBubble)
+                    .fill(selectedStage.themeColor)
                 )
-                .shadow(color: Color.lumaPinkBubble.opacity(0.4), radius: 12, x: 0, y: 8)
+                .shadow(color: selectedStage.themeColor.opacity(0.4), radius: 12, x: 0, y: 8)
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 40)

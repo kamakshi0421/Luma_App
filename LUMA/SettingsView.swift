@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 
 @available(iOS 26.0, *)
 struct SettingsView: View {
@@ -6,6 +7,8 @@ struct SettingsView: View {
   @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = true
   @AppStorage("notificationsEnabled") private var notificationsEnabled = false
   @AppStorage("dailyReminderEnabled") private var dailyReminderEnabled = false
+  
+  @Environment(\.requestReview) var requestReview
   
   // These are only used in clearAllData
   @AppStorage("user_name") private var userName: String = ""
@@ -93,7 +96,9 @@ struct SettingsView: View {
           Spacer()
           Text("1.0.0").foregroundColor(.secondary)
         }
-        Button(action: {}) {
+        Button(action: {
+          requestReview()
+        }) {
           HStack {
             Image(systemName: "star.fill")
               .font(.system(size: 14, weight: .semibold))
@@ -159,23 +164,26 @@ struct SettingsView: View {
     }
     .navigationTitle("Settings")
     .navigationBarTitleDisplayMode(.inline)
-    .background(Color(.systemGroupedBackground))
-    .alert("Reset Onboarding?", isPresented: $showResetAlert) {
-      Button("Cancel", role: .cancel) { }
-      Button("Reset", role: .destructive) {
-        hasSeenOnboarding = false
-      }
-    } message: {
-      Text("This will show the onboarding journey again on next launch.")
-    }
-    .alert("Clear All Data?", isPresented: $showClearDataAlert) {
-      Button("Cancel", role: .cancel) { }
-      Button("Clear Everything", role: .destructive) {
-        clearAllData()
-      }
-    } message: {
-      Text("This will reset your name, age, phase, streaks, and all preferences. This cannot be undone.")
-    }
+    .background(
+      Color(.systemGroupedBackground)
+        .alert("Reset Onboarding?", isPresented: $showResetAlert) {
+          Button("Cancel", role: .cancel) { }
+          Button("Reset", role: .destructive) {
+            hasSeenOnboarding = false
+          }
+        } message: {
+          Text("This will show the onboarding journey again on next launch.")
+        }
+        .alert("Clear All Data?", isPresented: $showClearDataAlert) {
+          Button("Cancel", role: .cancel) { }
+          Button("Clear Everything", role: .destructive) {
+            clearAllData()
+          }
+        } message: {
+          Text("This will reset your name, age, phase, streaks, and all preferences. This cannot be undone.")
+        }
+        .tint(.blue)
+    )
   }
   
   private func shareApp() {

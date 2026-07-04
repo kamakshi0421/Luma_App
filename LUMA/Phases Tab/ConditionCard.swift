@@ -16,6 +16,8 @@ struct ConditionCard: View {
           .scaledToFill()
           .frame(maxWidth: .infinity)
           .frame(height: 150)
+          .scaleEffect(condition.imageName == "endometriosis_awareness" ? 1.3 : 1.0)
+          .blendMode(condition.imageName == "endometriosis_awareness" ? .multiply : .normal)
           .clipped()
           .clipShape(RoundedRectangle(cornerRadius: 16))
         

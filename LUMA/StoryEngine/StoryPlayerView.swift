@@ -304,7 +304,7 @@ struct StoryPlayerView: View {
       Button {
         dismiss()
       } label: {
-        Text("Back to Phases")
+        Text("Close")
           .font(.headline)
           .foregroundColor(Color.lumaPinkBubble)
           .padding()

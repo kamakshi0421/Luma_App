@@ -23,8 +23,10 @@ struct ConditionDetailSheet: View {
               .scaledToFit()
               .frame(maxWidth: 600)
               .frame(maxWidth: .infinity)
+              .scaleEffect(condition.imageName == "endometriosis_awareness" ? 1.2 : 1.0)
+              .blendMode(condition.imageName == "endometriosis_awareness" ? .multiply : .normal)
               .clipShape(RoundedRectangle(cornerRadius: 24))
-              .shadow(color: .black.opacity(0.08), radius: 8)
+              .shadow(color: condition.imageName == "endometriosis_awareness" ? .clear : .black.opacity(0.08), radius: 8)
             
             
             VStack(alignment: .leading, spacing: 6) {

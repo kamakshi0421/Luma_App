@@ -67,101 +67,43 @@ struct CheckpointView: View {
   }
   
   private var mythCard: some View {
-    VStack(alignment: .leading, spacing: 16) {
+    VStack(alignment: .leading, spacing: 12) {
       // Header
       HStack {
         Image(systemName: "sparkles")
-          .font(.headline)
+          .font(.subheadline)
         Text("MYTH")
-          .font(.headline.bold())
-          .tracking(2)
+          .font(.subheadline.weight(.semibold))
         Spacer()
         Image(systemName: "bookmark")
-          .font(.title3)
+          .font(.subheadline)
       }
       .foregroundColor(Color(red: 0.55, green: 0.3, blue: 0.95))
       
       // Icon and Text
-      HStack(spacing: 20) {
-        ZStack {
-          Circle()
-            .fill(Color(red: 0.55, green: 0.3, blue: 0.95).opacity(0.12))
-            .frame(width: 80, height: 80)
-          Image(systemName: "face.dashed")
-            .font(.system(size: 40, weight: .regular))
-            .foregroundColor(Color(red: 0.55, green: 0.3, blue: 0.95))
-        }
-        
-        Text(question)
-          .font(.system(size: 26, weight: .bold, design: .serif))
-          .foregroundColor(Color(red: 0.05, green: 0.1, blue: 0.3)) // Dark navy
-          .fixedSize(horizontal: false, vertical: true)
-      }
-      .padding(.vertical, 8)
-      
-      Divider()
+      Text(question)
+        .font(.subheadline)
+        .foregroundColor(.primary)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 4)
       
+      Divider()
+        .padding(.vertical, 2)
+      
       if !isRevealed {
-        VStack(alignment: .leading, spacing: 16) {
-          Text("Did you believe this?")
-            .font(.subheadline)
-            .foregroundColor(.secondary)
-          
-          HStack(spacing: 12) {
-            Button {
-              withAnimation { selectedMythAnswer = true }
-            } label: {
-              HStack {
-                Image(systemName: "hand.thumbsup")
-                Text("Yes")
-              }
-              .font(.title3.weight(.medium))
-              .frame(maxWidth: .infinity)
-              .padding(.vertical, 16)
-              .background(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                  .fill(Color(red: 0.55, green: 0.3, blue: 0.95).opacity(selectedMythAnswer == false ? 0.1 : (selectedMythAnswer == true ? 1.0 : 0.8)))
-              )
-              .foregroundColor(selectedMythAnswer == false ? Color(red: 0.55, green: 0.3, blue: 0.95) : .white)
-            }
-            .buttonStyle(.plain)
-            
-            Button {
-              withAnimation { selectedMythAnswer = false }
-            } label: {
-              HStack {
-                Image(systemName: "hand.thumbsdown")
-                Text("No")
-              }
-              .font(.title3.weight(.medium))
-              .frame(maxWidth: .infinity)
-              .padding(.vertical, 16)
-              .background(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                  .fill(Color(red: 0.55, green: 0.3, blue: 0.95).opacity(selectedMythAnswer == false ? 1.0 : 0.08))
-              )
-              .foregroundColor(selectedMythAnswer == false ? .white : Color(red: 0.55, green: 0.3, blue: 0.95))
-            }
-            .buttonStyle(.plain)
+        Button {
+          withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+            isRevealed = true
           }
-          
-          Button {
-            withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-              isRevealed = true
-            }
-          } label: {
-            HStack {
-              Text("Tap to reveal truth")
-              Image(systemName: "arrow.right")
-            }
-            .font(.headline.bold())
-            .foregroundColor(Color(red: 0.55, green: 0.3, blue: 0.95))
-            .frame(maxWidth: .infinity)
-            .padding(.top, 12)
+        } label: {
+          HStack(spacing: 4) {
+            Text("Tap to reveal truth")
+            Image(systemName: "arrow.right")
           }
-          .buttonStyle(.plain)
+          .font(.footnote.weight(.medium))
+          .foregroundColor(Color(red: 0.55, green: 0.3, blue: 0.95))
         }
+        .buttonStyle(.plain)
       } else {
         // Revealed answer
         VStack(alignment: .leading, spacing: 10) {

@@ -35,7 +35,7 @@ struct MainTabView: View {
           }
             .tag(Tab.Phases)
             .tabItem {
-              Label("Phases", systemImage: "moon.stars.fill")
+              Label("Phases", systemImage: "leaf.fill")
             }
           
           NavigationStack {
@@ -46,7 +46,7 @@ struct MainTabView: View {
             .id(savedStageRaw)
             .tag(Tab.Reveal)
             .tabItem {
-              Label("Reveal", systemImage: "magnifyingglass")
+              Label("Reveal", systemImage: "lightbulb.fill")
             }
             
           NavigationStack {

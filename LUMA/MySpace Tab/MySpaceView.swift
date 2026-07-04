@@ -447,6 +447,8 @@ struct StageRiskCard: View {
         .scaledToFill()
         .frame(height: 90)
         .frame(maxWidth: .infinity)
+        .scaleEffect(condition.imageName == "endometriosis_awareness" ? 1.3 : 1.0)
+        .blendMode(condition.imageName == "endometriosis_awareness" ? .multiply : .normal)
         .clipped()
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
       

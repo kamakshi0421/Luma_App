@@ -281,6 +281,7 @@ private extension LifeStageDetailView {
             }
           }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .liquidGlass(cornerRadius: 20)
       }
@@ -309,6 +310,7 @@ private extension LifeStageDetailView {
             }
           }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .liquidGlass(cornerRadius: 20)
       }

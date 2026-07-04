@@ -73,10 +73,10 @@ struct PhasesView: View {
     .navigationDestination(item: $selectedStage) { stage in
       LifeStageDetailView(stage: stage)
     }
-    .sheet(isPresented: $showPlayground) {
+    .navigationDestination(isPresented: $showPlayground) {
       InteractivePlaygroundView()
     }
-    .sheet(isPresented: $showUterusSimulator) {
+    .navigationDestination(isPresented: $showUterusSimulator) {
       UterusSimulatorView()
     }
     

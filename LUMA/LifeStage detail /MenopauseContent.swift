@@ -81,23 +81,23 @@ struct MenopauseContent {
     conditions: [
       
       StageCondition(
-        name: "Osteoporosis",
-        shortDescription: "Bone weakening due to estrogen decline.",
-        overview: "Lower estrogen levels reduce bone density, increasing fracture risk.",
-        imageName: "osteoporosis_awareness",
+        name: "Insomnia & Sleep Disturbances",
+        shortDescription: "Disrupted sleep patterns due to hormonal shifts.",
+        overview: "Fluctuating hormones, especially drops in estrogen and progesterone, can severely disrupt sleep architecture, leading to frequent waking, night sweats, and difficulty falling asleep.",
+        imageName: "insomnia_awareness",
         symptoms: [
-         "Back pain",
-         "Loss of height",
-         "Frequent fractures",
-         "Stooped posture"
+         "Difficulty falling asleep",
+         "Waking up frequently during the night",
+         "Night sweats and hot flashes",
+         "Daytime fatigue and brain fog"
         ],
         basicCare: [
-         "Calcium & Vitamin D intake",
-         "Weight-bearing exercise",
-         "Bone density testing",
-         "Medical consultation"
+         "Maintain a cool sleeping environment",
+         "Establish a relaxing bedtime routine",
+         "Limit caffeine and screen time before bed",
+         "Consider cognitive behavioral therapy for insomnia (CBT-I)"
         ],
-        whenToSeeDoctor: "If you experience fractures or severe back pain."
+        whenToSeeDoctor: "If sleep disturbances significantly impact your daily life, mood, or cognitive function."
       ),
       
       StageCondition(
