@@ -13,11 +13,11 @@ enum BodyZone: String, CaseIterable, Identifiable {
     switch self {
     case .brain: return "brain"
     case .skin: return "face.smiling"
-    case .breasts: return "drop.fill"// Approximation
+    case .breasts: return "circle.circle"
     case .heart: return "heart.fill"
-    case .uterus: return "capsule.fill"// Approximation
+    case .uterus: return "drop.fill" // Represents menstrual cycle/flow
     case .ovaries: return "circle.grid.2x2.fill"
-    case .bones: return "figure.walk"
+    case .bones: return "dumbbell.fill" // Represents bone density and strength
     case .joints: return "link"
     }
   }
