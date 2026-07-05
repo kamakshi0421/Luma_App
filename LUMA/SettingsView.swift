@@ -245,8 +245,7 @@ struct LegalCard: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(UIColor.secondarySystemGroupedBackground))
-        .cornerRadius(16)
+        .liquidGlass(cornerRadius: 16)
     }
 }
 
@@ -254,7 +253,7 @@ struct LegalCard: View {
 struct PrivacyPolicyView: View {
     var body: some View {
         ZStack {
-            Color(UIColor.systemGroupedBackground).ignoresSafeArea()
+            LumaBackground()
             ScrollView {
                 VStack(spacing: 16) {
                     VStack(alignment: .leading, spacing: 8) {
@@ -268,21 +267,27 @@ struct PrivacyPolicyView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 8)
                     
-                    LegalCard(title: "1. Introduction", icon: "hand.raised.fill", content: "At Aarohi (\"we\", \"our\", or \"us\"), your privacy is our highest priority. As a women's health and wellness application, we understand the incredibly sensitive nature of the information you track. We have built Aarohi with strict privacy-by-design principles — your data stays on your device, always.")
+                    LegalCard(title: "1. Data Storage", icon: "icloud.slash.fill", content: "All your personal and health data is strictly stored on your device. We do not use cloud storage or databases.")
                     
-                    LegalCard(title: "2. Data We Collect", icon: "list.clipboard.fill", content: "To provide you with personalized insights, we collect the following data — all stored locally on your device only:\n• Profile Information: Your name, age, selected avatar, and current life phase.\n• Health & Symptom Logs: Mood, menstrual flow, pain levels, energy levels, stress, and sleep hours.\n• App Preferences: Notification settings, daily reminder preferences, onboarding status, and streak data.")
+                    LegalCard(title: "2. What We Collect", icon: "list.clipboard.fill", content: "We only collect profile info, symptoms, and preferences locally. No emails, phone numbers, or contacts are accessed.")
                     
-                    LegalCard(title: "3. Data We Do NOT Collect", icon: "xmark.shield.fill", content: "Because of the sensitive nature of female health tracking, we have a strict policy. We do not collect, store, or have access to:\n• Email addresses, phone numbers, or contact information\n• Location or GPS data\n• Photos, camera, or microphone data\n• Device identifiers (IDFA) or advertising data\n• Financial or payment data\n• Contacts or social media data\n• Apple HealthKit data")
+                    LegalCard(title: "3. AI Features", icon: "cpu", content: "Our AI wellness companion runs entirely on-device for maximum privacy. Your conversations are never sent to external servers.")
                     
-                    LegalCard(title: "4. No Cloud Storage", icon: "icloud.slash.fill", content: "Aarohi stores all your personal and health data exclusively on your device using local storage (UserDefaults and SwiftData). We do not use any cloud databases, remote servers, or third-party storage services. Your data never leaves your iPhone.")
+                    LegalCard(title: "4. Third Parties", icon: "hand.raised.slash.fill", content: "We do not sell your data, nor do we use third-party trackers or ads. You have full control to delete your data at any time.")
                     
-                    LegalCard(title: "5. AI Features — On-Device Processing", icon: "cpu", content: "Aarohi includes an AI wellness companion powered by Apple Foundation Models (Apple Intelligence). This AI processes your questions and generates personalized insights entirely on your device. Your conversations with Aarohi AI are never sent to external servers, third-party AI services, or cloud APIs.")
-                    
-                    LegalCard(title: "6. No Third-Party Tracking", icon: "hand.raised.slash.fill", content: "Aarohi does not include any third-party analytics, tracking SDKs, advertising networks, crash reporting services, or social media tracking pixels.")
-                    
-                    LegalCard(title: "7. Data Deletion", icon: "trash.fill", content: "Since all data is stored locally on your device, you have full control at all times. You can use the \"Clear All Data\" option in the app's Settings to permanently erase all personal information, health logs, and preferences. Alternatively, deleting the app from your device will remove all associated data.")
-                    
-                    LegalCard(title: "8. No User Accounts", icon: "person.crop.circle.badge.xmark", content: "Aarohi does not require or support user accounts, sign-ups, or login credentials. There are no passwords to manage and no account data stored on any server.")
+                    Link(destination: URL(string: "https://aarohi.vercel.app")!) {
+                        HStack {
+                            Image(systemName: "globe")
+                            Text("Visit our Official Website")
+                        }
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.lumaAccent)
+                        .cornerRadius(12)
+                    }
+                    .padding(.vertical, 8)
                     
                     Text("© 2026 Kamakshi Gupta. All rights reserved.")
                         .font(.footnote)
@@ -300,7 +305,7 @@ struct PrivacyPolicyView: View {
 struct TermsOfServiceView: View {
     var body: some View {
         ZStack {
-            Color(UIColor.systemGroupedBackground).ignoresSafeArea()
+            LumaBackground()
             ScrollView {
                 VStack(spacing: 16) {
                     VStack(alignment: .leading, spacing: 8) {
@@ -314,23 +319,27 @@ struct TermsOfServiceView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 8)
                     
-                    LegalCard(title: "1. Acceptance of Terms", icon: "checkmark.seal.fill", content: "By downloading, accessing, or using the Aarohi application (\"App\"), you agree to be bound by these Terms of Service (\"Terms\"). If you do not agree with any part of these Terms, you may not use the App.")
+                    LegalCard(title: "1. Medical Disclaimer", icon: "exclamationmark.triangle.fill", content: "⚠️ Aarohi is NOT a medical device. It's for educational purposes. Consult a doctor for medical advice.")
                     
-                    LegalCard(title: "2. Medical Disclaimer", icon: "exclamationmark.triangle.fill", content: "⚠️ AAROHI IS NOT A MEDICAL DEVICE OR A SUBSTITUTE FOR PROFESSIONAL MEDICAL ADVICE.\nThe information, insights, and conversations provided by Aarohi are for educational and informational purposes only. They are not intended to diagnose, treat, cure, or prevent any disease or health condition. Never disregard professional medical advice or delay in seeking it because of something you have read, heard, or interacted with on this App.")
+                    LegalCard(title: "2. Usage", icon: "person.text.rectangle.fill", content: "Aarohi is completely free with no in-app purchases. It's designed for users aged 9 and above.")
                     
-                    LegalCard(title: "3. Aarohi AI Wellness Companion", icon: "brain.head.profile", content: "Aarohi includes an artificial intelligence companion powered by Apple Foundation Models (Apple Intelligence), which runs entirely on your device. While we strive for accuracy, AI systems can occasionally provide incomplete, inaccurate, or generalized information. You agree to use your own judgment and not rely solely on AI responses for medical decisions.")
+                    LegalCard(title: "3. AI Companion", icon: "brain.head.profile", content: "AI can occasionally be inaccurate; use your judgment and do not rely solely on AI for medical decisions.")
                     
-                    LegalCard(title: "4. Age Requirements", icon: "person.text.rectangle.fill", content: "Aarohi is designed for users aged 9 years and above. For users under the age of 13, we strongly recommend parental or guardian supervision while using the App.")
+                    LegalCard(title: "4. Privacy & IP", icon: "lock.shield.fill", content: "Your data stays with you. All app content, illustrations, and designs are copyrighted and owned by Aarohi.")
                     
-                    LegalCard(title: "5. Free App — No In-App Purchases", icon: "gift.fill", content: "Aarohi is a completely free application with all features fully unlocked. There are no in-app purchases, subscriptions, paywalls, or advertisements.")
-                    
-                    LegalCard(title: "6. User Responsibilities", icon: "person.fill.checkmark", content: "You agree to use Aarohi only for lawful, personal wellness and educational purposes. You agree to provide accurate information about your age and life phase for the best experience, and not to attempt to reverse-engineer, modify, or distribute the App or its content.")
-                    
-                    LegalCard(title: "7. Data & Privacy", icon: "lock.shield.fill", content: "All your personal and health data is stored exclusively on your device. Aarohi does not require user accounts, does not collect data on external servers, and does not use third-party analytics or advertising.")
-                    
-                    LegalCard(title: "8. Intellectual Property", icon: "c.circle.fill", content: "The App, including its original content, features, interactive visualizations, illustrations, character designs, UI/UX design, and functionality, are owned by Aarohi and are protected by international copyright and trademark laws.")
-                    
-                    LegalCard(title: "9. Limitation of Liability", icon: "shield.slash.fill", content: "To the fullest extent permitted by law, Aarohi and its creator shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the App, including but not limited to health decisions made based on App content or AI responses.")
+                    Link(destination: URL(string: "https://aarohi.vercel.app")!) {
+                        HStack {
+                            Image(systemName: "globe")
+                            Text("Visit our Official Website")
+                        }
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.lumaAccent)
+                        .cornerRadius(12)
+                    }
+                    .padding(.vertical, 8)
                     
                     Text("© 2026 Kamakshi Gupta. All rights reserved.")
                         .font(.footnote)
