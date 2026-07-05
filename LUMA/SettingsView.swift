@@ -232,7 +232,7 @@ struct LegalCard: View {
             HStack(spacing: 10) {
                 Image(systemName: icon)
                     .font(.title3.weight(.semibold))
-                    .foregroundColor(.lumaAccent)
+                    .foregroundColor(.lumaPinkBubble)
                     .frame(width: 24)
                 Text(title)
                     .font(.headline)
@@ -259,7 +259,7 @@ struct PrivacyPolicyView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Privacy Policy")
                             .font(.largeTitle.weight(.bold))
-                            .foregroundColor(.lumaAccent)
+                            .foregroundColor(.lumaPinkBubble)
                         Text("Your health data is yours. We protect it fiercely.")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -282,7 +282,7 @@ struct PrivacyPolicyView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)
-                    .tint(.lumaAccent)
+                    .tint(.lumaPinkBubble)
                     .controlSize(.large)
                     .padding(.vertical, 8)
                     
@@ -308,7 +308,7 @@ struct TermsOfServiceView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Terms of Service")
                             .font(.largeTitle.weight(.bold))
-                            .foregroundColor(.lumaAccent)
+                            .foregroundColor(.lumaPinkBubble)
                         Text("Please read these terms carefully before using Aarohi.")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -331,7 +331,7 @@ struct TermsOfServiceView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)
-                    .tint(.lumaAccent)
+                    .tint(.lumaPinkBubble)
                     .controlSize(.large)
                     .padding(.vertical, 8)
                     
