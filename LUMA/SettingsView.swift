@@ -259,6 +259,7 @@ struct PrivacyPolicyView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Privacy Policy")
                             .font(.largeTitle.weight(.bold))
+                            .foregroundColor(.lumaAccent)
                         Text("Your health data is yours. We protect it fiercely.")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -275,7 +276,7 @@ struct PrivacyPolicyView: View {
                     
                     LegalCard(title: "4. Third Parties", icon: "hand.raised.slash.fill", content: "We do not sell your data, nor do we use third-party trackers or ads. You have full control to delete your data at any time.")
                     
-                    Link(destination: URL(string: "https://aarohiapp.vercel.app")!) {
+                    Link(destination: URL(string: "https://aarohi-app.vercel.app/")!) {
                         Label("Visit our Official Website", systemImage: "globe")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
@@ -307,6 +308,7 @@ struct TermsOfServiceView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Terms of Service")
                             .font(.largeTitle.weight(.bold))
+                            .foregroundColor(.lumaAccent)
                         Text("Please read these terms carefully before using Aarohi.")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -323,7 +325,7 @@ struct TermsOfServiceView: View {
                     
                     LegalCard(title: "4. Privacy & IP", icon: "lock.shield.fill", content: "Your data stays with you. All app content, illustrations, and designs are copyrighted and owned by Aarohi.")
                     
-                    Link(destination: URL(string: "https://aarohiapp.vercel.app")!) {
+                    Link(destination: URL(string: "https://aarohi-app.vercel.app/")!) {
                         Label("Visit our Official Website", systemImage: "globe")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
