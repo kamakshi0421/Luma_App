@@ -47,7 +47,7 @@ struct ScenarioGameView: View {
         ScrollView(.vertical, showsIndicators: false) {
           VStack(spacing: 0) {
             progressBar
-              .padding(.top, 16)
+              .padding(.top, 8)
               .padding(.horizontal, 24)
 
             scenarioCard(scenario)
@@ -67,7 +67,7 @@ struct ScenarioGameView: View {
 
             Spacer(minLength: 40)
           }
-          .padding(.top, 40)
+          .padding(.top, 8)
         }
       }
     }
