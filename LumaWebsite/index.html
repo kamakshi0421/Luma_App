@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aarohi - Your personal AI companion for every life stage. Track health, explore your body with an interactive Body Map, debunk myths, and navigate puberty to post-menopause.">
+    <meta name="theme-color" content="#08060f">
+    <title>Aarohi | Your Personal Health Companion</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Aarohi | Your Personal Health Companion">
+    <meta property="og:description" content="Your beautiful AI companion that tracks your health, debunks myths, and helps you understand your body. From pre-puberty to post-menopause.">
+    <meta property="og:image" content="assets/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aarohi | Your Personal Health Companion">
+    <meta name="twitter:description" content="Your beautiful AI companion for every life stage.">
+    <meta name="twitter:image" content="assets/og-image.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Fallback if JS is disabled -->
+    <noscript><style>.reveal, .reveal-delay { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+<body>
+    
+    <!-- Background Aura -->
+    <div class="aura-background">
+        <div class="aura-blob blob-1"></div>
+        <div class="aura-blob blob-2"></div>
+        <div class="aura-blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" style="text-decoration:none;">Aarohi</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="support.html">Support</a>
+            </div>
+            <a href="#download" class="nav-cta">
+                <span class="apple-icon">&#63743;</span> Download
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="support.html">Support</a>
+        <a href="#download" class="btn btn-primary" style="margin-top:1rem;text-align:center;">Download</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content reveal">
+            <div class="hero-badge">✨ Your Personal AI Wellness Companion</div>
+            <h1 class="hero-title">Navigate every <span class="gradient-text">life stage</span> with confidence.</h1>
+            <p class="hero-subtitle">Meet Aarohi — your beautiful AI companion that tracks your health, debunks myths, and helps you understand your body through an interactive Body Map. From pre-puberty to post-menopause.</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">
+                    <span class="apple-icon">&#63743;</span> Download for iOS
+                </a>
+                <a href="#features" class="btn btn-secondary">Explore Features ↓</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">LIFE PHASES</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">8+</span>
+                    <span class="stat-label">BODY ZONES</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">AI</span>
+                    <span class="stat-label">POWERED</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-visual reveal-delay">
+            <div class="phone-glow"></div>
+            <div class="iphone-frame">
+                <img src="assets/screenshot_splash.png" alt="Aarohi App Interface" class="iphone-screen" id="hero-screenshot">
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted Badge -->
+    <section class="trust-strip reveal">
+        <div class="trust-content">
+            <span>🔒 Your data stays on your device</span>
+            <span>🩺 Medically informed content</span>
+            <span>🧠 AI-powered insights</span>
+            <span>💜 Built with empathy</span>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header reveal">
+            <div class="section-badge">FEATURES</div>
+            <h2>Everything your body <span class="gradient-text">deserves to know.</span></h2>
+            <p>Aarohi is packed with powerful, beautiful features designed to empower you at every stage of life.</p>
+        </div>
+        
+        <div class="features-showcase-container">
+            <!-- Feature 1: Aarohi -->
+            <div class="feature-showcase reveal">
+                <div class="feature-text-content">
+                    <div class="feature-icon-wrapper pink-glow">
+                        <div class="feature-icon">💬</div>
+                    </div>
+                    <h3>Aarohi AI Companion</h3>
+                    <p>Your empathetic, always-available AI wellness companion — powered by on-device Apple Intelligence. Ask anything about your body, cycle, moods, or symptoms — Aarohi responds with medically-informed, judgement-free guidance. All conversations stay private on your device.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="phone-glow"></div>
+                    <div class="feature-iphone">
+                        <img src="assets/feature_aarohi.png" alt="Aarohi Chat Interface" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: MySpace Tab (Reverse) -->
+            <div class="feature-showcase reverse reveal">
+                <div class="feature-text-content">
+                    <div class="feature-icon-wrapper purple-glow">
+                        <div class="feature-icon">🏠</div>
+                    </div>
+                    <h3>MySpace Hub</h3>
+                    <p>Your personalized daily dashboard. See your current life phase, track weekly body insights with AI-generated summaries, discover interactive stories and daily challenges, and keep an eye on health conditions to watch for — all in one beautiful place.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="phone-glow"></div>
+                    <div class="feature-iphone">
+                        <img src="assets/screenshot_home.png" alt="MySpace Home Screen" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Life Phases -->
+            <div class="feature-showcase reveal">
+                <div class="feature-text-content">
+                    <div class="feature-icon-wrapper pink-glow">
+                        <div class="feature-icon">🌸</div>
+                    </div>
+                    <h3>Life Phases Guide</h3>
+                    <p>Navigate all 6 life stages with confidence — Pre-Puberty, Puberty, Reproductive, Perimenopause, Menopause, and Post-Menopause. Each phase includes detailed hormone info, common concerns, care tips, and an interactive Phase Simulator with organ visualizations.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="phone-glow"></div>
+                    <div class="feature-iphone">
+                        <img src="assets/screenshot_phases.png" alt="Life Phases Tab" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 4: Myth Reveal (Reverse) -->
+            <div class="feature-showcase reverse reveal">
+                <div class="feature-text-content">
+                    <div class="feature-icon-wrapper purple-glow">
+                        <div class="feature-icon">🔮</div>
+                    </div>
+                    <h3>Reveal</h3>
+                    <p>Uncover the truth about your body. Scratch away the "Myth of the Day", navigate "Real Life Scenarios" to see what you would do, decode your symptoms, and finally answer that burning question: "Is It Normal?"</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="phone-glow"></div>
+                    <div class="feature-iphone">
+                        <img src="assets/feature_reveal.png" alt="Myth Reveal Interface" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="section-header reveal">
+            <div class="section-badge">HOW IT WORKS</div>
+            <h2>Your journey in <span class="gradient-text">3 simple steps.</span></h2>
+        </div>
+
+        <div class="steps-container">
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>Choose Your Life Phase</h3>
+                    <p>During onboarding, enter your name and age. Aarohi auto-suggests your life phase and instantly tailors everything — content, stories, Body Map insights, and AI responses — to match your exact stage.</p>
+                </div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step reveal">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>Explore &amp; Track</h3>
+                    <p>Tap glowing zones on the Body Map, read interactive stories, scratch away myths, take on daily challenges, and log your symptoms — mood, energy, pain, and more. Learning about your body has never been this fun.</p>
+                </div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step reveal">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>Get Personalized Insights</h3>
+                    <p>After tracking for a few days, Aarohi generates beautiful weekly insights highlighting patterns in your health, mood, and body. Ask Aarohi AI anything along the way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Showcase - Screenshot Gallery -->
+    <section class="app-showcase">
+        <div class="section-header reveal">
+            <div class="section-badge">EXPERIENCE</div>
+            <h2>See Aarohi in <span class="gradient-text">action.</span></h2>
+            <p>Every pixel is crafted with care. Soft gradients, fluid animations, and an interface that feels as calming as it is powerful.</p>
+        </div>
+
+        <div class="screenshot-gallery reveal">
+            <div class="gallery-phone">
+                <div class="gallery-iphone">
+                    <img src="assets/feature_simulator.png" alt="Phase Simulator" class="gallery-screen" loading="lazy">
+                </div>
+                <p class="gallery-label">Phase Simulator</p>
+            </div>
+            <div class="gallery-phone">
+                <div class="gallery-iphone">
+                    <img src="assets/feature_bodymap.png" alt="Interactive Body Map" class="gallery-screen" loading="lazy">
+                </div>
+                <p class="gallery-label">Interactive Body Map</p>
+            </div>
+            <div class="gallery-phone">
+                <div class="gallery-iphone">
+                    <img src="assets/screenshot_story.png" alt="Interactive Stories" class="gallery-screen" loading="lazy">
+                </div>
+                <p class="gallery-label">Interactive Stories</p>
+            </div>
+            <div class="gallery-phone">
+                <div class="gallery-iphone">
+                    <img src="assets/screenshot_tracker.png" alt="Health Tracker" class="gallery-screen">
+                </div>
+                <p class="gallery-label">Health Tracker</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download CTA -->
+    <section id="download" class="cta-section reveal">
+        <div class="glass-panel cta-panel">
+            <div class="cta-glow"></div>
+            <h2>Ready to begin your <span class="gradient-text">journey?</span></h2>
+            <p>Download Aarohi today and take the first step toward understanding your body better — at every stage of life.</p>
+            <a href="https://apps.apple.com/app/aarohi" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large" id="appstore-link">
+                <span class="apple-icon">&#63743;</span> Get Aarohi on the App Store
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">Aarohi</div>
+                    <p class="footer-tagline">Your personal health companion for every life stage.</p>
+                </div>
+                <div class="footer-nav">
+                    <div class="footer-col">
+                        <h4>App</h4>
+                        <a href="#features">Features</a>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#download">Download</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Legal</h4>
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact</h4>
+                        <a href="support.html">Support</a>
+                        <a href="mailto:kamakshiig21@gmail.com">Email Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kamakshi Gupta. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
