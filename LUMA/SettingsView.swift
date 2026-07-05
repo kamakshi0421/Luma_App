@@ -245,7 +245,7 @@ struct LegalCard: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .liquidGlass(cornerRadius: 16)
+        .liquidGlass(cornerRadius: 22)
     }
 }
 
@@ -275,18 +275,14 @@ struct PrivacyPolicyView: View {
                     
                     LegalCard(title: "4. Third Parties", icon: "hand.raised.slash.fill", content: "We do not sell your data, nor do we use third-party trackers or ads. You have full control to delete your data at any time.")
                     
-                    Link(destination: URL(string: "https://aarohi.vercel.app")!) {
-                        HStack {
-                            Image(systemName: "globe")
-                            Text("Visit our Official Website")
-                        }
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.lumaAccent)
-                        .cornerRadius(12)
+                    Link(destination: URL(string: "https://aarohiapp.vercel.app")!) {
+                        Label("Visit our Official Website", systemImage: "globe")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
                     }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.lumaAccent)
+                    .controlSize(.large)
                     .padding(.vertical, 8)
                     
                     Text("© 2026 Kamakshi Gupta. All rights reserved.")
@@ -327,18 +323,14 @@ struct TermsOfServiceView: View {
                     
                     LegalCard(title: "4. Privacy & IP", icon: "lock.shield.fill", content: "Your data stays with you. All app content, illustrations, and designs are copyrighted and owned by Aarohi.")
                     
-                    Link(destination: URL(string: "https://aarohi.vercel.app")!) {
-                        HStack {
-                            Image(systemName: "globe")
-                            Text("Visit our Official Website")
-                        }
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.lumaAccent)
-                        .cornerRadius(12)
+                    Link(destination: URL(string: "https://aarohiapp.vercel.app")!) {
+                        Label("Visit our Official Website", systemImage: "globe")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
                     }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.lumaAccent)
+                    .controlSize(.large)
                     .padding(.vertical, 8)
                     
                     Text("© 2026 Kamakshi Gupta. All rights reserved.")
