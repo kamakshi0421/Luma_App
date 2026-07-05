@@ -91,15 +91,10 @@ body {
     width: 100%;
     padding: 1rem 0;
     z-index: 100;
-    background: transparent;
-    transition: all 0.3s ease;
-}
-
-.navbar.scrolled {
-    background: rgba(8, 6, 15, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-container {
@@ -109,20 +104,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.logo-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-}
-
-.nav-logo-img {
-    height: 32px;
-    width: 32px;
-    border-radius: 8px;
-    object-fit: cover;
 }
 
 .logo {
