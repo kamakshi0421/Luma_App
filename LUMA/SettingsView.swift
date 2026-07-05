@@ -35,7 +35,7 @@ struct SettingsView: View {
             Text("Notifications")
           }
         }
-        .tint(.lumaAccent)
+        .tint(.lumaPinkBubble)
         .onChange(of: notificationsEnabled) { _, newValue in
           if newValue {
             NotificationManager.shared.requestPermission { granted in
@@ -61,7 +61,7 @@ struct SettingsView: View {
             Text("Daily Reminders")
           }
         }
-        .tint(.lumaAccent)
+        .tint(.lumaPinkBubble)
         .onChange(of: dailyReminderEnabled) { _, newValue in
           if newValue {
             if !notificationsEnabled {
