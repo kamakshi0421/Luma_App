@@ -178,7 +178,7 @@ struct ScenarioGameView: View {
       handleChoice(choice)
     } label: {
       VStack(alignment: .leading, spacing: 0) {
-        HStack(alignment: .top, spacing: 14) {
+        HStack(alignment: .center, spacing: 14) {
           // Letter circle
           Text(letter)
             .font(.subheadline.weight(.bold))
