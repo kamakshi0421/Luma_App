@@ -107,11 +107,14 @@ body {
 }
 
 .logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: 3px;
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: #ffffff;
+    background: linear-gradient(135deg, #ffffff 0%, var(--luma-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .nav-links {
